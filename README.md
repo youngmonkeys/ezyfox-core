@@ -146,6 +146,7 @@ We must spend a lot of time to declare, init variables. Some time we also have t
 		<version>1.0.0</version>
 	</dependency>
 ```
+
 #API Reference
 
 http://www.javadoc.io/doc/com.tvd12/ezyfox-core
@@ -157,12 +158,12 @@ mvn test
 #Contributors
 
 - Project management 
-  - [NamCV](cungvinhnam@gmail.com)
+  - [NamCV](mailto:cungvinhnam@gmail.com)
 - Project development
- - [DungTV](dungtv192@gmail.com)
+ - [DungTV](mailto:dungtv192@gmail.com)
 - Project documentation
- - [DungTV](dungtv192@gmail.com)
- - [DatNT](dat.fithou@gmail.com)
+ - [DungTV](mailto:dungtv192@gmail.com)
+ - [DatNT](mailto:dat.fithou@gmail.com)
 
 #License
 
