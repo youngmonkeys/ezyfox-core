@@ -59,19 +59,19 @@
 	</developers>
 	
 	<scm>
-		<connection>scm:git:git@github.com:youngmokeys/ezyfox-core.git</connection>
-		<developerConnection>scm:git:git@github.com:youngmokeys/ezyfox-core.git</developerConnection>
-		<url>https://github.com/youngmokeys/ezyfox-core</url>
+		<connection>scm:git:git@github.com:youngmonkeys/ezyfox-core.git</connection>
+		<developerConnection>scm:git:git@github.com:youngmonkeys/ezyfox-core.git</developerConnection>
+		<url>https://github.com/youngmonkeys/ezyfox-core</url>
 	</scm>
 	
 	<issueManagement>
 		<system>Github</system>
-		<url>https://github.com/youngmokeys/ezyfox-core/issues</url>
+		<url>https://github.com/youngmonkeys/ezyfox-core/issues</url>
 	</issueManagement>
 	
 	<ciManagement>
 		<system>travis</system>
-		<url>https://travis-ci.org/youngmokeys/ezyfox-core</url>
+		<url>https://travis-ci.org/youngmonkeys/ezyfox-core</url>
 	</ciManagement>
 	
 	<distributionManagement>
