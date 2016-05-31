@@ -2,7 +2,7 @@ package com.tvd12.ezyfox.core.model;
 
 import java.util.List;
 
-public interface ApiZone {
+public interface ApiZone extends ApiProperties {
 
 	/**
 	 * 
@@ -89,13 +89,6 @@ public interface ApiZone {
 	 * @return name of zone
 	 */
 	String getName();
-	
-	/**
-	 * Properties are custom values that can be added or removed from the Zone at run-time.
-	 * @param key key
-	 * @return a property value
-	 */
-	Object getProperty(Object key); 
 	
 	/**
 	 * Get a User from its unique ID

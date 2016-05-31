@@ -36,6 +36,10 @@ public class ServerHandlerClass {
     // handler class
     protected Class<?> clazz;
     
+ // which object holds structure of that methods be annotated with PropertyConfig annotation
+    @Getter
+    protected PropertiesClassWrapper propertiesClassWrapper;
+    
     /**
      * Construct with handler class and parameter types of handle method
      * 
@@ -47,6 +51,7 @@ public class ServerHandlerClass {
         init(clazz, paramTypes);
         checkPriority(clazz);
         checkEventName(clazz);
+        checkPropertiesClass(clazz);
     }
     
     /**
@@ -91,6 +96,13 @@ public class ServerHandlerClass {
         handleMethod = HandleMethodParser.getServerHandleMethod(
                 clazz, 
                 ArrayUtils.add(paramTypes, 0, AppContext.class));
+    }
+    
+    /**
+     * init and check properties class structure 
+     */
+    protected void checkPropertiesClass(Class<?> clazz) {
+        propertiesClassWrapper = new PropertiesClassWrapper(clazz);
     }
     
     /**
