@@ -16,7 +16,7 @@ import lombok.Getter;
 public class UserAgentClass extends AgentClass {
 
     @Getter
-    private BuddyClassUnwrapper buddyUnwrapper;
+    private BuddyClass buddyClass;
     
     /**
      * @see AgentClass#AgentClass(Class)
@@ -25,7 +25,7 @@ public class UserAgentClass extends AgentClass {
      */
     public UserAgentClass(Class<?> clazz) {
         super(clazz);
-        buddyUnwrapper = new BuddyClassUnwrapper(clazz);
+        buddyClass = new BuddyClass(clazz);
     }
 
     

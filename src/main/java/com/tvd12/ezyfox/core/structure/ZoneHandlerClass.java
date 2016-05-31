@@ -22,10 +22,6 @@ public class ZoneHandlerClass extends ServerUserHandlerClass {
     @Getter
     public String zoneName;
     
-    // which object holds structure of that methods be annotated with PropertyConfig annotation
-    @Getter
-    private PropertiesClassWrapper propertiesClassWrapper;
-    
     /**
      * @see ServerUserHandlerClass#ServerUserHandlerClass(Class, Class, List)
      */
@@ -35,7 +31,6 @@ public class ZoneHandlerClass extends ServerUserHandlerClass {
         checkZoneName(clazz);
         checkHandleMethod(clazz, userClazz, gameUserClasses);
         checkUserClass();
-        propertiesClassWrapper = new PropertiesClassWrapper(clazz);
     }
     
     /**

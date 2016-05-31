@@ -27,6 +27,9 @@ public class ExtensionConfigurationTest {
         assertEquals(config.getGameUserClasses().size(), 2);
         assertEquals(config.getGameUserAgentClasses().size(), 2);
         assertEquals(config.getResponseParamsClasses().size(), 1);
+        assertEquals(config.getMessageParamsClasses().size(), 1);
+        assertEquals(config.getMessageParamsClasses()
+                .get(ExMessagesParameter.class).getWrapper().methodCount(), 1);
     }
     
     @Test(expectedExceptions = {RuntimeException.class})

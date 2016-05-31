@@ -8,6 +8,7 @@ import java.util.Map;
 
 import com.tvd12.ezyfox.core.annotation.ClientRequestListener;
 import com.tvd12.ezyfox.core.annotation.GameUser;
+import com.tvd12.ezyfox.core.annotation.MessageParams;
 import com.tvd12.ezyfox.core.annotation.ResponseParams;
 import com.tvd12.ezyfox.core.annotation.RoomAgent;
 import com.tvd12.ezyfox.core.annotation.ServerEventHandler;
@@ -17,6 +18,7 @@ import com.tvd12.ezyfox.core.model.ApiRoom;
 import com.tvd12.ezyfox.core.model.ApiUser;
 import com.tvd12.ezyfox.core.reflect.ReflectPackageUtil;
 import com.tvd12.ezyfox.core.structure.AgentClass;
+import com.tvd12.ezyfox.core.structure.MessageParamsClass;
 import com.tvd12.ezyfox.core.structure.RequestResponseClass;
 import com.tvd12.ezyfox.core.structure.ResponseParamsClass;
 import com.tvd12.ezyfox.core.structure.UserAgentClass;
@@ -68,6 +70,10 @@ public class ExtensionConfiguration extends ConfigurationLoading {
 	@Getter
 	private Map<Class<?>, ResponseParamsClass> responseParamsClasses;
 	
+	// map of message parameters classes and their structure 
+	@Getter
+	private Map<Class<?>, MessageParamsClass> messageParamsClasses;
+	
 	/**
 	 * Load all configuration from entry point class
 	 * 
@@ -81,6 +87,7 @@ public class ExtensionConfiguration extends ConfigurationLoading {
 		findServerEventHandlers();
 		findRequestResponseHandlers();
 		findResponseParamsClasses();
+		findMessageParamsClasses();
 	}
 	
 	/**
@@ -114,6 +121,18 @@ public class ExtensionConfiguration extends ConfigurationLoading {
             responseParamsClasses.put(clazz, new ResponseParamsClass(clazz));
         }
 	}
+	
+	/**
+     * find all classes hold data of message to response to client
+     */
+    private void findMessageParamsClasses() {
+        List<Class<?>> classes = ReflectPackageUtil
+                .findClasses(packagesScan, MessageParams.class);
+        messageParamsClasses = new HashMap<>();
+        for(Class<?> clazz : classes) {
+            messageParamsClasses.put(clazz, new MessageParamsClass(clazz));
+        }
+    }
 	
 	/**
 	 * find user agent's class in packages to scan and read it's structure
