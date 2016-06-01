@@ -7,8 +7,6 @@ import java.util.List;
 
 import com.tvd12.ezyfox.core.structure.ServerHandlerClass;
 
-import lombok.Getter;
-
 /**
  * Support to load and hold all structures of server event handler's classes
  * 
@@ -18,16 +16,26 @@ import lombok.Getter;
 
 public class ServerEventHandlerCenter {
 
-    // structures of server event handler's classes
-    @Getter
-    protected List<ServerHandlerClass> handlers = new ArrayList<>();
+    /**
+     * Create new handler instance
+     * 
+     * @param clazz handler class
+     * @param paramTypes parameter types of handle method
+     * @return a handler instance
+     */
+    @SuppressWarnings("unchecked")
+    protected <T extends ServerHandlerClass> T newHandler(Class<?> clazz,
+            Class<?>... paramTypes) {
+        return (T) new ServerHandlerClass(clazz, paramTypes);
+    }
     
     /**
      * Add a structure of server event handler's class to list of structures and re-sort the list
      * 
-     * @param handler
+     * @param handlers list of handler
+     * @param handler handler
      */
-    public void addListener(ServerHandlerClass handler) {
+    public <T extends ServerHandlerClass> void addHandler(List<T> handlers, T handler) {
         handlers.add(handler);
         Collections.sort(handlers, getComparator());
     }
@@ -38,10 +46,12 @@ public class ServerEventHandlerCenter {
      * @param classes room event handler's classes
      * @param paramTypes array of parameter types of handle method in handler's class
      */
-    public List<ServerHandlerClass> addListeners(List<Class<?>> classes,
+    @SuppressWarnings("unchecked")
+    public <T extends ServerHandlerClass> List<T> addHandlers(List<Class<?>> classes,
             Class<?>... paramTypes) {
+        List<T> handlers = new ArrayList<>();
         for(Class<?> clazz : classes) {
-            addListener(new ServerHandlerClass(clazz, paramTypes));
+            addHandler(handlers, (T)newHandler(clazz, paramTypes));
         }
         return handlers;
     }
