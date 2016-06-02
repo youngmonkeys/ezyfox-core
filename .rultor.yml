@@ -3,6 +3,8 @@ decrypt:
   pubring.gpg: "repo/pubring.gpg.asc"
   secring.gpg: "repo/secring.gpg.asc"
 release:
+  commanders:
+  - tvd12
   script: |
     mvn versions:set "-DnewVersion=${tag}"
     git commit -am "${tag}"
