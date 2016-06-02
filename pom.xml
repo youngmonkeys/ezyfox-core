@@ -11,13 +11,13 @@
     
 	<groupId>com.tvd12</groupId>
 	<artifactId>ezyfox-core</artifactId>
-	<version>1.0.1-SNAPSHOT</version>
+	<version>1.0.2-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	
 	<name>ezyfox-core</name>
 	<url>http://www.tvd12.com/java/projects/ezyfox-core</url>
 	<description>
-		A project project support to create a server side game application more efficiently and more quickly 
+		A project support to create a server side game application more efficiently and more quickly 
 	</description>
 	
 	<organization>

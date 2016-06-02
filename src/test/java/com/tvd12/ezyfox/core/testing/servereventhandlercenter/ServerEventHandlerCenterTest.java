@@ -20,9 +20,8 @@ public class ServerEventHandlerCenterTest extends BaseTest {
         config.load(ExampleSFSZoneExtensionTest.class);
         ServerEventHandlerCenter center = new ServerEventHandlerCenter();
         
-        List<ServerHandlerClass> handlers = center.addListeners(config.getServerEventHandlerClasses());
+        List<ServerHandlerClass> handlers = center.addHandlers(config.getServerEventHandlerClasses());
         assertEquals(2, handlers.size());
-        assertEquals(2, center.getHandlers().size());
     }
     
 }
