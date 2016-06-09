@@ -33,6 +33,14 @@ public abstract class ApiGameUser extends ApiBaseUser {
     }
     
     /**
+     * @see com.tvd12.ezyfox.core.model.ApiBaseUser#getIp()
+     */
+    @Override
+    public final String getIp() {
+        return parent.getIp();
+    }
+    
+    /**
      * @see com.tvd12.ezyfox.core.model.ApiBaseUser#getBuddyProperties()
      */
     @Override

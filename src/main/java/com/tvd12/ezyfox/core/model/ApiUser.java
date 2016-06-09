@@ -23,6 +23,10 @@ public abstract class ApiUser extends ApiBaseUser {
     @Setter @Getter
     private String name;
     
+    // user ip
+    @Setter @Getter
+    private String ip;
+    
     @Setter
     private ApiBuddyProperties buddyProperties;
     

@@ -23,6 +23,13 @@ public abstract class ApiBaseUser extends ApiModel {
     public abstract String getName();
     
     /**
+     * Get client ip address
+     * 
+     * @return ip address
+     */
+    public abstract String getIp();
+    
+    /**
      * Get user's buddy properties 
      * 
      * @return user's buddy properties

@@ -24,12 +24,15 @@ public class ApiGameUserTest {
         bp.setNickName("dungtv");
         parent.setBuddyProperties(bp);
         parent.setId(10);
+        parent.setIp("127.0.0.1");
         
         user.setParent(parent);
+        assertEquals(parent.getIp(), "127.0.0.1");
         assertEquals(user.getParent(), parent);
         assertEquals(user.getName(), "Hello");
         assertEquals(user.getId(), 10);
         assertEquals(user.getBuddyProperties().getNickName(), "dungtv");
+        assertEquals(user.getIp(), "127.0.0.1");
     }
     
     public static class ExGameUser extends ApiGameUser {
