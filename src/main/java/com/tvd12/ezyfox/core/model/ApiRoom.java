@@ -70,7 +70,7 @@ public abstract class ApiRoom extends ApiModel {
 	
     // filter bad words?
     @Setter @Getter
-	protected boolean useWordsFilter = false;
+	protected boolean useWordsFilter = true;
 	
     // room's name
     @Setter @Getter
