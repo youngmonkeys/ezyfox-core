@@ -43,7 +43,17 @@ public class BadRequestExceptionTest {
     
     @Test(expectedExceptions = {BadRequestException.class})
     public void test6() throws BadRequestException {
-        throw new BadRequestException("abc", 1, new Exception());
+        BadRequestException ex = new BadRequestException("abc", 1, new Exception());
+        assertEquals(ex.getReason(), "abc");
+        assertTrue(ex.isSendToClient());
+        throw ex;
+    }
+    
+    @Test(expectedExceptions = {BadRequestException.class})
+    public void test8() throws BadRequestException {
+        BadRequestException ex = new BadRequestException(1, false, new Exception());
+        assertFalse(ex.isSendToClient());
+        throw ex;
     }
     
 }

@@ -16,32 +16,60 @@ public class BadRequestException extends Exception {
     
     @Getter
     private int code;
+    @Getter
+    private String reason = "unknown";
+    @Getter
+    private boolean sendToClient = true;
     
     public BadRequestException() {
         super();
+        sendToClient = false;
     }
     
     public BadRequestException(String msg) {
-        super(msg);
+        this(msg, 0, false);
     }
     
     public BadRequestException(String msg, Throwable e) {
-        super(msg, e);
+        this(msg, 0, false, e);
     }
     
     public BadRequestException(int code) {
-        super();
-        this.code = code;
+        this(code, true);
     }
     
     public BadRequestException(String msg, int code) {
-        super(msg);
-        this.code = code;
+        this(msg, code, true);
     }
     
     public BadRequestException(String msg, int code, Throwable e) {
+        this(msg, code, true, e);
+    }
+    
+    public BadRequestException(int code, boolean sendToClient) {
+        super();
+        this.code = code;
+        this.sendToClient = sendToClient;
+    }
+    
+    public BadRequestException(int code, boolean sendToClient, Throwable e) {
+        super(e);
+        this.code = code;
+        this.sendToClient = sendToClient;
+    }
+    
+    public BadRequestException(String msg, int code, boolean sendToClient) {
+        super(msg);
+        this.code = code;
+        this.reason = msg;
+        this.sendToClient = sendToClient;
+    }
+    
+    public BadRequestException(String msg, int code, boolean sendToClient, Throwable e) {
         super(msg, e);
         this.code = code;
+        this.reason = msg;
+        this.sendToClient = sendToClient;
     }
 
 }
