@@ -36,16 +36,6 @@ public class RoomEventHandlerCenterTest {
     
     public static class ExampleRoom extends ApiRoom {
 
-        @Override
-        public void setOwner(Object owner) {
-            
-        }
-
-        @Override
-        public <T> T getOwner() {
-            return null;
-        }
-        
     }
     
     @ServerEventHandler(event="USER_JOIN_ROOM", priority = 2)

@@ -6,16 +6,4 @@ import com.tvd12.ezyfox.core.model.ApiRoom;
 @RoomAgent
 public class TestRoomAgent extends ApiRoom {
 
-    @Override
-    public void setOwner(Object owner) {
-        // TODO Auto-generated method stub
-        
-    }
-
-    @Override
-    public <T> T getOwner() {
-        // TODO Auto-generated method stub
-        return null;
-    }
-
 }

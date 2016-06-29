@@ -84,21 +84,18 @@ public abstract class ApiRoom extends ApiModel {
     @Setter @Getter
 	protected String groupdId;
     
+    @Setter
+    protected ApiBaseUser owner;
+    
     @Setter @Getter
     protected RoomRemoveMode removeMode = RoomRemoveMode.NEVER_REMOVE;
-	
-    /**
-     * set room's owner
-     * 
-     * @param owner room's owner
-     */
-	public void setOwner(Object owner) {};
 	
 	/**
 	 * get room's owner
 	 * 
 	 * @return room's owner
 	 */
-	public <T> T getOwner() {return null;}
+	@SuppressWarnings("unchecked")
+    public <T extends ApiBaseUser> T getOwner() {return (T) owner;}
 	
 }

@@ -75,19 +75,6 @@ public class ApiRoomTest {
     }
     public static class ExampleRoom extends ApiRoom {
         
-        private ExampleUser owner;
-        
-        @Override
-        public void setOwner(Object owner) {
-            this.owner = (ExampleUser)owner;
-        }
-
-        @SuppressWarnings("unchecked")
-        @Override
-        public ExampleUser getOwner() {
-            return owner;
-        }
-        
     }
     
     public static class ExampleRoom1 extends ApiRoom {

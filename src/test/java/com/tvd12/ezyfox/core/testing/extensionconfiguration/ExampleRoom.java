@@ -9,15 +9,6 @@ import com.tvd12.ezyfox.core.model.ApiRoom;
 @ResponseParams
 public class ExampleRoom extends ApiRoom {
 
-    @Override
-    public void setOwner(Object owner) {
-        
-    }
-
-    @Override
-    public <T> T getOwner() {
-        return null;
-    }
     
     @ResponseParam
     public int[] getIds() {
