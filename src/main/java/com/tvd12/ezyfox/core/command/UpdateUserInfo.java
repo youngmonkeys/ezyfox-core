@@ -144,4 +144,9 @@ public interface UpdateUserInfo {
      * Update last request time for user
      */
     void updateLastRequestTime();
+    
+    /**
+     * Remove all user variables
+     */
+    void removeAllVariables();
 }

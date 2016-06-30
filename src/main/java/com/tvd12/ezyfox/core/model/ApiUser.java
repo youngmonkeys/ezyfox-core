@@ -44,6 +44,19 @@ public abstract class ApiUser extends ApiBaseUser {
         children.add(child);
     }
     
+    /**
+     * get child by its class
+     * 
+     * @param clazz the class of agent object
+     */
+    @SuppressWarnings("unchecked")
+    public final <T extends ApiBaseUser> T getChild(Class<T> clazz) {
+        for(ApiGameUser child : children)
+            if(clazz.isAssignableFrom(child.getClass()))
+                return (T)child;
+        throw new IllegalStateException("Has no user agent with class " + clazz);
+    }
+    
     /* (non-Javadoc)
      * @see com.tvd12.ezyfox.core.model.ApiBaseUser#getBuddyProperties()
      */
