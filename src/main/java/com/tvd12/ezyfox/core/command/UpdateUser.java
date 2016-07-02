@@ -26,4 +26,20 @@ public interface UpdateUser extends BaseCommand {
 	 */
 	<T extends UpdateUser> T user(ApiBaseUser user);
 	
+	/**
+	 * exclude array of variables
+	 * 
+	 * @param varnames variable name array
+	 * @return this pointer
+	 */
+	<T extends UpdateUser> T exclude(String... varnames);
+	
+	/**
+	 * include array of variables, if have no included variable, all variables be accepted
+	 * 
+	 * @param varnames variable name array
+	 * @return this pointer
+	 */
+	<T extends UpdateUser> T include(String... varnames);
+	
 }

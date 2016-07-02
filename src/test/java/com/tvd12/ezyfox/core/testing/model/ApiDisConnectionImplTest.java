@@ -47,8 +47,6 @@ public class ApiDisConnectionImplTest extends BaseTest {
         assertEquals(disconnection.reason(), "UNKNOWN");
         assertEquals(disconnection.user(), user);
         assertEquals(disconnection.zone(), zone);
-        
-        assertNotEquals(disconnection, disconnection.clone());
     }
     
 }

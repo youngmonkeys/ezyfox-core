@@ -37,4 +37,20 @@ public interface UpdateBuddyProperties extends BaseCommand {
      */
     <T extends UpdateBuddyProperties> T fireServerEvent(boolean value);
     
+    /**
+     * exclude array of variables
+     * 
+     * @param varnames variable name array
+     * @return this pointer
+     */
+    <T extends UpdateBuddyProperties> T exclude(String... varnames);
+    
+    /**
+     * include array of variables, if have no included variable, all variables be accepted
+     * 
+     * @param varnames variable name array
+     * @return this pointer
+     */
+    <T extends UpdateBuddyProperties> T include(String... varnames);
+    
 }

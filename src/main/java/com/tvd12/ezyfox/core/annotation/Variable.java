@@ -35,5 +35,5 @@ public @interface Variable {
 	 * 
 	 * @return true or false
 	 */
-	public boolean visible() default false;
+	public boolean visible() default true;
 }

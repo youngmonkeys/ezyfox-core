@@ -26,10 +26,10 @@ public class VariableMethodUtilTest extends BaseTest {
         assertFalse(VariableMethodUtil.checkHidden(field, false));
         
         field = ReflectFieldUtil.getField("a0", ClassA.class);
-        assertTrue(VariableMethodUtil.checkHidden(field, false));
+        assertFalse(VariableMethodUtil.checkHidden(field, false));
         
         field = ReflectFieldUtil.getField("a4", ClassA.class);
-        assertFalse(VariableMethodUtil.checkHidden(field, false));
+        assertTrue(VariableMethodUtil.checkHidden(field, false));
     }
     
     @Test
@@ -139,7 +139,7 @@ public class VariableMethodUtilTest extends BaseTest {
         @VariableParam(value = "a33")
         public String a3;
         
-        @Variable(visible = true)
+        @Variable(visible = false)
         public String a4;
         
         @Variable(name = "hello", visible = false)

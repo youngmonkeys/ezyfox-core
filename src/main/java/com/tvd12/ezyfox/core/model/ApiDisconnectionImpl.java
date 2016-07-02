@@ -65,14 +65,4 @@ public class ApiDisconnectionImpl implements ApiDisconnection {
     public String reason() {
         return this.reason;
     }
-
-    public ApiDisconnectionImpl clone() {
-        ApiDisconnectionImpl clone = new ApiDisconnectionImpl();
-        clone.setJoinedRooms(joinedRooms);
-        clone.setPlayerIdsByRoom(playerIdsByRoom);
-        clone.setReason(reason);
-        clone.setUser(user);
-        clone.setZone(zone);
-        return clone;
-    }
 }

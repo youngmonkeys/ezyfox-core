@@ -35,4 +35,20 @@ public interface UpdateRoom extends BaseCommand {
 	 * @return this pointer
 	 */
 	<T extends UpdateRoom> T user(ApiBaseUser user);
+	
+	/**
+     * exclude array of variables
+     * 
+     * @param varnames variable name array
+     * @return this pointer
+     */
+    <T extends UpdateRoom> T exclude(String... varnames);
+    
+    /**
+     * include array of variables, if have no included variable, all variables be accepted
+     * 
+     * @param varnames variable name array
+     * @return this pointer
+     */
+    <T extends UpdateRoom> T include(String... varnames);
 }
