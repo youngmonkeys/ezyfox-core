@@ -1,15 +1,18 @@
 package com.tvd12.ezyfox.core.reflect;
 
 import static com.tvd12.ezyfox.core.reflect.ReflectFieldUtil.getSetterMethod;
+import static org.reflections.ReflectionUtils.withModifier;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.commons.lang3.reflect.MethodUtils;
 import org.reflections.ReflectionUtils;
@@ -51,6 +54,17 @@ public final class ReflectMethodUtil {
 	        throw new ExtensionException("Can not get method " + name
 	                + " on class " + clazz);
 	    return method;
+	}
+	
+	/**
+	 * Get set of public methods in a class
+	 * 
+	 * @param clazz the class
+	 * @return set of public methods
+	 */
+	@SuppressWarnings("unchecked")
+    public static Set<Method> getPublicMethodSet(Class<?> clazz) {
+	    return ReflectionUtils.getAllMethods(clazz, withModifier(Modifier.PUBLIC));
 	}
 	
 	/**
