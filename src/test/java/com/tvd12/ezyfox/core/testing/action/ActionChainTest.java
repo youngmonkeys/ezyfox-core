@@ -161,26 +161,22 @@ public class ActionChainTest {
         private Runnable runabble;
         
         @Override
-        @SuppressWarnings("unchecked")
         public ScheduleImpl1 delay(long time) {
             this.delayTime = time;
             return this;
         }
 
         @Override
-        @SuppressWarnings("unchecked")
         public ScheduleImpl1 oneTime(boolean value) {
             return this;
         }
 
         @Override
-        @SuppressWarnings("unchecked")
         public ScheduleImpl1 period(long value) {
             return this;
         }
 
         @Override
-        @SuppressWarnings("unchecked")
         public ScheduleImpl1 task(Runnable value) {
             this.runabble = value;
             return this;
@@ -213,26 +209,22 @@ public class ActionChainTest {
         }
         
         @Override
-        @SuppressWarnings("unchecked")
         public ScheduleImpl2 delay(long time) {
             this.delayTime = time;
             return this;
         }
 
         @Override
-        @SuppressWarnings("unchecked")
         public ScheduleImpl2 oneTime(boolean value) {
             return this;
         }
 
         @Override
-        @SuppressWarnings("unchecked")
         public ScheduleImpl2 period(long value) {
             return this;
         }
 
         @Override
-        @SuppressWarnings("unchecked")
         public ScheduleImpl2 task(Runnable value) {
             this.runabble = value;
             return this;

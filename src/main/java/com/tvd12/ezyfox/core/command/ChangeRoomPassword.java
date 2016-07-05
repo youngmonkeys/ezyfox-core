@@ -3,8 +3,8 @@
  */
 package com.tvd12.ezyfox.core.command;
 
-import com.tvd12.ezyfox.core.model.ApiBaseUser;
-import com.tvd12.ezyfox.core.model.ApiRoom;
+import com.tvd12.ezyfox.core.entities.ApiBaseUser;
+import com.tvd12.ezyfox.core.entities.ApiRoom;
 
 /**
  * Execute this command to changes the Room password and the Room password-state. 
@@ -23,7 +23,7 @@ public interface ChangeRoomPassword extends BaseCommand {
      * @param owner room's owner
      * @return this pointer
      */
-    public <T extends ChangeRoomPassword> T owner(ApiBaseUser owner);
+    ChangeRoomPassword owner(ApiBaseUser owner);
     
     /**
      * Set room to change password
@@ -31,7 +31,7 @@ public interface ChangeRoomPassword extends BaseCommand {
      * @param targetRoom room to change password
      * @return this pointer
      */
-    public <T extends ChangeRoomPassword> T room(ApiRoom targetRoom);
+    ChangeRoomPassword room(ApiRoom targetRoom);
     
     /**
      * Set room's new password
@@ -39,6 +39,6 @@ public interface ChangeRoomPassword extends BaseCommand {
      * @param newPassword room's new password
      * @return this pointer
      */
-    public <T extends ChangeRoomPassword> T password(String newPassword);
+    ChangeRoomPassword password(String newPassword);
     
 }

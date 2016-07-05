@@ -7,9 +7,9 @@ import org.testng.annotations.Test;
 import com.google.common.collect.Lists;
 import com.tvd12.ezyfox.core.annotation.GameUser;
 import com.tvd12.ezyfox.core.annotation.UserAgent;
+import com.tvd12.ezyfox.core.entities.ApiGameUser;
+import com.tvd12.ezyfox.core.entities.ApiUser;
 import com.tvd12.ezyfox.core.factory.UserAgentFactory;
-import com.tvd12.ezyfox.core.model.ApiGameUser;
-import com.tvd12.ezyfox.core.model.ApiUser;
 import com.tvd12.ezyfox.core.structure.UserAgentClass;
 import com.tvd12.test.base.BaseTest;
 

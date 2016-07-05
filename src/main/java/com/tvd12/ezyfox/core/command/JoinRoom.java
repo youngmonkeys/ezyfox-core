@@ -3,8 +3,8 @@
  */
 package com.tvd12.ezyfox.core.command;
 
-import com.tvd12.ezyfox.core.model.ApiBaseUser;
-import com.tvd12.ezyfox.core.model.ApiRoom;
+import com.tvd12.ezyfox.core.entities.ApiBaseUser;
+import com.tvd12.ezyfox.core.entities.ApiRoom;
 
 /**
  * Execute this command to move user to a room
@@ -20,7 +20,7 @@ public interface JoinRoom extends BaseCommand {
      * @param user user to join room
      * @return this pointer
      */
-    public <T extends JoinRoom> T user(ApiBaseUser user);
+    JoinRoom user(ApiBaseUser user);
     
     /**
      * Set user's name to join room
@@ -28,7 +28,7 @@ public interface JoinRoom extends BaseCommand {
      * @param username user's name to join room
      * @return
      */
-    public <T extends JoinRoom> T user(String username);
+    JoinRoom user(String username);
     
     /**
      * Set room to join
@@ -36,7 +36,7 @@ public interface JoinRoom extends BaseCommand {
      * @param roomName the room to join
      * @return this pointer
      */
-    public <T extends JoinRoom> T roomToJoin(String roomName);
+    JoinRoom roomToJoin(String roomName);
     
     /**
      * Set room to join
@@ -44,7 +44,7 @@ public interface JoinRoom extends BaseCommand {
      * @param room the room to join
      * @return this pointer
      */
-    public <T extends JoinRoom> T roomToJoin(ApiRoom room);
+    JoinRoom roomToJoin(ApiRoom room);
     
     /**
      * Set an optional password if the room requires it. Use null if no password is needed
@@ -52,7 +52,7 @@ public interface JoinRoom extends BaseCommand {
      * @param password room's password
      * @return this pointer
      */
-    public <T extends JoinRoom> T password(String password);
+    JoinRoom password(String password);
     
     /**
      * join the room as spectator, in case of a game room
@@ -60,7 +60,7 @@ public interface JoinRoom extends BaseCommand {
      * @param value true or false
      * @return this pointer
      */
-    public <T extends JoinRoom> T asSpectator(boolean value);
+    JoinRoom asSpectator(boolean value);
     
     /**
      * Set room to leave, optionally specify a Room that should be left if roomToJoin is successfully joined
@@ -68,7 +68,7 @@ public interface JoinRoom extends BaseCommand {
      * @param roomName room to leave
      * @return this pointer
      */
-    public <T extends JoinRoom> T roomToLeave(String roomName);
+    JoinRoom roomToLeave(String roomName);
     
     /**
      * Set room to leave, optionally specify a Room that should be left if roomToJoin is successfully joined
@@ -76,7 +76,7 @@ public interface JoinRoom extends BaseCommand {
      * @param room room to leave
      * @return this pointer
      */
-    public <T extends JoinRoom> T roomToLeave(ApiRoom room);
+    JoinRoom roomToLeave(ApiRoom room);
     
     /**
      * fires client side Event
@@ -84,7 +84,7 @@ public interface JoinRoom extends BaseCommand {
      * @param value true or false
      * @return this pointer
      */
-    public <T extends JoinRoom> T fireClientEvent(boolean value);
+    JoinRoom fireClientEvent(boolean value);
     
     /**
      * fires server side Event
@@ -92,6 +92,6 @@ public interface JoinRoom extends BaseCommand {
      * @param value true or false
      * @return this pointer
      */
-    public <T extends JoinRoom> T fireServerEvent(boolean value);
+    JoinRoom fireServerEvent(boolean value);
     
 }

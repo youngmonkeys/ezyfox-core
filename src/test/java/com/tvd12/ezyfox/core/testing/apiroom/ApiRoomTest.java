@@ -5,9 +5,9 @@ import static org.testng.Assert.assertNull;
 
 import org.testng.annotations.Test;
 
-import com.tvd12.ezyfox.core.model.ApiRoom;
-import com.tvd12.ezyfox.core.model.ApiUser;
-import com.tvd12.ezyfox.core.model.RoomRemoveMode;
+import com.tvd12.ezyfox.core.entities.ApiRoom;
+import com.tvd12.ezyfox.core.entities.ApiUser;
+import com.tvd12.ezyfox.core.entities.RoomRemoveMode;
 
 public class ApiRoomTest {
 

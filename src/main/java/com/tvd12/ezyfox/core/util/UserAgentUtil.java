@@ -1,7 +1,7 @@
 package com.tvd12.ezyfox.core.util;
 
-import com.tvd12.ezyfox.core.model.ApiGameUser;
-import com.tvd12.ezyfox.core.model.ApiUser;
+import com.tvd12.ezyfox.core.entities.ApiGameUser;
+import com.tvd12.ezyfox.core.entities.ApiUser;
 
 /**
  * Support to get user agent object or game user agent object from class

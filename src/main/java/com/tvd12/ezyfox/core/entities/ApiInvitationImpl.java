@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.tvd12.ezyfox.core.model;
+package com.tvd12.ezyfox.core.entities;
 
 import com.tvd12.ezyfox.core.transport.Parameters;
 
@@ -23,7 +23,7 @@ public class ApiInvitationImpl implements ApiInvitation {
     private Parameters params;
     
     /* (non-Javadoc)
-     * @see com.tvd12.ezyfox.core.model.ApiInvitation#getId()
+     * @see com.tvd12.ezyfox.core.entities.ApiInvitation#getId()
      */
     @Override
     public int id() {
@@ -31,7 +31,7 @@ public class ApiInvitationImpl implements ApiInvitation {
     }
 
     /* (non-Javadoc)
-     * @see com.tvd12.ezyfox.core.model.ApiInvitation#inviter()
+     * @see com.tvd12.ezyfox.core.entities.ApiInvitation#inviter()
      */
     @SuppressWarnings("unchecked")
     @Override
@@ -40,7 +40,7 @@ public class ApiInvitationImpl implements ApiInvitation {
     }
 
     /* (non-Javadoc)
-     * @see com.tvd12.ezyfox.core.model.ApiInvitation#invitee()
+     * @see com.tvd12.ezyfox.core.entities.ApiInvitation#invitee()
      */
     @SuppressWarnings("unchecked")
     @Override
@@ -49,7 +49,7 @@ public class ApiInvitationImpl implements ApiInvitation {
     }
 
     /* (non-Javadoc)
-     * @see com.tvd12.ezyfox.core.model.ApiInvitation#exxpired()
+     * @see com.tvd12.ezyfox.core.entities.ApiInvitation#exxpired()
      */
     @Override
     public boolean expired() {
@@ -57,7 +57,7 @@ public class ApiInvitationImpl implements ApiInvitation {
     }
 
     /* (non-Javadoc)
-     * @see com.tvd12.ezyfox.core.model.ApiInvitation#expiryTime()
+     * @see com.tvd12.ezyfox.core.entities.ApiInvitation#expiryTime()
      */
     @Override
     public int expiryTime() {
@@ -65,7 +65,7 @@ public class ApiInvitationImpl implements ApiInvitation {
     }
 
     /* (non-Javadoc)
-     * @see com.tvd12.ezyfox.core.model.ApiInvitation#secondsForAnswer()
+     * @see com.tvd12.ezyfox.core.entities.ApiInvitation#secondsForAnswer()
      */
     @Override
     public int secondsForAnswer() {
@@ -73,7 +73,7 @@ public class ApiInvitationImpl implements ApiInvitation {
     }
 
     /* (non-Javadoc)
-     * @see com.tvd12.ezyfox.core.model.ApiInvitation#params()
+     * @see com.tvd12.ezyfox.core.entities.ApiInvitation#params()
      */
     @Override
     public Parameters params() {

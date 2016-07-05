@@ -5,8 +5,8 @@ package com.tvd12.ezyfox.core.command;
 
 import java.util.List;
 
-import com.tvd12.ezyfox.core.model.ApiBaseUser;
-import com.tvd12.ezyfox.core.model.ApiInvitation;
+import com.tvd12.ezyfox.core.entities.ApiBaseUser;
+import com.tvd12.ezyfox.core.entities.ApiInvitation;
 import com.tvd12.ezyfox.core.transport.Parameters;
 
 /**
@@ -15,17 +15,17 @@ import com.tvd12.ezyfox.core.transport.Parameters;
  */
 public interface SendInvitation extends BaseCommand {
 
-    <T extends SendInvitation> T inviter(ApiBaseUser user);
+    SendInvitation inviter(ApiBaseUser user);
     
-    <T extends SendInvitation> T invitees(List<ApiBaseUser> users);
+    SendInvitation invitees(List<ApiBaseUser> users);
     
-    <T extends SendInvitation> T invitees(ApiBaseUser... users);
+    SendInvitation invitees(ApiBaseUser... users);
     
-    <T extends SendInvitation> T expirySeconds(int seconds);
+    SendInvitation expirySeconds(int seconds);
     
-    <T extends SendInvitation> T callback(Callback callback);
+    SendInvitation callback(Callback callback);
     
-    <T extends SendInvitation> T param(String name, Object value);
+    SendInvitation param(String name, Object value);
     
     public static interface Callback {
         

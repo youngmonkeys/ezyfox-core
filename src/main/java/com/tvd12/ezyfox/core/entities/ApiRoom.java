@@ -1,4 +1,4 @@
-package com.tvd12.ezyfox.core.model;
+package com.tvd12.ezyfox.core.entities;
 
 import lombok.Getter;
 import lombok.Setter;

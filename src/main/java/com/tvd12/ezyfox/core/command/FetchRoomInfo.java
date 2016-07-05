@@ -5,8 +5,8 @@ package com.tvd12.ezyfox.core.command;
 
 import java.util.List;
 
-import com.tvd12.ezyfox.core.model.ApiBaseUser;
-import com.tvd12.ezyfox.core.model.ApiZone;
+import com.tvd12.ezyfox.core.entities.ApiBaseUser;
+import com.tvd12.ezyfox.core.entities.ApiZone;
 
 /**
  * Execute this command to fetch information of a room

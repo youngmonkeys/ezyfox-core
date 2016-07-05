@@ -3,8 +3,8 @@
  */
 package com.tvd12.ezyfox.core.command;
 
-import com.tvd12.ezyfox.core.model.ApiBaseUser;
-import com.tvd12.ezyfox.core.model.ApiZone;
+import com.tvd12.ezyfox.core.entities.ApiBaseUser;
+import com.tvd12.ezyfox.core.entities.ApiZone;
 
 /**
  * Execute this command to adds a new buddy to the BuddyList of the specified User.
@@ -20,7 +20,7 @@ public interface AddBuddy extends BaseCommand {
      * @param owner owner
      * @return this pointer
      */
-    public <T extends AddBuddy> T owner(ApiBaseUser owner);
+    AddBuddy owner(ApiBaseUser owner);
     
     /**
      * name of buddy's owner
@@ -28,7 +28,7 @@ public interface AddBuddy extends BaseCommand {
      * @param ownerName owner name
      * @return this pointer
      */
-    public <T extends AddBuddy> T owner(String ownerName);
+    AddBuddy owner(String ownerName);
     
     /**
      * If you set zone this command will add a buddy to the User's buddy list 
@@ -37,7 +37,7 @@ public interface AddBuddy extends BaseCommand {
      * @param zone which zone user's now in
      * @return this pointer
      */
-    public <T extends AddBuddy> T zone(ApiZone zone);
+    AddBuddy zone(ApiZone zone);
     
     /**
      * name of buddy to add
@@ -45,7 +45,7 @@ public interface AddBuddy extends BaseCommand {
      * @param buddyName buddy name
      * @return this pointer
      */
-    public <T extends AddBuddy> T buddy(String buddyName);
+    AddBuddy buddy(String buddyName);
     
     /**
      * if true, the Buddy is only temporary and will be lost when the user logs out
@@ -53,7 +53,7 @@ public interface AddBuddy extends BaseCommand {
      * @param isTemp is temporary?
      * @return this pointer
      */
-    public <T extends AddBuddy> T temp(boolean isTemp);
+    AddBuddy temp(boolean isTemp);
     
     /**
      * if true, send a client update
@@ -61,7 +61,7 @@ public interface AddBuddy extends BaseCommand {
      * @param fireClientEvent if true, send a client update
      * @return this pointer
      */
-    public <T extends AddBuddy> T fireClientEvent(boolean fireClientEvent);
+    AddBuddy fireClientEvent(boolean fireClientEvent);
     
     /**
      * if true, fire a server event (BUDDY_ADDED)
@@ -69,6 +69,6 @@ public interface AddBuddy extends BaseCommand {
      * @param fireServerEvent if true, fire a server event (BUDDY_ADDED)
      * @return this pointer
      */
-    public <T extends AddBuddy> T fireServerEvent(boolean fireServerEvent);
+    AddBuddy fireServerEvent(boolean fireServerEvent);
     
 }

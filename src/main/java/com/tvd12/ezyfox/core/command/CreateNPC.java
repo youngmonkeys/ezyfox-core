@@ -3,7 +3,7 @@
  */
 package com.tvd12.ezyfox.core.command;
 
-import com.tvd12.ezyfox.core.model.ApiZone;
+import com.tvd12.ezyfox.core.entities.ApiZone;
 
 /**
  * Execute this command to create connection-less NPC (Non-Player Character). 
@@ -26,7 +26,7 @@ public interface CreateNPC extends BaseCommand {
      * @param username the NPC name
      * @return this pointer
      */
-    public <T extends CreateNPC> T username(String username);
+    CreateNPC username(String username);
     
     /**
      * Set NPC's zone
@@ -34,7 +34,7 @@ public interface CreateNPC extends BaseCommand {
      * @param zone zone
      * @return this pointer
      */
-    public <T extends CreateNPC> T zone(ApiZone zone);
+    CreateNPC zone(ApiZone zone);
     
     /**
      * Name of NPC's zone
@@ -42,7 +42,7 @@ public interface CreateNPC extends BaseCommand {
      * @param zoneName zone name
      * @return this pointer
      */
-    public <T extends CreateNPC> T zone(String zoneName);
+    CreateNPC zone(String zoneName);
     
     /**
      * if a User already exists with that name, it will disconnect it first
@@ -50,6 +50,6 @@ public interface CreateNPC extends BaseCommand {
      * @param value force login or not
      * @return this pointer
      */
-    public <T extends CreateNPC> T forceLogin(boolean value);
+    CreateNPC forceLogin(boolean value);
     
 }

@@ -3,7 +3,7 @@
  */
 package com.tvd12.ezyfox.core.command;
 
-import com.tvd12.ezyfox.core.model.ApiBaseUser;
+import com.tvd12.ezyfox.core.entities.ApiBaseUser;
 
 /**
  * Execute this command to update information of a room

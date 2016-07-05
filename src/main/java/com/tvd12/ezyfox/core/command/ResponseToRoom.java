@@ -3,8 +3,8 @@
  */
 package com.tvd12.ezyfox.core.command;
 
-import com.tvd12.ezyfox.core.model.ApiBaseUser;
-import com.tvd12.ezyfox.core.model.ApiRoom;
+import com.tvd12.ezyfox.core.entities.ApiBaseUser;
+import com.tvd12.ezyfox.core.entities.ApiRoom;
 
 /**
  * Execute this command to response data to all clients in a room
@@ -20,7 +20,7 @@ public interface ResponseToRoom extends BaseCommand {
      * @param command command to response 
      * @return this pointer
      */
-    public <T extends ResponseToRoom> T command(String command);
+    ResponseToRoom command(String command);
     
     /**
      * set data object to response to client
@@ -28,7 +28,7 @@ public interface ResponseToRoom extends BaseCommand {
      * @param object data to response
      * @return this pointer
      */
-    public <T extends ResponseToRoom> T data(Object object);
+    ResponseToRoom data(Object object);
     
     /**
      * add a key-value data to response to client
@@ -37,7 +37,7 @@ public interface ResponseToRoom extends BaseCommand {
      * @param value value
      * @return this pointer
      */
-    public <T extends ResponseToRoom> T param(String name, Object value);
+    ResponseToRoom param(String name, Object value);
     
     /**
      * the sender
@@ -45,7 +45,7 @@ public interface ResponseToRoom extends BaseCommand {
      * @param user the sender
      * @return this pointer
      */
-    public <T extends ResponseToRoom> T sender(ApiBaseUser user);
+    ResponseToRoom sender(ApiBaseUser user);
     
     /**
      * the room
@@ -53,7 +53,7 @@ public interface ResponseToRoom extends BaseCommand {
      * @param room the room
      * @return this pointer
      */
-    public <T extends ResponseToRoom> T room(ApiRoom room);
+    ResponseToRoom room(ApiRoom room);
     
     /**
      * Add user to excluded users list, excluded users will not receive the message
@@ -61,6 +61,6 @@ public interface ResponseToRoom extends BaseCommand {
      * @param user the excluded user
      * @return this pointer
      */
-    public <T extends ResponseToRoom> T exclude(ApiBaseUser user);
+    ResponseToRoom exclude(ApiBaseUser user);
     
 }

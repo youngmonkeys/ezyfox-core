@@ -1,6 +1,6 @@
 package com.tvd12.ezyfox.core.command;
 
-import com.tvd12.ezyfox.core.model.ApiBaseUser;
+import com.tvd12.ezyfox.core.entities.ApiBaseUser;
 
 /**
  * Run this command to kick user from server
@@ -17,7 +17,7 @@ public interface KickUser extends BaseCommand {
      * @param user user to kick
      * @return this pointer
      */
-    public <T extends KickUser> T user(ApiBaseUser user);
+    KickUser user(ApiBaseUser user);
     
     /**
      * Set user's name to kick
@@ -25,7 +25,7 @@ public interface KickUser extends BaseCommand {
      * @param username user's name
      * @return this pointer
      */
-    public <T extends KickUser> T user(String username);
+    KickUser user(String username);
     
     /**
      * Set the mod/admin user, can be null to indicate generically the "Server"
@@ -33,7 +33,7 @@ public interface KickUser extends BaseCommand {
      * @param user the mod/admin user, can be null to indicate generically the "Server" 
      * @return this pointer
      */
-    public <T extends KickUser> T modUser(ApiBaseUser user);
+    KickUser modUser(ApiBaseUser user);
     
     /**
      * Set the mod/admin user's name, can be null to indicate generically the "Server"
@@ -41,7 +41,7 @@ public interface KickUser extends BaseCommand {
      * @param username mod/admin user's name
      * @return this pointer
      */
-    public <T extends KickUser> T modUser(String username);
+    KickUser modUser(String username);
     
     /**
      * set moderator message
@@ -49,7 +49,7 @@ public interface KickUser extends BaseCommand {
      * @param message a moderator message
      * @return this pointer 
      */
-    public <T extends KickUser> T message(String message);
+    KickUser message(String message);
     
     /**
      * set delay before the disconnection is performed
@@ -57,6 +57,6 @@ public interface KickUser extends BaseCommand {
      * @param delaySeconds delay time in seconds
      * @return
      */
-    public <T extends KickUser> T delay(int delaySeconds);
+    KickUser delay(int delaySeconds);
     
 }

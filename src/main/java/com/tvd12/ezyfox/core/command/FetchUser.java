@@ -3,7 +3,7 @@
  */
 package com.tvd12.ezyfox.core.command;
 
-import com.tvd12.ezyfox.core.model.ApiRoom;
+import com.tvd12.ezyfox.core.entities.ApiRoom;
 
 /**
  * Execute this command to fetch an user
@@ -19,7 +19,7 @@ public interface FetchUser extends BaseCommand {
      * @param userId user id
      * @return this pointer
      */
-    <T extends FetchUser> T userId(int userId);
+    FetchUser userId(int userId);
     
     /**
      * user name 
@@ -27,7 +27,7 @@ public interface FetchUser extends BaseCommand {
      * @param name user name
      * @return this pointer
      */
-    <T extends FetchUser> T username(String name);
+    FetchUser username(String name);
     
     /**
      * the room
@@ -35,6 +35,6 @@ public interface FetchUser extends BaseCommand {
      * @param room the room
      * @return this pointer
      */
-    <T extends FetchUser> T room(ApiRoom room);
+    FetchUser room(ApiRoom room);
     
 }

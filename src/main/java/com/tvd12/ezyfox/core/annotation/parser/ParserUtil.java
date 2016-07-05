@@ -5,8 +5,8 @@ package com.tvd12.ezyfox.core.annotation.parser;
 
 import java.util.Collection;
 
-import com.tvd12.ezyfox.core.model.ApiRoom;
-import com.tvd12.ezyfox.core.model.ApiUser;
+import com.tvd12.ezyfox.core.entities.ApiRoom;
+import com.tvd12.ezyfox.core.entities.ApiUser;
 
 /**
  * @author tavandung12

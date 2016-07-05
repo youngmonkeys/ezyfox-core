@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.tvd12.ezyfox.core.model;
+package com.tvd12.ezyfox.core.entities;
 
 import java.util.List;
 import java.util.Map;
@@ -24,7 +24,7 @@ public class ApiDisconnectionImpl implements ApiDisconnection {
     private String reason;
     
     /* (non-Javadoc)
-     * @see com.tvd12.ezyfox.core.model.ApiDisconnection#user()
+     * @see com.tvd12.ezyfox.core.entities.ApiDisconnection#user()
      */
     @SuppressWarnings("unchecked")
     @Override
@@ -33,7 +33,7 @@ public class ApiDisconnectionImpl implements ApiDisconnection {
     }
 
     /* (non-Javadoc)
-     * @see com.tvd12.ezyfox.core.model.ApiDisconnection#zone()
+     * @see com.tvd12.ezyfox.core.entities.ApiDisconnection#zone()
      */
     @Override
     public ApiZone zone() {
@@ -41,7 +41,7 @@ public class ApiDisconnectionImpl implements ApiDisconnection {
     }
 
     /* (non-Javadoc)
-     * @see com.tvd12.ezyfox.core.model.ApiDisconnection#joinedRooms()
+     * @see com.tvd12.ezyfox.core.entities.ApiDisconnection#joinedRooms()
      */
     @SuppressWarnings("unchecked")
     @Override
@@ -50,7 +50,7 @@ public class ApiDisconnectionImpl implements ApiDisconnection {
     }
 
     /* (non-Javadoc)
-     * @see com.tvd12.ezyfox.core.model.ApiDisconnection#playerIdsByRoom()
+     * @see com.tvd12.ezyfox.core.entities.ApiDisconnection#playerIdsByRoom()
      */
     @SuppressWarnings("unchecked")
     @Override
@@ -59,7 +59,7 @@ public class ApiDisconnectionImpl implements ApiDisconnection {
     }
 
     /* (non-Javadoc)
-     * @see com.tvd12.ezyfox.core.model.ApiDisconnection#reason()
+     * @see com.tvd12.ezyfox.core.entities.ApiDisconnection#reason()
      */
     @Override
     public String reason() {

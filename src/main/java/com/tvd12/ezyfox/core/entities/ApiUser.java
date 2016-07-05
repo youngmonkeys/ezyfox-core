@@ -1,4 +1,4 @@
-package com.tvd12.ezyfox.core.model;
+package com.tvd12.ezyfox.core.entities;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -58,7 +58,7 @@ public abstract class ApiUser extends ApiBaseUser {
     }
     
     /* (non-Javadoc)
-     * @see com.tvd12.ezyfox.core.model.ApiBaseUser#getBuddyProperties()
+     * @see com.tvd12.ezyfox.core.entities.ApiBaseUser#getBuddyProperties()
      */
     @SuppressWarnings("unchecked")
     @Override

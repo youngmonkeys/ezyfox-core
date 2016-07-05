@@ -3,7 +3,7 @@
  */
 package com.tvd12.ezyfox.core.command;
 
-import com.tvd12.ezyfox.core.model.ApiBaseUser;
+import com.tvd12.ezyfox.core.entities.ApiBaseUser;
 
 /**
  * Execute this command to disconnect User abruptly
@@ -19,7 +19,7 @@ public interface DisconnectUser extends BaseCommand {
      * @param userToDisconnect user to disconnect
      * @return this pointer
      */
-    public <T extends DisconnectUser> T user(ApiBaseUser userToDisconnect);
+    DisconnectUser user(ApiBaseUser userToDisconnect);
     
     /**
      * User's name to disconnect
@@ -27,7 +27,7 @@ public interface DisconnectUser extends BaseCommand {
      * @param usernameToDisconnect name of user to disconnect
      * @return this pointer
      */
-    public <T extends DisconnectUser> T user(String usernameToDisconnect);
+    DisconnectUser user(String usernameToDisconnect);
     
     /**
      * Disconnect reason id
@@ -35,6 +35,6 @@ public interface DisconnectUser extends BaseCommand {
      * @param id id
      * @return this pointer
      */
-    public <T extends DisconnectUser> T reasonId(byte id);
+    DisconnectUser reasonId(byte id);
     
 }

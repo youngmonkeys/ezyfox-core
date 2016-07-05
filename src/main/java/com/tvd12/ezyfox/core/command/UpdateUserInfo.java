@@ -3,7 +3,7 @@
  */
 package com.tvd12.ezyfox.core.command;
 
-import com.tvd12.ezyfox.core.model.ApiRoom;
+import com.tvd12.ezyfox.core.entities.ApiRoom;
 
 /**
  * Execute this command to update information of an user

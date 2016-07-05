@@ -3,7 +3,7 @@
  */
 package com.tvd12.ezyfox.core.command;
 
-import com.tvd12.ezyfox.core.model.ApiBaseUser;
+import com.tvd12.ezyfox.core.entities.ApiBaseUser;
 
 /**
  * Execute this command to find a buddy
@@ -19,7 +19,7 @@ public interface FindBuddy extends BaseCommand {
      * @param owner buddy's owner
      * @return this pointer
      */
-    <T extends FindBuddy> T owner(ApiBaseUser owner);
+    FindBuddy owner(ApiBaseUser owner);
     
     /**
      * Name of buddy's owner
@@ -27,7 +27,7 @@ public interface FindBuddy extends BaseCommand {
      * @param ownerName name of buddy's owner
      * @return
      */
-    <T extends FindBuddy> T owner(String ownerName);
+    FindBuddy owner(String ownerName);
     
     /**
      * Buddy name to find
@@ -35,6 +35,6 @@ public interface FindBuddy extends BaseCommand {
      * @param buddyName buddy name to find
      * @return this pointer
      */
-    <T extends FindBuddy> T buddy(String buddyName);
+    FindBuddy buddy(String buddyName);
     
 }

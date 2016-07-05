@@ -12,7 +12,7 @@ import java.util.Set;
 
 import com.tvd12.ezyfox.core.annotation.HandleMethod;
 import com.tvd12.ezyfox.core.content.AppContext;
-import com.tvd12.ezyfox.core.model.ApiZone;
+import com.tvd12.ezyfox.core.entities.ApiZone;
 import com.tvd12.ezyfox.core.reflect.ReflectMethodUtil;
 
 /**

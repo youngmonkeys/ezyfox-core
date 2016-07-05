@@ -3,7 +3,7 @@
  */
 package com.tvd12.ezyfox.core.command;
 
-import com.tvd12.ezyfox.core.model.ApiBaseUser;
+import com.tvd12.ezyfox.core.entities.ApiBaseUser;
 
 /**
  * Subscribe User to a Room Group. This will enable the User to receive events for Rooms in that Group
@@ -19,7 +19,7 @@ public interface SubscribeRoomGroup extends BaseCommand {
      * @param user the user
      * @return this pointer
      */
-    public <T extends SubscribeRoomGroup> T user(ApiBaseUser user);
+    SubscribeRoomGroup user(ApiBaseUser user);
     
     /**
      * the group name
@@ -27,6 +27,6 @@ public interface SubscribeRoomGroup extends BaseCommand {
      * @param groupId the group name
      * @return this pointer
      */
-    public <T extends SubscribeRoomGroup> T groupId(String groupId);
+    SubscribeRoomGroup groupId(String groupId);
     
 }

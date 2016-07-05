@@ -3,7 +3,7 @@
  */
 package com.tvd12.ezyfox.core.command;
 
-import com.tvd12.ezyfox.core.model.ApiBaseUser;
+import com.tvd12.ezyfox.core.entities.ApiBaseUser;
 
 /**
  * Execute this command to update buddy properties of an user
@@ -19,7 +19,7 @@ public interface UpdateBuddyProperties extends BaseCommand {
      * @param user owner user 
      * @return this pointer
      */
-    <T extends UpdateBuddyProperties> T owner(ApiBaseUser user);
+    UpdateBuddyProperties owner(ApiBaseUser user);
     
     /**
      *  if true, send a client update
@@ -27,7 +27,7 @@ public interface UpdateBuddyProperties extends BaseCommand {
      * @param value true or false
      * @return this pointer
      */
-    <T extends UpdateBuddyProperties> T fireClientEvent(boolean value);
+    UpdateBuddyProperties fireClientEvent(boolean value);
     
     /**
      * if true, fire a server event (BUDDY_VARIABLES_UPDATE)
@@ -35,7 +35,7 @@ public interface UpdateBuddyProperties extends BaseCommand {
      * @param value true or false
      * @return this pointer
      */
-    <T extends UpdateBuddyProperties> T fireServerEvent(boolean value);
+    UpdateBuddyProperties fireServerEvent(boolean value);
     
     /**
      * exclude array of variables
@@ -43,7 +43,7 @@ public interface UpdateBuddyProperties extends BaseCommand {
      * @param varnames variable name array
      * @return this pointer
      */
-    <T extends UpdateBuddyProperties> T exclude(String... varnames);
+    UpdateBuddyProperties exclude(String... varnames);
     
     /**
      * include array of variables, if have no included variable, all variables be accepted
@@ -51,6 +51,6 @@ public interface UpdateBuddyProperties extends BaseCommand {
      * @param varnames variable name array
      * @return this pointer
      */
-    <T extends UpdateBuddyProperties> T include(String... varnames);
+    UpdateBuddyProperties include(String... varnames);
     
 }

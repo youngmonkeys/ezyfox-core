@@ -2,8 +2,8 @@ package com.tvd12.ezyfox.core.factory;
 
 import java.util.Collection;
 
-import com.tvd12.ezyfox.core.model.ApiGameUser;
-import com.tvd12.ezyfox.core.model.ApiUser;
+import com.tvd12.ezyfox.core.entities.ApiGameUser;
+import com.tvd12.ezyfox.core.entities.ApiUser;
 import com.tvd12.ezyfox.core.structure.AgentClass;
 import com.tvd12.ezyfox.core.structure.UserAgentClass;
 

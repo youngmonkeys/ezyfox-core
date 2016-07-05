@@ -6,8 +6,8 @@ package com.tvd12.ezyfox.core.command;
 import java.util.List;
 import java.util.Map;
 
-import com.tvd12.ezyfox.core.model.ApiRoom;
-import com.tvd12.ezyfox.core.model.ApiZone;
+import com.tvd12.ezyfox.core.entities.ApiRoom;
+import com.tvd12.ezyfox.core.entities.ApiZone;
 
 /**
  * Execute this command to get information of an user

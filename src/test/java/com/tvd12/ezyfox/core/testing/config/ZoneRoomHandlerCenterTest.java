@@ -10,8 +10,8 @@ import com.tvd12.ezyfox.core.annotation.ServerEventHandler;
 import com.tvd12.ezyfox.core.config.ServerEvent;
 import com.tvd12.ezyfox.core.config.ZoneRoomHandlerCenter;
 import com.tvd12.ezyfox.core.content.AppContext;
-import com.tvd12.ezyfox.core.model.ApiRoom;
-import com.tvd12.ezyfox.core.model.ApiZone;
+import com.tvd12.ezyfox.core.entities.ApiRoom;
+import com.tvd12.ezyfox.core.entities.ApiZone;
 import com.tvd12.test.base.BaseTest;
 
 import static org.testng.Assert.*;

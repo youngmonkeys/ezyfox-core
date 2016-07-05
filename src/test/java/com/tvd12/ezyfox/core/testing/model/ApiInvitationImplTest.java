@@ -6,8 +6,8 @@ package com.tvd12.ezyfox.core.testing.model;
 
 import org.testng.annotations.Test;
 
-import com.tvd12.ezyfox.core.model.ApiInvitationImpl;
-import com.tvd12.ezyfox.core.model.ApiUser;
+import com.tvd12.ezyfox.core.entities.ApiInvitationImpl;
+import com.tvd12.ezyfox.core.entities.ApiUser;
 import com.tvd12.ezyfox.core.transport.Parameters;
 import com.tvd12.ezyfox.core.transport.impl.ParameterWrapper;
 import com.tvd12.test.base.BaseTest;

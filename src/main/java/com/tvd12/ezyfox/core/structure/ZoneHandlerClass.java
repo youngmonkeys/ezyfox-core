@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.tvd12.ezyfox.core.annotation.ZoneName;
 import com.tvd12.ezyfox.core.annotation.parser.HandleMethodParser;
-import com.tvd12.ezyfox.core.model.ApiZone;
+import com.tvd12.ezyfox.core.entities.ApiZone;
 
 import lombok.Getter;
 

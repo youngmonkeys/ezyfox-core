@@ -1,4 +1,4 @@
-package com.tvd12.ezyfox.core.model;
+package com.tvd12.ezyfox.core.entities;
 
 /**
  * Each user must have a unique user name

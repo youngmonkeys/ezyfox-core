@@ -3,7 +3,7 @@
  */
 package com.tvd12.ezyfox.core.command;
 
-import com.tvd12.ezyfox.core.model.ApiBaseUser;
+import com.tvd12.ezyfox.core.entities.ApiBaseUser;
 
 /**
  * Unsubscribe User form a Room Group.
@@ -19,7 +19,7 @@ public interface UnsubscribeRoomGroup extends BaseCommand {
      * @param user the user
      * @return this pointer
      */
-    public <T extends UnsubscribeRoomGroup> T user(ApiBaseUser user);
+    UnsubscribeRoomGroup user(ApiBaseUser user);
     
     /**
      * the group name
@@ -27,6 +27,6 @@ public interface UnsubscribeRoomGroup extends BaseCommand {
      * @param groupId the group name
      * @return this pointer
      */
-    public <T extends UnsubscribeRoomGroup> T groupId(String groupId);
+    UnsubscribeRoomGroup groupId(String groupId);
     
 }
