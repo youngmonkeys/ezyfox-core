@@ -6,6 +6,8 @@ package com.tvd12.ezyfox.core.command;
 import java.util.List;
 
 import com.tvd12.ezyfox.core.entities.ApiBaseUser;
+import com.tvd12.ezyfox.core.entities.ApiGameUser;
+import com.tvd12.ezyfox.core.entities.ApiUser;
 import com.tvd12.ezyfox.core.entities.ApiZone;
 
 /**
@@ -52,21 +54,45 @@ public interface FetchRoomInfo {
      * 
      * @return list of spectators
      */
-    <T extends ApiBaseUser> List<T> getSpectatorsList();
+    <T extends ApiUser> List<T> getSpectatorsList();
+    
+    /**
+     * For Game Rooms: get all Players in the Room (same as all User without the Spectators)
+     * 
+     * @param clazz class of game user
+     * @return list of spectators
+     */
+    <T extends ApiGameUser> List<T> getSpectatorsList(Class<?> clazz);
     
     /**
      * For Game Rooms: get all Spectators in the Room (same as all User without the Players)
      * 
      * @return list of player without spectators
      */
-    <T extends ApiBaseUser> List<T> getPlayersList();
+    <T extends ApiUser> List<T> getPlayersList();
+    
+    /**
+     * For Game Rooms: get all Spectators in the Room (same as all User without the Players)
+     * 
+     * @param clazz class of game user
+     * @return list of player without spectators
+     */
+    <T extends ApiGameUser> List<T> getPlayersList(Class<?> clazz);
     
     /**
      * Get all Users in the Room
      * 
      * @return all user in room
      */
-    <T extends ApiBaseUser> List<T> getUserList();
+    <T extends ApiUser> List<T> getUserList();
+    
+    /**
+     * Get all Users in the Room
+     * 
+     * @param clazz class of game user
+     * @return all user in room
+     */
+    <T extends ApiGameUser> List<T> getUserList(Class<?> clazz);
     
     /**
      * Get the total amount of Room Variables for this Room
@@ -102,5 +128,13 @@ public interface FetchRoomInfo {
      * @return true or false
      */
     boolean isPasswordProtected();
+    
+    /**
+     * Return true if the Room is active in the Zone. 
+     * When a Room is not active it will refuse any join request
+     * 
+     * @return true or false
+     */
+    boolean isActive();
     
 }

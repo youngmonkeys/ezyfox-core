@@ -5,6 +5,7 @@ package com.tvd12.ezyfox.core.command;
 
 import java.util.List;
 
+import com.tvd12.ezyfox.core.entities.ApiGameUser;
 import com.tvd12.ezyfox.core.entities.ApiRoom;
 import com.tvd12.ezyfox.core.entities.ApiUser;
 
@@ -22,6 +23,14 @@ public interface FetchUserList {
      * @param room the room
      * @return list of users
      */
-    List<ApiUser> in(ApiRoom room);
+    <T extends ApiUser> List<T> in(ApiRoom room);
     
+    /**
+     * Get all users in a room
+     * 
+     * @param clazz class of game user
+     * @param room the room
+     * @return list of users
+     */
+    <T extends ApiGameUser> List<T> in(ApiRoom room, Class<?> clazz);
 }

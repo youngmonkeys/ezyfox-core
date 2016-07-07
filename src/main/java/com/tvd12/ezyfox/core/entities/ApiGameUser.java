@@ -1,5 +1,7 @@
 package com.tvd12.ezyfox.core.entities;
 
+import com.tvd12.ezyfox.core.command.UserInfo;
+
 import lombok.Getter;
 import lombok.Setter;
 
@@ -20,7 +22,7 @@ public abstract class ApiGameUser extends ApiBaseUser {
      * @see com.tvd12.ezyfox.core.entities.ApiBaseUser#getId()
      */
     @Override
-    public final int getId() {
+    public int getId() {
         return parent.getId();
     }
     
@@ -28,7 +30,7 @@ public abstract class ApiGameUser extends ApiBaseUser {
      * @see com.tvd12.ezyfox.core.entities.ApiBaseUser#getName()
      */
     @Override
-    public final String getName() {
+    public String getName() {
         return parent.getName();
     }
     
@@ -36,7 +38,7 @@ public abstract class ApiGameUser extends ApiBaseUser {
      * @see com.tvd12.ezyfox.core.entities.ApiBaseUser#getIp()
      */
     @Override
-    public final String getIp() {
+    public String getIp() {
         return parent.getIp();
     }
     
@@ -44,8 +46,11 @@ public abstract class ApiGameUser extends ApiBaseUser {
      * @see com.tvd12.ezyfox.core.entities.ApiBaseUser#getBuddyProperties()
      */
     @Override
-    public final <T extends ApiBuddyProperties> T getBuddyProperties() {
+    public <T extends ApiBuddyProperties> T getBuddyProperties() {
         return parent.getBuddyProperties();
     }
     
+    public final UserInfo getCommand() {
+        return parent.getCommand();
+    }
 }
