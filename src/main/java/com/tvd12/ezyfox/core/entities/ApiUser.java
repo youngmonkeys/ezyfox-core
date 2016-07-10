@@ -19,9 +19,6 @@ import lombok.Setter;
 
 public abstract class ApiUser extends ApiBaseUser {
 	
-    @Getter @Setter
-    protected UserInfo command;
-    
     // user id
     @Setter @Getter
     private int id;
@@ -33,6 +30,12 @@ public abstract class ApiUser extends ApiBaseUser {
     // user ip
     @Setter @Getter
     private String ip;
+    
+    @Getter @Setter
+    protected UserInfo command;
+    
+    @Getter @Setter
+    protected ApiSession session;
     
     @Setter
     private ApiBuddyProperties buddyProperties;

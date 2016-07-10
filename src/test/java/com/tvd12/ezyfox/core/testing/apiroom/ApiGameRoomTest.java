@@ -1,23 +1,28 @@
 package com.tvd12.ezyfox.core.testing.apiroom;
 
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNull;
 
+import java.util.List;
+
 import org.testng.annotations.Test;
 
+import com.google.common.collect.Lists;
 import com.tvd12.ezyfox.core.command.RoomInfo;
 import com.tvd12.ezyfox.core.constants.RoomRemoveMode;
-import com.tvd12.ezyfox.core.entities.ApiRoom;
+import com.tvd12.ezyfox.core.entities.ApiGameRoom;
+import com.tvd12.ezyfox.core.entities.ApiGameUser;
 import com.tvd12.ezyfox.core.entities.ApiUser;
 
-import static org.mockito.Mockito.*;
+public class ApiGameRoomTest {
 
-public class ApiRoomTest {
-
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     @Test
     public void test() {
         RoomInfo command = mock(RoomInfo.class);
-        ApiRoom room = new ExampleRoom();
+        ExampleRoom room = new ExampleRoom();
         room.setCommand(command);
         room.setCapacity(10);
         room.setDynamic(true);
@@ -69,6 +74,17 @@ public class ApiRoomTest {
         room.setRemoveMode(RoomRemoveMode.DEFAULT);
         assertEquals(room.getRemoveMode(), RoomRemoveMode.DEFAULT);
         
+        when(command.getPlayersList(GameUser.class)).thenReturn((List)Lists.newArrayList(new GameUser()));
+        when(command.getSpectatorsList(GameUser.class)).thenReturn((List)Lists.newArrayList(new GameUser(), new GameUser()));
+        when(command.getUserList(GameUser.class)).thenReturn((List)Lists.newArrayList(new GameUser(), new GameUser(), new GameUser()));
+        
+        assertEquals(room.getPlayers().size(), 1);
+        assertEquals(room.getSpectators().size(), 2);
+        assertEquals(room.getUsers().size(), 3);
+        
+        room.switchPlayerToSpectator(new GameUser());
+        room.switchSpectatorToPlayer(new GameUser());
+        
         ExampleRoom1 exampleRoom1 = new ExampleRoom1();
         exampleRoom1.setOwner(null);
         assertNull(exampleRoom1.getOwner());
@@ -79,11 +95,33 @@ public class ApiRoomTest {
             setName("dung");
         }
     }
-    public static class ExampleRoom extends ApiRoom {
+    public static class ExampleRoom extends ApiGameRoom {
+
+        /* (non-Javadoc)
+         * @see com.tvd12.ezyfox.core.entities.ApiGameRoom#userClass()
+         */
+        @Override
+        protected Class<?> userClass() {
+            // TODO Auto-generated method stub
+            return GameUser.class;
+        }
         
     }
     
-    public static class ExampleRoom1 extends ApiRoom {
+    public static class ExampleRoom1 extends ApiGameRoom {
+
+        /* (non-Javadoc)
+         * @see com.tvd12.ezyfox.core.entities.ApiGameRoom#userClass()
+         */
+        @Override
+        protected Class<?> userClass() {
+            // TODO Auto-generated method stub
+            return GameUser.class;
+        }
+        
+    }
+    
+    public static class GameUser extends ApiGameUser {
         
     }
 }

@@ -11,8 +11,8 @@ import org.testng.annotations.Test;
 
 import com.google.common.collect.Lists;
 import com.tvd12.ezyfox.core.annotation.ServerEventHandler;
-import com.tvd12.ezyfox.core.config.ServerEvent;
 import com.tvd12.ezyfox.core.config.UserLoginEventHandlerCenter;
+import com.tvd12.ezyfox.core.constants.ServerEvent;
 import com.tvd12.ezyfox.core.content.AppContext;
 import com.tvd12.ezyfox.core.structure.UserLoginHandlerClass;
 import com.tvd12.test.base.BaseTest;

@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 import com.tvd12.ezyfox.core.annotation.RequestParam;
 import com.tvd12.ezyfox.core.annotation.ResponseParam;
 import com.tvd12.ezyfox.core.annotation.ServerEventHandler;
-import com.tvd12.ezyfox.core.config.ServerEvent;
+import com.tvd12.ezyfox.core.constants.ServerEvent;
 import com.tvd12.ezyfox.core.content.AppContext;
 import com.tvd12.ezyfox.core.structure.UserLoginHandlerClass;
 import com.tvd12.test.base.BaseTest;

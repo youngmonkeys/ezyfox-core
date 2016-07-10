@@ -5,6 +5,7 @@ import org.testng.annotations.Test;
 import com.tvd12.ezyfox.core.command.UserInfo;
 import com.tvd12.ezyfox.core.entities.ApiBuddyProperties;
 import com.tvd12.ezyfox.core.entities.ApiGameUser;
+import com.tvd12.ezyfox.core.entities.ApiSession;
 import com.tvd12.ezyfox.core.entities.ApiUser;
 
 import static org.testng.Assert.*;
@@ -38,6 +39,11 @@ public class ApiGameUserTest {
         assertEquals(user.getBuddyProperties().getNickName(), "dungtv");
         assertEquals(user.getIp(), "127.0.0.1");
         assertNotNull(user.getCommand());
+        
+        ApiSession session = mock(ApiSession.class);
+        parent.setSession(session);
+        assertEquals(parent.getSession(), session);
+        assertEquals(user.getSession(), session);
     }
     
     public static class ExGameUser extends ApiGameUser {

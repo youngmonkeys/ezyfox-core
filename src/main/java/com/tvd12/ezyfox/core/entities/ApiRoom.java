@@ -1,6 +1,7 @@
 package com.tvd12.ezyfox.core.entities;
 
 import com.tvd12.ezyfox.core.command.RoomInfo;
+import com.tvd12.ezyfox.core.constants.RoomRemoveMode;
 
 import lombok.Getter;
 import lombok.Setter;

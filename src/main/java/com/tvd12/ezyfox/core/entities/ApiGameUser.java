@@ -2,7 +2,6 @@ package com.tvd12.ezyfox.core.entities;
 
 import com.tvd12.ezyfox.core.command.UserInfo;
 
-import lombok.Getter;
 import lombok.Setter;
 
 /**
@@ -15,7 +14,7 @@ import lombok.Setter;
 public abstract class ApiGameUser extends ApiBaseUser {
 
     // application's user agent
-    @Getter @Setter
+    @Setter
     protected ApiUser parent;
     
     /**
@@ -43,14 +42,36 @@ public abstract class ApiGameUser extends ApiBaseUser {
     }
     
     /**
+     * Get user agent parent
+     * 
+     * @return the user agent parent
+     */
+    @SuppressWarnings("unchecked")
+    public <T extends ApiUser> T getParent() {
+        return (T)parent;
+    }
+    
+    /**
      * @see com.tvd12.ezyfox.core.entities.ApiBaseUser#getBuddyProperties()
      */
     @Override
     public <T extends ApiBuddyProperties> T getBuddyProperties() {
         return parent.getBuddyProperties();
     }
-    
+
+    /* (non-Javadoc)
+     * @see com.tvd12.ezyfox.core.entities.ApiBaseUser#getCommand()
+     */
+    @Override
     public final UserInfo getCommand() {
         return parent.getCommand();
+    }
+    
+    /* (non-Javadoc)
+     * @see com.tvd12.ezyfox.core.entities.ApiBaseUser#getSession()
+     */
+    @Override
+    public final ApiSession getSession() {
+        return parent.getSession();
     }
 }

@@ -7,8 +7,8 @@ import org.testng.annotations.Test;
 
 import com.tvd12.ezyfox.core.annotation.HandleMethod;
 import com.tvd12.ezyfox.core.annotation.ServerEventHandler;
-import com.tvd12.ezyfox.core.config.ServerEvent;
 import com.tvd12.ezyfox.core.config.ZoneRoomHandlerCenter;
+import com.tvd12.ezyfox.core.constants.ServerEvent;
 import com.tvd12.ezyfox.core.content.AppContext;
 import com.tvd12.ezyfox.core.entities.ApiRoom;
 import com.tvd12.ezyfox.core.entities.ApiZone;
