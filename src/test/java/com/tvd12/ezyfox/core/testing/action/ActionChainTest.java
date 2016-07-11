@@ -157,6 +157,7 @@ public class ActionChainTest {
     public static class ScheduleImpl1 implements Schedule {
         
         protected long delayTime;
+        protected boolean stopped;
         
         private Runnable runabble;
         
@@ -193,6 +194,14 @@ public class ActionChainTest {
         
         @Override
         public void stopNow() {
+        }
+
+        /* (non-Javadoc)
+         * @see com.tvd12.ezyfox.core.command.Schedule#stopped()
+         */
+        @Override
+        public boolean stopped() {
+            return this.stopped;
         }
         
     }
@@ -243,6 +252,14 @@ public class ActionChainTest {
         @Override
         public void stopNow() {
             executorService.shutdownNow();
+        }
+        
+        /* (non-Javadoc)
+         * @see com.tvd12.ezyfox.core.command.Schedule#stopped()
+         */
+        @Override
+        public boolean stopped() {
+            return false;
         }
         
     }

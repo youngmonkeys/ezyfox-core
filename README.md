@@ -108,7 +108,7 @@ Let's say you need validate a parameter in a request from client (i.e money in "
     @ResponseParam("2")
     private int roomId;
     
-    public void execute(AppContext context, VideoPokerUser user) throws Exception {
+    public void execute(AppContext context, MyUser user) throws Exception {
         if(money <= 0) {
             context.command(Response.class)
                 .command("2").recipient(user).execute();

@@ -56,4 +56,11 @@ public interface Schedule {
      */
     public void stopNow();
     
+    /**
+     * Indicate that the schedule is stopped or not
+     * 
+     * @return true or false
+     */
+    public boolean stopped();
+    
 }
