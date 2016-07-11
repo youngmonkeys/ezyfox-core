@@ -3,7 +3,7 @@
  */
 package com.tvd12.ezyfox.core.command;
 
-import com.tvd12.ezyfox.core.model.ApiBaseUser;
+import com.tvd12.ezyfox.core.entities.ApiBaseUser;
 
 /**
  * Execute this command to get id address of an user
@@ -19,7 +19,7 @@ public interface GetIpAddress extends BaseCommand {
      * @param user user to get ip address
      * @return this pointer
      */
-    <T extends GetIpAddress> T user(ApiBaseUser user);
+    GetIpAddress user(ApiBaseUser user);
     
     /**
      * name of user to get ip address
@@ -27,6 +27,6 @@ public interface GetIpAddress extends BaseCommand {
      * @param username user name
      * @return this pointer
      */
-    <T extends GetIpAddress> T user(String username);
+    GetIpAddress user(String username);
     
 }

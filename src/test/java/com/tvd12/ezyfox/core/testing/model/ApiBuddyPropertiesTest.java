@@ -5,7 +5,7 @@ package com.tvd12.ezyfox.core.testing.model;
 
 import org.testng.annotations.Test;
 
-import com.tvd12.ezyfox.core.model.ApiBuddyProperties;
+import com.tvd12.ezyfox.core.entities.ApiBuddyProperties;
 import com.tvd12.test.base.BaseTest;
 
 import static org.testng.Assert.*;

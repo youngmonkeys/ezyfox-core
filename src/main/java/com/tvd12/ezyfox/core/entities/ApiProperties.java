@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.tvd12.ezyfox.core.model;
+package com.tvd12.ezyfox.core.entities;
 
 /**
  * Each model in application should have properties, and we think key/value is good idea

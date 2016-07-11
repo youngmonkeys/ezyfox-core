@@ -15,7 +15,7 @@ public interface Schedule {
      * @param time delay time
      * @return this pointer
      */
-    public <T extends Schedule> T delay(long time);
+    Schedule delay(long time);
 
     /**
      * set schedule on time or not
@@ -23,7 +23,7 @@ public interface Schedule {
      * @param value true or false
      * @return this pointer
      */
-    public <T extends Schedule> T oneTime(boolean value);
+    Schedule oneTime(boolean value);
     
     /**
      * set period 
@@ -31,7 +31,7 @@ public interface Schedule {
      * @param value period
      * @return this pointer
      */
-    public <T extends Schedule> T period(long value);
+    Schedule period(long value);
     
     /**
      * set task
@@ -39,7 +39,7 @@ public interface Schedule {
      * @param value a task
      * @return this pointer
      */
-    public <T extends Schedule> T task(Runnable value);
+    Schedule task(Runnable value);
     
     /**
      * start schedule
@@ -55,5 +55,12 @@ public interface Schedule {
      * stop schedule without waiting for task's done
      */
     public void stopNow();
+    
+    /**
+     * Indicate that the schedule is stopped or not
+     * 
+     * @return true or false
+     */
+    public boolean stopped();
     
 }

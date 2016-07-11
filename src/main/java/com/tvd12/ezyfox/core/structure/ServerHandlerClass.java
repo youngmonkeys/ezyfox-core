@@ -90,7 +90,7 @@ public class ServerHandlerClass {
      * @param clazz handler class
      * @param paramTypes parameter types
      */
-    private void checkHandleMethod(Class<?> clazz, Class<?>... paramTypes) {
+    protected void checkHandleMethod(Class<?> clazz, Class<?>... paramTypes) {
         if(handleMethod != null)
             return;
         handleMethod = HandleMethodParser.getServerHandleMethod(

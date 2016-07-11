@@ -3,8 +3,8 @@
  */
 package com.tvd12.ezyfox.core.command;
 
-import com.tvd12.ezyfox.core.model.ApiBaseUser;
-import com.tvd12.ezyfox.core.model.ApiZone;
+import com.tvd12.ezyfox.core.entities.ApiBaseUser;
+import com.tvd12.ezyfox.core.entities.ApiZone;
 
 /**
  * Execute this command to removes a new buddy from the BuddyList of the specified User.
@@ -20,7 +20,7 @@ public interface RemoveBuddy extends BaseCommand {
      * @param owner owner
      * @return this pointer
      */
-    public <T extends RemoveBuddy> T owner(ApiBaseUser owner);
+    RemoveBuddy owner(ApiBaseUser owner);
     
     /**
      * name of buddy's owner
@@ -28,7 +28,7 @@ public interface RemoveBuddy extends BaseCommand {
      * @param ownerName owner name
      * @return this pointer
      */
-    public <T extends RemoveBuddy> T owner(String ownerName);
+    RemoveBuddy owner(String ownerName);
     
     /**
      * If you set zone this command will remove a buddy from the User's buddy list 
@@ -37,7 +37,7 @@ public interface RemoveBuddy extends BaseCommand {
      * @param zone which zone user's now in
      * @return this pointer
      */
-    public <T extends RemoveBuddy> T zone(ApiZone zone);
+    RemoveBuddy zone(ApiZone zone);
     
     /**
      * name of buddy to add
@@ -45,7 +45,7 @@ public interface RemoveBuddy extends BaseCommand {
      * @param buddyName buddy name
      * @return this pointer
      */
-    public <T extends RemoveBuddy> T buddy(String buddyName);
+    RemoveBuddy buddy(String buddyName);
     
     /**
      * if true, send a client update
@@ -53,7 +53,7 @@ public interface RemoveBuddy extends BaseCommand {
      * @param fireClientEvent if true, send a client update
      * @return this pointer
      */
-    public <T extends RemoveBuddy> T fireClientEvent(boolean fireClientEvent);
+    RemoveBuddy fireClientEvent(boolean fireClientEvent);
     
     /**
      * if true, fire a server event (BUDDY_REMOVE)
@@ -61,6 +61,6 @@ public interface RemoveBuddy extends BaseCommand {
      * @param fireServerEvent if true, fire a server event (BUDDY_REMOVE)
      * @return this pointer
      */
-    public <T extends RemoveBuddy> T fireServerEvent(boolean fireServerEvent);
+    RemoveBuddy fireServerEvent(boolean fireServerEvent);
     
 }

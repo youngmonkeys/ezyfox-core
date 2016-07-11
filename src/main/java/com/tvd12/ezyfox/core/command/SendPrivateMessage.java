@@ -3,7 +3,7 @@
  */
 package com.tvd12.ezyfox.core.command;
 
-import com.tvd12.ezyfox.core.model.ApiBaseUser;
+import com.tvd12.ezyfox.core.entities.ApiBaseUser;
 
 /**
  * Sends a private chat message. The message is sent to both the sender and receiver. 
@@ -21,7 +21,7 @@ public interface SendPrivateMessage extends BaseCommand {
      * @param sender the sender of the message
      * @return this pointer
      */
-    public <T extends SendPrivateMessage> T sender(ApiBaseUser sender);
+    SendPrivateMessage sender(ApiBaseUser sender);
     
     /**
      * the sender of the message
@@ -29,7 +29,7 @@ public interface SendPrivateMessage extends BaseCommand {
      * @param senderName the sender of the message
      * @return this pointer
      */
-    public <T extends SendPrivateMessage> T sender(String senderName);
+    SendPrivateMessage sender(String senderName);
     
     /**
      * the recipient of the message
@@ -37,7 +37,7 @@ public interface SendPrivateMessage extends BaseCommand {
      * @param recipient the recipient of the message
      * @return this pointer
      */
-    public <T extends SendPrivateMessage> T recipient(ApiBaseUser recipient);
+    SendPrivateMessage recipient(ApiBaseUser recipient);
     
     /**
      * the recipient of the message
@@ -45,7 +45,7 @@ public interface SendPrivateMessage extends BaseCommand {
      * @param recipientName the recipient of the message
      * @return this pointer
      */
-    public <T extends SendPrivateMessage> T recipient(String recipientName);
+    SendPrivateMessage recipient(String recipientName);
     
     /**
      * the chat message
@@ -53,7 +53,7 @@ public interface SendPrivateMessage extends BaseCommand {
      * @param message message as string
      * @return this pointer
      */
-    public <T extends SendPrivateMessage> T message(String message);
+    SendPrivateMessage message(String message);
     
     /**
      * extra parameter of message as object (that object be annotated with {@code MessageParams} annotation)
@@ -61,6 +61,6 @@ public interface SendPrivateMessage extends BaseCommand {
      * @param params an object
      * @return this pointer
      */
-    public <T extends SendPrivateMessage> T params(Object params);
+    SendPrivateMessage params(Object params);
     
 }

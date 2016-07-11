@@ -1,4 +1,6 @@
-package com.tvd12.ezyfox.core.model;
+package com.tvd12.ezyfox.core.entities;
+
+import com.tvd12.ezyfox.core.command.UserInfo;
 
 /**
  * Each user must have a unique user name
@@ -35,5 +37,15 @@ public abstract class ApiBaseUser extends ApiModel {
      * @return user's buddy properties
      */
     public abstract <T extends ApiBuddyProperties> T getBuddyProperties();
+    
+    /**
+     * @return the user info command
+     */
+    public abstract UserInfo getCommand();
+    
+    /**
+     * @return the session
+     */
+    public abstract ApiSession getSession();
     
 }

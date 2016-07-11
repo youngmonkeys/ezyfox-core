@@ -3,8 +3,8 @@
  */
 package com.tvd12.ezyfox.core.command;
 
-import com.tvd12.ezyfox.core.model.ApiBaseUser;
-import com.tvd12.ezyfox.core.model.ApiRoom;
+import com.tvd12.ezyfox.core.entities.ApiBaseUser;
+import com.tvd12.ezyfox.core.entities.ApiRoom;
 
 /**
  * Execute this command to removes a User from a previously joined Room
@@ -20,7 +20,7 @@ public interface LeaveRoom extends BaseCommand {
      * @param user user to leave room
      * @return this pointer
      */
-    public <T extends LeaveRoom> T user(ApiBaseUser user);
+    LeaveRoom user(ApiBaseUser user);
     
     /**
      * Name of user to leave room
@@ -28,7 +28,7 @@ public interface LeaveRoom extends BaseCommand {
      * @param username name of user to leave room
      * @return
      */
-    public <T extends LeaveRoom> T user(String username);
+    LeaveRoom user(String username);
     
     /**
      * Set room to leave, optionally specify a Room that should be left if roomToJoin is successfully joined
@@ -36,7 +36,7 @@ public interface LeaveRoom extends BaseCommand {
      * @param room room to leave
      * @return this pointer
      */
-    public <T extends LeaveRoom> T room(ApiRoom room);
+    LeaveRoom room(ApiRoom room);
     
     /**
      * Set room to leave, optionally specify a Room that should be left if roomToJoin is successfully joined
@@ -44,7 +44,7 @@ public interface LeaveRoom extends BaseCommand {
      * @param roomName room to leave
      * @return this pointer
      */
-    public <T extends LeaveRoom> T room(String roomName);
+    LeaveRoom room(String roomName);
     
     /**
      * fires client side Event
@@ -52,7 +52,7 @@ public interface LeaveRoom extends BaseCommand {
      * @param value true or false
      * @return this pointer
      */
-    public <T extends LeaveRoom> T fireClientEvent(boolean value);
+    LeaveRoom fireClientEvent(boolean value);
     
     /**
      * fires server side Event
@@ -60,6 +60,6 @@ public interface LeaveRoom extends BaseCommand {
      * @param value true or false
      * @return this pointer
      */
-    public <T extends LeaveRoom> T fireServerEvent(boolean value);
+    LeaveRoom fireServerEvent(boolean value);
     
 }

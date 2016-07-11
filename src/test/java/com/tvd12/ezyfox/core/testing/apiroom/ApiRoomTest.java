@@ -5,20 +5,22 @@ import static org.testng.Assert.assertNull;
 
 import org.testng.annotations.Test;
 
-import com.tvd12.ezyfox.core.model.ApiRoom;
-import com.tvd12.ezyfox.core.model.ApiUser;
-import com.tvd12.ezyfox.core.model.RoomRemoveMode;
+import com.tvd12.ezyfox.core.command.RoomInfo;
+import com.tvd12.ezyfox.core.constants.RoomRemoveMode;
+import com.tvd12.ezyfox.core.entities.ApiRoom;
+import com.tvd12.ezyfox.core.entities.ApiUser;
+
+import static org.mockito.Mockito.*;
 
 public class ApiRoomTest {
 
     @Test
     public void test() {
+        RoomInfo command = mock(RoomInfo.class);
         ApiRoom room = new ExampleRoom();
-        room.setActive(true);
+        room.setCommand(command);
         room.setCapacity(10);
         room.setDynamic(true);
-        room.setEmpty(false);
-        room.setFull(false);
         room.setGame(true);
         room.setGroupdId("123");
         room.setHidden(false);
@@ -35,11 +37,15 @@ public class ApiRoomTest {
         room.setUseWordsFilter(false);
         room.setVariablesCount(30);
         
+        when(command.isActive()).thenReturn(true);
         assertEquals(true, room.isActive());
         assertEquals(10, room.getCapacity());
         assertEquals(true, room.isDynamic());
+        when(command.isEmpty()).thenReturn(false);
         assertEquals(false, room.isEmpty());
+        when(command.isFull()).thenReturn(false);
         assertEquals(false, room.isFull());
+        assertEquals(false, room.getCommand().isFull());
         assertEquals(true, room.isGame());
         assertEquals("123", room.getGroupdId());
         assertEquals(false, room.isHidden());
@@ -74,19 +80,6 @@ public class ApiRoomTest {
         }
     }
     public static class ExampleRoom extends ApiRoom {
-        
-        private ExampleUser owner;
-        
-        @Override
-        public void setOwner(Object owner) {
-            this.owner = (ExampleUser)owner;
-        }
-
-        @SuppressWarnings("unchecked")
-        @Override
-        public ExampleUser getOwner() {
-            return owner;
-        }
         
     }
     

@@ -1,4 +1,4 @@
-package com.tvd12.ezyfox.core.config;
+package com.tvd12.ezyfox.core.constants;
 
 /**
  * Hold all server event

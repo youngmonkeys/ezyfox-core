@@ -3,7 +3,7 @@
  */
 package com.tvd12.ezyfox.core.command;
 
-import com.tvd12.ezyfox.core.model.ApiBaseUser;
+import com.tvd12.ezyfox.core.entities.ApiBaseUser;
 
 /**
  * Execute this command to activates/De-activates the Buddy ONLINE status of the User. 
@@ -20,7 +20,7 @@ public interface GoOnline extends BaseCommand {
      * @param user the user
      * @return this pointer
      */
-    <T extends GoOnline> T user(ApiBaseUser user);
+    GoOnline user(ApiBaseUser user);
     
     /**
      * the user
@@ -28,7 +28,7 @@ public interface GoOnline extends BaseCommand {
      * @param username user name
      * @return this pointer
      */
-    <T extends GoOnline> T user(String username);
+    GoOnline user(String username);
     
     /**
      * the online status
@@ -36,7 +36,7 @@ public interface GoOnline extends BaseCommand {
      * @param online the online status
      * @return this pointer
      */
-    <T extends GoOnline> T online(boolean online);
+    GoOnline online(boolean online);
     
     /**
      * if true fires a server side event (BUDDY_ONLINE)
@@ -44,7 +44,7 @@ public interface GoOnline extends BaseCommand {
      * @param fireServerEvent fire server event
      * @return this pointer
      */
-    <T extends GoOnline> T fireServerEvent(boolean fireServerEvent);
+    GoOnline fireServerEvent(boolean fireServerEvent);
     
     
     

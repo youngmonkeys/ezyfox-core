@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.tvd12.ezyfox.core.model;
+package com.tvd12.ezyfox.core.entities;
 
 /**
  * @author tavandung12

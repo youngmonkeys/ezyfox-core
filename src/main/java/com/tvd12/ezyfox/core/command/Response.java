@@ -3,7 +3,9 @@
  */
 package com.tvd12.ezyfox.core.command;
 
-import com.tvd12.ezyfox.core.model.ApiBaseUser;
+import java.util.List;
+
+import com.tvd12.ezyfox.core.entities.ApiBaseUser;
 
 /**
  * Execute this command to response data to client
@@ -19,7 +21,7 @@ public interface Response extends BaseCommand {
      * @param command command to response 
      * @return this pointer
      */
-    public <T extends Response> T command(String command);
+    Response command(String command);
     
     /**
      * set data object to response to client
@@ -27,7 +29,7 @@ public interface Response extends BaseCommand {
      * @param object data to response
      * @return this pointer
      */
-    public <T extends Response> T data(Object object);
+    Response data(Object object);
     
     /**
      * add a key-value data to response to client
@@ -36,23 +38,31 @@ public interface Response extends BaseCommand {
      * @param value value
      * @return this pointer
      */
-    public <T extends Response> T param(String name, Object value);
+    Response param(String name, Object value);
     
     /**
-     * add a recipient to list
+     * add recipients to list
      * 
-     * @param user user agent
+     * @param users user agent
      * @return this pointer
      */
-    public <T extends Response> T recipient(ApiBaseUser user);
+    Response recipient(ApiBaseUser... users);
     
     /**
-     * add a recipient to list
+     * add recipients to list
      * 
-     * @param username recipient's name
+     * @param users user agent
      * @return this pointer
      */
-    public <T extends Response> T recipient(String username);
+    public <T extends Response, U extends ApiBaseUser> T recipient(List<U> users);
+    
+    /**
+     * add recipients to list
+     * 
+     * @param usernames recipient's names
+     * @return this pointer
+     */
+    Response recipient(String... usernames);
     
     /**
      * user udp protocol or not
@@ -60,5 +70,5 @@ public interface Response extends BaseCommand {
      * @param value true or false
      * @return this pointer
      */
-    public <T extends Response> T useUDP(boolean value);
+    Response useUDP(boolean value);
 }

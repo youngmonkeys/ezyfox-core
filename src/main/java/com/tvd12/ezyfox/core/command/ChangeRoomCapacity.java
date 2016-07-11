@@ -3,8 +3,8 @@
  */
 package com.tvd12.ezyfox.core.command;
 
-import com.tvd12.ezyfox.core.model.ApiBaseUser;
-import com.tvd12.ezyfox.core.model.ApiRoom;
+import com.tvd12.ezyfox.core.entities.ApiBaseUser;
+import com.tvd12.ezyfox.core.entities.ApiRoom;
 
 /**
  * Execute this command to changes the capacity (max number of Users and Spectators) in the Room. 
@@ -22,7 +22,7 @@ public interface ChangeRoomCapacity extends BaseCommand {
      * @param owner room's owner
      * @return this pointer
      */
-    public <T extends ChangeRoomCapacity> T owner(ApiBaseUser owner);
+    ChangeRoomCapacity owner(ApiBaseUser owner);
     
     /**
      * Room to change capacity
@@ -30,7 +30,7 @@ public interface ChangeRoomCapacity extends BaseCommand {
      * @param targetRoom target room
      * @return this pointer
      */
-    public <T extends ChangeRoomCapacity> T room(ApiRoom targetRoom);
+    ChangeRoomCapacity room(ApiRoom targetRoom);
     
     /**
      * Set new max users value
@@ -38,7 +38,7 @@ public interface ChangeRoomCapacity extends BaseCommand {
      * @param newMaxUsers new max users value
      * @return this pointer
      */
-    public <T extends ChangeRoomCapacity> T maxUsers(int newMaxUsers);
+    ChangeRoomCapacity maxUsers(int newMaxUsers);
     
     /**
      * Set new max spectators value
@@ -46,6 +46,6 @@ public interface ChangeRoomCapacity extends BaseCommand {
      * @param newMaxSpactators new max spactators value
      * @return this pointer
      */
-    public <T extends ChangeRoomCapacity> T maxSpectators(int newMaxSpactators);
+    ChangeRoomCapacity maxSpectators(int newMaxSpactators);
     
 }

@@ -1,8 +1,11 @@
 package com.tvd12.ezyfox.core.annotation.parser;
 
+import static com.tvd12.ezyfox.core.annotation.parser.ParserUtil.isRoomAgentClass;
+import static com.tvd12.ezyfox.core.annotation.parser.ParserUtil.isUserAgentClass;
+import static com.tvd12.ezyfox.core.reflect.ReflectMethodUtil.getPublicMethodSet;
+
 import java.lang.reflect.Method;
-import java.util.Arrays;
-import java.util.List;
+import java.util.Collection;
 
 import com.tvd12.ezyfox.core.annotation.HandleMethod;
 import com.tvd12.ezyfox.core.content.AppContext;
@@ -28,8 +31,7 @@ public final class HandleMethodParser {
 	public static Method getServerHandleMethod(Class<?> clazz,
 			Class<?>... parameterTypes) {
 		int length = parameterTypes.length;
-		Method[] methods = clazz.getDeclaredMethods();
-		for(Method method : methods) {
+		for(Method method : getPublicMethodSet(clazz)) {
 			if(!validateMethod(method, length)) 
 				continue;
 			for(int i = 0 ; i < length ; i++) {
@@ -64,11 +66,10 @@ public final class HandleMethodParser {
 	 * @return handling method
 	 */
 	public static Method getServerHandleMethod(Class<?> clazz, 
-	        List<Class<?>> roomClasses, 
-	        Class<?> userClass, List<Class<?>> gameUserClasses) {
-	    Method[] methods = clazz.getDeclaredMethods();
+	        Collection<Class<?>> roomClasses, 
+	        Class<?> userClass, Collection<Class<?>> gameUserClasses) {
 	    Method handleMethod = getServerHandleMethod(
-	            Arrays.asList(methods), roomClasses, userClass, gameUserClasses);
+	            getPublicMethodSet(clazz), roomClasses, userClass, gameUserClasses);
 	    if(handleMethod != null)
 	        return handleMethod;
 	    throw new RuntimeException("Has no handle methods on class " + clazz);
@@ -84,9 +85,10 @@ public final class HandleMethodParser {
 	 * @param gameUserClasses list of game user agent classes
 	 * @return handling method
 	 */
-	private static Method getServerHandleMethod(List<Method> methods, 
-            List<Class<?>> roomClasses, 
-            Class<?> userClass, List<Class<?>> gameUserClasses) {
+	private static Method getServerHandleMethod(
+	        Collection<Method> methods, 
+	        Collection<Class<?>> roomClasses, 
+            Class<?> userClass, Collection<Class<?>> gameUserClasses) {
         for(Method method : methods) {
             if(validateMethod(method)
                     && method.getParameterTypes().length == 3
@@ -127,8 +129,8 @@ public final class HandleMethodParser {
 	 * @param roomClasses list of room agent classes
 	 * @return true or false
 	 */
-	private static boolean validateSecondParamType(Method method, List<Class<?>> roomClasses) {
-	    return roomClasses.contains(method.getParameterTypes()[1]);
+	private static boolean validateSecondParamType(Method method, Collection<Class<?>> roomClasses) {
+	    return isRoomAgentClass(roomClasses, method.getParameterTypes()[1]);
 	}
 	
 	/**
@@ -140,9 +142,9 @@ public final class HandleMethodParser {
 	 * @return true or false
 	 */
 	private static boolean validateThirdParamType(Method method,
-            Class<?> userClass, List<Class<?>> gameUserClasses) {
+            Class<?> userClass, Collection<Class<?>> gameUserClasses) {
         Class<?> type = method.getParameterTypes()[2];
-        return (type == userClass || gameUserClasses.contains(type));
+        return isUserAgentClass(type, userClass, gameUserClasses);
     }
 	
 	/**
@@ -156,10 +158,9 @@ public final class HandleMethodParser {
 	 */
 	public static Method getServerHandleMethod(Class<?> clazz, 
 	        Class<?> modelClass,
-	        Class<?> userClass, List<Class<?>> gameUserClasses) {
-	    Method[] methods = clazz.getDeclaredMethods();
+	        Class<?> userClass, Collection<Class<?>> gameUserClasses) {
         Method handleMethod = getServerHandleMethod(
-                Arrays.asList(methods), modelClass, userClass, gameUserClasses);
+                getPublicMethodSet(clazz), modelClass, userClass, gameUserClasses);
         if(handleMethod != null)
             return handleMethod;
         throw new RuntimeException("Has no handle methods on class " + clazz);
@@ -175,9 +176,9 @@ public final class HandleMethodParser {
 	 * @param gameUserClasses game user agent's class
 	 * @return handle method
 	 */
-    private static Method getServerHandleMethod(List<Method> methods, 
+    private static Method getServerHandleMethod(Collection<Method> methods, 
             Class<?> modelClass, 
-            Class<?> userClass, List<Class<?>> gameUserClasses) {
+            Class<?> userClass, Collection<Class<?>> gameUserClasses) {
         for(Method method : methods) {
             if(validateMethod(method)
                     && method.getParameterTypes().length == 3
@@ -210,10 +211,9 @@ public final class HandleMethodParser {
 	 * @return handling method
 	 */
 	public static Method getServerHandleMethod(Class<?> clazz, 
-            Class<?> userClass, List<Class<?>> gameUserClasses) {
-        Method[] methods = clazz.getDeclaredMethods();
+            Class<?> userClass, Collection<Class<?>> gameUserClasses) {
         Method handleMethod = getServerHandleMethod(
-                Arrays.asList(methods), userClass, gameUserClasses);
+                getPublicMethodSet(clazz), userClass, gameUserClasses);
         if(handleMethod != null)
             return handleMethod;
         throw new RuntimeException("Has no handle methods on class " + clazz);
@@ -228,8 +228,8 @@ public final class HandleMethodParser {
 	 * @param gameUserClasses list of game user agent classes
 	 * @return handling method
 	 */
-    private static Method getServerHandleMethod(List<Method> methods, 
-            Class<?> userClass, List<Class<?>> gameUserClasses) {
+    private static Method getServerHandleMethod(Collection<Method> methods, 
+            Class<?> userClass, Collection<Class<?>> gameUserClasses) {
         for(Method method : methods) {
             if(validateMethod(method)
                     && method.getParameterTypes().length == 2
@@ -250,8 +250,8 @@ public final class HandleMethodParser {
      * @return true or false
      */
     private static boolean validateSecondParamType(Method method,
-            Class<?> userClass, List<Class<?>> gameUserClasses) {
+            Class<?> userClass, Collection<Class<?>> gameUserClasses) {
         Class<?> type = method.getParameterTypes()[1];
-        return (type == userClass || gameUserClasses.contains(type));
+        return isUserAgentClass(type, userClass, gameUserClasses);
     }
 }

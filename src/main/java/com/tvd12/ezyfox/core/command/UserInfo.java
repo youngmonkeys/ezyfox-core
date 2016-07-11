@@ -3,7 +3,7 @@
  */
 package com.tvd12.ezyfox.core.command;
 
-import com.tvd12.ezyfox.core.model.ApiBaseUser;
+import com.tvd12.ezyfox.core.entities.ApiBaseUser;
 
 /**
  * Use this command to update or fetch information of an user 
@@ -19,7 +19,7 @@ public interface UserInfo extends UpdateUserInfo, FetchUserInfo {
      * @param user user
      * @return this pointer
      */
-    <T extends UserInfo> T user(ApiBaseUser user);
+    UserInfo user(ApiBaseUser user);
     
     /**
      * Set user name to get user
@@ -27,7 +27,7 @@ public interface UserInfo extends UpdateUserInfo, FetchUserInfo {
      * @param username user name
      * @return this pointer
      */
-    <T extends UserInfo> T user(String username);
+    UserInfo user(String username);
     
     /**
      * Set user id to get user
@@ -35,6 +35,6 @@ public interface UserInfo extends UpdateUserInfo, FetchUserInfo {
      * @param userId user id
      * @return this pointer
      */
-    <T extends UserInfo> T user(int userId);
+    UserInfo user(int userId);
     
 }

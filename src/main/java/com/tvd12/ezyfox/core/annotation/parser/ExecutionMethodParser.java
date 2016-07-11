@@ -88,7 +88,7 @@ public final class ExecutionMethodParser {
 	private static boolean validateSecondParamType(Method method,
 	        Class<?> userClass, List<Class<?>> gameUserClasses) {
 	    Class<?> type = method.getParameterTypes()[1];
-	    return (type == userClass || gameUserClasses.contains(type));
+	    return ParserUtil.isUserAgentClass(type, userClass, gameUserClasses);
 	}
 	
 }

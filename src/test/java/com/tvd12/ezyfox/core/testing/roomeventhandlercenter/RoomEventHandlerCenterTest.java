@@ -11,8 +11,8 @@ import com.google.common.collect.Lists;
 import com.tvd12.ezyfox.core.annotation.ServerEventHandler;
 import com.tvd12.ezyfox.core.config.RoomEventHandlerCenter;
 import com.tvd12.ezyfox.core.content.AppContext;
-import com.tvd12.ezyfox.core.model.ApiRoom;
-import com.tvd12.ezyfox.core.model.ApiUser;
+import com.tvd12.ezyfox.core.entities.ApiRoom;
+import com.tvd12.ezyfox.core.entities.ApiUser;
 import com.tvd12.ezyfox.core.structure.RoomHandlerClass;
 
 public class RoomEventHandlerCenterTest {
@@ -36,16 +36,6 @@ public class RoomEventHandlerCenterTest {
     
     public static class ExampleRoom extends ApiRoom {
 
-        @Override
-        public void setOwner(Object owner) {
-            
-        }
-
-        @Override
-        public <T> T getOwner() {
-            return null;
-        }
-        
     }
     
     @ServerEventHandler(event="USER_JOIN_ROOM", priority = 2)

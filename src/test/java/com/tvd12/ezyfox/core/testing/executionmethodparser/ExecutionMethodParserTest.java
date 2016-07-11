@@ -13,6 +13,7 @@ import com.google.common.collect.Lists;
 import com.tvd12.ezyfox.core.annotation.ExecuteMethod;
 import com.tvd12.ezyfox.core.annotation.parser.ExecutionMethodParser;
 import com.tvd12.ezyfox.core.content.AppContext;
+import com.tvd12.ezyfox.core.entities.ApiUser;
 import com.tvd12.ezyfox.core.exception.ExtensionException;
 import com.tvd12.test.reflect.ReflectMethodUtil;
 
@@ -103,7 +104,7 @@ public class ExecutionMethodParserTest {
 	}
 	
 	public static class BettingActionListener {
-		public void execute(AppContext context, ExampleUser user) throws Exception {
+		public void execute(AppContext context, ApiUser user) throws Exception {
 			
 		}
 	}

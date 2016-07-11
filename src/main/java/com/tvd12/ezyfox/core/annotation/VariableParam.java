@@ -36,6 +36,6 @@ public @interface VariableParam {
 	 * 
 	 * @return visible with client or not
 	 */
-	public boolean visible() default false;
+	public boolean visible() default true;
 	
 }

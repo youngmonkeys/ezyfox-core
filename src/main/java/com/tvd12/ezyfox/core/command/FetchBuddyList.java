@@ -3,7 +3,7 @@
  */
 package com.tvd12.ezyfox.core.command;
 
-import com.tvd12.ezyfox.core.model.ApiBaseUser;
+import com.tvd12.ezyfox.core.entities.ApiBaseUser;
 
 /**
  * Execute this command to get all buddies of an user
@@ -19,7 +19,7 @@ public interface FetchBuddyList extends BaseCommand {
      * @param user the user
      * @return
      */
-    <T extends FetchBuddyList> T user(ApiBaseUser user);
+    FetchBuddyList user(ApiBaseUser user);
     
     /**
      * the user
@@ -27,6 +27,6 @@ public interface FetchBuddyList extends BaseCommand {
      * @param username user name
      * @return
      */
-    <T extends FetchBuddyList> T user(String username);
+    FetchBuddyList user(String username);
     
 }

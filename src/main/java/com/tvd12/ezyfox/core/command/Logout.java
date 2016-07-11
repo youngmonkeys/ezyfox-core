@@ -3,7 +3,7 @@
  */
 package com.tvd12.ezyfox.core.command;
 
-import com.tvd12.ezyfox.core.model.ApiBaseUser;
+import com.tvd12.ezyfox.core.entities.ApiBaseUser;
 
 /**
  * Execute this command to log a User out of the current Zone
@@ -19,7 +19,7 @@ public interface Logout extends BaseCommand {
      * @param user user to logout
      * @return this pointer
      */
-    public <T extends Logout> T user(ApiBaseUser user);
+    Logout user(ApiBaseUser user);
     
     /**
      * Name of user to logout
@@ -27,6 +27,6 @@ public interface Logout extends BaseCommand {
      * @param username name of user to logout
      * @return this pointer
      */
-    public <T extends Logout> T user(String username);
+    Logout user(String username);
     
 }

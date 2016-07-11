@@ -2,8 +2,8 @@ package com.tvd12.ezyfox.core.testing.utilities;
 
 import org.testng.annotations.Test;
 
-import com.tvd12.ezyfox.core.model.ApiGameUser;
-import com.tvd12.ezyfox.core.model.ApiUser;
+import com.tvd12.ezyfox.core.entities.ApiGameUser;
+import com.tvd12.ezyfox.core.entities.ApiUser;
 import com.tvd12.ezyfox.core.util.UserAgentUtil;
 import com.tvd12.test.base.BaseTest;
 

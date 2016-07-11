@@ -3,8 +3,8 @@
  */
 package com.tvd12.ezyfox.core.command;
 
-import com.tvd12.ezyfox.core.model.ApiBaseUser;
-import com.tvd12.ezyfox.core.model.ApiRoom;
+import com.tvd12.ezyfox.core.entities.ApiBaseUser;
+import com.tvd12.ezyfox.core.entities.ApiRoom;
 
 /**
  * Execute this command to rename a Room. Errors can be fired if:
@@ -23,7 +23,7 @@ public interface ChangeRoomName extends BaseCommand {
      * @param owner room's owner user
      * @return this pointer
      */
-    public <T extends ChangeRoomName> T owner(ApiBaseUser owner);
+    ChangeRoomName owner(ApiBaseUser owner);
     
     /**
      * Set room to change name
@@ -31,7 +31,7 @@ public interface ChangeRoomName extends BaseCommand {
      * @param targetRoom target room
      * @return this pointer
      */
-    public <T extends ChangeRoomName> T room(ApiRoom targetRoom);
+    ChangeRoomName room(ApiRoom targetRoom);
     
     /**
      * Set new room's name
@@ -39,6 +39,6 @@ public interface ChangeRoomName extends BaseCommand {
      * @param newName new room's name
      * @return this pointer
      */
-    public <T extends ChangeRoomName> T name(String newName);
+    ChangeRoomName name(String newName);
     
 }

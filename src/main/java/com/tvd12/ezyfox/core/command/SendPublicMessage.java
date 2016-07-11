@@ -3,8 +3,8 @@
  */
 package com.tvd12.ezyfox.core.command;
 
-import com.tvd12.ezyfox.core.model.ApiBaseUser;
-import com.tvd12.ezyfox.core.model.ApiRoom;
+import com.tvd12.ezyfox.core.entities.ApiBaseUser;
+import com.tvd12.ezyfox.core.entities.ApiRoom;
 
 /**
  * Execute this command to send a public chat message. 
@@ -21,7 +21,7 @@ public interface SendPublicMessage extends BaseCommand {
      * @param sender the sender of the message
      * @return this pointer
      */
-    public <T extends SendPublicMessage> T sender(ApiBaseUser sender);
+    SendPublicMessage sender(ApiBaseUser sender);
     
     /**
      * the sender of the message
@@ -29,7 +29,7 @@ public interface SendPublicMessage extends BaseCommand {
      * @param senderName the sender of the message
      * @return this pointer
      */
-    public <T extends SendPublicMessage> T sender(String senderName);
+    SendPublicMessage sender(String senderName);
     
     /**
      * the Room where the message is sent
@@ -37,7 +37,7 @@ public interface SendPublicMessage extends BaseCommand {
      * @param room target room
      * @return this pointer
      */
-    public <T extends SendPublicMessage> T room(ApiRoom room);
+    SendPublicMessage room(ApiRoom room);
     
     /**
      * the Room where the message is sent
@@ -45,7 +45,7 @@ public interface SendPublicMessage extends BaseCommand {
      * @param roomName target room
      * @return this pointer
      */
-    public <T extends SendPublicMessage> T room(String roomName);
+    SendPublicMessage room(String roomName);
     
     /**
      * the chat message
@@ -53,7 +53,7 @@ public interface SendPublicMessage extends BaseCommand {
      * @param message message as string
      * @return this pointer
      */
-    public <T extends SendPublicMessage> T message(String message);
+    SendPublicMessage message(String message);
     
     /**
      * extra parameter of message as object (that object be annotated with {@code MessageParams} annotation)
@@ -61,6 +61,6 @@ public interface SendPublicMessage extends BaseCommand {
      * @param params an object
      * @return this pointer
      */
-    public <T extends SendPublicMessage> T params(Object params);
+    SendPublicMessage params(Object params);
     
 }

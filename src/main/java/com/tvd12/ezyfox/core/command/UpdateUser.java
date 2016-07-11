@@ -1,6 +1,6 @@
 package com.tvd12.ezyfox.core.command;
 
-import com.tvd12.ezyfox.core.model.ApiBaseUser;
+import com.tvd12.ezyfox.core.entities.ApiBaseUser;
 
 /**
  * Execute this command to update user variables
@@ -16,7 +16,7 @@ public interface UpdateUser extends BaseCommand {
      * @param value true or false
      * @return this pointer
      */
-	<T extends UpdateUser> T toClient(boolean value);
+	UpdateUser toClient(boolean value);
 	
 	/**
 	 * set user agent
@@ -24,6 +24,22 @@ public interface UpdateUser extends BaseCommand {
 	 * @param user user agent
 	 * @return this pointer
 	 */
-	<T extends UpdateUser> T user(ApiBaseUser user);
+	UpdateUser user(ApiBaseUser user);
+	
+	/**
+	 * exclude array of variables
+	 * 
+	 * @param varnames variable name array
+	 * @return this pointer
+	 */
+	UpdateUser exclude(String... varnames);
+	
+	/**
+	 * include array of variables, if have no included variable, all variables be accepted
+	 * 
+	 * @param varnames variable name array
+	 * @return this pointer
+	 */
+	UpdateUser include(String... varnames);
 	
 }

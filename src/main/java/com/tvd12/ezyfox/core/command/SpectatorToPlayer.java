@@ -3,8 +3,8 @@
  */
 package com.tvd12.ezyfox.core.command;
 
-import com.tvd12.ezyfox.core.model.ApiBaseUser;
-import com.tvd12.ezyfox.core.model.ApiRoom;
+import com.tvd12.ezyfox.core.entities.ApiBaseUser;
+import com.tvd12.ezyfox.core.entities.ApiRoom;
 
 /**
  * Execute this command to turns a spectator in a Game Room to a player.
@@ -20,7 +20,7 @@ public interface SpectatorToPlayer extends BaseCommand {
      * @param user spectator to turn to player
      * @return this pointer
      */
-    public <T extends SpectatorToPlayer> T user(ApiBaseUser user);
+    SpectatorToPlayer user(ApiBaseUser user);
     
     /**
      * the Room in which the spectator will be turned into a player
@@ -28,7 +28,7 @@ public interface SpectatorToPlayer extends BaseCommand {
      * @param room the Room in which the player will be turned into a spectator
      * @return this pointer
      */
-    public <T extends SpectatorToPlayer> T room(ApiRoom room);
+    SpectatorToPlayer room(ApiRoom room);
     
     /**
      * if true send an update to the client (recommended)
@@ -36,7 +36,7 @@ public interface SpectatorToPlayer extends BaseCommand {
      * @param value fire client event or not
      * @return this pointer
      */
-    public <T extends SpectatorToPlayer> T fireClientEvent(boolean value);
+    SpectatorToPlayer fireClientEvent(boolean value);
     
     /**
      * if true fire a server side event
@@ -44,6 +44,6 @@ public interface SpectatorToPlayer extends BaseCommand {
      * @param value fire a server side event or not
      * @return this pointer
      */
-    public <T extends SpectatorToPlayer> T fireServerEvent(boolean value);
+    SpectatorToPlayer fireServerEvent(boolean value);
     
 }

@@ -12,9 +12,9 @@ import com.google.common.collect.Lists;
 import com.tvd12.ezyfox.core.annotation.HandleMethod;
 import com.tvd12.ezyfox.core.annotation.parser.HandleMethodParser;
 import com.tvd12.ezyfox.core.content.AppContext;
-import com.tvd12.ezyfox.core.model.ApiGameUser;
-import com.tvd12.ezyfox.core.model.ApiRoom;
-import com.tvd12.ezyfox.core.model.ApiUser;
+import com.tvd12.ezyfox.core.entities.ApiGameUser;
+import com.tvd12.ezyfox.core.entities.ApiRoom;
+import com.tvd12.ezyfox.core.entities.ApiUser;
 import com.tvd12.test.reflect.ReflectMethodUtil;
 
 public class HandleMethodParserTest {

@@ -3,7 +3,7 @@
  */
 package com.tvd12.ezyfox.core.command;
 
-import com.tvd12.ezyfox.core.model.ApiBaseUser;
+import com.tvd12.ezyfox.core.entities.ApiBaseUser;
 
 /**
  * Execute this command to initialize the buddy list for the requested User. 
@@ -20,7 +20,7 @@ public interface InitBuddyList extends BaseCommand {
      * @param user the User
      * @return this pointer
      */
-    public <T extends InitBuddyList> T user(ApiBaseUser user);
+    InitBuddyList user(ApiBaseUser user);
     
     /**
      * User's name
@@ -28,7 +28,7 @@ public interface InitBuddyList extends BaseCommand {
      * @param username user name
      * @return this pointer
      */
-    public <T extends InitBuddyList> T user(String username);
+    InitBuddyList user(String username);
     
     /**
      * if true fires a server side event (BUDDY_LIST_INIT)
@@ -36,6 +36,6 @@ public interface InitBuddyList extends BaseCommand {
      * @param value if true fires a server side event (BUDDY_LIST_INIT)
      * @return this pointer
      */
-    public <T extends InitBuddyList> T fireServerEvent(boolean value);
+    InitBuddyList fireServerEvent(boolean value);
     
 }

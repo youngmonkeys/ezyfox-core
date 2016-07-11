@@ -1,9 +1,16 @@
 package com.tvd12.ezyfox.core.config;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
 import org.springframework.core.annotation.AnnotationUtils;
 
 import com.tvd12.ezyfox.core.annotation.AppContextConfiguration;
+import com.tvd12.ezyfox.core.annotation.AutoResponse;
 import com.tvd12.ezyfox.core.annotation.PackagesScan;
+
+import lombok.Getter;
 
 /**
  * 
@@ -12,6 +19,7 @@ import com.tvd12.ezyfox.core.annotation.PackagesScan;
  * @author tavandung12
  *
  */
+@Getter
 public class ConfigurationLoading {
 
     // configuration class
@@ -19,6 +27,9 @@ public class ConfigurationLoading {
 	
 	// packages to scan
 	protected String[] packagesScan;
+	
+	// auto response events
+	protected Set<String> autoResponseEvents;
 	
 	/**
 	 * Load configuration from entry point class of application
@@ -28,6 +39,15 @@ public class ConfigurationLoading {
 	public void load(Class<?> entryPoint) {
 		getConfigurationClass(entryPoint);
 		getPackagesScan();
+		fetchAutoResponseEvents();
+	}
+	
+	private void fetchAutoResponseEvents() {
+	    autoResponseEvents = new HashSet<>();
+	    AutoResponse annotation = AnnotationUtils
+	            .findAnnotation(configClass, AutoResponse.class);
+	    if(annotation == null) return;
+	    autoResponseEvents.addAll(Arrays.asList(annotation.events()));
 	}
 	
 	/**

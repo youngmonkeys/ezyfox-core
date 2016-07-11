@@ -3,7 +3,7 @@
  */
 package com.tvd12.ezyfox.core.command;
 
-import com.tvd12.ezyfox.core.model.ApiBaseUser;
+import com.tvd12.ezyfox.core.entities.ApiBaseUser;
 
 /**
  * Execute this command when you want to ban an user
@@ -19,7 +19,7 @@ public interface BanUser extends BaseCommand {
      * @param userToBan
      * @return this pointer
      */
-    public <T extends BanUser> T user(ApiBaseUser userToBan);
+    BanUser user(ApiBaseUser userToBan);
     
     /**
      * set user name of user to ban
@@ -27,7 +27,7 @@ public interface BanUser extends BaseCommand {
      * @param userToBan user name of user to ban
      * @return this pointer
      */
-    public <T extends BanUser> T user(String userToBan);
+    BanUser user(String userToBan);
     
     /**
      * set the mod/admin user name, can be null to indicate generically the "Server"
@@ -35,7 +35,7 @@ public interface BanUser extends BaseCommand {
      * @param modUser mod/admin user name
      * @return this pointer
      */
-    public <T extends BanUser> T modUser(String modUser);
+    BanUser modUser(String modUser);
     
     /**
      * set ban message
@@ -43,21 +43,21 @@ public interface BanUser extends BaseCommand {
      * @param banMessage ban message
      * @return this pointer
      */
-    public <T extends BanUser> T message(String banMessage);
+    BanUser message(String banMessage);
     
     /**
      * choose between banning by Ip Address or by User name
      * 
      * @return this pointer
      */
-    public <T extends BanUser> T byAddress();
+    BanUser byAddress();
     
     /**
      * choose between banning by ip address or by User name
      * 
      * @return this pointer
      */
-    public <T extends BanUser> T byName();
+    BanUser byName();
     
     /**
      * the duration of the banishment in hours
@@ -65,7 +65,7 @@ public interface BanUser extends BaseCommand {
      * @param durationMinutes duration in minute
      * @return this pointer
      */
-    public <T extends BanUser> T duration(int durationMinutes);
+    BanUser duration(int durationMinutes);
  
     /**
      * delay before the disconnection is performed
@@ -73,5 +73,5 @@ public interface BanUser extends BaseCommand {
      * @param delaySeconds delay time in second
      * @return this pointer
      */
-    public <T extends BanUser> T delay(int delaySeconds);
+    BanUser delay(int delaySeconds);
 }

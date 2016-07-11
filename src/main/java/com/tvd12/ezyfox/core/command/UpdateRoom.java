@@ -1,7 +1,7 @@
 package com.tvd12.ezyfox.core.command;
 
-import com.tvd12.ezyfox.core.model.ApiBaseUser;
-import com.tvd12.ezyfox.core.model.ApiRoom;
+import com.tvd12.ezyfox.core.entities.ApiBaseUser;
+import com.tvd12.ezyfox.core.entities.ApiRoom;
 
 /**
  * Execute this command to update room variables
@@ -18,7 +18,7 @@ public interface UpdateRoom extends BaseCommand {
      * @param value true or false
      * @return this pointer
      */
-	<T extends UpdateRoom> T toClient(boolean value);
+	UpdateRoom toClient(boolean value);
 	
 	/**
 	 * Set room agent
@@ -26,7 +26,7 @@ public interface UpdateRoom extends BaseCommand {
 	 * @param room room agent
 	 * @return this pointer
 	 */
-	<T extends UpdateRoom> T room(ApiRoom room);
+	UpdateRoom room(ApiRoom room);
 	
 	/**
 	 * Set user agent (who active update)
@@ -34,5 +34,21 @@ public interface UpdateRoom extends BaseCommand {
 	 * @param user user agent
 	 * @return this pointer
 	 */
-	<T extends UpdateRoom> T user(ApiBaseUser user);
+	UpdateRoom user(ApiBaseUser user);
+	
+	/**
+     * exclude array of variables
+     * 
+     * @param varnames variable name array
+     * @return this pointer
+     */
+    UpdateRoom exclude(String... varnames);
+    
+    /**
+     * include array of variables, if have no included variable, all variables be accepted
+     * 
+     * @param varnames variable name array
+     * @return this pointer
+     */
+    UpdateRoom include(String... varnames);
 }

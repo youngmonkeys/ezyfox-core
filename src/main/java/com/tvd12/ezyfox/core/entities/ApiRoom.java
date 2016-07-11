@@ -1,4 +1,7 @@
-package com.tvd12.ezyfox.core.model;
+package com.tvd12.ezyfox.core.entities;
+
+import com.tvd12.ezyfox.core.command.RoomInfo;
+import com.tvd12.ezyfox.core.constants.RoomRemoveMode;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -36,21 +39,9 @@ public abstract class ApiRoom extends ApiModel {
     @Setter @Getter
 	protected int variablesCount = 0;
 	
-    // room's state
-    @Setter @Getter
-	protected boolean active = true; 
-	
     // room's type
     @Setter @Getter
 	protected boolean dynamic = true;
-	
-    // room's state
-    @Setter @Getter
-	protected boolean empty = true;
-	
-    // room's state
-    @Setter @Getter
-	protected boolean full = false;
 	
     // room's type
     @Setter @Getter
@@ -84,21 +75,33 @@ public abstract class ApiRoom extends ApiModel {
     @Setter @Getter
 	protected String groupdId;
     
+    @Setter
+    protected ApiBaseUser owner;
+    
+    @Setter @Getter
+    protected RoomInfo command; 
+    
     @Setter @Getter
     protected RoomRemoveMode removeMode = RoomRemoveMode.NEVER_REMOVE;
-	
-    /**
-     * set room's owner
-     * 
-     * @param owner room's owner
-     */
-	public void setOwner(Object owner) {};
 	
 	/**
 	 * get room's owner
 	 * 
 	 * @return room's owner
 	 */
-	public <T> T getOwner() {return null;}
+	@SuppressWarnings("unchecked")
+    public <T extends ApiBaseUser> T getOwner() {return (T) owner;}
+	
+    public boolean isEmpty() {
+        return command.isEmpty();
+    }
+    
+    public boolean isFull() {
+        return command.isFull();
+    }
+    
+    public boolean isActive() {
+        return command.isActive();
+    }
 	
 }
