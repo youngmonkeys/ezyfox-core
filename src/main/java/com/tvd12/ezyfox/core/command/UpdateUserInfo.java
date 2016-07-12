@@ -149,4 +149,13 @@ public interface UpdateUserInfo {
      * Remove all user variables
      */
     void removeAllVariables();
+    
+    /**
+     * Disconnect user from server
+     * 
+     * IDLE(0),  KICK(1),  BAN(2),  UNKNOWN(3);
+     * 
+     * @param reasonId the reason id
+     */
+    void disconnect(byte reasonId);
 }
