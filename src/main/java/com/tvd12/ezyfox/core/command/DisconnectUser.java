@@ -31,10 +31,11 @@ public interface DisconnectUser extends BaseCommand {
     
     /**
      * Disconnect reason id
+     * IDLE(0),  KICK(1),  BAN(2),  UNKNOWN(3);
      * 
      * @param id id
      * @return this pointer
      */
-    DisconnectUser reasonId(byte id);
+    DisconnectUser reason(byte id);
     
 }

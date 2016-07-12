@@ -74,7 +74,7 @@ Let's say you want to listen a "bet" request from client and you also you want t
     @ResponseParam("2")
     private int roomId;
     
-    public void execute(AppContext context, VideoPokerUser user) {
+    public void execute(AppContext context, MyUser user) {
         MyRoom room = 
                 context.command(FindRoom.class).by(roomId);
         context.command(Log.class).from(this).info("user {} has just betted {} chips", 
@@ -143,7 +143,7 @@ We must spend a lot of time to declare, init variables. Some time we also have t
 	<dependency>
 		<groupId>com.tvd12</groupId>
 		<artifactId>ezyfox-core</artifactId>
-		<version>1.0.6</version>
+		<version>1.0.7</version>
 	</dependency>
 ```
 
