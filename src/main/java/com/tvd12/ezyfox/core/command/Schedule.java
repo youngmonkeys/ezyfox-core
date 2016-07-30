@@ -47,14 +47,9 @@ public interface Schedule {
     public void schedule();
     
     /**
-     * stop schedule after done
-     */
-    public void stop();
-    
-    /**
      * stop schedule without waiting for task's done
      */
-    public void stopNow();
+    public void stop();
     
     /**
      * Indicate that the schedule is stopped or not
@@ -62,5 +57,37 @@ public interface Schedule {
      * @return true or false
      */
     public boolean stopped();
+    
+    /**
+     * Attempts to cancel execution of this task but give a change to be done
+     * 
+     * @see java.util.concurrent.Future#cancel(boolean)
+     * 
+     * @return true or false
+     */
+    public boolean cancel();
+    
+    /**
+     * Attempts to cancel execution of this task
+     * 
+     * @see java.util.concurrent.Future#cancel(boolean)
+     * 
+     * @return true or false
+     */
+    public boolean cancelNow();
+    
+    /**
+     * @see java.util.concurrent.Future#isCancelled()
+     * 
+     * @return true or false
+     */
+    public boolean cancelled();
+    
+    /**
+     * @see java.util.concurrent.Future#isDone()
+     * 
+     * @return true or false
+     */
+    public boolean done();
     
 }
