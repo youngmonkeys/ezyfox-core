@@ -57,14 +57,9 @@ public interface PingClient {
     void ping();
     
     /**
-     * stop schedule after done
+     * stop ping
      */
     void stop();
-    
-    /**
-     * stop schedule without waiting for task's done
-     */
-    void stopNow();
     
     /**
      * Indicate that the schedule is stopped or not
@@ -72,5 +67,37 @@ public interface PingClient {
      * @return true or false
      */
     boolean stopped();
+    
+    /**
+     * Attempts to cancel execution of this ping but give a change to be done
+     * 
+     * @see java.util.concurrent.Future#cancel(boolean)
+     * 
+     * @return true or false
+     */
+    public boolean cancel();
+    
+    /**
+     * Attempts to cancel execution of this ping
+     * 
+     * @see java.util.concurrent.Future#cancel(boolean)
+     * 
+     * @return true or false
+     */
+    public boolean cancelNow();
+    
+    /**
+     * @see java.util.concurrent.Future#isCancelled()
+     * 
+     * @return true or false
+     */
+    public boolean cancelled();
+    
+    /**
+     * @see java.util.concurrent.Future#isDone()
+     * 
+     * @return true or false
+     */
+    public boolean done();
     
 }

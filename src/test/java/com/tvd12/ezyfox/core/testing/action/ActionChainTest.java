@@ -192,16 +192,48 @@ public class ActionChainTest {
         public void stop() {
         }
         
-        @Override
-        public void stopNow() {
-        }
-
         /* (non-Javadoc)
          * @see com.tvd12.ezyfox.core.command.Schedule#stopped()
          */
         @Override
         public boolean stopped() {
             return this.stopped;
+        }
+
+        /* (non-Javadoc)
+         * @see com.tvd12.ezyfox.core.command.Schedule#cancel()
+         */
+        @Override
+        public boolean cancel() {
+            // TODO Auto-generated method stub
+            return false;
+        }
+
+        /* (non-Javadoc)
+         * @see com.tvd12.ezyfox.core.command.Schedule#cancelNow()
+         */
+        @Override
+        public boolean cancelNow() {
+            // TODO Auto-generated method stub
+            return false;
+        }
+
+        /* (non-Javadoc)
+         * @see com.tvd12.ezyfox.core.command.Schedule#cancelled()
+         */
+        @Override
+        public boolean cancelled() {
+            // TODO Auto-generated method stub
+            return false;
+        }
+
+        /* (non-Javadoc)
+         * @see com.tvd12.ezyfox.core.command.Schedule#done()
+         */
+        @Override
+        public boolean done() {
+            // TODO Auto-generated method stub
+            return false;
         }
         
     }
@@ -246,11 +278,6 @@ public class ActionChainTest {
 
         @Override
         public void stop() {
-            executorService.shutdown();
-        }
-        
-        @Override
-        public void stopNow() {
             executorService.shutdownNow();
         }
         
@@ -259,6 +286,42 @@ public class ActionChainTest {
          */
         @Override
         public boolean stopped() {
+            return false;
+        }
+
+        /* (non-Javadoc)
+         * @see com.tvd12.ezyfox.core.command.Schedule#cancel()
+         */
+        @Override
+        public boolean cancel() {
+            // TODO Auto-generated method stub
+            return false;
+        }
+
+        /* (non-Javadoc)
+         * @see com.tvd12.ezyfox.core.command.Schedule#cancelNow()
+         */
+        @Override
+        public boolean cancelNow() {
+            // TODO Auto-generated method stub
+            return false;
+        }
+
+        /* (non-Javadoc)
+         * @see com.tvd12.ezyfox.core.command.Schedule#cancelled()
+         */
+        @Override
+        public boolean cancelled() {
+            // TODO Auto-generated method stub
+            return false;
+        }
+
+        /* (non-Javadoc)
+         * @see com.tvd12.ezyfox.core.command.Schedule#done()
+         */
+        @Override
+        public boolean done() {
+            // TODO Auto-generated method stub
             return false;
         }
         
