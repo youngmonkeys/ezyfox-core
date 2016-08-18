@@ -83,6 +83,9 @@ public abstract class ApiRoom extends ApiModel {
     
     @Setter @Getter
     protected RoomRemoveMode removeMode = RoomRemoveMode.NEVER_REMOVE;
+    
+    @Setter @Getter
+    private ApiRoomExtension extension;
 	
 	/**
 	 * get room's owner

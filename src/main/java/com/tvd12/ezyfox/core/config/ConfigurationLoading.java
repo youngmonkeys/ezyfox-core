@@ -67,7 +67,7 @@ public class ConfigurationLoading {
 	 * 
 	 * @param entryPoint application's entry point class
 	 */
-	private void getConfigurationClass(Class<?> entryPoint) {
+	protected void getConfigurationClass(Class<?> entryPoint) {
 		AppContextConfiguration appConfig = AnnotationUtils
 				.findAnnotation(entryPoint, AppContextConfiguration.class);
 		if(appConfig == null)
@@ -83,7 +83,7 @@ public class ConfigurationLoading {
 	 * @param entryPoint application's entry point class
 	 * @return message
 	 */
-	private String createMessage(Class<?> annotation, Class<?> entryPoint) {
+	protected String createMessage(Class<?> annotation, Class<?> entryPoint) {
 	    return new StringBuilder()
 	            .append("You must specific ")
 	            .append(annotation.getName())

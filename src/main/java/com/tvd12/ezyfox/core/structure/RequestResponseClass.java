@@ -39,7 +39,7 @@ public class RequestResponseClass {
     
     // execute method
     @Getter
-    private Method executeMethod;
+    protected Method executeMethod;
     
     // user agent class
     @Getter
@@ -67,9 +67,13 @@ public class RequestResponseClass {
         checkResponseCommand(clazz);
         checkRequestPriority(clazz);
         checkExecuteMethod(clazz, userClazz, gameUserClasses);
-        userClass = executeMethod.getParameterTypes()[1];
+        userClass = fetchUserClass();
         requestListenerClass = new RequestListenerClass(clazz);
         responseHandlerClass = new ResponseHandlerClass(clazz);
+    }
+    
+    protected Class<?> fetchUserClass() {
+        return executeMethod.getParameterTypes()[1];
     }
     
     /**
@@ -121,7 +125,7 @@ public class RequestResponseClass {
     }
     
     
-    private void checkExecuteMethod(Class<?> clazz, 
+    protected void checkExecuteMethod(Class<?> clazz, 
             Class<?> userClazz, List<Class<?>> gameUserClasses) {
         executeMethod = ExecutionMethodParser
                 .getListenerExecuteMethod(clazz, userClazz, gameUserClasses);
