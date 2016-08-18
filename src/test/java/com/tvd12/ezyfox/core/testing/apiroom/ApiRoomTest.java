@@ -8,6 +8,7 @@ import org.testng.annotations.Test;
 import com.tvd12.ezyfox.core.command.RoomInfo;
 import com.tvd12.ezyfox.core.constants.RoomRemoveMode;
 import com.tvd12.ezyfox.core.entities.ApiRoom;
+import com.tvd12.ezyfox.core.entities.ApiRoomExtension;
 import com.tvd12.ezyfox.core.entities.ApiUser;
 
 import static org.mockito.Mockito.*;
@@ -72,6 +73,14 @@ public class ApiRoomTest {
         ExampleRoom1 exampleRoom1 = new ExampleRoom1();
         exampleRoom1.setOwner(null);
         assertNull(exampleRoom1.getOwner());
+        
+        ApiRoomExtension extension = new ApiRoomExtension("abc", getClass());
+        extension.setClazz(getClass());
+        extension.setName("abc");
+        assertEquals(extension.getName(), "abc");
+        assertEquals(extension.getClazz(), getClass().getName());
+        exampleRoom1.setExtension(extension);
+        assertEquals(exampleRoom1.getExtension(), extension);
     }
     
     public static class ExampleUser extends ApiUser {

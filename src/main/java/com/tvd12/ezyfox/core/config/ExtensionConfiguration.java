@@ -106,8 +106,11 @@ public class ExtensionConfiguration extends ConfigurationLoading {
 				.findClasses(packagesScan, ClientRequestListener.class);
 		requestResponseClientClasses = new ArrayList<>();
 		for(Class<?> clazz : classes)
-		    requestResponseClientClasses.add(
-		            new RequestResponseClass(clazz, userClass, gameUserClasses));
+		    requestResponseClientClasses.add(newRequestResponseClass(clazz));
+	}
+	
+	protected RequestResponseClass newRequestResponseClass(Class<?> clazz) {
+	    return new RequestResponseClass(clazz, userClass, gameUserClasses);
 	}
 	
 	/**
@@ -125,7 +128,7 @@ public class ExtensionConfiguration extends ConfigurationLoading {
 	/**
      * find all classes hold data of message to response to client
      */
-    private void findMessageParamsClasses() {
+    protected void findMessageParamsClasses() {
         List<Class<?>> classes = ReflectPackageUtil
                 .findClasses(packagesScan, MessageParams.class);
         messageParamsClasses = new HashMap<>();
@@ -137,7 +140,7 @@ public class ExtensionConfiguration extends ConfigurationLoading {
 	/**
 	 * find user agent's class in packages to scan and read it's structure
 	 */
-	private void initUserAgentClass() {
+	protected void initUserAgentClass() {
         userClass = findUserAgentClass();
         checkUserAgentClass();
         userAgentClass = new UserAgentClass(userClass);
@@ -146,7 +149,7 @@ public class ExtensionConfiguration extends ConfigurationLoading {
 	/**
 	 * find all room agent's classes and read their struct and put all to map
 	 */
-	private void initRoomAgentClasses() {
+	protected void initRoomAgentClasses() {
 		roomClasses = findAgentClasses(RoomAgent.class);
 		checkRoomClasses();
 		roomAgentClasses = new HashMap<>();
@@ -157,7 +160,7 @@ public class ExtensionConfiguration extends ConfigurationLoading {
 	/**
 	 * find all game user agent's classes and read their struct and put all to map
 	 */
-	private void initGameUserAgentClasses() {
+	protected void initGameUserAgentClasses() {
 	    gameUserClasses = findAgentClasses(GameUser.class);
 	    checkGameUserClasses();
 	    gameUserAgentClasses = new HashMap<>();
