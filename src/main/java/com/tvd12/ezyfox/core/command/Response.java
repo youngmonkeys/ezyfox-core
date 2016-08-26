@@ -54,7 +54,7 @@ public interface Response extends BaseCommand {
      * @param users user agent
      * @return this pointer
      */
-    public <T extends Response, U extends ApiBaseUser> T recipient(List<U> users);
+    public <T extends Response, U extends ApiBaseUser> T recipients(List<U> users);
     
     /**
      * add recipients to list
