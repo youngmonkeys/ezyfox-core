@@ -46,7 +46,7 @@ public interface Response extends BaseCommand {
      * @param users user agent
      * @return this pointer
      */
-    Response recipient(ApiBaseUser... users);
+    Response recipients(ApiBaseUser... users);
     
     /**
      * add recipients to list
@@ -62,7 +62,7 @@ public interface Response extends BaseCommand {
      * @param usernames recipient's names
      * @return this pointer
      */
-    Response recipient(String... usernames);
+    Response recipients(String... usernames);
     
     /**
      * user udp protocol or not
@@ -71,4 +71,18 @@ public interface Response extends BaseCommand {
      * @return this pointer
      */
     Response useUDP(boolean value);
+    
+    /**
+     * Only response array of parameters to client
+     * 
+     * @param params array of parameters name
+     */
+    Response only(String... params);
+    
+    /**
+     * Does not send the array of parameters to client
+     * 
+     * @param params array of parameters name
+     */
+    Response ignore(String... params);
 }

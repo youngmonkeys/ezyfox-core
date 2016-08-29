@@ -39,13 +39,6 @@ public interface ResponseToRoom extends BaseCommand {
      */
     ResponseToRoom param(String name, Object value);
     
-    /**
-     * the sender
-     * 
-     * @param user the sender
-     * @return this pointer
-     */
-    ResponseToRoom sender(ApiBaseUser user);
     
     /**
      * the room
@@ -62,5 +55,27 @@ public interface ResponseToRoom extends BaseCommand {
      * @return this pointer
      */
     ResponseToRoom exclude(ApiBaseUser user);
+    
+    /**
+     * user udp protocol or not
+     * 
+     * @param value true or false
+     * @return this pointer
+     */
+    ResponseToRoom useUDP(boolean value);
+    
+    /**
+     * Only response array of parameters to client
+     * 
+     * @param params array of parameters name
+     */
+    ResponseToRoom only(String... params);
+    
+    /**
+     * Does not send the array of parameters to client
+     * 
+     * @param params array of parameters name
+     */
+    ResponseToRoom ignore(String... params);
     
 }
