@@ -1,5 +1,9 @@
 package com.tvd12.ezyfox.core.testing.responsehandlerclasss;
 
+import static org.testng.Assert.assertEquals;
+
+import java.util.List;
+
 import org.testng.annotations.Test;
 
 import com.tvd12.ezyfox.core.annotation.ResponseParam;
@@ -8,16 +12,12 @@ import com.tvd12.test.base.BaseTest;
 
 import lombok.Data;
 
-import static org.testng.Assert.*;
-
-import java.util.List;
-
 public class ResponseHandlerClassTest extends BaseTest {
 
     @Test
     public void testValidCase() {
         ResponseHandlerClass clazz = new ResponseHandlerClass(ClassA.class);
-        assertEquals(clazz.methodCount(), 5);
+        assertEquals(clazz.methodCount(), 6);
     }
     
     @Override
@@ -45,6 +45,11 @@ public class ResponseHandlerClassTest extends BaseTest {
         @ResponseParam
         public String getWar() {
             return "war";
+        }
+        
+        @ResponseParam
+        public ClassB[][] list() {
+            return new ClassB[][] {{new ClassB(), new ClassB()}, {new ClassB()}};
         }
         
     }

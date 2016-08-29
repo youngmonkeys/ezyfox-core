@@ -176,6 +176,9 @@ public class ReflectTypeUtilTest extends BaseTest {
         assertFalse(isStringArray(Short[].class));
         assertFalse(isObjectArray(Object.class));
         assertFalse(isObjectArray(String[].class));
+        assertTrue(isTwoDimensionArray(int[][].class));
+        assertFalse(isTwoDimensionArray(int[].class));
+        assertFalse(isTwoDimensionArray(int.class));
 	}
 	
 	public static enum ABC {

@@ -109,6 +109,12 @@ public class MethodCover {
 	// return type or parameter type is array of objects
 	protected boolean isObjectArray;
 	
+	// return type or parameter type is two-dimensions array
+	protected boolean isTwoDimensionsArray;
+	
+	// return type or parameter type is two-dimensions object array
+	protected boolean isTwoDimensionsObjectArray;
+	
 	// return type or parameter type is collection of objects
 	protected boolean isObjectCollection;
 	
@@ -272,6 +278,7 @@ public class MethodCover {
         checkObjectCollection();
         checkArrayObjectCollection();
         checkTwoDimensionsArray();
+        checkTwoDimensionsObjectArray();
         checkTwoDimensionsArrayCollection();
     }
 	
@@ -320,11 +327,18 @@ public class MethodCover {
      * 
      * @throws IllegalStateException when type is two-dimensions array
      */
-    private void checkTwoDimensionsArray() {
-        if(isArray && ReflectTypeUtil.isArray(getComponentType()))
-            throw new IllegalStateException("Unsupport two-dimensions array "
-                    + "(on field/method " 
-                    + ((method != null) ? getMethodName() : field.getName()) + ")");
+    protected void checkTwoDimensionsArray() {
+        isTwoDimensionsArray = isArray && ReflectTypeUtil.isArray(getComponentType());
+    }
+    
+    /**
+     * Check whether return type or parameter type is two-dimensions object array
+     * 
+     * @throws IllegalStateException when type is two-dimensions array
+     */
+    protected void checkTwoDimensionsObjectArray() {
+        isTwoDimensionsObjectArray = isTwoDimensionsArray && 
+                ReflectTypeUtil.isObjectArray(getComponentType());
     }
     
     /**
