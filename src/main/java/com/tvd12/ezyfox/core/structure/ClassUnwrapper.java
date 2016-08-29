@@ -125,7 +125,9 @@ public abstract class ClassUnwrapper extends ClassCover {
         method.setDeclaringClazz(this);
         methods.add(method);
         Class<?> paramType = null;
-        if(method.isObjectArray())
+        if(method.isTwoDimensionsObjectArray()) 
+            paramType = method.getComponentType().getComponentType();
+        else if(method.isObjectArray())
             paramType = method.getComponentType();
         else if(method.isObjectCollection())
             paramType = method.getGenericType();

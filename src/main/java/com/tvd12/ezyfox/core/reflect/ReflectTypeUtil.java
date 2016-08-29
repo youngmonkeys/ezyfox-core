@@ -593,6 +593,17 @@ public final class ReflectTypeUtil {
 				&& !isCollection(type);
 	}
 	
+	/**
+     * Check whether type is two-dimensions array or not
+     * 
+     * @param type type to check
+     * @return true or false
+     */
+    public static boolean isTwoDimensionArray(Class<?> type) {
+        return isArray(type) 
+                && isArray(type.getComponentType());
+    }
+	
 	 /**
      * Check whether type is wrapper
      * 

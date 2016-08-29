@@ -218,6 +218,7 @@ public class MethodCoverTest extends BaseTest {
         assertTrue(methodCovers[48].isArrayObjectCollection());
         assertTrue(methodCovers[49].isObject());
         assertFalse(methodCovers[49].isPrimitive());
+        assertTrue(methodCovers[51].isTwoDimensionsArray());
         assertEquals("a49", methodCovers[49].getField().getName());
         assertEquals("a49", methodCovers[49].getField().getName());
         
@@ -270,16 +271,6 @@ public class MethodCoverTest extends BaseTest {
             .param(ClassA.class).param(filed1).invoke();
         MethodInvoker.create()
             .object(cover).method("checkTwoDimensionsArrayCollection").invoke();
-    }
-    
-    @Test(expectedExceptions = {IllegalStateException.class})
-    public void checkTwoDimensionsArrayTest() throws ExtensionException {
-        Field filed1 = ReflectFieldUtil.getField("a0", ClassB.class);
-        MethodCover cover = new MethodCover();
-        MethodInvoker.create().object(cover).method("initWithField")
-            .param(ClassA.class).param(filed1).invoke();
-        MethodInvoker.create()
-        .object(cover).method("checkTwoDimensionsArray").invoke();
     }
     
     @Test(expectedExceptions = {IllegalStateException.class})
@@ -374,6 +365,7 @@ public class MethodCoverTest extends BaseTest {
         
         public Object a49;
         public ClassA a50;
+        public int[][] a51;
         
     }
     
@@ -437,19 +429,6 @@ public class MethodCoverTest extends BaseTest {
         .object(methodCover)
         .method("checkTwoDimensionsArray")
         .invoke();
-    }
-    
-    @Test(expectedExceptions = {IllegalStateException.class})
-    public void checkTwoDimensionsArrayInvalidCaseTest() throws ExtensionException {
-        MethodCover methodCover = new MethodCover();
-        Field field = ReflectFieldUtil.getField("a0", ClassB.class);
-        field.setAccessible(true);
-        MethodInvoker.create()
-            .object(methodCover)
-            .method("initWithField")
-            .param(ClassB.class)
-            .param(field)
-            .invoke();
     }
     
     @Test
@@ -525,14 +504,6 @@ public class MethodCoverTest extends BaseTest {
                 .invoke(Class.class);
         assertEquals(clazz, null);
         
-    }
-    
-    @Test(expectedExceptions = {IllegalStateException.class})
-    public void testCheckTwoDimensionArrayInvalidCase3() {
-        MethodInvoker.create()
-            .object(new MethodCoverEx())
-            .method("checkTwoDimensionsArray")
-            .invoke();
     }
     
     @Test(expectedExceptions = {IllegalStateException.class})

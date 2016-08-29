@@ -20,6 +20,16 @@ public class RequestListenerClassTest extends BaseTest {
         assertEquals(clazz.methodCount(), 5);
     }
     
+    @Test(expectedExceptions = {IllegalStateException.class})
+    public void testInValidCase1() {
+        new RequestListenerClass(ClassC.class);
+    }
+    
+    @Test(expectedExceptions = {IllegalStateException.class})
+    public void testInValidCase2() {
+        new RequestListenerClass(ClassD.class);
+    }
+    
     @Override
     public Class<?> getTestClass() {
         return RequestListenerClass.class;
@@ -54,6 +64,19 @@ public class RequestListenerClassTest extends BaseTest {
         
         @RequestParam
         public void setValues(List<Integer> values) {
+            
+        }
+    }
+    
+    @Data
+    public static class ClassC {
+        @RequestParam
+        private ClassA classA[][];
+    }
+    
+    public static class ClassD {
+        @RequestParam
+        public void setAbc(ClassA classA[][]) {
             
         }
     }
