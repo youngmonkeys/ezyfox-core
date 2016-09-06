@@ -72,9 +72,10 @@ public class ConcurrentParameters implements Parameters {
     /**
      * @see Parameters#get(Object, Class)
      */
+    @SuppressWarnings("unchecked")
     @Override
     public <T> T get(Object key, Class<T> clazz) {
-        return clazz.cast(values.get(key));
+        return (T)values.get(key);
     }
 
     /**
@@ -106,5 +107,13 @@ public class ConcurrentParameters implements Parameters {
     @Override
     public void clear() {
         values.clear();
+    }
+    
+    /* (non-Javadoc)
+     * @see com.tvd12.ezyfox.core.transport.Parameters#toMap()
+     */
+    @Override
+    public Map<Object, Object> toMap() {
+        return values;
     }
 }

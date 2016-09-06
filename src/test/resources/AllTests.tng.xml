@@ -237,4 +237,16 @@
     		<package name="com.tvd12.ezyfox.core.testing.structure"/>
     	</packages>
     </test>
+    
+    <test name="Context">
+    	<packages>
+    		<package name="com.tvd12.ezyfox.core.testing.context"/>
+    	</packages>
+    </test>
+    
+    <test name="Command">
+    	<packages>
+    		<package name="com.tvd12.ezyfox.core.testing.command"/>
+    	</packages>
+    </test>
 </suite>

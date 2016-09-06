@@ -64,9 +64,10 @@ public class ParameterWrapper implements Parameters {
     /**
      * @see Parameters#get(Object, Class)
      */
+    @SuppressWarnings("unchecked")
     @Override
     public <T> T get(Object key, Class<T> clazz) {
-        return clazz.cast(get(key));
+        return (T)get(key);
     }
     
     /**
@@ -99,5 +100,13 @@ public class ParameterWrapper implements Parameters {
     @Override
     public void clear() {
         values.clear();
+    }
+    
+    /* (non-Javadoc)
+     * @see com.tvd12.ezyfox.core.transport.Parameters#toMap()
+     */
+    @Override
+    public Map<Object, Object> toMap() {
+        return values;
     }
 }
