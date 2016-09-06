@@ -33,6 +33,7 @@ public class ConcurrentParametersTest {
         assertTrue(params.isEmpty());
         params.setIfAbsent("Hello", "World");
         assertFalse(params.isEmpty());
+        assertFalse(params.toMap() == null);
         
     }
     

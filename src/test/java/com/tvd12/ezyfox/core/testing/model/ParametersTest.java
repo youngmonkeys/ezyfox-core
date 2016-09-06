@@ -30,6 +30,7 @@ public class ParametersTest {
         assertFalse(params.isEmpty());
         params.clear();
         assertTrue(params.isEmpty());
+        assertFalse(params.toMap() == null);
     }
     
 }

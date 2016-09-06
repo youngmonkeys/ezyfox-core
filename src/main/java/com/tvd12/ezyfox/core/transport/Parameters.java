@@ -77,16 +77,21 @@ public interface Parameters {
     <T> T get(Object key, Class<T> clazz);
     
     /**
-     * 
      * @return set of keys
      */
     Set<Object> keys();
     
     /**
-     * 
      * @return list of values
      */
     List<Object> values();
+    
+    /**
+     * Convert the parameters object to map
+     * 
+     * @return the map object
+     */
+    Map<Object, Object> toMap();
     
     
 }
