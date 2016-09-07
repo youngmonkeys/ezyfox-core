@@ -8,6 +8,7 @@ import java.util.Map;
 
 import com.tvd12.ezyfox.core.annotation.ClientRequestListener;
 import com.tvd12.ezyfox.core.annotation.GameUser;
+import com.tvd12.ezyfox.core.annotation.ParamsMapper;
 import com.tvd12.ezyfox.core.annotation.MessageParams;
 import com.tvd12.ezyfox.core.annotation.ResponseParams;
 import com.tvd12.ezyfox.core.annotation.RoomAgent;
@@ -36,43 +37,51 @@ public class ExtensionConfiguration extends ConfigurationLoading {
 	
     // user agent's class
     @Getter
-	private Class<?> userClass;
+	protected Class<?> userClass;
 
     @Getter
     // list of room agent's classes
-	private List<Class<?>> roomClasses;
+    protected List<Class<?>> roomClasses;
     
     // list of game user agent's classes
     @Getter
-    private List<Class<?>> gameUserClasses;
+    protected List<Class<?>> gameUserClasses;
 	
     // structure of user agent's class
 	@Getter
-	private UserAgentClass userAgentClass;
+	protected UserAgentClass userAgentClass;
 	
 	// map of room agent's classes and their structure
 	@Getter
-    private Map<Class<?>, AgentClass> roomAgentClasses;
+	protected Map<Class<?>, AgentClass> roomAgentClasses;
 	
 	// map of room agent's classes and their structure
 	@Getter
-    private Map<Class<?>, UserAgentClass> gameUserAgentClasses;
+	protected Map<Class<?>, UserAgentClass> gameUserAgentClasses;
 	
 	// list of server event handler classes
 	@Getter
-	private List<Class<?>> serverEventHandlerClasses;
+	protected List<Class<?>> serverEventHandlerClasses;
 	
 	// list of client request listener class's structure
 	@Getter
-	private List<RequestResponseClass> requestResponseClientClasses;
+	protected List<RequestResponseClass> requestResponseClientClasses;
 	
 	// map of client request listener classes and their structure
 	@Getter
-	private Map<Class<?>, ResponseParamsClass> responseParamsClasses;
+	protected Map<Class<?>, ResponseParamsClass> responseParamsClasses;
 	
 	// map of message parameters classes and their structure 
 	@Getter
-	private Map<Class<?>, MessageParamsClass> messageParamsClasses;
+	protected Map<Class<?>, MessageParamsClass> messageParamsClasses;
+	
+	protected List<Class<?>> hasMapperClasses; 
+	
+	@Getter
+	protected Map<Class<?>, Class<?>> objectSerializerClasses;
+	
+	@Getter
+	protected Map<Class<?>, Class<?>> objectDeserializerClasses;
 	
 	/**
 	 * Load all configuration from entry point class
@@ -88,25 +97,52 @@ public class ExtensionConfiguration extends ConfigurationLoading {
 		findRequestResponseHandlers();
 		findResponseParamsClasses();
 		findMessageParamsClasses();
+		findHasMapperClasses();
+		findObjectSerializerClasses();
+		findObjectDeserialierClasses();
 	}
 	
 	/**
 	 * find all server event handler classes in packages to scan
 	 */
-	private void findServerEventHandlers() {
-		serverEventHandlerClasses = ReflectPackageUtil
-				.findClasses(packagesScan, ServerEventHandler.class);
+	protected void findServerEventHandlers() {
+		initServerEventHandlers();
+		findServerEventHandlersFromScannedPackages();
+		addAdditionalServerEventHandlers();
+	}
+	
+	protected void initServerEventHandlers() {
+	    serverEventHandlerClasses = new ArrayList<>();
+	}
+	
+	protected void findServerEventHandlersFromScannedPackages() {
+	    serverEventHandlerClasses.addAll(ReflectPackageUtil
+                .findClasses(packagesScan, ServerEventHandler.class));
+	}
+	
+	protected void addAdditionalServerEventHandlers() {
+	    serverEventHandlerClasses.addAll(getAdditionalServerEventHandlers());
 	}
 	
 	/**
 	 * find all client request listener classes in packages to scan
 	 */
-	private void findRequestResponseHandlers() {
-		List<Class<?>> classes = ReflectPackageUtil
-				.findClasses(packagesScan, ClientRequestListener.class);
+	protected void findRequestResponseHandlers() {
+		List<Class<?>> classes = findAllRequestResponseHandlers();
 		requestResponseClientClasses = new ArrayList<>();
 		for(Class<?> clazz : classes)
 		    requestResponseClientClasses.add(newRequestResponseClass(clazz));
+	}
+	
+	protected List<Class<?>> findRequestResponseHandlersFromScannedPackages() {
+	    return ReflectPackageUtil.findClasses(packagesScan, ClientRequestListener.class);
+	}
+	
+	protected List<Class<?>> findAllRequestResponseHandlers() {
+	    List<Class<?>> answer = new ArrayList<>();
+	    answer.addAll(findRequestResponseHandlersFromScannedPackages());
+	    answer.addAll(getAdditionalClientRequestHandlers());
+	    return answer;
 	}
 	
 	protected RequestResponseClass newRequestResponseClass(Class<?> clazz) {
@@ -116,7 +152,7 @@ public class ExtensionConfiguration extends ConfigurationLoading {
 	/**
 	 * find all classes hold data to response to client
 	 */
-	private void findResponseParamsClasses() {
+	protected void findResponseParamsClasses() {
 	    List<Class<?>> classes = ReflectPackageUtil
                 .findClasses(packagesScan, ResponseParams.class);
 	    responseParamsClasses = new HashMap<>();
@@ -134,6 +170,29 @@ public class ExtensionConfiguration extends ConfigurationLoading {
         messageParamsClasses = new HashMap<>();
         for(Class<?> clazz : classes) {
             messageParamsClasses.put(clazz, new MessageParamsClass(clazz));
+        }
+    }
+    
+    protected void findHasMapperClasses() {
+        hasMapperClasses = ReflectPackageUtil
+                .findClasses(packagesScan, ParamsMapper.class);
+    }
+    
+    protected void findObjectSerializerClasses() {
+        objectSerializerClasses = new HashMap<>();
+        for(Class<?> clazz : hasMapperClasses) {
+            ParamsMapper anno = clazz.getAnnotation(ParamsMapper.class);
+            if(!anno.serializer().equals(Class.class))
+                objectSerializerClasses.put(clazz, anno.serializer());
+        }
+    }
+    
+    protected void findObjectDeserialierClasses() {
+        objectDeserializerClasses = new HashMap<>();
+        for(Class<?> clazz : hasMapperClasses) {
+            ParamsMapper anno = clazz.getAnnotation(ParamsMapper.class);
+            if(!anno.deserializer().equals(Class.class))
+                objectDeserializerClasses.put(clazz, anno.deserializer());
         }
     }
 	
@@ -174,7 +233,7 @@ public class ExtensionConfiguration extends ConfigurationLoading {
 	 * @param annotation annotation related to agent's class
 	 * @return list of agent's classes
 	 */
-	private List<Class<?>> findAgentClasses(Class<? extends Annotation> annotation) {
+	protected List<Class<?>> findAgentClasses(Class<? extends Annotation> annotation) {
 		return ReflectPackageUtil
 				.findClasses(packagesScan, annotation);
 	}
@@ -184,7 +243,7 @@ public class ExtensionConfiguration extends ConfigurationLoading {
 	 * 
 	 * @return user agent's class
 	 */
-	private Class<?> findUserAgentClass() {
+	protected Class<?> findUserAgentClass() {
 	    List<Class<?>> agentClasses = findAgentClasses(UserAgent.class);
 	    if(agentClasses.size() != 1) 
             throw new RuntimeException(exceptionMsgWhenFindingAgent(UserAgent.class, 
@@ -197,7 +256,7 @@ public class ExtensionConfiguration extends ConfigurationLoading {
 	 * 
 	 * @throws IllegalStateException when user agent's class not extends {@code ApiUser}
 	 */
-	private void checkUserAgentClass() {
+	protected void checkUserAgentClass() {
 	    if(!ApiUser.class.isAssignableFrom(getUserClass()))
 	        throw new IllegalStateException("User agent class " 
 	                + userClass + " must extend "
@@ -209,7 +268,7 @@ public class ExtensionConfiguration extends ConfigurationLoading {
 	 * 
 	 * @throws IllegalStateException when any room agent's class not extends {@code ApiRoom}
 	 */
-	private void checkRoomClasses() {
+	protected void checkRoomClasses() {
 	    for(Class<?> clazz : roomClasses)
 	        checkRoomClass(clazz);
 	}
@@ -220,7 +279,7 @@ public class ExtensionConfiguration extends ConfigurationLoading {
 	 * @param clazz room agent's class
 	 * @throws IllegalStateException when room agent's class not extends {@code ApiRoom}
 	 */
-	private void checkRoomClass(Class<?> clazz) {
+	protected void checkRoomClass(Class<?> clazz) {
         if(!ApiRoom.class.isAssignableFrom(clazz))
             throw new IllegalStateException("Room agent class " 
                     + clazz + " must extend "
@@ -232,7 +291,7 @@ public class ExtensionConfiguration extends ConfigurationLoading {
 	 * 
 	 * @throws IllegalStateException when has any agent's classes not extends {@code ApiGameUser}
 	 */
-	private void checkGameUserClasses() {
+	protected void checkGameUserClasses() {
 	    for(Class<?> clazz : gameUserClasses)
 	        checkGameUserClass(clazz);
 	}
@@ -243,7 +302,7 @@ public class ExtensionConfiguration extends ConfigurationLoading {
 	 * @param clazz game user agent's class
 	 * @throws IllegalStateException when agent's class not extends {@code ApiGameUser}
 	 */
-	private void checkGameUserClass(Class<?> clazz) {
+	protected void checkGameUserClass(Class<?> clazz) {
         if(!ApiGameUser.class.isAssignableFrom(clazz))
             throw new IllegalStateException("Game user class " 
                     + clazz + " must extend "
@@ -257,7 +316,7 @@ public class ExtensionConfiguration extends ConfigurationLoading {
 	 * @param size invalid size of agent's classes
 	 * @return message
 	 */
-	private String exceptionMsgWhenFindingAgent(Class<? extends Annotation> annotation, int size) {
+	protected String exceptionMsgWhenFindingAgent(Class<? extends Annotation> annotation, int size) {
 		return new StringBuilder()
 				.append("Number of ") 
 				.append(annotation.getSimpleName()) 

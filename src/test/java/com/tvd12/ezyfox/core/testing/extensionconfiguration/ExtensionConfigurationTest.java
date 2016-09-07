@@ -1,12 +1,11 @@
 package com.tvd12.ezyfox.core.testing.extensionconfiguration;
 
+import static org.testng.Assert.assertEquals;
+
 import org.testng.annotations.Test;
 
 import com.tvd12.ezyfox.core.config.ExtensionConfiguration;
 import com.tvd12.test.reflect.MethodInvoker;
-
-import static org.testng.Assert.*;
-import static org.mockito.Mockito.*;
 
 public class ExtensionConfigurationTest {
 
@@ -20,8 +19,8 @@ public class ExtensionConfigurationTest {
         assertEquals(ExampleRoom.class, config.getRoomAgentClasses()
                 .get(ExampleRoom.class).getWrapper().getClazz());
         assertEquals(ExampleUser.class, config.getUserAgentClass().getWrapper().getClazz());
-        assertEquals(2, config.getRequestResponseClientClasses().size());
-        assertEquals(2, config.getServerEventHandlerClasses().size());
+        assertEquals(config.getRequestResponseClientClasses().size(), 3);
+        assertEquals(config.getServerEventHandlerClasses().size(), 3);
         assertEquals(ExampleRoom.class, config.getRoomAgentClasses()
                 .get(ExampleRoom.class).getUnwrapper().getClazz());
         assertEquals(config.getGameUserClasses().size(), 2);
@@ -30,6 +29,8 @@ public class ExtensionConfigurationTest {
         assertEquals(config.getMessageParamsClasses().size(), 1);
         assertEquals(config.getMessageParamsClasses()
                 .get(ExMessagesParameter.class).getWrapper().methodCount(), 1);
+        assertEquals(config.getObjectDeserializerClasses().size(), 2);
+        assertEquals(config.getObjectSerializerClasses().size(), 2);
     }
     
     @Test(expectedExceptions = {RuntimeException.class})
@@ -38,11 +39,14 @@ public class ExtensionConfigurationTest {
         config.load(ExampleSFSZoneExtensionTest2.class);
     }
     
-    @SuppressWarnings("unchecked")
     @Test(expectedExceptions = {IllegalStateException.class})
     public void checkUserAgentClassTest() {
-        ExtensionConfiguration config = mock(ExtensionConfiguration.class);
-        when((Class<ClassA>)config.getUserClass()).thenReturn(ClassA.class);
+        ExtensionConfiguration config = new ExtensionConfiguration() {
+            @Override
+            public Class<?> getUserClass() {
+                return ClassA.class;
+            }
+        };
         MethodInvoker.create()
             .object(config)
             .method("checkUserAgentClass")
@@ -51,7 +55,7 @@ public class ExtensionConfigurationTest {
     
     @Test(expectedExceptions = {IllegalStateException.class})
     public void testCheckRoomClassInvalidCase() {
-        ExtensionConfiguration config = mock(ExtensionConfiguration.class);
+        ExtensionConfiguration config = new ExtensionConfiguration();
         MethodInvoker.create()
             .object(config)
             .method("checkRoomClass")
@@ -61,7 +65,7 @@ public class ExtensionConfigurationTest {
     
     @Test(expectedExceptions = {IllegalStateException.class})
     public void testCheckGameUserClassInvalidCase() {
-        ExtensionConfiguration config = mock(ExtensionConfiguration.class);
+        ExtensionConfiguration config = new ExtensionConfiguration();
         MethodInvoker.create()
             .object(config)
             .method("checkGameUserClass")

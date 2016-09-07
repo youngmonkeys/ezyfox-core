@@ -48,7 +48,6 @@ public class ExAppContextImpl extends BaseAppContext {
      */
     @Override
     protected <T> T getCommand(Class<T> clazz) {
-        System.out.println("contain " + clazz.getName() + " is: " + commands.containsKey(clazz.getName()));
         if(!commands.containsKey(clazz.getName()))
             throw new RuntimeException("has no command map to " + clazz);
         return getCommand(commands, clazz);

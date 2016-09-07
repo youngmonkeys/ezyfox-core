@@ -4,6 +4,7 @@
 package com.tvd12.ezyfox.core.testing.handlemethodparser;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.testng.annotations.Test;
@@ -36,10 +37,15 @@ public class HandleMethodParser2Test extends BaseTest {
                 userClass, gameUserClasses);
     }
     
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     @Test
     public void test2() {
         HandleMethodParser.getServerHandleMethod(ClassC.class, 
-                userClass, gameUserClasses);
+                userClass, (List)Arrays.asList(MyGameUser.class));
+    }
+    
+    public static class MyGameUser extends ApiUser {
+        
     }
     
     public static class ClassA {

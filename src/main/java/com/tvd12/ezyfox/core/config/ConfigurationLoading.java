@@ -6,6 +6,8 @@ import java.util.Set;
 
 import org.springframework.core.annotation.AnnotationUtils;
 
+import com.tvd12.ezyfox.core.annotation.AdditionalClientRequestListeners;
+import com.tvd12.ezyfox.core.annotation.AdditionalServerEventHandlers;
 import com.tvd12.ezyfox.core.annotation.AppContextConfiguration;
 import com.tvd12.ezyfox.core.annotation.AutoResponse;
 import com.tvd12.ezyfox.core.annotation.PackagesScan;
@@ -31,6 +33,10 @@ public class ConfigurationLoading {
 	// auto response events
 	protected Set<String> autoResponseEvents;
 	
+	protected Set<Class<?>> additionalServerEventHandlers;
+	
+	protected Set<Class<?>> additionalClientRequestHandlers;
+	
 	/**
 	 * Load configuration from entry point class of application
 	 * 
@@ -40,9 +46,27 @@ public class ConfigurationLoading {
 		getConfigurationClass(entryPoint);
 		getPackagesScan();
 		fetchAutoResponseEvents();
+		fetchAdditionalServerEventHandlers();
+		fetchAdditionalClientRequestListeners();
 	}
 	
-	private void fetchAutoResponseEvents() {
+	protected void fetchAdditionalServerEventHandlers() {
+	    additionalServerEventHandlers = new HashSet<>();
+	    AdditionalServerEventHandlers annotation = AnnotationUtils
+	            .findAnnotation(configClass, AdditionalServerEventHandlers.class);
+	    if(annotation == null) return;
+	    additionalServerEventHandlers.addAll(Arrays.asList(annotation.classes()));
+	}
+	
+	protected void fetchAdditionalClientRequestListeners() {
+	    additionalClientRequestHandlers = new HashSet<>();
+	    AdditionalClientRequestListeners annotation = AnnotationUtils
+	            .findAnnotation(configClass, AdditionalClientRequestListeners.class);
+	    if(annotation == null) return;
+	    additionalClientRequestHandlers.addAll(Arrays.asList(annotation.classes()));
+	}
+	
+	protected void fetchAutoResponseEvents() {
 	    autoResponseEvents = new HashSet<>();
 	    AutoResponse annotation = AnnotationUtils
 	            .findAnnotation(configClass, AutoResponse.class);
@@ -53,7 +77,7 @@ public class ConfigurationLoading {
 	/**
 	 * Get packages to scan
 	 */
-	private void getPackagesScan() {
+	protected void getPackagesScan() {
 		PackagesScan pkgsScan = AnnotationUtils
 				.findAnnotation(configClass, PackagesScan.class);
 		if(pkgsScan == null) 
