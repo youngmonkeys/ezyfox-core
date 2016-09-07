@@ -249,4 +249,9 @@
     		<package name="com.tvd12.ezyfox.core.testing.command"/>
     	</packages>
     </test>
+    <test name="RoomContext">
+    	<packages>
+    		<package name="com.tvd12.ezyfox.core.testing.roomcontext"/>
+    	</packages>
+    </test>
 </suite>

@@ -84,6 +84,8 @@ public abstract class BaseAppContext implements AppContext {
         
         this.initObjectSerializerMapper();
         this.initObjectDeserializerMapper();
+        this.addObjectSerializerMaps();
+        this.addObjectDeserializerMaps();
         this.initFixedCommands();
         this.addFixedCommands();
     }
@@ -104,6 +106,27 @@ public abstract class BaseAppContext implements AppContext {
      */
     protected void initObjectDeserializerMapper() {
         objectDeserializers = new ObjectDeserializerMapper();
+    }
+    
+    protected void addObjectSerializerMaps() {
+        Map<Class<?>, Class<?>> map = extensionConfig.getObjectSerializerClasses();
+        for(Class<?> clazz : map.keySet())
+            addObjectSerializer(clazz, (ObjectSerializer) newInstance(map.get(clazz)));
+    }
+    
+    protected void addObjectDeserializerMaps() {
+        Map<Class<?>, Class<?>> map = extensionConfig.getObjectDeserializerClasses();
+        for(Class<?> clazz : map.keySet())
+            addObjectDeserializer(clazz, (ObjectDeserializer) newInstance(map.get(clazz)));
+    }
+    
+    @SuppressWarnings("unchecked")
+    protected <T> T newInstance(Class<?> clazz) {
+        try {
+            return (T)ReflectClassUtil.newInstance(clazz);
+        } catch (ExtensionException e) {
+            throw new IllegalStateException(e);
+        }
     }
     
     protected void initAppCommands() {
@@ -155,9 +178,10 @@ public abstract class BaseAppContext implements AppContext {
     /**
      * @see AppContext#get(Object, Class)
      */
+    @SuppressWarnings("unchecked")
     @Override
     public <T> T get(Object key, Class<T> clazz) {
-        return clazz.cast(properties.get(key));
+        return (T)properties.get(key);
     }
     
     /**

@@ -24,7 +24,7 @@ public final class UserAgentUtil {
      */
     public static ApiGameUser getGameUser(ApiUser agent, Class<?> gameUserClass) {
         for(ApiGameUser user : agent.getChildren())
-            if(user.getClass() == gameUserClass)
+            if(gameUserClass.isAssignableFrom(user.getClass()))
                 return user;
         return null;
     }

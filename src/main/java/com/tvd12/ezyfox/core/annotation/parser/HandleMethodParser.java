@@ -35,7 +35,7 @@ public final class HandleMethodParser {
 			if(!validateMethod(method, length)) 
 				continue;
 			for(int i = 0 ; i < length ; i++) {
-				if(parameterTypes[i] != method.getParameterTypes()[i])
+				if(!method.getParameterTypes()[i].isAssignableFrom(parameterTypes[i]))
 					continue;
 				return method;
 			}

@@ -81,11 +81,11 @@ public class ZoneRoomHandlerCenterTest extends BaseTest {
         center.addHandlers(handleClasses, roomClasses.toArray(new Class[roomClasses.size()]));
     }
     
-    public static class ExRoom {
+    public static class ExRoom extends ApiRoom {
         
     }
     
-    public static class ExRoom1 {
+    public static class ExRoom1 extends ApiRoom {
         
     }
     
