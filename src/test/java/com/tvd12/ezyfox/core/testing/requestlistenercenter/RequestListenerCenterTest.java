@@ -24,7 +24,7 @@ public class RequestListenerCenterTest extends BaseTest {
         center.addListeners(config.getRequestResponseClientClasses());
         
         List<RequestResponseClass> classes = center.getListeners("abc");
-        assertEquals(classes.size(), 3);
+        assertEquals(classes.size(), 4);
         
         Set<String> commands = center.getCommands();
         assertEquals(1, commands.size());

@@ -1,7 +1,9 @@
 package com.tvd12.ezyfox.core.config;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.core.annotation.AnnotationUtils;
@@ -11,6 +13,7 @@ import com.tvd12.ezyfox.core.annotation.AdditionalServerEventHandlers;
 import com.tvd12.ezyfox.core.annotation.AppContextConfiguration;
 import com.tvd12.ezyfox.core.annotation.AutoResponse;
 import com.tvd12.ezyfox.core.annotation.PackagesScan;
+import com.tvd12.ezyfox.core.reflect.ReflectClassUtil;
 
 import lombok.Getter;
 
@@ -56,6 +59,7 @@ public class ConfigurationLoading {
 	            .findAnnotation(configClass, AdditionalServerEventHandlers.class);
 	    if(annotation == null) return;
 	    additionalServerEventHandlers.addAll(Arrays.asList(annotation.classes()));
+	    additionalServerEventHandlers.addAll(fetchClassesByName(annotation.value()));
 	}
 	
 	protected void fetchAdditionalClientRequestListeners() {
@@ -64,6 +68,14 @@ public class ConfigurationLoading {
 	            .findAnnotation(configClass, AdditionalClientRequestListeners.class);
 	    if(annotation == null) return;
 	    additionalClientRequestHandlers.addAll(Arrays.asList(annotation.classes()));
+	    additionalClientRequestHandlers.addAll(fetchClassesByName(annotation.value()));
+	}
+	
+	protected List<Class<?>> fetchClassesByName(String[] classNames) {
+	    List<Class<?>> answer = new ArrayList<>();
+	    for(String name : classNames)
+	        answer.add(ReflectClassUtil.getClassByName(name));
+	    return answer;
 	}
 	
 	protected void fetchAutoResponseEvents() {

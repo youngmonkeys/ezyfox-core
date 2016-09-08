@@ -72,6 +72,11 @@ public class ReflectClassUtilTest extends BaseTest {
         
         ReflectClassUtil.newInstance(constructor, Class.class);
     }
+    
+    @Test(expectedExceptions = {IllegalArgumentException.class})
+    public void testGetClassByNameInvalidCase() {
+        ReflectClassUtil.getClassByName("@");
+    }
 
     public static class ClassA {
         

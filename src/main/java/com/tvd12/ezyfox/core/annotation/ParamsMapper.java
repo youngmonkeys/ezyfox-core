@@ -9,6 +9,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * Use this annotation to register mapper of class that contains parameters to response to client
+ * 
  * @author tavandung12
  *
  */
@@ -16,8 +18,14 @@ import java.lang.annotation.Target;
 @Target({ ElementType.TYPE })
 public @interface ParamsMapper {
 
+    /**
+     * @return serializer class
+     */
     public Class<?> serializer() default Class.class;
     
+    /**
+     * @return deserializer class
+     */
     public Class<?> deserializer() default Class.class;
     
 }
