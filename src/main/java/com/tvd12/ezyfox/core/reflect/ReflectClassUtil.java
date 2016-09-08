@@ -3,6 +3,7 @@ package com.tvd12.ezyfox.core.reflect;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 
+import org.apache.commons.lang3.ClassUtils;
 import org.apache.commons.lang3.StringUtils;
 
 import com.tvd12.ezyfox.core.exception.ExtensionException;
@@ -134,4 +135,17 @@ public final class ReflectClassUtil {
 	    return getConstructor(clazz);
 	}
 	
+	/**
+	 * Get class by name
+	 * 
+	 * @param className class's name
+	 * @return the class
+	 */
+	public static Class<?> getClassByName(String className) {
+	    try {
+            return ClassUtils.getClass(className);
+        } catch (ClassNotFoundException e) {
+            throw new IllegalArgumentException(e);
+        }
+	}
 }

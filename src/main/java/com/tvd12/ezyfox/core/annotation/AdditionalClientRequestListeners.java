@@ -9,6 +9,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * Use this annotation to register additional client request listeners to application context
+ * 
  * @author tavandung12
  *
  */
@@ -16,6 +18,14 @@ import java.lang.annotation.Target;
 @Target({ ElementType.TYPE })
 public @interface AdditionalClientRequestListeners {
 
-    public Class<?>[] classes();
+    /**
+     * @return array of additional client request listeners class name
+     */
+    public String[] value() default {};
+    
+    /**
+     * @return array of additional sclient request listeners classes
+     */
+    public Class<?>[] classes() default {};
     
 }

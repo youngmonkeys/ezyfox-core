@@ -21,7 +21,7 @@ public class ServerEventHandlerCenterTest extends BaseTest {
         ServerEventHandlerCenter center = new ServerEventHandlerCenter();
         
         List<ServerHandlerClass> handlers = center.addHandlers(config.getServerEventHandlerClasses());
-        assertEquals(handlers.size(), 3);
+        assertEquals(handlers.size(), 4);
     }
     
 }

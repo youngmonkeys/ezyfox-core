@@ -19,8 +19,8 @@ public class ExtensionConfigurationTest {
         assertEquals(ExampleRoom.class, config.getRoomAgentClasses()
                 .get(ExampleRoom.class).getWrapper().getClazz());
         assertEquals(ExampleUser.class, config.getUserAgentClass().getWrapper().getClazz());
-        assertEquals(config.getRequestResponseClientClasses().size(), 3);
-        assertEquals(config.getServerEventHandlerClasses().size(), 3);
+        assertEquals(config.getRequestResponseClientClasses().size(), 4);
+        assertEquals(config.getServerEventHandlerClasses().size(), 4);
         assertEquals(ExampleRoom.class, config.getRoomAgentClasses()
                 .get(ExampleRoom.class).getUnwrapper().getClazz());
         assertEquals(config.getGameUserClasses().size(), 2);
