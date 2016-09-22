@@ -2,6 +2,7 @@ package com.tvd12.ezyfox.core.reflect;
 
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
@@ -48,5 +49,22 @@ public final class ReflectPackageUtil {
 		}
 		return result;
 	}
+	
+	/**
+     * Find all classes be annotated with a annotation in a collection of classes
+     * 
+     * @param classes the collection of classes
+     * @param annotation annotation class
+     * @return list of classes
+     */
+    public static List<Class<?>> findClasses(Collection<Class<?>> classes, 
+            Class<? extends Annotation> annotation) {
+        List<Class<?>> result = new ArrayList<>();
+        for(Class<?> clazz : classes) {
+            if(clazz.isAnnotationPresent(annotation))
+                result.add(clazz);
+        }
+        return result;
+    }
 
 }

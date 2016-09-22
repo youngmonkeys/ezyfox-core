@@ -6,10 +6,10 @@ import com.tvd12.ezyfox.core.annotation.PackagesScan;
 
 @PackagesScan(packages = {"com.tvd12.ezyfox.core.testing.extensionconfiguration"})
 @AdditionalClientRequestListeners(
-        value = {"com.tvd12.ezyfox.core.testing.extensionconfiguration.ExClientRequestListener"}, 
+        value = {"com.tvd12.ezyfox.core.testing.addition.ExClientRequestListener3"}, 
         classes = {ExClientRequestListener2.class})
 @AdditionalServerEventHandlers(
-        value = {"com.tvd12.ezyfox.core.testing.extensionconfiguration.ExServereEventHandler"},
+        value = {"com.tvd12.ezyfox.core.testing.addition.ExServereEventHandler3"},
         classes = {ExServereEventHandler2.class})
 //@AdditionalClientRequestListeners({"com.tvd12.ezyfox.core.testing.extensionconfiguration.ExClientRequestListener"})
 //@AdditionalServerEventHandlers({"com.tvd12.ezyfox.core.testing.extensionconfiguration.ExServereEventHandler"})

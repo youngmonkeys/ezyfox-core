@@ -6,7 +6,6 @@ import java.lang.reflect.Method;
 import com.tvd12.ezyfox.core.exception.ExtensionException;
 import com.tvd12.ezyfox.core.reflect.ReflectFieldUtil;
 import com.tvd12.ezyfox.core.reflect.ReflectMethodUtil;
-import com.tvd12.ezyfox.core.reflect.ReflectTypeUtil;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -120,14 +119,4 @@ public class SetterMethodCover extends MethodCover {
         }
 	}
 	
-	/* (non-Javadoc)
-	 * @see com.tvd12.ezyfox.core.structure.MethodCover#checkTwoDimensionsArray()
-	 */
-	@Override
-	protected void checkTwoDimensionsArray() {
-	    if(isArray && ReflectTypeUtil.isArray(getComponentType()))
-            throw new IllegalStateException("Unsupport two-dimensions array "
-                    + "(on field/method " 
-                    + ((method != null) ? getMethodName() : field.getName()) + ")");
-	}
 }

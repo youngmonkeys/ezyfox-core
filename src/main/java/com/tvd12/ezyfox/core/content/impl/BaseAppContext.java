@@ -148,13 +148,20 @@ public abstract class BaseAppContext implements AppContext {
     
     protected void addFixedCommand(Class<?> base, Class<?> impl) {
         try {
-            Constructor<?> constructor = ReflectClassUtil
-                    .getConstructor(impl, BaseAppContext.class);
-            fixedCommands.put(base.getName(), constructor);
+            addFixedCommand(base, getFixedCommandContructor(impl));
         } catch (ExtensionException e) {
             throw new RuntimeException("Can not get constructor of command class " 
                     + impl);
         }
+    }
+    
+    protected Constructor<?> getFixedCommandContructor(Class<?> impl) 
+            throws ExtensionException {
+        return ReflectClassUtil.getConstructor(impl, BaseAppContext.class);
+    }
+    
+    private void addFixedCommand(Class<?> base, Constructor<?> constructor) {
+        fixedCommands.put(base.getName(), constructor);
     }
     
     /**
@@ -357,12 +364,16 @@ public abstract class BaseAppContext implements AppContext {
      */
     protected void initCommands() {
         Map<Object, Class<?>> commandsClass 
-                = CommandProvider.provide(getClass());
+                = loadCommandClasses();
         commands = new HashMap<>();
         for(Entry<Object, Class<?>> entry : commandsClass.entrySet()) {
             Constructor<?> constructor = getCommandConstructor(entry.getValue());
             commands.put(entry.getKey(), constructor);
         }
+    }
+    
+    private Map<Object, Class<?>> loadCommandClasses() {
+        return CommandProvider.provide(getClass());
     }
     
     /**

@@ -20,12 +20,12 @@ public class RequestListenerClassTest extends BaseTest {
         assertEquals(clazz.methodCount(), 5);
     }
     
-    @Test(expectedExceptions = {IllegalStateException.class})
+    @Test
     public void testInValidCase1() {
         new RequestListenerClass(ClassC.class);
     }
     
-    @Test(expectedExceptions = {IllegalStateException.class})
+    @Test
     public void testInValidCase2() {
         new RequestListenerClass(ClassD.class);
     }

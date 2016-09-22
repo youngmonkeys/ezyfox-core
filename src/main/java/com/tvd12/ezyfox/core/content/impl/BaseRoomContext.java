@@ -1,11 +1,14 @@
 package com.tvd12.ezyfox.core.content.impl;
 
 import java.lang.reflect.Constructor;
+import java.util.Map;
 
 import com.tvd12.ezyfox.core.config.ExtensionConfiguration;
 import com.tvd12.ezyfox.core.config.RoomExtensionConfiguration;
 import com.tvd12.ezyfox.core.serialize.ObjectDeserializer;
 import com.tvd12.ezyfox.core.serialize.ObjectSerializer;
+import com.tvd12.ezyfox.core.structure.AgentClass;
+import com.tvd12.ezyfox.core.structure.UserAgentClass;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -68,6 +71,30 @@ public class BaseRoomContext extends BaseAppContext {
      */
     @Override
     protected void initCommands() {}
+    
+    /* (non-Javadoc)
+     * @see com.tvd12.ezyfox.core.content.impl.BaseAppContext#getUserAgentClass()
+     */
+    @Override
+    public UserAgentClass getUserAgentClass() {
+        return appContext.getUserAgentClass();
+    }
+    
+    /* (non-Javadoc)
+     * @see com.tvd12.ezyfox.core.content.impl.BaseAppContext#getGameUserAgentClasses()
+     */
+    @Override
+    public Map<Class<?>, UserAgentClass> getGameUserAgentClasses() {
+        return appContext.getGameUserAgentClasses();
+    }
+    
+    /* (non-Javadoc)
+     * @see com.tvd12.ezyfox.core.content.impl.BaseAppContext#getRoomAgentClasses()
+     */
+    @Override
+    public Map<Class<?>, AgentClass> getRoomAgentClasses() {
+        return appContext.getRoomAgentClasses();
+    }
     
     /* (non-Javadoc)
      * @see com.tvd12.ezyfox.core.content.impl.BaseAppContext#addObjectDeserializer(java.lang.Class, com.tvd12.ezyfox.core.serialize.ObjectDeserializer)

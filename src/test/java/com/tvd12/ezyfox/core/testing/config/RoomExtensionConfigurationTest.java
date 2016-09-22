@@ -3,6 +3,8 @@
  */
 package com.tvd12.ezyfox.core.testing.config;
 
+import static org.testng.Assert.assertEquals;
+
 import org.testng.annotations.Test;
 
 import com.tvd12.ezyfox.core.annotation.RoomContextConfiguration;
@@ -20,6 +22,10 @@ public class RoomExtensionConfigurationTest {
     public void test() {
         RoomExtensionConfiguration config = new RoomExtensionConfiguration();
         config.load(RoomExtensionConfigurationTest.class);
+        assertEquals(config.getRequestResponseClientClasses().size(), 3);
+        assertEquals(config.getServerEventHandlerClasses().size(), 2);
+        assertEquals(config.getObjectDeserializerClasses().size(), 3);
     }
+    
     
 }
