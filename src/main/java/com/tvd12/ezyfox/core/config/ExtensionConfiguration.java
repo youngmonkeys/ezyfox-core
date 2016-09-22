@@ -3,8 +3,10 @@ package com.tvd12.ezyfox.core.config;
 import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import com.tvd12.ezyfox.core.annotation.ClientRequestListener;
 import com.tvd12.ezyfox.core.annotation.GameUser;
@@ -39,16 +41,14 @@ public class ExtensionConfiguration extends ConfigurationLoading {
     @Getter
 	protected Class<?> userClass;
 
-    @Getter
     // list of room agent's classes
-    protected List<Class<?>> roomClasses;
+    protected Set<Class<?>> roomClasses;
     
     // list of game user agent's classes
-    @Getter
-    protected List<Class<?>> gameUserClasses;
+    protected Set<Class<?>> gameUserClasses;
 	
     // structure of user agent's class
-	@Getter
+    @Getter
 	protected UserAgentClass userAgentClass;
 	
 	// map of room agent's classes and their structure
@@ -60,12 +60,10 @@ public class ExtensionConfiguration extends ConfigurationLoading {
 	protected Map<Class<?>, UserAgentClass> gameUserAgentClasses;
 	
 	// list of server event handler classes
-	@Getter
-	protected List<Class<?>> serverEventHandlerClasses;
+	protected Set<Class<?>> serverEventHandlerClasses;
 	
 	// list of client request listener class's structure
-	@Getter
-	protected List<RequestResponseClass> requestResponseClientClasses;
+	protected Set<RequestResponseClass> requestResponseClientClasses;
 	
 	// map of client request listener classes and their structure
 	@Getter
@@ -75,7 +73,7 @@ public class ExtensionConfiguration extends ConfigurationLoading {
 	@Getter
 	protected Map<Class<?>, MessageParamsClass> messageParamsClasses;
 	
-	protected List<Class<?>> hasMapperClasses; 
+	protected Set<Class<?>> hasMapperClasses; 
 	
 	@Getter
 	protected Map<Class<?>, Class<?>> objectSerializerClasses;
@@ -93,6 +91,12 @@ public class ExtensionConfiguration extends ConfigurationLoading {
 		initUserAgentClass();
 		initRoomAgentClasses();
 		initGameUserAgentClasses();
+		initHasMapperClasses();
+		initRequestResponseClientClasses();
+		loadAndCheckRoomClasses();
+        createRoomAgentClasses();
+        loadAndCheckGameUserClasses();
+        createGameUserAgentClasses();
 		findServerEventHandlers();
 		findRequestResponseHandlers();
 		findResponseParamsClasses();
@@ -112,7 +116,7 @@ public class ExtensionConfiguration extends ConfigurationLoading {
 	}
 	
 	protected void initServerEventHandlers() {
-	    serverEventHandlerClasses = new ArrayList<>();
+	    serverEventHandlerClasses = new HashSet<>();
 	}
 	
 	protected void findServerEventHandlersFromScannedPackages() {
@@ -128,10 +132,16 @@ public class ExtensionConfiguration extends ConfigurationLoading {
 	 * find all client request listener classes in packages to scan
 	 */
 	protected void findRequestResponseHandlers() {
-		List<Class<?>> classes = findAllRequestResponseHandlers();
-		requestResponseClientClasses = new ArrayList<>();
-		for(Class<?> clazz : classes)
-		    requestResponseClientClasses.add(newRequestResponseClass(clazz));
+		addRequestResponseClientClasses(findAllRequestResponseHandlers());
+	}
+	
+	protected void addRequestResponseClientClasses(List<Class<?>> classes) {
+        for(Class<?> clazz : classes)
+            requestResponseClientClasses.add(newRequestResponseClass(clazz));
+	}
+	
+	protected void initRequestResponseClientClasses() {
+	    requestResponseClientClasses = new HashSet<>();
 	}
 	
 	protected List<Class<?>> findRequestResponseHandlersFromScannedPackages() {
@@ -139,14 +149,14 @@ public class ExtensionConfiguration extends ConfigurationLoading {
 	}
 	
 	protected List<Class<?>> findAllRequestResponseHandlers() {
-	    List<Class<?>> answer = new ArrayList<>();
+	    Set<Class<?>> answer = new HashSet<>();
 	    answer.addAll(findRequestResponseHandlersFromScannedPackages());
 	    answer.addAll(getAdditionalClientRequestHandlers());
-	    return answer;
+	    return new ArrayList<>(answer);
 	}
 	
 	protected RequestResponseClass newRequestResponseClass(Class<?> clazz) {
-	    return new RequestResponseClass(clazz, userClass, gameUserClasses);
+	    return new RequestResponseClass(clazz, getUserClass(), getGameUserClasses());
 	}
 	
 	/**
@@ -173,9 +183,21 @@ public class ExtensionConfiguration extends ConfigurationLoading {
         }
     }
     
+    public void initHasMapperClasses() {
+        hasMapperClasses = new HashSet<>();
+    }
+    
     protected void findHasMapperClasses() {
-        hasMapperClasses = ReflectPackageUtil
-                .findClasses(packagesScan, ParamsMapper.class);
+        hasMapperClasses.addAll(findHasMapperClassesInScannedPackages());
+        hasMapperClasses.addAll(findHasMapperClassesInAdditionalRequestHandlerClasses());
+    }
+    
+    protected List<Class<?>> findHasMapperClassesInScannedPackages() {
+        return ReflectPackageUtil.findClasses(packagesScan, ParamsMapper.class);
+    }
+    
+    protected List<Class<?>> findHasMapperClassesInAdditionalRequestHandlerClasses() {
+        return ReflectPackageUtil.findClasses(additionalClientRequestHandlers, ParamsMapper.class);
     }
     
     protected void findObjectSerializerClasses() {
@@ -209,21 +231,35 @@ public class ExtensionConfiguration extends ConfigurationLoading {
 	 * find all room agent's classes and read their struct and put all to map
 	 */
 	protected void initRoomAgentClasses() {
-		roomClasses = findAgentClasses(RoomAgent.class);
-		checkRoomClasses();
-		roomAgentClasses = new HashMap<>();
-		for(Class<?> clazz : roomClasses) 
-		    roomAgentClasses.put(clazz, new AgentClass(clazz));
+	    roomClasses = new HashSet<>();
+	}
+	
+	protected void loadAndCheckRoomClasses() {
+	    roomClasses.addAll(findAgentClasses(RoomAgent.class));
+	    checkRoomClasses();
+	}
+	
+	protected void createRoomAgentClasses() {
+	    roomAgentClasses = new HashMap<>();
+        for(Class<?> clazz : roomClasses) 
+            roomAgentClasses.put(clazz, new AgentClass(clazz));
 	}
 	
 	/**
 	 * find all game user agent's classes and read their struct and put all to map
 	 */
 	protected void initGameUserAgentClasses() {
-	    gameUserClasses = findAgentClasses(GameUser.class);
+	    gameUserClasses = new HashSet<>();
+	}
+	
+	protected void loadAndCheckGameUserClasses() {
+	    gameUserClasses.addAll(findAgentClasses(GameUser.class));
 	    checkGameUserClasses();
+	}
+	
+	protected void createGameUserAgentClasses() {
 	    gameUserAgentClasses = new HashMap<>();
-	    for(Class<?> clazz : gameUserClasses) 
+        for(Class<?> clazz : gameUserClasses) 
             gameUserAgentClasses.put(clazz, new UserAgentClass(clazz));
 	}
 	
@@ -330,4 +366,22 @@ public class ExtensionConfiguration extends ConfigurationLoading {
 				.append(annotation.getSimpleName())
 				.toString();
 	}
+	
+    public List<Class<?>> getRoomClasses() {
+        return new ArrayList<>(roomClasses);
+    }
+    
+    public List<Class<?>> getGameUserClasses() {
+        return new ArrayList<>(gameUserClasses);
+    }
+    
+    public List<RequestResponseClass> getRequestResponseClientClasses() {
+        return new ArrayList<>(requestResponseClientClasses);
+    }
+    
+    public List<Class<?>> getServerEventHandlerClasses() {
+        return new ArrayList<>(serverEventHandlerClasses);
+    }
+    
 }
+    

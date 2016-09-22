@@ -40,24 +40,6 @@ public class RoomExtensionConfiguration extends ExtensionConfiguration {
      * @see com.tvd12.ezyfox.core.config.ExtensionConfiguration#initUserAgentClass()
      */
     @Override
-    protected void initUserAgentClass() {}
-    
-    /* (non-Javadoc)
-     * @see com.tvd12.ezyfox.core.config.ExtensionConfiguration#initRoomAgentClasses()
-     */
-    @Override
-    protected void initRoomAgentClasses() {}
-    
-    /* (non-Javadoc)
-     * @see com.tvd12.ezyfox.core.config.ExtensionConfiguration#initGameUserAgentClasses()
-     */
-    @Override
-    protected void initGameUserAgentClasses() {}
-    
-    /* (non-Javadoc)
-     * @see com.tvd12.ezyfox.core.config.ExtensionConfiguration#findMessageParamsClasses()
-     */
-    @Override
-    protected void findMessageParamsClasses() {}
-    
+    protected void initUserAgentClass() {
+    }
 }

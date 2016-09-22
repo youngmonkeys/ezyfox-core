@@ -45,6 +45,10 @@ public class RoomContextTest {
                  .param(PokerUser.class)
                  .invoke());
          assertEquals(roomContext.getAppContext(), context);
+         
+         assertEquals(roomContext.getUserAgentClass(), context.getUserAgentClass());
+         assertEquals(roomContext.getGameUserAgentClasses(), context.getGameUserAgentClasses());
+         assertEquals(roomContext.getRoomAgentClasses(), context.getRoomAgentClasses());
     }
 
     private BaseAppContext newAppContext() {
