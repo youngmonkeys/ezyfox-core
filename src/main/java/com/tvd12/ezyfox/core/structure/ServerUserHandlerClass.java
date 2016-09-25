@@ -22,7 +22,7 @@ public class ServerUserHandlerClass extends ServerHandlerClass {
     protected Class<?> userClass;
     
     /**
-     * @see ServerHandlerClass#ServerHandlerClass(Class, Class...) 
+     * @param clazz the class to parse
      */
     public ServerUserHandlerClass(Class<?> clazz) {
         super(clazz);

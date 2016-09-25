@@ -27,7 +27,7 @@ public interface FetchUserInfo {
     /**
      * Check if the User is connected
      * 
-     * @return
+     * @return true or false
      */
     boolean isConnected();
     
@@ -143,6 +143,7 @@ public interface FetchUserInfo {
     /**
      * A reference to the last Room that was joined by this User
      * 
+     * @param <T> the room type
      * @return a reference or room
      */
     <T extends ApiRoom> T getLastJoinedRoom();
@@ -214,7 +215,7 @@ public interface FetchUserInfo {
     /**
      * Return the number of UserVariables for this User
      * 
-     * @return
+     * @return the variables count
      */
     int getVariablesCount();
     

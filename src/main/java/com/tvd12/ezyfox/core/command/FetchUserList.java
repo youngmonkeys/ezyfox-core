@@ -20,6 +20,7 @@ public interface FetchUserList {
     /**
      * Get all users in a room
      * 
+     * @param <T> the user type
      * @param room the room
      * @return list of users
      */
@@ -28,6 +29,7 @@ public interface FetchUserList {
     /**
      * Get all users in a room
      * 
+     * @param <T> the game user type
      * @param clazz class of game user
      * @param room the room
      * @return list of users

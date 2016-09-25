@@ -57,12 +57,8 @@ public class RequestListenerCenter {
      * @return structures of request listener's classes
      */
     public List<RequestResponseClass> getListeners(String command) {
-        List<RequestResponseClass> result = listeners.get(command);
-        if(result == null) {
-            result = new ArrayList<>();
-            listeners.put(command, result);
-        }
-        return result;
+        return (listeners.containsKey(command)) 
+                ? listeners.get(command) : new ArrayList<RequestResponseClass>();
     }
     
     /**
@@ -80,7 +76,7 @@ public class RequestListenerCenter {
     /**
      * get all request commands
      * 
-     * @return
+     * @return the set of commands
      */
     public Set<String> getCommands() {
         return listeners.keySet();

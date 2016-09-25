@@ -11,7 +11,8 @@ public interface BaseCommand {
 
     /**
      * executive method, call this method to run command
-     * 
+     *
+     * @param <T> returned type
      * @return result of execution
      */
 	<T> T execute();

@@ -90,19 +90,29 @@ public abstract class ApiRoom extends ApiModel {
 	/**
 	 * get room's owner
 	 * 
+	 * @param <T> the user type
 	 * @return room's owner
 	 */
 	@SuppressWarnings("unchecked")
     public <T extends ApiBaseUser> T getOwner() {return (T) owner;}
-	
+
+	/**
+	 * @return the room is empty or not
+	 */
     public boolean isEmpty() {
         return command.isEmpty();
     }
     
+    /**
+     * @return the room is full or not
+     */
     public boolean isFull() {
         return command.isFull();
     }
     
+    /**
+     * @return the room is active or not
+     */
     public boolean isActive() {
         return command.isActive();
     }

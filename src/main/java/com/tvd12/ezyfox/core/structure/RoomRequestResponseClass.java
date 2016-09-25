@@ -17,11 +17,6 @@ import com.tvd12.ezyfox.core.annotation.ExecuteMethod;
  */
 public class RoomRequestResponseClass extends RequestResponseClass {
 
-    public RoomRequestResponseClass(Class<?> clazz, 
-            Class<?> userClazz, List<Class<?>> gameUserClasses) {
-        super(clazz, userClazz, gameUserClasses);
-    }
-    
     /* (non-Javadoc)
      * @see com.tvd12.ezyfox.core.structure.RequestResponseClass#fetchUserClass()
      */
@@ -34,9 +29,8 @@ public class RoomRequestResponseClass extends RequestResponseClass {
      * @see com.tvd12.ezyfox.core.structure.RequestResponseClass#checkExecuteMethod(java.lang.Class, java.lang.Class, java.util.List)
      */
     @Override
-    protected void checkExecuteMethod(Class<?> clazz, Class<?> userClazz,
-            List<Class<?>> gameUserClasses) {
-        executeMethod = getExecutionMethod(clazz);
+    public void checkExecuteMethod(Class<?> userClazz, List<Class<?>> gameUserClasses) {
+        executeMethod = getExecutionMethod(getClazz());
     }
     
     @SuppressWarnings("unchecked")
@@ -49,7 +43,7 @@ public class RoomRequestResponseClass extends RequestResponseClass {
             answer = allMethods.iterator().next();
         if(answer != null && answer.getParameterTypes().length == 3)
             return answer;
-        throw new RuntimeException("Has no execute method in " + clazz + ", make sure you have an execute method with three paramerters (AppContext, Room, User)");
+        throw new IllegalStateException("Has no execute method in " + clazz + ", make sure you have an execute method with three paramerters (AppContext, Room, User)");
     }
     
 }

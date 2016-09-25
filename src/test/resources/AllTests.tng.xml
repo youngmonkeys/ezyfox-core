@@ -8,185 +8,21 @@
         </method-selector>
     </method-selectors>
 
-    <test name="ClientRequestParser">
+    <test name="Parser">
         <packages>
-            <package name="com.tvd12.ezyfox.core.testing.clientrequestparser"/>
+            <package name="com.tvd12.ezyfox.core.testing.parser"/>
         </packages>
     </test>
     
-    <test name="ClientResponseParser">
-    	<packages>
-    		<package name="com.tvd12.ezyfox.core.testing.clientresponseparser" />
-    	</packages>
-    </test>
-    
-    <test name="ConfigPropertyParser">
-        <packages>
-            <package name="com.tvd12.ezyfox.core.testing.configpropertiesparser"/>
-        </packages>
-    </test>
-    
-    <test name="ExecutionMethodParser">
-        <packages>
-            <package name="com.tvd12.ezyfox.core.testing.executionmethodparser"/>
-        </packages>
-    </test>
-    
-    <test name="HandleMethodParser">
-        <packages>
-            <package name="com.tvd12.ezyfox.core.testing.handlemethodparser"/>
-        </packages>
-    </test>
-    
-     <test name="ServerEventParser">
-        <packages>
-            <package name="com.tvd12.ezyfox.core.testing.servereventparser"/>
-        </packages>
-    </test>
-    <test name="BaseEventHandlerClasses">
-    	<packages>
-    		<package name="com.tvd12.ezyfox.core.testing.baseeventhandlerclasses"/>
-    	</packages>
-    </test>
     <test name="CommandProvider">
     	<packages>
     		<package name="com.tvd12.ezyfox.core.testing.commandprovider"/>
     	</packages>
     </test>
-    <test name="ServerEventHandlerProvider">
-    	<packages>
-    		<package name="com.tvd12.ezyfox.core.testing.servereventhandlerprovider"/>
-    	</packages>
-    </test>
+
     <test name="ExtensionConfiguration">
     	<packages>
     		<package name="com.tvd12.ezyfox.core.testing.extensionconfiguration"/>
-    	</packages>
-    </test>
-    
-    <test name="ConfigurationLoading">
-    	<packages>
-    		<package name="com.tvd12.ezyfox.core.testing.configurationloading"/>
-    	</packages>
-    </test>
-    
-    <test name="RequestListenerCenter">
-    	<packages>
-    		<package name="com.tvd12.ezyfox.core.testing.requestlistenercenter"/>
-    	</packages>
-    </test>
-    
-    <test name="ServerEventHandlerCenter">
-    	<packages>
-    		<package name="com.tvd12.ezyfox.core.testing.servereventhandlercenter"/>
-    	</packages>
-    </test>
-    
-    <test name="ZoneEventHandlerCenter">
-    	<packages>
-    		<package name="com.tvd12.ezyfox.core.testing.zoneeventhandlercenter"/>
-    	</packages>
-    </test>
-    
-    <test name="RoomEventHandlerCenter">
-    	<packages>
-    		<package name="com.tvd12.ezyfox.core.testing.roomeventhandlercenter"/>
-    	</packages>
-    </test>
-    
-    <test name="ContextProvider">
-    	<packages>
-    		<package name="com.tvd12.ezyfox.core.testing.contextprovider"/>
-    	</packages>
-    </test>
-    
-    <test name="ApiRoom">
-    	<packages>
-    		<package name="com.tvd12.ezyfox.core.testing.apiroom"/>
-    	</packages>
-    </test>
-    
-    <test name="MethodCover">
-    	<packages>
-    		<package name="com.tvd12.ezyfox.core.testing.methodcover"/>
-    	</packages>
-    </test>
-    
-    <test name="AgentClassUnwrapper">
-    	<packages>
-    		<package name="com.tvd12.ezyfox.core.testing.agentclassunwrapper"/>
-    	</packages>
-    </test>
-    
-    <test name="ResponseHandlerClass">
-    	<packages>
-    		<package name="com.tvd12.ezyfox.core.testing.responsehandlerclasss"/>
-    	</packages>
-    </test>
-    
-    <test name="AgentClassWrapper">
-    	<packages>
-    		<package name="com.tvd12.ezyfox.core.testing.agentclasswrapper"/>
-    	</packages>
-    </test>
-    
-    <test name="RequestListenerClass">
-    	<packages>
-    		<package name="com.tvd12.ezyfox.core.testing.requestlistenerclass"/>
-    	</packages>
-    </test>
-    
-    <test name="ZoneHandlerClass">
-    	<packages>
-    		<package name="com.tvd12.ezyfox.core.testing.zonehandlerclass"/>
-    	</packages>
-    </test>
-    
-    <test name="ServerHandlerClass">
-    	<packages>
-    		<package name="com.tvd12.ezyfox.core.testing.serverhandlerclass"/>
-    	</packages>
-    </test>
-    
-    <test name="RequestResponseClass">
-    	<packages>
-    		<package name="com.tvd12.ezyfox.core.testing.requestresponseclass"/>
-    	</packages>
-    </test>
-    
-    <test name="SetterMethodCover">
-    	<packages>
-    		<package name="com.tvd12.ezyfox.core.testing.settermethodcover"/>
-    	</packages>
-    </test>
-    
-    <test name="GetterMethodCover">
-    	<packages>
-    		<package name="com.tvd12.ezyfox.core.testing.gettermethodcover"/>
-    	</packages>
-    </test>
-    
-    <test name="VariableMethodUtil">
-    	<packages>
-    		<package name="com.tvd12.ezyfox.core.testing.variablemethodutil"/>
-    	</packages>
-    </test>
-    
-    <test name="RoomHandlerClass">
-    	<packages>
-    		<package name="com.tvd12.ezyfox.core.testing.roomhandlerclass"/>
-    	</packages>
-    </test>
-    
-    <test name="RequestParamMethod">
-    	<packages>
-    		<package name="com.tvd12.ezyfox.core.testing.requestparammethod"/>
-    	</packages>
-    </test>
-    
-    <test name="ResponseParamMethod">
-    	<packages>
-    		<package name="com.tvd12.ezyfox.core.testing.responseparammethod"/>
     	</packages>
     </test>
     
@@ -208,9 +44,9 @@
     	</packages>
     </test>
     
-    <test name="Model">
+    <test name="Entities">
     	<packages>
-    		<package name="com.tvd12.ezyfox.core.testing.model"/>
+    		<package name="com.tvd12.ezyfox.core.testing.entities"/>
     	</packages>
     </test>
     
@@ -252,6 +88,12 @@
     <test name="RoomContext">
     	<packages>
     		<package name="com.tvd12.ezyfox.core.testing.roomcontext"/>
+    	</packages>
+    </test>
+    
+    <test name="V117">
+    	<packages>
+    		<package name="com.tvd12.ezyfox.core.testing.v117"/>
     	</packages>
     </test>
 </suite>

@@ -15,21 +15,24 @@ import com.tvd12.ezyfox.core.annotation.MessageParam;
 public class MessageParamGetterMethod extends GetterMethodCover {
     
     /**
-     * @see GetterMethodCover#GetterMethodCover(Class, Field) 
+     * @param clazz the return type
+     * @param field the java field
      */
     public MessageParamGetterMethod(Class<?> clazz, Field field) {
         super(clazz, field);
     }
     
     /**
-     * @see GetterMethodCover#initWithMethod(Class, Method) 
+     * @param clazz the return type
+     * @param method the java method
      */
     public MessageParamGetterMethod(Class<?> clazz, Method method) {
         super(clazz, method);
     }
 
-    /**
-     * @see GetterMethodCover#getKey(Method)
+    /*
+     * (non-Javadoc)
+     * @see com.tvd12.ezyfox.core.structure.MethodCover#getKey(java.lang.reflect.Method)
      */
     @Override
     protected String getKey(Method method) {
@@ -39,8 +42,9 @@ public class MessageParamGetterMethod extends GetterMethodCover {
         return value.length() > 0 ? value : super.getKey(method);
     }
 
-    /**
-     * @see GetterMethodCover#getKey(Field)
+    /*
+     * (non-Javadoc)
+     * @see com.tvd12.ezyfox.core.structure.MethodCover#getKey(java.lang.reflect.Field)
      */
     @Override
     protected String getKey(Field field) {

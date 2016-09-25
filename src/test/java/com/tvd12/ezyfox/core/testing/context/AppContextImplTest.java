@@ -45,9 +45,7 @@ public class AppContextImplTest {
         assertEquals(context.getUserClass(), AppUser.class);
         assertTrue(context.getRoomClasses().size() > 0);
         assertTrue(context.getGameUserClasses().size() > 0);
-        assertTrue(context.getResponseParamsClasses().size() > 0);
         assertNotNull(context.getResponseParamsClass(VideoPokerRoom.class));
-        assertTrue(context.getMessageParamsClasses().size() > 0);
         assertNotNull(context.getMessageParamsClass(PokerMessages.class));
         assertNotNull(context.getResponseParamsClass(PokerMessages.class));
         assertTrue(context.clientRequestListeners("bet").size() > 0);

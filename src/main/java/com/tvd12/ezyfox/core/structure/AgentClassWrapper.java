@@ -26,7 +26,7 @@ public class AgentClassWrapper extends ClassWrapper {
     /**
      * Construct with java class
      * 
-     * @param clazz
+     * @param clazz the class to parse
      */
     public AgentClassWrapper(Class<?> clazz) {
         super(clazz);

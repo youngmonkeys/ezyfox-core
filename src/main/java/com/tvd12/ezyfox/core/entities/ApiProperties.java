@@ -30,6 +30,7 @@ public interface ApiProperties {
     /**
      * get the value to which the specified key is mapped and cast value to specific type
      * 
+     * @param <T> the value type
      * @param key key
      * @param clazz specific type
      * @return a value
@@ -39,7 +40,7 @@ public interface ApiProperties {
     /**
      * removes the mapping for a key from the map
      * 
-     * @param key
+     * @param key the key
      */
     public void removeProperty(Object key);
     

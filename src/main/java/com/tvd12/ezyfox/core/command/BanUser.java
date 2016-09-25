@@ -16,7 +16,7 @@ public interface BanUser extends BaseCommand {
     /**
      * set user to ban
      * 
-     * @param userToBan
+     * @param userToBan the user to ban
      * @return this pointer
      */
     BanUser user(ApiBaseUser userToBan);

@@ -22,8 +22,8 @@ import com.tvd12.ezyfox.core.reflect.ReflectMethodUtil;
 public class ZoneRoomHandlerClass extends ServerHandlerClass {
 
     /**
-     * @param clazz
-     * @param roomClasses
+     * @param clazz the class to parse
+     * @param roomClasses the array of room classes
      */
     public ZoneRoomHandlerClass(Class<?> clazz, Class<?>[] roomClasses) {
         super(clazz, roomClasses);

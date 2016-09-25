@@ -97,6 +97,8 @@ public abstract class ClassUnwrapper extends ClassCover {
     
 	/**
 	 * Add method's structure object to reference list
+	 * 
+	 * @param method the method to add 
 	 */
     protected void addReference(GetterMethodCover method) {
         this.references.add(method);
@@ -119,7 +121,7 @@ public abstract class ClassUnwrapper extends ClassCover {
     /**
      * Add a method's structure to list
      * 
-     * @param method
+     * @param method the method to add
      */
     protected void addMethod(GetterMethodCover method) {
         method.setDeclaringClazz(this);

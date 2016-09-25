@@ -97,6 +97,8 @@ public abstract class ClassWrapper extends ClassCover {
 	
 	/**
      * Add method's structure object to reference list
+     * 
+     * @param method the structure of setter method
      */
 	public void addReference(SetterMethodCover method) {
 	    this.references.add(method);
@@ -119,7 +121,7 @@ public abstract class ClassWrapper extends ClassCover {
 	/**
      * Add a method's structure to list
      * 
-     * @param method
+     * @param method the structure of setter method
      */
 	public void addMethod(SetterMethodCover method) {
 	    method.setDeclaringClazz(this);

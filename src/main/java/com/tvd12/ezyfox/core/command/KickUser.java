@@ -55,7 +55,7 @@ public interface KickUser extends BaseCommand {
      * set delay before the disconnection is performed
      * 
      * @param delaySeconds delay time in seconds
-     * @return
+     * @return this pointer
      */
     KickUser delay(int delaySeconds);
     

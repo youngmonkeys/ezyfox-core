@@ -18,7 +18,7 @@ public class RequestListenerClass extends ClassWrapper {
     private RequestListenerClass() {}
     
     /**
-     * @see ClassWrapper#ClassWrapper()
+     * @param clazz the class to parse
      */
 	public RequestListenerClass(Class<?> clazz) {
 		super(clazz);

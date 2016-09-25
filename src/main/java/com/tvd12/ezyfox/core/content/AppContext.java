@@ -14,7 +14,7 @@ package com.tvd12.ezyfox.core.content;
 public interface AppContext {
 	 
 	/**
-	 * 
+	 * @param <T> the command type
 	 * @param clazz command class or interface
 	 * @return a command object
 	 */
@@ -31,6 +31,7 @@ public interface AppContext {
 	/**
 	 * Support for retrieve data that's held
 	 * 
+	 * @param <T> the returned type
 	 * @param key key
 	 * @param clazz type of value
 	 * @return a value

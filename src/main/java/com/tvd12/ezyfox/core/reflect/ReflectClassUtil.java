@@ -23,6 +23,7 @@ public final class ReflectClassUtil {
 	/**
 	 * Create an instance of class with default constructor
 	 * 
+	 * @param <T> the type
 	 * @param clazz class to create new instance
 	 * @return an instance
 	 * @throws ExtensionException when can't create class's instance
@@ -40,6 +41,7 @@ public final class ReflectClassUtil {
 	/**
 	 * Create an instance of class with only argument constructor
 	 * 
+	 * @param <T> the type
 	 * @param clazz class to create new instance
 	 * @param paramType parameter type of constructor
 	 * @param value value of parameter
@@ -58,6 +60,7 @@ public final class ReflectClassUtil {
 	/**
 	 * Create an instance of class
 	 * 
+	 * @param <T> the type
 	 * @param clazz class to create new instance
 	 * @param paramTypes array of parameter types
 	 * @param values values array of parameters
@@ -85,6 +88,7 @@ public final class ReflectClassUtil {
 	/**
 	 * Create an instance of class with constructor and values array of parameter
 	 * 
+	 * @param <T> the type
 	 * @param constructor constructor object
 	 * @param values values array of parameters of constructor
 	 * @return an instance
@@ -107,6 +111,7 @@ public final class ReflectClassUtil {
 	/**
 	 * Get constructor of specific class
 	 * 
+	 * @param <T> the type
 	 * @param clazz class to get constructor
 	 * @param paramTypes parameter types
 	 * @return a constructor object
@@ -126,6 +131,7 @@ public final class ReflectClassUtil {
 	/**
 	 * Get default constructor of specific class
 	 * 
+	 * @param <T> the type
 	 * @param clazz class to get constructor
 	 * @return default constructor object
 	 * @throws ExtensionException when can't get constructor

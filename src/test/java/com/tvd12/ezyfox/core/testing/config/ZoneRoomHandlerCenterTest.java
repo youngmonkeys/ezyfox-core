@@ -17,7 +17,9 @@ import com.tvd12.test.base.BaseTest;
 import static org.testng.Assert.*;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @author tavandung12
@@ -33,7 +35,7 @@ public class ZoneRoomHandlerCenterTest extends BaseTest {
 
     @Test
     public void test() {
-        List<Class<?>> handleClasses = new ArrayList<>();
+        Set<Class<?>> handleClasses = new HashSet<>();
         handleClasses.add(InviteHandler.class);
         handleClasses.add(Handle.class);
         handleClasses.add(Handle1.class);
@@ -43,7 +45,7 @@ public class ZoneRoomHandlerCenterTest extends BaseTest {
     
     @Test(expectedExceptions = {RuntimeException.class})
     public void test1() {
-        List<Class<?>> handleClasses = new ArrayList<>();
+        Set<Class<?>> handleClasses = new HashSet<>();
         handleClasses.add(Handle2.class);
         ZoneRoomHandlerCenter center = new ZoneRoomHandlerCenter();
         center.addHandlers(handleClasses, roomClasses.toArray(new Class[roomClasses.size()]));
@@ -51,7 +53,7 @@ public class ZoneRoomHandlerCenterTest extends BaseTest {
     
     @Test(expectedExceptions = {RuntimeException.class})
     public void test2() {
-        List<Class<?>> handleClasses = new ArrayList<>();
+        Set<Class<?>> handleClasses = new HashSet<>();
         handleClasses.add(Handle3.class);
         ZoneRoomHandlerCenter center = new ZoneRoomHandlerCenter();
         center.addHandlers(handleClasses, roomClasses.toArray(new Class[roomClasses.size()]));
@@ -59,7 +61,7 @@ public class ZoneRoomHandlerCenterTest extends BaseTest {
     
     @Test(expectedExceptions = {RuntimeException.class})
     public void test3() {
-        List<Class<?>> handleClasses = new ArrayList<>();
+        Set<Class<?>> handleClasses = new HashSet<>();
         handleClasses.add(Handle4.class);
         ZoneRoomHandlerCenter center = new ZoneRoomHandlerCenter();
         center.addHandlers(handleClasses, roomClasses.toArray(new Class[roomClasses.size()]));
@@ -67,7 +69,7 @@ public class ZoneRoomHandlerCenterTest extends BaseTest {
     
     @Test(expectedExceptions = {RuntimeException.class})
     public void test4() {
-        List<Class<?>> handleClasses = new ArrayList<>();
+        Set<Class<?>> handleClasses = new HashSet<>();
         handleClasses.add(Handle5.class);
         ZoneRoomHandlerCenter center = new ZoneRoomHandlerCenter();
         center.addHandlers(handleClasses, roomClasses.toArray(new Class[roomClasses.size()]));
@@ -75,7 +77,7 @@ public class ZoneRoomHandlerCenterTest extends BaseTest {
     
     @Test(expectedExceptions = {RuntimeException.class})
     public void test5() {
-        List<Class<?>> handleClasses = new ArrayList<>();
+        Set<Class<?>> handleClasses = new HashSet<>();
         handleClasses.add(Handle6.class);
         ZoneRoomHandlerCenter center = new ZoneRoomHandlerCenter();
         center.addHandlers(handleClasses, roomClasses.toArray(new Class[roomClasses.size()]));

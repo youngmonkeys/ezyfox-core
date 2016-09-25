@@ -50,7 +50,7 @@ public abstract class ApiUser extends ApiBaseUser {
     /**
      * add game user agent reference to set
      * 
-     * @param child
+     * @param child the game user
      */
     public final void addChild(ApiGameUser child) {
         children.add(child);
@@ -60,7 +60,9 @@ public abstract class ApiUser extends ApiBaseUser {
     /**
      * get child by its class
      * 
+     * @param <T> the game user type
      * @param clazz the class of agent object
+     * @return the game user
      */
     @SuppressWarnings("unchecked")
     public final <T extends ApiBaseUser> T getChild(Class<?> clazz) {

@@ -13,7 +13,7 @@ import com.tvd12.ezyfox.core.content.impl.BaseAppContext;
 public class AddCommandImpl extends FixedCommand implements AddCommand {
     
     /**
-     * @param context
+     * @param context the application context
      */
     public AddCommandImpl(BaseAppContext context) {
         super(context);

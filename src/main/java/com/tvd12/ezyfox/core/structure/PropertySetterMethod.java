@@ -16,14 +16,16 @@ import com.tvd12.ezyfox.core.annotation.ConfigProperty;
 public class PropertySetterMethod extends SetterMethodCover {
     
     /**
-     * @see SetterMethodCover#SetterMethodCover(Class, Field)
+     * @param clazz the parameter type
+     * @param field the java field
      */
     public PropertySetterMethod(Class<?> clazz, Field field) {
         super(clazz, field);
     }
 
-    /**
-     * @see SetterMethodCover#getKey(Field)
+    /*
+     * (non-Javadoc)
+     * @see com.tvd12.ezyfox.core.structure.MethodCover#getKey(java.lang.reflect.Field)
      */
     @Override
     protected String getKey(Field field) {

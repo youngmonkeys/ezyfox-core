@@ -25,7 +25,7 @@ public interface FindBuddy extends BaseCommand {
      * Name of buddy's owner
      * 
      * @param ownerName name of buddy's owner
-     * @return
+     * @return this pointer
      */
     FindBuddy owner(String ownerName);
     

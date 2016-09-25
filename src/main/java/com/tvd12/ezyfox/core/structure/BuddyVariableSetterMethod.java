@@ -16,31 +16,35 @@ import java.lang.reflect.Method;
 public class BuddyVariableSetterMethod extends SetterMethodCover {
     
     /**
-     * @see SetterMethodCover#SetterMethodCover(Class, Field)
+     * @param clazz the parameter type
+     * @param field the java field
      */
     public BuddyVariableSetterMethod(Class<?> clazz, Field field) {
         super(clazz, field);
         this.isHidden = checkHidden(field, isHidden);
     }
-    
+ 
     /**
-     * @see SetterMethodCover#SetterMethodCover(Class, Method)
+     * @param clazz the parameter type
+     * @param method the java method
      */
     public BuddyVariableSetterMethod(Class<?> clazz, Method method) {
         super(clazz, method);
         this.isHidden = checkHidden(method, isHidden);
     }
     
-    /**
-     * @see SetterMethodCover#getKey(Field)
+    /*
+     * (non-Javadoc)
+     * @see com.tvd12.ezyfox.core.structure.MethodCover#getKey(java.lang.reflect.Field)
      */
     @Override
     protected String getKey(Field field) {
         return BuddyVariableMethodUtil.getKey(field, super.getKey(field));
     }
     
-    /**
-     * @see SetterMethodCover#getKey(Method)
+    /*
+     * (non-Javadoc)
+     * @see com.tvd12.ezyfox.core.structure.MethodCover#getKey(java.lang.reflect.Method)
      */
     @Override
     protected String getKey(Method method) {

@@ -49,7 +49,7 @@ public abstract class BaseEventHandlerClasses {
 	/**
 	 * Obtain comparator to sort handler classes by priority
 	 * 
-	 * @return
+	 * @return the comparator object
 	 */
 	protected abstract Comparator<Class<?>> getComparator();
 	
@@ -73,9 +73,9 @@ public abstract class BaseEventHandlerClasses {
 	/**
 	 * Add list of handlers class to map
 	 * 
-	 * @param handlers
+	 * @param handlers set of handler classes
 	 */
-	public void addHandlers(List<Class<?>> handlers) {
+	public void addHandlers(Set<Class<?>> handlers) {
 		for(Class<?> handler : handlers) {
 			String command = getEventName(handler);
 			addHandler(command, handler);

@@ -14,7 +14,8 @@ import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 import com.tvd12.ezyfox.core.annotation.AppContextConfiguration;
-import com.tvd12.ezyfox.core.config.ExtensionConfiguration;
+import com.tvd12.ezyfox.core.config.AppExtensionConfigurationImpl;
+import com.tvd12.ezyfox.core.config.loader.AppExtensionConfigurationLoader;
 import com.tvd12.ezyfox.core.structure.RequestResponseClass;
 
 @ContextConfiguration(classes = {TestAppConfig.class})
@@ -25,11 +26,13 @@ public class ExtensionConfigTest extends AbstractTestNGSpringContextTests {
 			= LoggerFactory.getLogger(ExtensionConfigTest.class);
 
 	@Autowired
-	private ExtensionConfiguration extensionConfig;
+	private AppExtensionConfigurationImpl extensionConfig;
 	
 	@BeforeMethod
 	public void init() {
-		extensionConfig.load(getClass());
+	    AppExtensionConfigurationLoader loader = new AppExtensionConfigurationLoader();
+	    loader.setEntryPoint(getClass());
+	    extensionConfig = loader.load();
 	}
 	
 	@Test

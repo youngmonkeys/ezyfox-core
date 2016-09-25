@@ -3,43 +3,33 @@
  */
 package com.tvd12.ezyfox.core.config;
 
-import org.springframework.core.annotation.AnnotationUtils;
-
-import com.tvd12.ezyfox.core.annotation.RoomContextConfiguration;
-import com.tvd12.ezyfox.core.structure.RequestResponseClass;
-import com.tvd12.ezyfox.core.structure.RoomRequestResponseClass;
+import com.tvd12.ezyfox.core.structure.AgentClass;
+import com.tvd12.ezyfox.core.structure.UserAgentClass;
 
 /**
  * @author tavandung12
  *
  */
-public class RoomExtensionConfiguration extends ExtensionConfiguration {
-
-    /* (non-Javadoc)
-     * @see com.tvd12.ezyfox.core.config.ConfigurationLoading#getConfigurationClass(java.lang.Class)
-     */
-    @Override
-    protected void getConfigurationClass(Class<?> entryPoint) {
-        RoomContextConfiguration appConfig = AnnotationUtils
-                .findAnnotation(entryPoint, RoomContextConfiguration.class);
-        if(appConfig == null)
-            throw new RuntimeException(
-                    createMessage(RoomContextConfiguration.class, entryPoint));
-        configClass = appConfig.clazz();
-    }
+public interface RoomExtensionConfiguration {
     
-    /* (non-Javadoc)
-     * @see com.tvd12.ezyfox.core.config.ExtensionConfiguration#newRequestResponseClass(java.lang.Class)
+    /**
+     * @return the room class
      */
-    @Override
-    protected RequestResponseClass newRequestResponseClass(Class<?> clazz) {
-        return new RoomRequestResponseClass(clazz, getUserClass(), getGameUserClasses());
-    }
+    Class<?> getRoomClass();
     
-    /* (non-Javadoc)
-     * @see com.tvd12.ezyfox.core.config.ExtensionConfiguration#initUserAgentClass()
+    /**
+     * @return the structure of room class
      */
-    @Override
-    protected void initUserAgentClass() {
-    }
+    AgentClass getRoomAgentClass();
+    
+    /**
+     * @return the game user class
+     */
+    Class<?> getGameUserClass();
+    
+    /**
+     * @return the game user class structure
+     */
+    UserAgentClass getGameUserAgentClass();
+    
 }

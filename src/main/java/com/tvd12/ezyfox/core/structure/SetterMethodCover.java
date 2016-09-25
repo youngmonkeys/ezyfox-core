@@ -49,8 +49,9 @@ public class SetterMethodCover extends MethodCover {
         initWithField(clazz, field);
     }
 	
-    /**
-     * @see MethodCover#initWithMethod(Class, Method)
+    /*
+     * (non-Javadoc)
+     * @see com.tvd12.ezyfox.core.structure.MethodCover#initWithMethod(java.lang.Class, java.lang.reflect.Method)
      */
 	@Override
 	protected void initWithMethod(Class<?> clazz, Method method) {
@@ -58,26 +59,29 @@ public class SetterMethodCover extends MethodCover {
 		super.initWithMethod(clazz, method);
 	}
 	
-	/**
-     * @see MethodCover#initWithField(Class, Field)
-     */
+	/*
+	 * (non-Javadoc)
+	 * @see com.tvd12.ezyfox.core.structure.MethodCover#initWithField(java.lang.Class, java.lang.reflect.Field)
+	 */
 	@Override
 	protected void initWithField(Class<?> clazz, Field field) {
 		super.initWithField(clazz, field);
 		method = getSetterMethodFromField(clazz, field);
 	}
 	
-	/**
-     * @see MethodCover#getTypeFromMethod(Method)
-     */
+	/*
+	 * (non-Javadoc)
+	 * @see com.tvd12.ezyfox.core.structure.MethodCover#getTypeFromMethod(java.lang.reflect.Method)
+	 */
 	@Override
 	protected Class<?> getTypeFromMethod(Method method) {
 		return method.getParameterTypes()[0];
 	}
 	
-	/**
-     * @see MethodCover#getGenericTypeFromMethod(Method)
-     */
+	/*
+	 * (non-Javadoc)
+	 * @see com.tvd12.ezyfox.core.structure.MethodCover#getGenericTypeFromMethod(java.lang.reflect.Method)
+	 */
 	@Override
 	protected Class<?> getGenericTypeFromMethod(Method method) {
 		try {
@@ -108,6 +112,7 @@ public class SetterMethodCover extends MethodCover {
      * @see com.tvd12.ezyfox.core.reflect.ReflectMethodUtil#invokeMethod(Method, Object, Object...)
      * 
      * @param obj the object the underlying method is invoked from
+     * @param value the value to set
      */
 	public void invoke(Object obj, Object value) {
 		try {

@@ -234,8 +234,8 @@ public class MethodCover {
 	 * If field be annotated with an annotation, read that annotation and get a key.
      * If field not annotated wit any annotations, then parse field name to get a key
 	 * 
-	 * @param field
-	 * @return
+	 * @param field the field
+	 * @return the key related to the field
 	 */
 	protected String getKey(Field field) {
 		return field.getName();

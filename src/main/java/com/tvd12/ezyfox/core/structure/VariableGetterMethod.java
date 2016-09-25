@@ -16,7 +16,8 @@ import java.lang.reflect.Method;
 public class VariableGetterMethod extends GetterMethodCover {
     
     /**
-     * @see GetterMethodCover#GetterMethodCover(Class, Field)
+     * @param clazz the return type
+     * @param field the java field
      */
     public VariableGetterMethod(Class<?> clazz, Field field) {
         super(clazz, field);
@@ -24,23 +25,26 @@ public class VariableGetterMethod extends GetterMethodCover {
     }
     
     /**
-     * @see GetterMethodCover#GetterMethodCover(Class, Method)
+     * @param clazz the return type
+     * @param method the java method
      */
     public VariableGetterMethod(Class<?> clazz, Method method) {
         super(clazz, method);
         this.isHidden = checkHidden(method, isHidden);
     }
     
-    /**
-     * @see GetterMethodCover#getKey(Field)
+    /*
+     * (non-Javadoc)
+     * @see com.tvd12.ezyfox.core.structure.MethodCover#getKey(java.lang.reflect.Field)
      */
     @Override
     protected String getKey(Field field) {
         return VariableMethodUtil.getKey(field, super.getKey(field));
     }
     
-    /**
-     * @see GetterMethodCover#getKey(Method)
+    /*
+     * (non-Javadoc)
+     * @see com.tvd12.ezyfox.core.structure.MethodCover#getKey(java.lang.reflect.Method)
      */
     @Override
     protected String getKey(Method method) {

@@ -14,6 +14,7 @@ public interface ApiMessage extends ApiBaseMessage {
     /**
      * The room
      * 
+     * @param <T> the room type
      * @return the room
      */
     public <T extends ApiRoom> T room();

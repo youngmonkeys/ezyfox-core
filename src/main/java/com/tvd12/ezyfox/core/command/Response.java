@@ -51,10 +51,11 @@ public interface Response extends BaseCommand {
     /**
      * add recipients to list
      * 
+     * @param <U> the user type
      * @param users user agent
      * @return this pointer
      */
-    public <T extends Response, U extends ApiBaseUser> T recipients(List<U> users);
+    public <U extends ApiBaseUser> Response recipients(List<U> users);
     
     /**
      * add recipients to list
@@ -76,6 +77,7 @@ public interface Response extends BaseCommand {
      * Only response array of parameters to client
      * 
      * @param params array of parameters name
+     * @return this pointer
      */
     Response only(String... params);
     
@@ -83,6 +85,7 @@ public interface Response extends BaseCommand {
      * Does not send the array of parameters to client
      * 
      * @param params array of parameters name
+     * @return this pointer
      */
     Response ignore(String... params);
 }

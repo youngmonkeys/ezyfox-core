@@ -41,9 +41,9 @@ public class RequestResponseClass {
     @Getter
     protected Method executeMethod;
     
-    // user agent class
+    // the java class
     @Getter
-    private Class<?> userClass;
+    private Class<?> clazz;
     
     // structure of listener class
     @Getter
@@ -53,27 +53,26 @@ public class RequestResponseClass {
     @Getter
     private ResponseHandlerClass responseHandlerClass;
     
-    /**
-     * Construct with java class, user agent class and list of game user agent's classes
-     * 
-     * @param clazz request listener's class
-     * @param userClazz user agent's class
-     * @param gameUserClasses game user agent's classes
-     */
-    public RequestResponseClass(Class<?> clazz, 
-            Class<?> userClazz, List<Class<?>> gameUserClasses) {
+    public void init(Class<?> clazz) {
+        setClazz(clazz);
         checkRequestCommand(clazz);
         checkResponseToClient(clazz);
         checkResponseCommand(clazz);
         checkRequestPriority(clazz);
-        checkExecuteMethod(clazz, userClazz, gameUserClasses);
-        userClass = fetchUserClass();
         requestListenerClass = new RequestListenerClass(clazz);
         responseHandlerClass = new ResponseHandlerClass(clazz);
     }
     
+    private void setClazz(Class<?> clazz) {
+        this.clazz = clazz;
+    }
+    
     protected Class<?> fetchUserClass() {
         return executeMethod.getParameterTypes()[1];
+    }
+    
+    public Class<?> getUserClass() {
+        return fetchUserClass();
     }
     
     /**
@@ -125,8 +124,7 @@ public class RequestResponseClass {
     }
     
     
-    protected void checkExecuteMethod(Class<?> clazz, 
-            Class<?> userClazz, List<Class<?>> gameUserClasses) {
+    public void checkExecuteMethod(Class<?> userClazz, List<Class<?>> gameUserClasses) {
         executeMethod = ExecutionMethodParser
                 .getListenerExecuteMethod(clazz, userClazz, gameUserClasses);
     }

@@ -6,7 +6,7 @@ package com.tvd12.ezyfox.core.testing.config;
 import org.testng.annotations.Test;
 
 import com.tvd12.ezyfox.core.annotation.RoomContextConfiguration;
-import com.tvd12.ezyfox.core.config.RoomExtensionConfiguration;
+import com.tvd12.ezyfox.core.config.loader.RoomExtensionConfigurationLoader;
 import com.tvd12.ezyfox.core.testing.roomextensionconfig3.RoomConfig3;
 
 /**
@@ -18,8 +18,9 @@ public class RoomExtensionConfigurationTest3 {
 
     @Test
     public void test() {
-        RoomExtensionConfiguration config = new RoomExtensionConfiguration();
-        config.load(RoomExtensionConfigurationTest3.class);
+        RoomExtensionConfigurationLoader loader = new RoomExtensionConfigurationLoader();
+        loader.setEntryPoint(RoomExtensionConfigurationTest3.class);
+        loader.load();
     }
     
 }

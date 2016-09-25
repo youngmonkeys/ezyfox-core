@@ -15,6 +15,7 @@ import java.util.Map;
 public interface ApiDisconnection {
 
     /**
+     * @param <T> the user type
      * @return the user
      */
     <T extends ApiBaseUser> T user();
@@ -26,11 +27,13 @@ public interface ApiDisconnection {
     ApiZone zone();
     
     /**
+     * @param <T> the room type
      * @return the list of Rooms previously joined by the User ( List or Room )
      */
     <T extends ApiRoom> List<T> joinedRooms();
     
     /**
+     * @param <T> the room type
      * @return a map of PlayerId by Room, for each Room joined by the User ( Map of Room, Integer)
      */
     <T extends ApiRoom> Map<T, Integer> playerIdsByRoom();

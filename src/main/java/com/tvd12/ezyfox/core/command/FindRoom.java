@@ -13,6 +13,7 @@ public interface FindRoom {
     /**
      * get room by room's id
      * 
+     * @param <T> the room type
      * @param id room's id
      * @return this pointer
      */
@@ -21,6 +22,7 @@ public interface FindRoom {
     /**
      * get room by room's name
      * 
+     * @param <T> the room type
      * @param name room's name
      * @return this pointer
      */
@@ -29,6 +31,7 @@ public interface FindRoom {
 	/**
 	 * get room by user in room
 	 * 
+	 * @param <T> the room type
 	 * @param user user in room
 	 * @return this pointer
 	 */
