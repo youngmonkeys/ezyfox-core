@@ -16,7 +16,7 @@ public class RoomExtensionConfigurationTest1 {
     @Test(expectedExceptions = RuntimeException.class)
     public void test() {
         RoomExtensionConfigurationLoader loader = new RoomExtensionConfigurationLoader();
-        loader.setEntryPoint(RoomExtensionConfigurationTest1.class);
+        loader.setConfigClass(Class.class);
         loader.load();
     }
     

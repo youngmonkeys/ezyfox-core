@@ -1,6 +1,6 @@
 package com.tvd12.ezyfox.core.structure;
 
-import java.util.List;
+import java.util.Set;
 
 import com.tvd12.ezyfox.core.annotation.parser.HandleMethodParser;
 
@@ -36,7 +36,7 @@ public class ServerUserHandlerClass extends ServerHandlerClass {
      * @param gameUserClasses game user agent's classes
      */
     public ServerUserHandlerClass(Class<?> clazz, 
-            Class<?> userClass, List<Class<?>> gameUserClasses) {
+            Class<?> userClass, Set<Class<?>> gameUserClasses) {
         super(clazz);
         checkHandleMethod(clazz, userClass, gameUserClasses);
         checkUserClass();
@@ -65,7 +65,7 @@ public class ServerUserHandlerClass extends ServerHandlerClass {
      * @param gameUserClasses list of game user agent's classes
      */
     protected void checkHandleMethod(Class<?> clazz, 
-            Class<?> userClass, List<Class<?>> gameUserClasses) {
+            Class<?> userClass, Set<Class<?>> gameUserClasses) {
         handleMethod = HandleMethodParser.getServerHandleMethod(
                 clazz, userClass, gameUserClasses);
     }

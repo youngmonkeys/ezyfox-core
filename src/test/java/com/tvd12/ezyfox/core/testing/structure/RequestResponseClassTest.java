@@ -3,11 +3,11 @@ package com.tvd12.ezyfox.core.testing.structure;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
-import java.util.List;
+import java.util.Set;
 
 import org.testng.annotations.Test;
 
-import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.tvd12.ezyfox.core.annotation.ClientRequestListener;
 import com.tvd12.ezyfox.core.annotation.ClientResponseHandler;
 import com.tvd12.ezyfox.core.content.AppContext;
@@ -22,7 +22,7 @@ public class RequestResponseClassTest {
     public void testValidCase() {
         RequestResponseClass clazz = new RequestResponseClass(); 
         clazz.init(ClassA.class);
-        clazz.checkExecuteMethod(ExampleUser.class, (List)Lists.newArrayList(PokerUser.class));
+        clazz.checkExecuteMethod(ExampleUser.class, (Set)Sets.newHashSet(PokerUser.class));
         assertEquals(clazz.getResponseCommand(), "B");
         assertEquals(clazz.getExecuteMethod().getName(), "execute");
         assertEquals(clazz.getRequestListenerClass().getClazz(), ClassA.class);
@@ -32,7 +32,7 @@ public class RequestResponseClassTest {
         
         clazz = new RequestResponseClass();
         clazz.init(ClassB.class);
-        clazz.checkExecuteMethod(ExampleUser.class, (List)Lists.newArrayList(PokerUser.class));
+        clazz.checkExecuteMethod(ExampleUser.class, (Set)Sets.newHashSet(PokerUser.class));
         assertEquals(clazz.getExecuteMethod().getName(), "execute");
     }
     

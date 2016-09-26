@@ -3,7 +3,7 @@ package com.tvd12.ezyfox.core.testing.structure;
 import static org.testng.Assert.assertEquals;
 import static org.testng.Assert.assertNotNull;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 
 import org.testng.annotations.Test;
 
@@ -20,27 +20,27 @@ public class ZoneHandlerClassTest {
     @Test
     public void testInvalidCase() {
         ZoneHandlerClass clazz = new ZoneHandlerClass(
-                ClassA.class, ExampleUser.class, new ArrayList<Class<?>>());
+                ClassA.class, ExampleUser.class, new HashSet<Class<?>>());
         assertEquals(clazz.getZoneName(), "");
         assertEquals(clazz.getPropertiesClassWrapper().getClazz(), ClassA.class);
         assertNotNull(clazz.newInstance());
         
         clazz = new ZoneHandlerClass(
-                ClassB.class, ExampleUser.class, new ArrayList<Class<?>>());
+                ClassB.class, ExampleUser.class, new HashSet<Class<?>>());
         assertEquals(clazz.getZoneName(), "zone");
     }
     
     @Test(expectedExceptions = {IllegalStateException.class})
     public void testInvalidCase1() {
         ZoneHandlerClass clazz = new ZoneHandlerClass(
-                ClassC.class, ExampleUser.class, new ArrayList<Class<?>>());
+                ClassC.class, ExampleUser.class, new HashSet<Class<?>>());
         clazz.newInstance();
     }
     
     @Test(expectedExceptions = {IllegalStateException.class})
     public void testInvalidCase2() {
         ZoneHandlerClass clazz = new ZoneHandlerClass(
-                ClassD.class, ExampleUser.class, new ArrayList<Class<?>>());
+                ClassD.class, ExampleUser.class, new HashSet<Class<?>>());
         clazz.newInstance();
     }
     

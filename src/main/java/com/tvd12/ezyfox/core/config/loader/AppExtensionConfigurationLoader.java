@@ -1,6 +1,5 @@
 package com.tvd12.ezyfox.core.config.loader;
 
-import java.lang.annotation.Annotation;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -9,16 +8,19 @@ import java.util.Set;
 
 import org.springframework.core.annotation.AnnotationUtils;
 
-import com.tvd12.ezyfox.core.annotation.AppContextConfiguration;
 import com.tvd12.ezyfox.core.annotation.AutoResponse;
 import com.tvd12.ezyfox.core.annotation.RoomContextConfiguration;
 import com.tvd12.ezyfox.core.annotation.RoomPackages;
 import com.tvd12.ezyfox.core.annotation.UserAgent;
+import com.tvd12.ezyfox.core.annotation.parser.ContextConfigParser;
 import com.tvd12.ezyfox.core.config.AppExtensionConfigurationImpl;
 import com.tvd12.ezyfox.core.config.ExtensionConfiguration;
 import com.tvd12.ezyfox.core.config.RoomExtensionConfiguration;
 import com.tvd12.ezyfox.core.entities.ApiUser;
 import com.tvd12.ezyfox.core.reflect.ReflectPackageUtil;
+
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * 
@@ -28,6 +30,10 @@ import com.tvd12.ezyfox.core.reflect.ReflectPackageUtil;
  *
  */
 public class AppExtensionConfigurationLoader extends ConfigurationLoader {
+    
+    // the entry point class
+    @Getter @Setter 
+    private Class<?> entryPoint; 
     
     /* (non-Javadoc)
      * @see com.tvd12.ezyfox.core.config.loader.ConfigurationLoader#load(java.lang.Class, java.lang.String[])
@@ -46,29 +52,20 @@ public class AppExtensionConfigurationLoader extends ConfigurationLoader {
     }
     
     /* (non-Javadoc)
-     * @see com.tvd12.ezyfox.core.config.loader.BaseConfigurationLoader#getConfigAnnotation()
-     */
-    @SuppressWarnings("unchecked")
-    @Override
-    protected Class<AppContextConfiguration> getConfigAnnotation() {
-        return AppContextConfiguration.class;
-    }
-    
-    /* (non-Javadoc)
-     * @see com.tvd12.ezyfox.core.config.loader.BaseConfigurationLoader#getConfigClass(java.lang.annotation.Annotation)
-     */
-    @Override
-    protected <T extends Annotation> Class<?> getConfigClass(T annotation) {
-        return ((AppContextConfiguration)annotation).clazz();
-    }
-    
-    /* (non-Javadoc)
      * @see com.tvd12.ezyfox.core.config.loader.BaseConfigurationLoader#newExtensionConfiguration()
      */
     @SuppressWarnings("unchecked")
     @Override
     protected AppExtensionConfigurationImpl newExtensionConfiguration() {
         return new AppExtensionConfigurationImpl();
+    }
+    
+    /* (non-Javadoc)
+     * @see com.tvd12.ezyfox.core.config.loader.BaseConfigurationLoader#getConfigurationClass()
+     */
+    @Override
+    protected Class<?> getConfigurationClass() {
+        return ContextConfigParser.getConfigurationClass(getEntryPoint());
     }
     
     /**
@@ -80,8 +77,8 @@ public class AppExtensionConfigurationLoader extends ConfigurationLoader {
     protected Map<Class<?>, RoomExtensionConfiguration> 
             createRoomExtensionConfigs(Class<?> configClass) {
         Map<Class<?>, RoomExtensionConfiguration> answer = new HashMap<>();
-        Set<Class<?>> entries = findRoomEntryPointClasses(configClass);
-        for(Class<?> entry : entries) 
+        Set<Class<?>> classes = findRoomConfigurationClasses(configClass);
+        for(Class<?> entry : classes) 
             answer.put(entry, loadRoomExtensionConfig(entry));
         return answer;
     }
@@ -89,23 +86,23 @@ public class AppExtensionConfigurationLoader extends ConfigurationLoader {
     /**
      * Load room extension configuration
      * 
-     * @param entryPoint the room extension entry point class
+     * @param configClass the room configuration class
      * @return the room extension configuration
      */
-    protected RoomExtensionConfiguration loadRoomExtensionConfig(Class<?> entryPoint) {
-        return newRoomExtensionConfigLoader(entryPoint).load();
+    protected RoomExtensionConfiguration loadRoomExtensionConfig(Class<?> configClass) {
+        return newRoomExtensionConfigLoader(configClass).load();
     }
     
     /**
      * Create new room extension configuration loader
      * 
-     * @param entryPoint the room extension entry point class
+     * @param configClass the room configuration class
      * @return the loader
      */
     protected RoomExtensionConfigurationLoader 
-            newRoomExtensionConfigLoader(Class<?> entryPoint) {
+            newRoomExtensionConfigLoader(Class<?> configClass) {
         RoomExtensionConfigurationLoader loader = newRoomExtensionConfigLoader();
-        loader.setEntryPoint(entryPoint);
+        loader.setConfigClass(configClass);
         return loader;
     }
     
@@ -122,7 +119,7 @@ public class AppExtensionConfigurationLoader extends ConfigurationLoader {
      * @param configClass the application's configuration class
      * @return the set of room extension entry point
      */
-    protected Set<Class<?>> findRoomEntryPointClasses(Class<?> configClass) {
+    protected Set<Class<?>> findRoomConfigurationClasses(Class<?> configClass) {
         return new HashSet<>(ReflectPackageUtil.findClasses(
                 getRoomPackages(configClass), RoomContextConfiguration.class));
     }
@@ -170,7 +167,6 @@ public class AppExtensionConfigurationLoader extends ConfigurationLoader {
         return answer;
             
     }
-    
 
 }
     

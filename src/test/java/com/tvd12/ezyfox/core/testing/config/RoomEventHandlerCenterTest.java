@@ -2,12 +2,13 @@ package com.tvd12.ezyfox.core.testing.config;
 
 import static org.testng.Assert.assertEquals;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.testng.annotations.Test;
 
-import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.tvd12.ezyfox.core.annotation.ServerEventHandler;
 import com.tvd12.ezyfox.core.config.RoomEventHandlerCenter;
 import com.tvd12.ezyfox.core.content.AppContext;
@@ -22,9 +23,9 @@ public class RoomEventHandlerCenterTest {
     public void testValidCase() {
         RoomEventHandlerCenter center = new RoomEventHandlerCenter();
         List<RoomHandlerClass> handlers = center.addHandlers(
-                (List)Lists.newArrayList(ClassA.class, ClassB.class), 
-                (List)Lists.newArrayList(ExampleRoom.class), 
-                ExampleUser.class, new ArrayList<Class<?>>());
+                (Set)Sets.newHashSet(ClassA.class, ClassB.class), 
+                (Set)Sets.newHashSet(ExampleRoom.class), 
+                ExampleUser.class, new HashSet<Class<?>>());
         assertEquals(2, handlers.size());
         assertEquals(2, center.getHandlers().size());
         assertEquals(1, handlers.get(0).getPriority());

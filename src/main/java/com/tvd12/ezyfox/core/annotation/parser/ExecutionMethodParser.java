@@ -2,6 +2,7 @@ package com.tvd12.ezyfox.core.annotation.parser;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 import com.tvd12.ezyfox.core.annotation.ExecuteMethod;
@@ -27,7 +28,7 @@ public final class ExecutionMethodParser {
 	 * @return execute method
 	 */
 	public static Method getListenerExecuteMethod(Class<?> clazz, 
-	        Class<?> userClass, List<Class<?>> gameUserClasses) {
+	        Class<?> userClass, Collection<Class<?>> gameUserClasses) {
 		Method[] methods = clazz.getDeclaredMethods();
 		Method executeMethod = getListenerExecuteMethod(
 		        Arrays.asList(methods), userClass, gameUserClasses);
@@ -45,7 +46,7 @@ public final class ExecutionMethodParser {
 	 * @return
 	 */
 	private static Method getListenerExecuteMethod(List<Method> methods,
-	        Class<?> userClass, List<Class<?>> gameUserClasses) {
+	        Class<?> userClass, Collection<Class<?>> gameUserClasses) {
 	    for(Method method : methods) {
             if(validateMethod(method)
                     && method.getParameterTypes().length == 2
@@ -86,7 +87,7 @@ public final class ExecutionMethodParser {
 	 * @return true or false
 	 */
 	private static boolean validateSecondParamType(Method method,
-	        Class<?> userClass, List<Class<?>> gameUserClasses) {
+	        Class<?> userClass, Collection<Class<?>> gameUserClasses) {
 	    Class<?> type = method.getParameterTypes()[1];
 	    return ParserUtil.isUserAgentClass(type, userClass, gameUserClasses);
 	}

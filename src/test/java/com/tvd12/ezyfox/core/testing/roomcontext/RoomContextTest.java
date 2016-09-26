@@ -26,7 +26,7 @@ public class RoomContextTest {
     public void test() {
          BaseAppContext context = newAppContext();
          BaseRoomContext roomContext = new BaseRoomContext();
-         roomContext.init(ExRoomExtension.class, context);
+         roomContext.init(context, ExRoomExtension.class);
          assertNotNull(roomContext.getObjectDeserializer(CurrentState.class));
          assertNotNull(roomContext.getObjectSerializer(CurrentState.class));
          assertNotNull(roomContext.command(AddCommand.class));

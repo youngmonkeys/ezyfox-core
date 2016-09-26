@@ -1,8 +1,8 @@
 package com.tvd12.ezyfox.core.testing.extensionconfiguration;
 
-import com.tvd12.ezyfox.core.annotation.AppContextConfiguration;
+import com.tvd12.ezyfox.core.annotation.ContextConfiguration;
 
-@AppContextConfiguration(clazz = TestAppConfig2.class)
+@ContextConfiguration(clazz = TestAppConfig2.class)
 public class ExampleSFSZoneExtensionTest2 {
 	
 }

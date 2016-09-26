@@ -48,9 +48,9 @@ public class AppContextImplTest {
         assertNotNull(context.getResponseParamsClass(VideoPokerRoom.class));
         assertNotNull(context.getMessageParamsClass(PokerMessages.class));
         assertNotNull(context.getResponseParamsClass(PokerMessages.class));
-        assertTrue(context.clientRequestListeners("bet").size() > 0);
-        assertTrue(context.serverEventHandlerClasses(ServerEvent.USER_JOIN_ROOM).size() > 0);
-        assertTrue(context.clientRequestCommands().size() > 0);
+        assertTrue(context.getClientRequestListeners("bet").size() > 0);
+        assertTrue(context.getServerEventHandlerClasses(ServerEvent.USER_JOIN_ROOM).size() > 0);
+        assertTrue(context.getClientRequestCommands().size() > 0);
         assertEquals(context.command(AddCommand.class).getClass(), AddCommandImpl.class);
         assertNotNull(context.command(AppCommand.class));
         assertNotNull(context.command(PokerUser.class));

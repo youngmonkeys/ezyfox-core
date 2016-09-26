@@ -1,7 +1,7 @@
 package com.tvd12.ezyfox.core.structure;
 
 import java.lang.reflect.Method;
-import java.util.List;
+import java.util.Set;
 
 import com.tvd12.ezyfox.core.annotation.parser.ClientRequestParser;
 import com.tvd12.ezyfox.core.annotation.parser.ClientResponseParser;
@@ -124,7 +124,7 @@ public class RequestResponseClass {
     }
     
     
-    public void checkExecuteMethod(Class<?> userClazz, List<Class<?>> gameUserClasses) {
+    public void checkExecuteMethod(Class<?> userClazz, Set<Class<?>> gameUserClasses) {
         executeMethod = ExecutionMethodParser
                 .getListenerExecuteMethod(clazz, userClazz, gameUserClasses);
     }

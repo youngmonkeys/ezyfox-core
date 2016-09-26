@@ -17,7 +17,7 @@ public class ConfigurationLoaderTest {
     @Test(expectedExceptions = {IllegalStateException.class})
     public void checkAgentClassTestInvalidCase() {
         RoomExtensionConfigurationLoader loader = new RoomExtensionConfigurationLoader();
-        loader.setEntryPoint(V117RoomEntryPoint2.class);
+        loader.setConfigClass(V117RoomEntryPoint2.class);
         loader.load();
     }
     

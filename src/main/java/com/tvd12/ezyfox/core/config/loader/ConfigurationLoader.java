@@ -266,7 +266,7 @@ public abstract class ConfigurationLoader extends BaseConfigurationLoader {
                 .append(" annotation in a model class that you want to it represents to ")
                 .append(annotation.getSimpleName())
                 .append(" (error related to ")
-                .append(getEntryPoint())
+                .append(getConfigurationClass())
                 .append(")")
                 .toString();
     }

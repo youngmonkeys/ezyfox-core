@@ -148,7 +148,6 @@ public final class ReflectMethodUtil {
 	    try {
             invokeMethod(method, obj, args);
         } catch (Exception e) {
-            e.printStackTrace();
             LOGGER.error("Invoke handle method error", e);
             throw new RuntimeException("Can not invoke handle method " 
                     + method.getName()
@@ -167,7 +166,6 @@ public final class ReflectMethodUtil {
         try {
             invokeMethod(method, obj, args);
         } catch (Exception e) {
-            e.printStackTrace();
             LOGGER.error("Invoke execute method error", e);
             throw new RuntimeException("Can not invoke execute method " 
                     + method.getName()

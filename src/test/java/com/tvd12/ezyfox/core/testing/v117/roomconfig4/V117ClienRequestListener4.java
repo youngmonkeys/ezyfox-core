@@ -10,7 +10,7 @@ import com.tvd12.ezyfox.core.content.AppContext;
  * @author tavandung12
  *
  */
-@ClientRequestListener(command = "v117_1")
+@ClientRequestListener(command = "v117_4")
 public class V117ClienRequestListener4 {
 
     public void execute(AppContext context, V117Room4 room, V117GameUser4 user) {

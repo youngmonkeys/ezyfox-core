@@ -3,13 +3,13 @@
  */
 package com.tvd12.ezyfox.core.testing.roomcontext;
 
-import com.tvd12.ezyfox.core.annotation.RoomContextConfiguration;
+import com.tvd12.ezyfox.core.annotation.ContextConfiguration;
 
 /**
  * @author tavandung12
  *
  */
-@RoomContextConfiguration(clazz = RoomConfig.class)
+@ContextConfiguration(clazz = RoomConfig.class)
 public class ExRoomExtension {
 
 }

@@ -2,8 +2,9 @@ package com.tvd12.ezyfox.core.testing.config;
 
 import static org.testng.Assert.assertEquals;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.testng.annotations.Test;
 
@@ -17,12 +18,12 @@ public class ZoneEventHandlerCenterTest {
     
     @Test
     public void testValidCase() {
-        List<Class<?>> handlerClasses = new ArrayList<>();
+        Set<Class<?>> handlerClasses = new HashSet<>();
         handlerClasses.add(ClassA.class);
         handlerClasses.add(ClassB.class);
         ZoneEventHandlerCenter center = new ZoneEventHandlerCenter();
         List<ZoneHandlerClass> handlers = center.addHandlers(
-                handlerClasses, ExampleUser.class, new ArrayList<Class<?>>());
+                handlerClasses, ExampleUser.class, new HashSet<Class<?>>());
         assertEquals(2, handlers.size());
         assertEquals(2, center.getHandlers().size());
     }

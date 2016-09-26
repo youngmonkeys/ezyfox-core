@@ -1,12 +1,9 @@
 package com.tvd12.ezyfox.core.content.impl;
 
-import java.util.List;
-
+import com.tvd12.ezyfox.core.annotation.parser.ContextConfigParser;
 import com.tvd12.ezyfox.core.config.ExtensionConfiguration;
-import com.tvd12.ezyfox.core.config.RoomExtensionConfiguration;
 import com.tvd12.ezyfox.core.serialize.ObjectDeserializer;
 import com.tvd12.ezyfox.core.serialize.ObjectSerializer;
-import com.tvd12.ezyfox.core.structure.RequestResponseClass;
 import com.tvd12.ezyfox.core.structure.ResponseParamsClass;
 
 /**
@@ -15,13 +12,23 @@ import com.tvd12.ezyfox.core.structure.ResponseParamsClass;
  *
  */
 public class BaseRoomContext extends BaseContext {
-    
+
+    protected Class<?> configClasss;
     protected BaseAppContext appContext;
-    private RoomExtensionConfiguration config;
     
-    public void init(Class<?> entryPoint, BaseAppContext appContext) {
+    public void init(BaseAppContext appContext, Class<?> entryPoint) {
         this.appContext = appContext;
-        this.config = appContext.getRoomExtensionConfig(entryPoint);
+        this.configClasss = getConfigClass(entryPoint);
+        this.extensionConfig = getExtensionConfig();
+        this.initRequestListenerCenter();
+    }
+    
+    protected ExtensionConfiguration getExtensionConfig() {
+        return (ExtensionConfiguration)appContext.getRoomExtensionConfig(configClasss);
+    }
+    
+    protected Class<?> getConfigClass(Class<?> entryPoint) {
+        return ContextConfigParser.getConfigurationClass(entryPoint);
     }
 
     /* (non-Javadoc)
@@ -72,13 +79,4 @@ public class BaseRoomContext extends BaseContext {
         return appContext.getResponseParamsClass(clazz);
     }
 
-    /* (non-Javadoc)
-     * @see com.tvd12.ezyfox.core.content.impl.BaseContext#clientRequestListeners(java.lang.String)
-     */
-    @Override
-    public List<RequestResponseClass> clientRequestListeners(String command) {
-        return ((ExtensionConfiguration)config).getRequestResponseClientClasses();
-    }
-    
-    
 }

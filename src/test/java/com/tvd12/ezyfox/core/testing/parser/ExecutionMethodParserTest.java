@@ -5,6 +5,7 @@ import static org.testng.Assert.assertNotNull;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 
 import org.testng.annotations.Test;
@@ -22,17 +23,17 @@ public class ExecutionMethodParserTest {
 	@Test
 	public void testValidCase() throws ExtensionException {
 		Method method1 = ExecutionMethodParser
-		        .getListenerExecuteMethod(BettingActionListener.class, ExampleUser.class, new ArrayList<Class<?>>());
+		        .getListenerExecuteMethod(BettingActionListener.class, ExampleUser.class, new HashSet<Class<?>>());
 		assertEquals("execute", method1.getName());
 		Method method2 = ExecutionMethodParser
-		        .getListenerExecuteMethod(ExampleListener.class, ExampleUser.class, new ArrayList<Class<?>>());
+		        .getListenerExecuteMethod(ExampleListener.class, ExampleUser.class, new HashSet<Class<?>>());
 		assertEquals("doSomeThing", method2.getName());
 	}
 	
 	@Test(expectedExceptions = {RuntimeException.class})
 	public void testInvalidCase() throws ExtensionException {
 		ExecutionMethodParser
-		.getListenerExecuteMethod(getClass(), ExampleUser.class, new ArrayList<Class<?>>());
+		.getListenerExecuteMethod(getClass(), ExampleUser.class, new HashSet<Class<?>>());
 	}
 	
 	@Test(expectedExceptions = {RuntimeException.class})

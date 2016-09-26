@@ -4,7 +4,7 @@ import static org.testng.Assert.assertEquals;
 
 import org.testng.annotations.Test;
 
-import com.tvd12.ezyfox.core.annotation.AppContextConfiguration;
+import com.tvd12.ezyfox.core.annotation.ContextConfiguration;
 import com.tvd12.ezyfox.core.annotation.AutoResponse;
 import com.tvd12.ezyfox.core.annotation.PackagesScan;
 import com.tvd12.ezyfox.core.annotation.RoomPackages;
@@ -46,7 +46,7 @@ public class ConfigurationLoadingTest extends BaseTest {
         
     }
 
-    @AppContextConfiguration(clazz = ClassE.class)
+    @ContextConfiguration(clazz = ClassE.class)
     public static class ClassD {
         
     }
@@ -55,7 +55,7 @@ public class ConfigurationLoadingTest extends BaseTest {
         
     }
     
-    @AppContextConfiguration(clazz = ClassC.class)
+    @ContextConfiguration(clazz = ClassC.class)
     public static class ClassB {
         
     }

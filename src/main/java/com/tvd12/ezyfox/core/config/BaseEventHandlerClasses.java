@@ -62,12 +62,10 @@ public abstract class BaseEventHandlerClasses {
 	protected abstract String getEventName(Class<?> clazz);
 	
 	public List<Class<?>> getHandlers(String event) {
-		List<Class<?>> result = handlers.get(event);
-		if(result == null) {
-			result = new ArrayList<>();
-			handlers.put(event, result);
-		}
-		return result;
+	    if (handlers.containsKey(event))
+            return handlers.get(event);
+        else
+            return new ArrayList<>();
 	}
 	
 	/**

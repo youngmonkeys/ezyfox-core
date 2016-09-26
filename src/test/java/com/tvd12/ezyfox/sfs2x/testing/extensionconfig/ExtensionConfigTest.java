@@ -8,18 +8,16 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.testng.AbstractTestNGSpringContextTests;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-import com.tvd12.ezyfox.core.annotation.AppContextConfiguration;
+import com.tvd12.ezyfox.core.annotation.ContextConfiguration;
 import com.tvd12.ezyfox.core.config.AppExtensionConfigurationImpl;
 import com.tvd12.ezyfox.core.config.loader.AppExtensionConfigurationLoader;
 import com.tvd12.ezyfox.core.structure.RequestResponseClass;
 
-@ContextConfiguration(classes = {TestAppConfig.class})
-@AppContextConfiguration(clazz = TestAppConfig.class)
+@ContextConfiguration(clazz = TestAppConfig.class)
 public class ExtensionConfigTest extends AbstractTestNGSpringContextTests {
 	
 	protected static final Logger LOGGER

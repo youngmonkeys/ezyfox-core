@@ -1,10 +1,12 @@
 package com.tvd12.ezyfox.core.testing.context;
 
+import com.tvd12.ezyfox.core.annotation.AppContextConfiguration;
 import com.tvd12.ezyfox.core.annotation.AutoResponse;
 import com.tvd12.ezyfox.core.annotation.PackagesScan;
 import com.tvd12.ezyfox.core.annotation.RoomPackages;
 import com.tvd12.ezyfox.core.constants.APIEvent;
 
+@AppContextConfiguration
 @PackagesScan(packages = {"com.tvd12.ezyfox.core.testing.context"})
 @RoomPackages(packages = {
         "com.tvd12.ezyfox.core.testing.v117.roomconfig1",

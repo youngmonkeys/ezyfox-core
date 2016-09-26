@@ -3,20 +3,23 @@
  */
 package com.tvd12.ezyfox.core.config.loader;
 
-import java.lang.annotation.Annotation;
 import java.util.Set;
 
 import com.tvd12.ezyfox.core.annotation.GameUser;
 import com.tvd12.ezyfox.core.annotation.RoomAgent;
-import com.tvd12.ezyfox.core.annotation.RoomContextConfiguration;
 import com.tvd12.ezyfox.core.config.ExtensionConfiguration;
 import com.tvd12.ezyfox.core.config.RoomExtensionConfigurationImpl;
+
+import lombok.Setter;
 
 /**
  * @author tavandung12
  *
  */
 public class RoomExtensionConfigurationLoader extends ConfigurationLoader {
+    
+    @Setter
+    private Class<?> configClass;
     
     /* (non-Javadoc)
      * @see com.tvd12.ezyfox.core.config.loader.ConfigurationLoader#load(java.lang.Class, java.lang.String[])
@@ -32,29 +35,20 @@ public class RoomExtensionConfigurationLoader extends ConfigurationLoader {
     }
     
     /* (non-Javadoc)
-     * @see com.tvd12.ezyfox.core.config.loader.BaseConfigurationLoader#getConfigAnnotation()
-     */
-    @SuppressWarnings("unchecked")
-    @Override
-    protected Class<RoomContextConfiguration> getConfigAnnotation() {
-        return RoomContextConfiguration.class;
-    }
-    
-    /* (non-Javadoc)
-     * @see com.tvd12.ezyfox.core.config.loader.BaseConfigurationLoader#getConfigClass(java.lang.annotation.Annotation)
-     */
-    @Override
-    protected <T extends Annotation> Class<?> getConfigClass(T annotation) {
-        return ((RoomContextConfiguration)annotation).clazz();
-    }
-    
-    /* (non-Javadoc)
      * @see com.tvd12.ezyfox.core.config.loader.BaseConfigurationLoader#newExtensionConfiguration()
      */
     @SuppressWarnings("unchecked")
     @Override
     protected RoomExtensionConfigurationImpl newExtensionConfiguration() {
         return new RoomExtensionConfigurationImpl();
+    }
+    
+    /* (non-Javadoc)
+     * @see com.tvd12.ezyfox.core.config.loader.BaseConfigurationLoader#getConfigurationClass()
+     */
+    @Override
+    protected Class<?> getConfigurationClass() {
+        return this.configClass;
     }
     
     /**

@@ -1,6 +1,5 @@
 package com.tvd12.ezyfox.core.config;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.HashMap;
@@ -208,7 +207,7 @@ public class AppExtensionConfigurationImpl
      */
     @Override
     protected void checkExecuteMethod(RequestResponseClass clazz) {
-        clazz.checkExecuteMethod(getUserClass(), new ArrayList<>(getGameUserClasses()));
+        clazz.checkExecuteMethod(getUserClass(), getGameUserClasses());
     }
     
     /**

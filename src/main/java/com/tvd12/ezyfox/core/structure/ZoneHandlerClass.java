@@ -1,6 +1,6 @@
 package com.tvd12.ezyfox.core.structure;
 
-import java.util.List;
+import java.util.Set;
 
 import com.tvd12.ezyfox.core.annotation.ZoneName;
 import com.tvd12.ezyfox.core.annotation.parser.HandleMethodParser;
@@ -28,7 +28,7 @@ public class ZoneHandlerClass extends ServerUserHandlerClass {
      * @param gameUserClasses the list of game user classes
      */
     public ZoneHandlerClass(Class<?> clazz, 
-            Class<?> userClazz, List<Class<?>> gameUserClasses) {
+            Class<?> userClazz, Set<Class<?>> gameUserClasses) {
         super(clazz);
         checkZoneName(clazz);
         checkHandleMethod(clazz, userClazz, gameUserClasses);
@@ -59,7 +59,7 @@ public class ZoneHandlerClass extends ServerUserHandlerClass {
      */
     @Override
     protected void checkHandleMethod(Class<?> clazz, 
-            Class<?> userClazz, List<Class<?>> gameUserClasses) {
+            Class<?> userClazz, Set<Class<?>> gameUserClasses) {
         handleMethod = HandleMethodParser
                 .getServerHandleMethod(clazz, ApiZone.class, userClazz, gameUserClasses);
     }

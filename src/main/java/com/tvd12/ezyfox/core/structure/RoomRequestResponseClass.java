@@ -4,7 +4,6 @@
 package com.tvd12.ezyfox.core.structure;
 
 import java.lang.reflect.Method;
-import java.util.List;
 import java.util.Set;
 
 import org.reflections.ReflectionUtils;
@@ -29,7 +28,7 @@ public class RoomRequestResponseClass extends RequestResponseClass {
      * @see com.tvd12.ezyfox.core.structure.RequestResponseClass#checkExecuteMethod(java.lang.Class, java.lang.Class, java.util.List)
      */
     @Override
-    public void checkExecuteMethod(Class<?> userClazz, List<Class<?>> gameUserClasses) {
+    public void checkExecuteMethod(Class<?> userClazz, Set<Class<?>> gameUserClasses) {
         executeMethod = getExecutionMethod(getClazz());
     }
     

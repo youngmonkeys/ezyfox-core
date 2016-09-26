@@ -79,7 +79,7 @@ public class BaseExtensionConfiguration {
      */
     public void checkAll() {
         unmodifyAll();
-        checkRequestRequestClasses();
+        checkRequestResponseClasses();
     }
     
     /**
@@ -97,7 +97,7 @@ public class BaseExtensionConfiguration {
     /**
      * Check all request listener classes
      */
-    protected void checkRequestRequestClasses() {
+    protected void checkRequestResponseClasses() {
         for(RequestResponseClass clazz : requestResponseClientClasses)
             checkExecuteMethod(clazz);
     }

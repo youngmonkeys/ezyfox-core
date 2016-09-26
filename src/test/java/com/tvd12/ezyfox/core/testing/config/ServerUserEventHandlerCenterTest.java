@@ -3,10 +3,11 @@ package com.tvd12.ezyfox.core.testing.config;
 import static org.testng.Assert.assertEquals;
 
 import java.util.List;
+import java.util.Set;
 
 import org.testng.annotations.Test;
 
-import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.tvd12.ezyfox.core.annotation.ServerEventHandler;
 import com.tvd12.ezyfox.core.config.ServerUserEventHandlerCenter;
 import com.tvd12.ezyfox.core.content.AppContext;
@@ -21,9 +22,9 @@ public class ServerUserEventHandlerCenterTest {
         ServerUserEventHandlerCenter center = new ServerUserEventHandlerCenter();
         List<ServerUserHandlerClass> classes = 
                 center.addHandlers(
-                        (List)Lists.newArrayList(ClassA.class, ClassB.class),
+                        (Set)Sets.newHashSet(ClassA.class, ClassB.class),
                         ExUser.class,
-                        (List)Lists.newArrayList());
+                        (Set)Sets.newHashSet());
         assertEquals(classes.size(), 2);
         assertEquals(center.getHandlers().size(), 2);
     }

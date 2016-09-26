@@ -6,7 +6,7 @@ package com.tvd12.ezyfox.core.content.impl;
 import java.lang.reflect.Constructor;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -20,14 +20,11 @@ import com.tvd12.ezyfox.core.command.impl.AddObjectDeserializerImpl;
 import com.tvd12.ezyfox.core.command.impl.AddObjectSerializerImpl;
 import com.tvd12.ezyfox.core.config.AppExtensionConfiguration;
 import com.tvd12.ezyfox.core.config.CommandProvider;
-import com.tvd12.ezyfox.core.config.ExtensionConfiguration;
 import com.tvd12.ezyfox.core.config.ObjectDeserializerMapper;
 import com.tvd12.ezyfox.core.config.ObjectSerializerMapper;
-import com.tvd12.ezyfox.core.config.RequestListenerCenter;
 import com.tvd12.ezyfox.core.config.RoomExtensionConfiguration;
 import com.tvd12.ezyfox.core.config.ServerEventHandlerClasses;
 import com.tvd12.ezyfox.core.config.loader.AppExtensionConfigurationLoader;
-import com.tvd12.ezyfox.core.config.loader.BaseConfigurationLoader;
 import com.tvd12.ezyfox.core.content.AppContext;
 import com.tvd12.ezyfox.core.exception.ExtensionException;
 import com.tvd12.ezyfox.core.reflect.ReflectClassUtil;
@@ -35,7 +32,6 @@ import com.tvd12.ezyfox.core.serialize.ObjectDeserializer;
 import com.tvd12.ezyfox.core.serialize.ObjectSerializer;
 import com.tvd12.ezyfox.core.structure.AgentClass;
 import com.tvd12.ezyfox.core.structure.MessageParamsClass;
-import com.tvd12.ezyfox.core.structure.RequestResponseClass;
 import com.tvd12.ezyfox.core.structure.ResponseParamsClass;
 import com.tvd12.ezyfox.core.structure.UserAgentClass;
 
@@ -44,12 +40,6 @@ import com.tvd12.ezyfox.core.structure.UserAgentClass;
  *
  */
 public abstract class BaseAppContext extends BaseContext {
-    
-    // extension configuration object
-    protected ExtensionConfiguration extensionConfig;
-    
-    // holds all request listeners's structure
-    protected RequestListenerCenter requestListenerCenter;
     
     // holds all structures of server event handler classes
     protected ServerEventHandlerClasses serverEventHandlerClasses;
@@ -283,39 +273,23 @@ public abstract class BaseAppContext extends BaseContext {
         return appExtensionConfig().getMessageParamsClass(clazz);
     }
     
-    /*
-     * (non-Javadoc)
-     * @see com.tvd12.ezyfox.core.content.impl.BaseContext#clientRequestListeners(java.lang.String)
-     */
-    @Override
-    public List<RequestResponseClass> clientRequestListeners(String command) {
-        return requestListenerCenter.getListeners(command);
-    }
-    
     /**
      * Get list of server event handler classes related to the event
      * 
      * @param event the event
      * @return list of server event handler classes
      */
-    public List<Class<?>> serverEventHandlerClasses(String event) {
-        return serverEventHandlerClasses.getHandlers(event);
+    public Set<Class<?>> getServerEventHandlerClasses(String event) {
+        return new HashSet<>(serverEventHandlerClasses.getHandlers(event));
     }
 
-    /**
-     * @return set of client request commands
-     */
-    public Set<String> clientRequestCommands() {
-        return requestListenerCenter.getCommands();
-    }
-    
     /**
      * Initialize extension configuration
      * 
      * @param entryPoint application's entry point class
      */
     protected void initExtensionConfig(Class<?> entryPoint) {
-        BaseConfigurationLoader loader = 
+        AppExtensionConfigurationLoader loader = 
                 newExtensionConfigurationLoader();
         loader.setEntryPoint(entryPoint);
         extensionConfig = loader.load();
@@ -324,18 +298,8 @@ public abstract class BaseAppContext extends BaseContext {
     /**
      * @return the extension configuration loader
      */
-    protected BaseConfigurationLoader newExtensionConfigurationLoader() {
+    protected AppExtensionConfigurationLoader newExtensionConfigurationLoader() {
         return new AppExtensionConfigurationLoader();
-    }
-    
-    /**
-     * Get all request listener classes and read their structure
-     */
-    protected void initRequestListenerCenter() {
-        requestListenerCenter
-            = new RequestListenerCenter();
-        requestListenerCenter.addListeners(extensionConfig
-                .getRequestResponseClientClasses());
     }
     
     /**

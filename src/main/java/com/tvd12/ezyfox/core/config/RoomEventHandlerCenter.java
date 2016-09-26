@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 import com.tvd12.ezyfox.core.structure.RoomHandlerClass;
 
@@ -41,9 +42,9 @@ public class RoomEventHandlerCenter {
      * @param gameUserClasses game user agent's classes in all handler's classes
      * @return structures list after add elements
      */
-    public List<RoomHandlerClass> addHandlers(List<Class<?>> handlerClasses, 
-            List<Class<?>> roomClasses, 
-            Class<?> userClass, List<Class<?>> gameUserClasses) {
+    public List<RoomHandlerClass> addHandlers(Set<Class<?>> handlerClasses, 
+            Set<Class<?>> roomClasses, 
+            Class<?> userClass, Set<Class<?>> gameUserClasses) {
         for(Class<?> clazz : handlerClasses) {
             RoomHandlerClass handler = new RoomHandlerClass(
                     clazz, roomClasses, userClass, gameUserClasses);

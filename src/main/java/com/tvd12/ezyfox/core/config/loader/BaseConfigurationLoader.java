@@ -1,6 +1,5 @@
 package com.tvd12.ezyfox.core.config.loader;
 
-import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
@@ -11,14 +10,10 @@ import org.springframework.core.annotation.AnnotationUtils;
 
 import com.tvd12.ezyfox.core.annotation.AdditionalClientRequestListeners;
 import com.tvd12.ezyfox.core.annotation.AdditionalServerEventHandlers;
-import com.tvd12.ezyfox.core.annotation.AppContextConfiguration;
 import com.tvd12.ezyfox.core.annotation.PackagesScan;
 import com.tvd12.ezyfox.core.config.BaseExtensionConfiguration;
 import com.tvd12.ezyfox.core.config.ExtensionConfiguration;
 import com.tvd12.ezyfox.core.reflect.ReflectClassUtil;
-
-import lombok.Getter;
-import lombok.Setter;
 
 /**
  * 
@@ -27,12 +22,7 @@ import lombok.Setter;
  * @author tavandung12
  *
  */
-@Getter
 public abstract class BaseConfigurationLoader {
-    
-    // the entry point class
-    @Setter
-    private Class<?> entryPoint; 
     
 	/**
 	 * Load configuration from entry point class of application
@@ -145,42 +135,22 @@ public abstract class BaseConfigurationLoader {
 	 * @return configuration class from application's entry point class
 	 * 
 	 */
-	protected Class<?> getConfigurationClass() {
-		Annotation appConfig = AnnotationUtils
-				.findAnnotation(getEntryPoint(), getConfigAnnotation());
-		if(appConfig == null)
-			throw new IllegalStateException(
-			        createMessage(AppContextConfiguration.class, getEntryPoint()));
-		return getConfigClass(appConfig);
-	}
+	protected abstract Class<?> getConfigurationClass();
 	
 	/**
-	 * @param <T> annotation type
-	 * @return the configuration annotation
-	 */
-	protected abstract <T extends Annotation> Class<T> getConfigAnnotation();
-	
-	/**
-	 * @param <T> annotation type
-	 * @param annotation the configuration annotation
-	 * @return the configuration class
-	 */
-	protected abstract <T extends Annotation> Class<?> getConfigClass(T annotation);
-	
-	/**
-	 * Create an exception message
-	 * 
-	 * @param annotation annotation
-	 * @param entryPoint application's entry point class
-	 * @return message
-	 */
-	protected String createMessage(Class<?> annotation, Class<?> entryPoint) {
-	    return new StringBuilder()
-	            .append("You must specific ")
-	            .append(annotation.getName())
-	            .append(" in class ")
-	            .append(entryPoint.getName())
-	            .toString();
-	}
+     * Create an exception message
+     * 
+     * @param annotation annotation
+     * @param entryPoint application's entry point class
+     * @return message
+     */
+    protected String createMessage(Class<?> annotation, Class<?> entryPoint) {
+        return new StringBuilder()
+                .append("You must specific ")
+                .append(annotation.getName())
+                .append(" in class ")
+                .append(entryPoint.getName())
+                .toString();
+    }
 	
 }
