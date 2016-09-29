@@ -11,8 +11,8 @@ import java.util.Properties;
 import org.testng.annotations.Test;
 
 import com.tvd12.ezyfox.core.annotation.ConfigProperty;
-import com.tvd12.ezyfox.core.annotation.parser.ConfigPropertyParser;
 import com.tvd12.ezyfox.core.exception.ExtensionException;
+import com.tvd12.ezyfox.core.serialize.impl.ConfigPropertyDeserializer;
 import com.tvd12.ezyfox.core.structure.PropertiesClassWrapper;
 import com.tvd12.ezyfox.core.structure.SetterMethodCover;
 import com.tvd12.test.base.BaseTest;
@@ -31,31 +31,58 @@ public class ConfigPropertiesParserTest extends BaseTest {
 	@ConfigProperty
 	public String greet;
 	
+	public String howAreYouAnwser;
+	
+	private String str1;
+	
+	private String str2;
+	
 	public ConfigPropertiesParserTest() {
 	    pro.setProperty("greet", "hello");
         pro.setProperty("abc", "halo");
+        pro.setProperty("howAreYouAnwser", "I'm find, thanks!");
+        pro.setProperty("str1", "String 1");
+        pro.setProperty("2", "String 2");
 	}
+	
+	@ConfigProperty
+	public void setHowAreYouAnwser(String answer) {
+	    this.howAreYouAnwser = answer;
+	}
+	
+	@ConfigProperty("")
+    public void setStr1(String str1) {
+        this.str1 = str1;
+    }
+	
+	@ConfigProperty("2")
+    public void setStr2(String str2) {
+        this.str2 = str2;
+    }
 	
 	@Test
 	public void testValidCase() throws ExtensionException {
 		ConfigPropertiesParserTest config = new ConfigPropertiesParserTest();
 		PropertiesClassWrapper wrapper = new PropertiesClassWrapper(config.getClass());
-		ConfigPropertyParser.assignValue(wrapper, config, pro);
-		assertEquals("hello", config.getGreet());
+		new ConfigPropertyDeserializer().deserialize(wrapper, config, pro);
+		assertEquals(config.getGreet(), "hello");
+		assertEquals(config.getHowAreYouAnwser(), "I'm find, thanks!");
+		assertEquals(config.getStr1(), "String 1");
+		assertEquals(config.getStr2(), "String 2");
 	}
 	
 	@Test(expectedExceptions = {IllegalStateException.class})
 	public void callSetterMethodWithNoSetterMethodTest() throws ExtensionException {
 	    ClassA config = new ClassA();
 	    PropertiesClassWrapper wrapper = new PropertiesClassWrapper(config.getClass());
-        ConfigPropertyParser.assignValue(wrapper, config, pro);
+        new ConfigPropertyDeserializer().deserialize(wrapper, config, pro);
 	}
 	
 	@Test
     public void getPropertyWithKeyTest() throws ExtensionException {
         ClassB config = new ClassB();
         PropertiesClassWrapper wrapper = new PropertiesClassWrapper(config.getClass());
-        ConfigPropertyParser.assignValue(wrapper, config, pro);
+        new ConfigPropertyDeserializer().deserialize(wrapper, config, pro);
         assertEquals("halo", config.getHello());
     }
 	
@@ -74,7 +101,7 @@ public class ConfigPropertiesParserTest extends BaseTest {
 	    properties.setProperty("value9", "hell");
 	    properties.put("value10", object);
 	    PropertiesClassWrapper wrapper = new PropertiesClassWrapper(ClassC.class);
-	    ClassC classC = (ClassC) ConfigPropertyParser.assignValue(wrapper, properties);
+	    ClassC classC = (ClassC) new ConfigPropertyDeserializer().deserialize(wrapper, properties);
 	    assertEquals(true, classC.isValue1());
 	    assertEquals(1, classC.getValue2());
 	    assertEquals('a', classC.getValue3());
@@ -103,7 +130,7 @@ public class ConfigPropertiesParserTest extends BaseTest {
         properties.put("value10", object);
         ClassC classC = new ClassC();
         PropertiesClassWrapper wrapper = new PropertiesClassWrapper(ClassC.class);
-        ConfigPropertyParser.assignValue(wrapper, classC, properties);
+        new ConfigPropertyDeserializer().deserialize(wrapper, classC, properties);
         assertEquals(true, classC.isValue1());
         assertEquals(1, classC.getValue2());
         assertEquals('a', classC.getValue3());
@@ -119,76 +146,78 @@ public class ConfigPropertiesParserTest extends BaseTest {
 	@Test
 	public void getValueTest() {
 	    SetterMethodCover setter = null; 
+	    ConfigPropertyDeserializer ds = 
+	            new ConfigPropertyDeserializer();
 	    Method method = MethodBuilder.create()
 	            .method("getValue")
 	            .argument(SetterMethodCover.class)
 	            .argument(Object.class)
-	            .clazz(ConfigPropertyParser.class)
+	            .clazz(ConfigPropertyDeserializer.class)
 	            .build();
 	    setter = mock(SetterMethodCover.class);
         when(setter.isBoolean()).thenReturn(true);
 	    Boolean boolValue = (Boolean) ReflectMethodUtil
-	            .invokeStaticMethod(method, setter, new Boolean(true));
+	            .invokeMethod(method, ds, setter, new Boolean(true));
 	    assertEquals(Boolean.TRUE, boolValue);
 	    
 	    setter = mock(SetterMethodCover.class);
         when(setter.isByte()).thenReturn(true);
         Byte byteValue = (Byte) ReflectMethodUtil
-                .invokeStaticMethod(method, setter, new Byte((byte)1));
+                .invokeMethod(method, ds, setter, new Byte((byte)1));
         assertEquals(new Byte((byte)1), byteValue);
         
         setter = mock(SetterMethodCover.class);
         when(setter.isChar()).thenReturn(true);
         Character charValue = (Character) ReflectMethodUtil
-                .invokeStaticMethod(method, setter, new Character((char)1));
+                .invokeMethod(method, ds, setter, new Character((char)1));
         assertEquals(new Character((char)1), charValue);
         
         setter = mock(SetterMethodCover.class);
         when(setter.isDouble()).thenReturn(true);
         Double doubleValue = (Double) ReflectMethodUtil
-                .invokeStaticMethod(method, setter, new Double(1));
+                .invokeMethod(method, ds, setter, new Double(1));
         assertEquals(new Double(1), doubleValue);
         
         setter = mock(SetterMethodCover.class);
         when(setter.isFloat()).thenReturn(true);
         Float floatValue = (Float) ReflectMethodUtil
-                .invokeStaticMethod(method, setter, new Float(1));
+                .invokeMethod(method, ds, setter, new Float(1));
         assertEquals(new Float(1), floatValue);
         
         setter = mock(SetterMethodCover.class);
         when(setter.isInt()).thenReturn(true);
         Integer intValue = (Integer) ReflectMethodUtil
-                .invokeStaticMethod(method, setter, new Integer(1));
+                .invokeMethod(method, ds, setter, new Integer(1));
         assertEquals(new Integer(1), intValue);
         
         setter = mock(SetterMethodCover.class);
         when(setter.isLong()).thenReturn(true);
         Long longValue = (Long) ReflectMethodUtil
-                .invokeStaticMethod(method, setter, new Long(1));
+                .invokeMethod(method, ds, setter, new Long(1));
         assertEquals(new Long(1), longValue);
         
         setter = mock(SetterMethodCover.class);
         when(setter.isShort()).thenReturn(true);
         Short shortValue = (Short) ReflectMethodUtil
-                .invokeStaticMethod(method, setter, new Short((short) 1));
+                .invokeMethod(method, ds, setter, new Short((short) 1));
         assertEquals(new Short((short) 1), shortValue);
         
         setter = mock(SetterMethodCover.class);
         when(setter.isString()).thenReturn(true);
         String stringValue = (String) ReflectMethodUtil
-                .invokeStaticMethod(method, setter, new String("hello"));
+                .invokeMethod(method, ds, setter, new String("hello"));
         assertEquals("hello", stringValue);
         
         Object object = new Object();
         setter = mock(SetterMethodCover.class);
         Object objectValue = ReflectMethodUtil
-                .invokeStaticMethod(method, setter, object);
+                .invokeMethod(method, ds, setter, object);
         assertEquals(object, objectValue);
 	}
 	
 	@Test
 	public void constructorTest() {
-	    Object object = ReflectMethodUtil.invokeConstructor(ConfigPropertyParser.class);
+	    Object object = ReflectMethodUtil.invokeConstructor(ConfigPropertyDeserializer.class);
 	    assertNotNull(object);
 	}
 	

@@ -1,4 +1,4 @@
-package com.tvd12.ezyfox.core.annotation.parser;
+package com.tvd12.ezyfox.core.serialize.impl;
 
 import static com.tvd12.ezyfox.core.reflect.ReflectConvertUtil.stringToChar;
 
@@ -13,11 +13,8 @@ import com.tvd12.ezyfox.core.structure.SetterMethodCover;
  * @author tavandung12
  *
  */
-public final class ConfigPropertyParser {
+public final class ConfigPropertyDeserializer {
 
-    // prevent new instance
-	private ConfigPropertyParser() {}
-	
 	/**
 	 * map properties object to a object
 	 * 
@@ -25,7 +22,7 @@ public final class ConfigPropertyParser {
 	 * @param properties properties object
 	 * @return an object
 	 */
-	public static Object assignValue(ClassWrapper wrapper, Properties properties) {
+	public Object deserialize(ClassWrapper wrapper, Properties properties) {
 	    Object object = wrapper.newInstance();
         for(SetterMethodCover method : wrapper.getMethods()) {
             Object value = properties.get(method.getKey());
@@ -41,7 +38,7 @@ public final class ConfigPropertyParser {
 	 * @param object object to map
 	 * @param properties properties object
 	 */
-	public static void assignValue(ClassWrapper wrapper, Object object, Properties properties) {
+	public void deserialize(ClassWrapper wrapper, Object object, Properties properties) {
 	    for(SetterMethodCover method : wrapper.getMethods()) {
 	        Object value = properties.get(method.getKey());
 	        method.invoke(object, getValue(method, value));
@@ -55,7 +52,7 @@ public final class ConfigPropertyParser {
 	 * @param value value to transform
 	 * @return value after transform
 	 */
-	protected static Object getValue(SetterMethodCover method, Object value) {
+	protected Object getValue(SetterMethodCover method, Object value) {
 	    if(method.isBoolean())
             value = Boolean.valueOf(value.toString());
         else if(method.isByte())

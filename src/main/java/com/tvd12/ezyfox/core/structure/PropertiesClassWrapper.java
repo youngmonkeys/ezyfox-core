@@ -1,6 +1,7 @@
 package com.tvd12.ezyfox.core.structure;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 import com.tvd12.ezyfox.core.annotation.ConfigProperty;
 
@@ -32,6 +33,14 @@ public class PropertiesClassWrapper extends ClassWrapper {
     @Override
     protected SetterMethodCover initWithField(Field field) {
         return new PropertySetterMethod(clazz, field);
+    }
+    
+    /* (non-Javadoc)
+     * @see com.tvd12.ezyfox.core.structure.ClassWrapper#initWithMethod(java.lang.reflect.Method)
+     */
+    @Override
+    protected SetterMethodCover initWithMethod(Method method) {
+        return new PropertySetterMethod(clazz, method);
     }
     
     /*

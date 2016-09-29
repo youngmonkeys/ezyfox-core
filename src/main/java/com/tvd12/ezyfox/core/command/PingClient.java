@@ -20,22 +20,6 @@ public interface PingClient {
     PingClient delay(long time);
 
     /**
-     * set schedule on time or not
-     * 
-     * @param value true or false
-     * @return this pointer
-     */
-    PingClient oneTime(boolean value);
-    
-    /**
-     * set period 
-     * 
-     * @param value period
-     * @return this pointer
-     */
-    PingClient period(long value);
-    
-    /**
      * set task
      * 
      * @param value a task
