@@ -59,7 +59,7 @@ public abstract class ApiModel implements ApiProperties {
      * removes the mapping for a key from the map
      * @see java.util.Map#remove(Object)
      * 
-     * @param key
+     * @param key the key
      */
     @Override
     public void removeProperty(Object key) {

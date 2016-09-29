@@ -17,21 +17,24 @@ import com.tvd12.ezyfox.core.annotation.RequestParam;
 public class RequestParamMethod extends SetterMethodCover {
 	
     /**
-     * @see SetterMethodCover#SetterMethodCover(Class, Field)
+     * @param clazz the parameter type
+     * @param field the java field
      */
 	public RequestParamMethod(Class<?> clazz, Field field) {
 		super(clazz, field);
 	}
 	
 	/**
-	 * @see SetterMethodCover#SetterMethodCover(Class, Method)
+	 * @param clazz the parameter type
+	 * @param method the java method
 	 */
 	public RequestParamMethod(Class<?> clazz, Method method) {
 		super(clazz, method);
 	}
 
-	/**
-	 * @see SetterMethodCover#getKey(Method)
+	/*
+	 * (non-Javadoc)
+	 * @see com.tvd12.ezyfox.core.structure.MethodCover#getKey(java.lang.reflect.Method)
 	 */
 	@Override
 	protected String getKey(Method method) {
@@ -40,8 +43,9 @@ public class RequestParamMethod extends SetterMethodCover {
 		return value.length() > 0 ? value : super.getKey(method);
 	}
 
-	/**
-	 * @see SetterMethodCover#getKey(Field)
+	/*
+	 * (non-Javadoc)
+	 * @see com.tvd12.ezyfox.core.structure.MethodCover#getKey(java.lang.reflect.Field)
 	 */
 	@Override
 	protected String getKey(Field field) {

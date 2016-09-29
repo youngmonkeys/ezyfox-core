@@ -6,10 +6,11 @@ package com.tvd12.ezyfox.core.testing.config;
 import static org.testng.Assert.assertEquals;
 
 import java.util.List;
+import java.util.Set;
 
 import org.testng.annotations.Test;
 
-import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.tvd12.ezyfox.core.annotation.ServerEventHandler;
 import com.tvd12.ezyfox.core.config.UserLoginEventHandlerCenter;
 import com.tvd12.ezyfox.core.constants.ServerEvent;
@@ -29,7 +30,7 @@ public class UserLoginEventHandlerCenterTest extends BaseTest {
         UserLoginEventHandlerCenter center = new UserLoginEventHandlerCenter();
         List<UserLoginHandlerClass> classes = 
                 center.addHandlers(
-                        (List)Lists.newArrayList(ClassA.class, ClassB.class),
+                        (Set)Sets.newHashSet(ClassA.class, ClassB.class),
                         String.class,
                         String.class);
         assertEquals(classes.size(), 2);

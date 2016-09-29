@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
+import java.util.Set;
 
 import com.tvd12.ezyfox.core.structure.ServerHandlerClass;
 
@@ -19,6 +20,7 @@ public class ServerEventHandlerCenter {
     /**
      * Create new handler instance
      * 
+     * @param <T> the handler type
      * @param clazz handler class
      * @param paramTypes parameter types of handle method
      * @return a handler instance
@@ -32,6 +34,7 @@ public class ServerEventHandlerCenter {
     /**
      * Add a structure of server event handler's class to list of structures and re-sort the list
      * 
+     * @param <T> the handler type
      * @param handlers list of handler
      * @param handler handler
      */
@@ -43,11 +46,13 @@ public class ServerEventHandlerCenter {
     /**
      * Read all server event handler's classes and create their structures and add to structures list
      *
+     * @param <T> the handler type
      * @param classes room event handler's classes
      * @param paramTypes array of parameter types of handle method in handler's class
+     * @return the handler object
      */
     @SuppressWarnings("unchecked")
-    public <T extends ServerHandlerClass> List<T> addHandlers(List<Class<?>> classes,
+    public <T extends ServerHandlerClass> List<T> addHandlers(Set<Class<?>> classes,
             Class<?>... paramTypes) {
         List<T> handlers = new ArrayList<>();
         for(Class<?> clazz : classes) {

@@ -447,6 +447,7 @@ public final class ReflectConvertUtil {
     /**
     * Convert object array to object collection
     * 
+    * @param <T> the object type
     * @param value object array
     * @return object collection
     */
@@ -458,6 +459,7 @@ public final class ReflectConvertUtil {
     /**
      * Convert object array to object collection
      * 
+     * @param <T> the object type
      * @param value object represent to array
      * @return object collection
      */

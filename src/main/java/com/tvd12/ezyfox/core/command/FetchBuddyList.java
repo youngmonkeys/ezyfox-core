@@ -17,7 +17,7 @@ public interface FetchBuddyList extends BaseCommand {
      * the user
      * 
      * @param user the user
-     * @return
+     * @return this pointer
      */
     FetchBuddyList user(ApiBaseUser user);
     
@@ -25,7 +25,7 @@ public interface FetchBuddyList extends BaseCommand {
      * the user
      * 
      * @param username user name
-     * @return
+     * @return this pointer
      */
     FetchBuddyList user(String username);
     

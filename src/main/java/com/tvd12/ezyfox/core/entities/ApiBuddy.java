@@ -70,6 +70,7 @@ public interface ApiBuddy extends ApiProperties {
     /**
      * Get buddy's owner
      * 
+     * @param <T> the user type
      * @return buddy's owner
      */
     public <T extends ApiUser> T getOwner();

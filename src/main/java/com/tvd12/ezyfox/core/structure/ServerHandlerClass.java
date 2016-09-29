@@ -99,7 +99,9 @@ public class ServerHandlerClass {
     }
     
     /**
-     * init and check properties class structure 
+     * init and check properties class structure
+     *  
+     * @param clazz the class to parse
      */
     protected void checkPropertiesClass(Class<?> clazz) {
         propertiesClassWrapper = new PropertiesClassWrapper(clazz);

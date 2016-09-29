@@ -14,7 +14,7 @@ import com.tvd12.ezyfox.core.serialize.ObjectSerializer;
 public class AddObjectSerializerImpl extends FixedCommand implements AddObjectSerializer {
 
     /**
-     * @param context
+     * @param context the application context
      */
     public AddObjectSerializerImpl(BaseAppContext context) {
         super(context);

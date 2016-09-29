@@ -26,7 +26,7 @@ public interface LeaveRoom extends BaseCommand {
      * Name of user to leave room
      * 
      * @param username name of user to leave room
-     * @return
+     * @return this pointer
      */
     LeaveRoom user(String username);
     

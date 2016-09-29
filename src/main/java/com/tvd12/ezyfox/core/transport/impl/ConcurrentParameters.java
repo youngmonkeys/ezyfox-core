@@ -96,6 +96,10 @@ public class ConcurrentParameters implements Parameters {
 
     /**
      * @see ConcurrentHashMap#putIfAbsent(Object, Object) 
+     * 
+     * @param key the key
+     * @param value the value
+     * @return the replaced value
      */
     public Object setIfAbsent(Object key, Object value) {
         return values.putIfAbsent(key, value);

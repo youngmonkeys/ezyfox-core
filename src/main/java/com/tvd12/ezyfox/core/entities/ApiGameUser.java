@@ -44,6 +44,7 @@ public abstract class ApiGameUser extends ApiBaseUser {
     /**
      * Get user agent parent
      * 
+     * @param <T> the user type
      * @return the user agent parent
      */
     @SuppressWarnings("unchecked")

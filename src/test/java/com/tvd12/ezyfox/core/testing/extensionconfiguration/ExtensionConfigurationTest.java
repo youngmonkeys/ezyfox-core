@@ -4,25 +4,22 @@ import static org.testng.Assert.assertEquals;
 
 import org.testng.annotations.Test;
 
-import com.tvd12.ezyfox.core.config.ExtensionConfiguration;
+import com.tvd12.ezyfox.core.config.AppExtensionConfigurationImpl;
+import com.tvd12.ezyfox.core.config.loader.AppExtensionConfigurationLoader;
 import com.tvd12.test.reflect.MethodInvoker;
 
 public class ExtensionConfigurationTest {
 
     @Test
     public void testValidCase() {
-        ExtensionConfiguration config = new ExtensionConfiguration();
-        config.load(ExampleSFSZoneExtensionTest.class);
+        AppExtensionConfigurationLoader loader = new AppExtensionConfigurationLoader();
+        loader.setEntryPoint(ExampleSFSZoneExtensionTest.class);
+        AppExtensionConfigurationImpl config = loader.load();
         
-        assertEquals(ExampleRoom.class, config.getRoomClasses().get(0));
         assertEquals(ExampleUser.class, config.getUserClass());
-        assertEquals(ExampleRoom.class, config.getRoomAgentClasses()
-                .get(ExampleRoom.class).getWrapper().getClazz());
         assertEquals(ExampleUser.class, config.getUserAgentClass().getWrapper().getClazz());
         assertEquals(config.getRequestResponseClientClasses().size(), 3);
         assertEquals(config.getServerEventHandlerClasses().size(), 3);
-        assertEquals(ExampleRoom.class, config.getRoomAgentClasses()
-                .get(ExampleRoom.class).getUnwrapper().getClazz());
         assertEquals(config.getGameUserClasses().size(), 2);
         assertEquals(config.getGameUserAgentClasses().size(), 2);
         assertEquals(config.getResponseParamsClasses().size(), 1);
@@ -35,13 +32,14 @@ public class ExtensionConfigurationTest {
     
     @Test(expectedExceptions = {RuntimeException.class})
     public void testInvalidCase() {
-        ExtensionConfiguration config = new ExtensionConfiguration();
-        config.load(ExampleSFSZoneExtensionTest2.class);
+        AppExtensionConfigurationLoader loader = new AppExtensionConfigurationLoader();
+        loader.setEntryPoint(ExampleSFSZoneExtensionTest2.class);
+        loader.load();
     }
     
     @Test(expectedExceptions = {IllegalStateException.class})
     public void checkUserAgentClassTest() {
-        ExtensionConfiguration config = new ExtensionConfiguration() {
+        AppExtensionConfigurationImpl config = new AppExtensionConfigurationImpl() {
             @Override
             public Class<?> getUserClass() {
                 return ClassA.class;
@@ -55,7 +53,7 @@ public class ExtensionConfigurationTest {
     
     @Test(expectedExceptions = {IllegalStateException.class})
     public void testCheckRoomClassInvalidCase() {
-        ExtensionConfiguration config = new ExtensionConfiguration();
+        AppExtensionConfigurationImpl config = new AppExtensionConfigurationImpl();
         MethodInvoker.create()
             .object(config)
             .method("checkRoomClass")
@@ -65,7 +63,7 @@ public class ExtensionConfigurationTest {
     
     @Test(expectedExceptions = {IllegalStateException.class})
     public void testCheckGameUserClassInvalidCase() {
-        ExtensionConfiguration config = new ExtensionConfiguration();
+        AppExtensionConfigurationImpl config = new AppExtensionConfigurationImpl();
         MethodInvoker.create()
             .object(config)
             .method("checkGameUserClass")

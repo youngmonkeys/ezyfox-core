@@ -26,7 +26,7 @@ public interface JoinRoom extends BaseCommand {
      * Set user's name to join room
      * 
      * @param username user's name to join room
-     * @return
+     * @return this pointer
      */
     JoinRoom user(String username);
     

@@ -68,6 +68,7 @@ public interface ResponseToRoom extends BaseCommand {
      * Only response array of parameters to client
      * 
      * @param params array of parameters name
+     * @return this pointer
      */
     ResponseToRoom only(String... params);
     
@@ -75,6 +76,7 @@ public interface ResponseToRoom extends BaseCommand {
      * Does not send the array of parameters to client
      * 
      * @param params array of parameters name
+     * @return this pointer
      */
     ResponseToRoom ignore(String... params);
     

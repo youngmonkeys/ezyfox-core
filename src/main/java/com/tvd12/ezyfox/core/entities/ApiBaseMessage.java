@@ -28,6 +28,7 @@ public interface ApiBaseMessage {
     /**
      * message's sender
      * 
+     * @param <T> the user type
      * @return message's sender
      */
     public <T extends ApiBaseUser> T sender();

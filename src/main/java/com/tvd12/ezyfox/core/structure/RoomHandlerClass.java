@@ -1,6 +1,6 @@
 package com.tvd12.ezyfox.core.structure;
 
-import java.util.List;
+import java.util.Set;
 
 import com.tvd12.ezyfox.core.annotation.RoomName;
 import com.tvd12.ezyfox.core.annotation.parser.HandleMethodParser;
@@ -35,8 +35,8 @@ public class RoomHandlerClass extends ServerUserHandlerClass {
      * @param gameUserClasses list of game user agent's classes
      */
     public RoomHandlerClass(Class<?> clazz, 
-            List<Class<?>> roomClasses, 
-            Class<?> userClass, List<Class<?>> gameUserClasses) {
+            Set<Class<?>> roomClasses, 
+            Class<?> userClass, Set<Class<?>> gameUserClasses) {
         super(clazz);
         checkRoomName(clazz);
         checkHandleMethod(clazz, roomClasses, userClass, gameUserClasses);
@@ -55,8 +55,8 @@ public class RoomHandlerClass extends ServerUserHandlerClass {
      * @param gameUserClasses game user agent's classes
      */
     private void checkHandleMethod(Class<?> clazz, 
-            List<Class<?>> roomClasses, 
-            Class<?> userClass, List<Class<?>> gameUserClasses) {
+            Set<Class<?>> roomClasses, 
+            Class<?> userClass, Set<Class<?>> gameUserClasses) {
         handleMethod = HandleMethodParser.getServerHandleMethod(
                 clazz, roomClasses, userClass, gameUserClasses);
     }

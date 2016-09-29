@@ -15,7 +15,7 @@ public interface Log {
      * @param obj object to log
      * @return this pointer
      */
-	<T extends Log> T from(Object obj);
+    Log from(Object obj);
 	
 	/**
 	 * Log with info level

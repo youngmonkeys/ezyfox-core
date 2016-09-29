@@ -70,6 +70,7 @@ public interface Parameters {
      * or null if contains no mapping for the key and cast 
      * the value to specific type.
      * 
+     * @param <T> the type
      * @param key key
      * @param clazz type of value
      * @return a value

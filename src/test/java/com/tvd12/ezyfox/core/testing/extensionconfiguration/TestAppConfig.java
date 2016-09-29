@@ -3,6 +3,7 @@ package com.tvd12.ezyfox.core.testing.extensionconfiguration;
 import com.tvd12.ezyfox.core.annotation.AdditionalClientRequestListeners;
 import com.tvd12.ezyfox.core.annotation.AdditionalServerEventHandlers;
 import com.tvd12.ezyfox.core.annotation.PackagesScan;
+import com.tvd12.ezyfox.core.annotation.RoomPackages;
 
 @PackagesScan(packages = {"com.tvd12.ezyfox.core.testing.extensionconfiguration"})
 @AdditionalClientRequestListeners(
@@ -11,8 +12,7 @@ import com.tvd12.ezyfox.core.annotation.PackagesScan;
 @AdditionalServerEventHandlers(
         value = {"com.tvd12.ezyfox.core.testing.addition.ExServereEventHandler3"},
         classes = {ExServereEventHandler2.class})
-//@AdditionalClientRequestListeners({"com.tvd12.ezyfox.core.testing.extensionconfiguration.ExClientRequestListener"})
-//@AdditionalServerEventHandlers({"com.tvd12.ezyfox.core.testing.extensionconfiguration.ExServereEventHandler"})
+@RoomPackages(packages = {"com.tvd12.ezyfox.core.testing.extensionconfiguration"})
 public class TestAppConfig {
 
 }

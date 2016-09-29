@@ -1,6 +1,7 @@
 package com.tvd12.ezyfox.core.structure;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 import com.tvd12.ezyfox.core.annotation.ConfigProperty;
 
@@ -19,30 +20,41 @@ public class PropertiesClassWrapper extends ClassWrapper {
     private PropertiesClassWrapper() {}
     
     /**
-     * @see ClassWrapper#ClassWrapper(Class)
+     * @param clazz the class to parse
      */
     public PropertiesClassWrapper(Class<?> clazz) {
         super(clazz);
     }
     
-    /**
-     * @see ClassWrapper#initWithField(Field)
+    /*
+     * (non-Javadoc)
+     * @see com.tvd12.ezyfox.core.structure.ClassWrapper#initWithField(java.lang.reflect.Field)
      */
     @Override
     protected SetterMethodCover initWithField(Field field) {
         return new PropertySetterMethod(clazz, field);
     }
     
-    /**
-     * @see ClassWrapper#initWithMethod(java.lang.reflect.Method)
+    /* (non-Javadoc)
+     * @see com.tvd12.ezyfox.core.structure.ClassWrapper#initWithMethod(java.lang.reflect.Method)
+     */
+    @Override
+    protected SetterMethodCover initWithMethod(Method method) {
+        return new PropertySetterMethod(clazz, method);
+    }
+    
+    /*
+     * (non-Javadoc)
+     * @see com.tvd12.ezyfox.core.structure.ClassWrapper#newClass()
      */
     @Override
     protected ClassWrapper newClass() {
         return new PropertiesClassWrapper();
     }
 
-    /**
-     * @see ClassWrapper#getAnnotationClasses()
+    /*
+     * (non-Javadoc)
+     * @see com.tvd12.ezyfox.core.structure.ClassCover#getAnnotationClasses()
      */
     @Override
     @SuppressWarnings("unchecked")

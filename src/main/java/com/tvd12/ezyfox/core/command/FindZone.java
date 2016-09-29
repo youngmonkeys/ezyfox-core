@@ -24,6 +24,8 @@ public interface FindZone {
     
     /**
      * Get all zones
+     * 
+     * @return the list of zones
      */
     List<ApiZone> all();
     

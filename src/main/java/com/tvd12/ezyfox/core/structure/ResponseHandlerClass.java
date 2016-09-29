@@ -20,7 +20,7 @@ public class ResponseHandlerClass extends ClassUnwrapper {
     private ResponseHandlerClass() {}
     
     /**
-     * @see ClassUnwrapper#ClassUnwrapper(Class)
+     * @param clazz the class to parse
      */
     public ResponseHandlerClass(Class<?> clazz) {
         super(clazz);

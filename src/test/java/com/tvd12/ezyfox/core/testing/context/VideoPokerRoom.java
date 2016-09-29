@@ -15,7 +15,7 @@ public class VideoPokerRoom extends ApiRoom {
     }
     
     @ResponseParam("12")
-    public CurrentState currentState() {
-        return new CurrentState(this);
+    public CurrentState1 currentState() {
+        return new CurrentState1(this);
     }
 }

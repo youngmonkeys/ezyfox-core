@@ -93,6 +93,7 @@ public interface ApiZone extends ApiProperties {
 	/**
 	 * Get a User from its unique ID
 	 * 
+	 * @param <T> the user type
 	 * @param id unique ID
 	 * @return a reference
 	 */
@@ -101,6 +102,7 @@ public interface ApiZone extends ApiProperties {
 	/**
 	 * Get a User from its name
 	 * 
+	 * @param <T> the user type
 	 * @param username user name
 	 * @return a reference
 	 */
@@ -109,7 +111,8 @@ public interface ApiZone extends ApiProperties {
 	/**
 	 * Get a list of Users from all Rooms in the provided Room Group
 	 * 
-	 * @param groupId
+	 * @param <T> the user type
+	 * @param groupId the group id
 	 * @return a reference
 	 */
 	<T extends ApiUser> List<T> getUsersInGroup(String groupId);
@@ -117,6 +120,7 @@ public interface ApiZone extends ApiProperties {
 	/**
 	 * Get all users in the zone
 	 * 
+	 * @param <T> the user type
 	 * @return list of user
 	 */
 	<T extends ApiUser> List<T> getUserList();
@@ -133,6 +137,7 @@ public interface ApiZone extends ApiProperties {
 	/**
 	 * Get room by id
 	 * 
+	 * @param <T> the room type
 	 * @param id room id
 	 * @return a room
 	 */
@@ -141,6 +146,7 @@ public interface ApiZone extends ApiProperties {
 	/**
 	 * Get room by name
 	 * 
+	 * @param <T> the room type
 	 * @param name room name
 	 * @return a room
 	 */
@@ -149,6 +155,7 @@ public interface ApiZone extends ApiProperties {
 	/**
 	 * Get all rooms in a group
 	 * 
+	 * @param <T> the room type
 	 * @param groupId group id
 	 * @return list of rooms
 	 */
@@ -157,6 +164,7 @@ public interface ApiZone extends ApiProperties {
 	/**
 	 * Get all rooms in the zone
 	 * 
+	 * @param <T> the room type
 	 * @return list of rooms
 	 */
 	<T extends ApiRoom> List<T> getRoomList();

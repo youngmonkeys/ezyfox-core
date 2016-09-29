@@ -2,7 +2,7 @@ package com.tvd12.ezyfox.core.testing.structure;
 
 import static org.testng.Assert.assertEquals;
 
-import java.util.ArrayList;
+import java.util.HashSet;
 
 import org.testng.annotations.Test;
 
@@ -16,7 +16,7 @@ public class ServerUserHandlerClassTest {
     @Test
     public void testValidCase() {
         ServerUserHandlerClass clazz = new ServerUserHandlerClass(
-                ClassA.class, ExUser.class, new ArrayList<Class<?>>());
+                ClassA.class, ExUser.class, new HashSet<Class<?>>());
         assertEquals(clazz.getUserClass(), ExUser.class);
         assertEquals(clazz.getHandleMethod().getName(), "handle");
     }

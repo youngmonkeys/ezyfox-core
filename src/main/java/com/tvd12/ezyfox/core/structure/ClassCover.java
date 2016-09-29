@@ -35,7 +35,7 @@ public abstract class ClassCover {
 	/**
 	 * Initialize with java class
 	 * 
-	 * @param clazz
+	 * @param clazz the class to parse
 	 */
 	protected void init(Class<?> clazz) {
 		this.clazz = clazz;
@@ -88,6 +88,7 @@ public abstract class ClassCover {
 	/**
 	 * Get list of structures of method
 	 * 
+	 * @param <T> the type of method structure
 	 * @return list of structures
 	 */
 	public abstract <T extends MethodCover> List<T> getMethods();
@@ -96,6 +97,7 @@ public abstract class ClassCover {
 	 * Because in a class, sometimes we only care about methods or fields that's annotated with
 	 * an annotation, so we need know annotations to filter methods or fields
 	 * 
+	 * @param <T> the annotation type
 	 * @return array of annotations
 	 */
 	protected abstract <T extends Annotation> Class<T>[] getAnnotationClasses();
@@ -103,8 +105,9 @@ public abstract class ClassCover {
 	/**
 	 * Get method associated to key
 	 * 
-	 * @param key key
-	 * @return method associated to key
+	 * @param <T> the method structure type
+	 * @param key the key
+	 * @return method the method's structure associated to key
 	 */
     @SuppressWarnings("unchecked")
     public <T extends MethodCover> T getMethod(String key) {

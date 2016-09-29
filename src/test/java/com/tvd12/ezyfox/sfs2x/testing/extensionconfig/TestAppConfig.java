@@ -5,7 +5,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 import com.tvd12.ezyfox.core.annotation.PackagesScan;
-import com.tvd12.ezyfox.core.config.ExtensionConfiguration;
+import com.tvd12.ezyfox.core.config.AppExtensionConfigurationImpl;
 
 @Configuration
 @ComponentScan({"com.lagente.sfs2x"})
@@ -13,7 +13,7 @@ import com.tvd12.ezyfox.core.config.ExtensionConfiguration;
 public class TestAppConfig {
 	
 	@Bean
-	public ExtensionConfiguration extensionConfig() {
-		return new ExtensionConfiguration();
+	public AppExtensionConfigurationImpl extensionConfig() {
+		return new AppExtensionConfigurationImpl();
 	}
 }

@@ -34,6 +34,7 @@ public abstract class ApiBaseUser extends ApiModel {
     /**
      * Get user's buddy properties 
      * 
+     * @param <T> the buddy type
      * @return user's buddy properties
      */
     public abstract <T extends ApiBuddyProperties> T getBuddyProperties();

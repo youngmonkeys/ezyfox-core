@@ -4,8 +4,9 @@
 package com.tvd12.ezyfox.core.content.impl;
 
 import java.lang.reflect.Constructor;
+import java.util.Collection;
 import java.util.HashMap;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
@@ -17,12 +18,13 @@ import com.tvd12.ezyfox.core.command.AddObjectSerializer;
 import com.tvd12.ezyfox.core.command.impl.AddCommandImpl;
 import com.tvd12.ezyfox.core.command.impl.AddObjectDeserializerImpl;
 import com.tvd12.ezyfox.core.command.impl.AddObjectSerializerImpl;
+import com.tvd12.ezyfox.core.config.AppExtensionConfiguration;
 import com.tvd12.ezyfox.core.config.CommandProvider;
-import com.tvd12.ezyfox.core.config.ExtensionConfiguration;
 import com.tvd12.ezyfox.core.config.ObjectDeserializerMapper;
 import com.tvd12.ezyfox.core.config.ObjectSerializerMapper;
-import com.tvd12.ezyfox.core.config.RequestListenerCenter;
+import com.tvd12.ezyfox.core.config.RoomExtensionConfiguration;
 import com.tvd12.ezyfox.core.config.ServerEventHandlerClasses;
+import com.tvd12.ezyfox.core.config.loader.AppExtensionConfigurationLoader;
 import com.tvd12.ezyfox.core.content.AppContext;
 import com.tvd12.ezyfox.core.exception.ExtensionException;
 import com.tvd12.ezyfox.core.reflect.ReflectClassUtil;
@@ -30,7 +32,6 @@ import com.tvd12.ezyfox.core.serialize.ObjectDeserializer;
 import com.tvd12.ezyfox.core.serialize.ObjectSerializer;
 import com.tvd12.ezyfox.core.structure.AgentClass;
 import com.tvd12.ezyfox.core.structure.MessageParamsClass;
-import com.tvd12.ezyfox.core.structure.RequestResponseClass;
 import com.tvd12.ezyfox.core.structure.ResponseParamsClass;
 import com.tvd12.ezyfox.core.structure.UserAgentClass;
 
@@ -38,13 +39,7 @@ import com.tvd12.ezyfox.core.structure.UserAgentClass;
  * @author tavandung12
  *
  */
-public abstract class BaseAppContext implements AppContext {
-    
-    // extension configuration object
-    protected ExtensionConfiguration extensionConfig;
-    
-    // holds all request listeners's structure
-    protected RequestListenerCenter requestListenerCenter;
+public abstract class BaseAppContext extends BaseContext {
     
     // holds all structures of server event handler classes
     protected ServerEventHandlerClasses serverEventHandlerClasses;
@@ -171,7 +166,7 @@ public abstract class BaseAppContext implements AppContext {
      * @return true or false
      */
     public boolean isAutoResponse(String event) {
-        return extensionConfig.getAutoResponseEvents().contains(event);
+        return appExtensionConfig().isAutoResponseEvent(event);
     }
     
     /**
@@ -197,25 +192,16 @@ public abstract class BaseAppContext implements AppContext {
      * @return structure of user agent class
      */
     public UserAgentClass getUserAgentClass() {
-        return extensionConfig.getUserAgentClass();
+        return appExtensionConfig().getUserAgentClass();
     }
     
     /**
-     * Get map of user agent classes and their structure
+     * Get collection of game user agent classes structure
      * 
-     * @return a map
+     * @return a collection of user classes structure
      */
-    public Map<Class<?>, AgentClass> getRoomAgentClasses() {
-        return extensionConfig.getRoomAgentClasses();
-    }
-    
-    /**
-     * Get map of game user agent classes and their structure
-     * 
-     * @return a map
-     */
-    public Map<Class<?>, UserAgentClass> getGameUserAgentClasses() {
-        return extensionConfig.getGameUserAgentClasses();
+    public Collection<UserAgentClass> getGameUserAgentClasses() {
+        return appExtensionConfig().getGameUserAgentClasses();
     }
     
     /**
@@ -225,7 +211,7 @@ public abstract class BaseAppContext implements AppContext {
      * @return structure of room agent class
      */
     public AgentClass getRoomAgentClass(Class<?> clazz) {
-        return getRoomAgentClasses().get(clazz);
+        return appExtensionConfig().getRoomAgentClass(clazz);
     }
     
     /**
@@ -235,57 +221,46 @@ public abstract class BaseAppContext implements AppContext {
      * @return structure of user agent class
      */
     public UserAgentClass getUserAgentClass(Class<?> clazz) {
-        if(clazz == getUserClass())
+        if(clazz.equals(getUserClass()))
             return getUserAgentClass();
-        return getGameUserAgentClasses().get(clazz);
+        return getGameUserAgentClass(clazz);
+        
+        
+    }
+    
+    public UserAgentClass getGameUserAgentClass(Class<?> clazz) {
+        return appExtensionConfig().getGameUserAgentClass(clazz);
     }
     
     /**
      * @return user agent's class
      */
     public Class<?> getUserClass() {
-        return extensionConfig.getUserClass();
+        return appExtensionConfig().getUserClass();
     }
     
     /**
      * @return list of room agent classes
      */
-    public List<Class<?>> getRoomClasses() {
-        return extensionConfig.getRoomClasses();
+    public Set<Class<?>> getRoomClasses() {
+        return appExtensionConfig().getRoomClasses();
     }
     
     /**
      * @return list of game user agent classes
      */
-    public List<Class<?>> getGameUserClasses() {
-        return extensionConfig.getGameUserClasses();
+    public Set<Class<?>> getGameUserClasses() {
+        return appExtensionConfig().getGameUserClasses();
     }
     
-    /**
-     * @return map of response parameter classes and their structure
+    /*
+     * (non-Javadoc)
+     * @see com.tvd12.ezyfox.core.content.impl.BaseContext#getResponseParamsClass(java.lang.Class)
      */
-    public Map<Class<?>, ResponseParamsClass> getResponseParamsClasses() {
-        return extensionConfig.getResponseParamsClasses();
-    }
-    
-    /**
-     * Get structure of response parameter class map to the class
-     * 
-     * @param clazz response parameter class
-     * @return structure of response parameter class
-     */
+    @Override
     public ResponseParamsClass getResponseParamsClass(Class<?> clazz) {
-         ResponseParamsClass answer = getResponseParamsClasses().get(clazz);
-         if(answer == null)
-             answer = new ResponseParamsClass(clazz);
-         return answer;
-    }
-    
-    /**
-     * @return map of message parameter classes and their structure
-     */
-    public Map<Class<?>, MessageParamsClass> getMessageParamsClasses() {
-        return extensionConfig.getMessageParamsClasses();
+         ResponseParamsClass answer = appExtensionConfig().getResponseParamsClass(clazz);
+         return (answer == null) ? new ResponseParamsClass(clazz) : answer;
     }
     
     /**
@@ -295,17 +270,7 @@ public abstract class BaseAppContext implements AppContext {
      * @return structure of message parameter class
      */
     public MessageParamsClass getMessageParamsClass(Class<?> clazz) {
-        return getMessageParamsClasses().get(clazz);
-    }
-    
-    /**
-     * Get list of request listeners related to the command
-     * 
-     * @param command request's command
-     * @return list of request listeners
-     */
-    public List<RequestResponseClass> clientRequestListeners(String command) {
-        return requestListenerCenter.getListeners(command);
+        return appExtensionConfig().getMessageParamsClass(clazz);
     }
     
     /**
@@ -314,39 +279,27 @@ public abstract class BaseAppContext implements AppContext {
      * @param event the event
      * @return list of server event handler classes
      */
-    public List<Class<?>> serverEventHandlerClasses(String event) {
-        return serverEventHandlerClasses.getHandlers(event);
+    public Set<Class<?>> getServerEventHandlerClasses(String event) {
+        return new HashSet<>(serverEventHandlerClasses.getHandlers(event));
     }
 
-    /**
-     * @return set of client request commands
-     */
-    public Set<String> clientRequestCommands() {
-        return requestListenerCenter.getCommands();
-    }
-    
     /**
      * Initialize extension configuration
      * 
      * @param entryPoint application's entry point class
      */
     protected void initExtensionConfig(Class<?> entryPoint) {
-        extensionConfig = newExtensionConfiguration();
-        extensionConfig.load(entryPoint);
-    }
-    
-    protected ExtensionConfiguration newExtensionConfiguration() {
-        return new ExtensionConfiguration();
+        AppExtensionConfigurationLoader loader = 
+                newExtensionConfigurationLoader();
+        loader.setEntryPoint(entryPoint);
+        extensionConfig = loader.load();
     }
     
     /**
-     * Get all request listener classes and read their structure
+     * @return the extension configuration loader
      */
-    protected void initRequestListenerCenter() {
-        requestListenerCenter
-            = new RequestListenerCenter();
-        requestListenerCenter.addListeners(extensionConfig
-                .getRequestResponseClientClasses());
+    protected AppExtensionConfigurationLoader newExtensionConfigurationLoader() {
+        return new AppExtensionConfigurationLoader();
     }
     
     /**
@@ -355,8 +308,8 @@ public abstract class BaseAppContext implements AppContext {
     protected void initEventHandlerClasses() {
         serverEventHandlerClasses 
             = new ServerEventHandlerClasses();
-        serverEventHandlerClasses.addHandlers(extensionConfig
-            .getServerEventHandlerClasses());
+        serverEventHandlerClasses.addHandlers(
+            extensionConfig.getServerEventHandlerClasses());
     }
     
     /**
@@ -387,6 +340,7 @@ public abstract class BaseAppContext implements AppContext {
     /**
      * Get command by interface class
      * 
+     * @param <T> the command type
      * @param clazz interface class
      * @return a command instance
      */
@@ -395,6 +349,7 @@ public abstract class BaseAppContext implements AppContext {
     /**
      * Get command
      * 
+     * @param <T> the command type
      * @param map map of command classes and their constructors
      * @param clazz the interface class
      * @param params array of params for constructor
@@ -415,6 +370,7 @@ public abstract class BaseAppContext implements AppContext {
     /**
      * Get fixed command
      * 
+     * @param <T> the command type
      * @param clazz the interface class
      * @return a command instance
      */
@@ -425,6 +381,7 @@ public abstract class BaseAppContext implements AppContext {
     /**
      * Get application command by base class
      * 
+     * @param <T> the command type
      * @param clazz the base class
      * @return a command instance
      */
@@ -487,23 +444,38 @@ public abstract class BaseAppContext implements AppContext {
         objectDeserializers.add(clazz, deserializer);
     }
 
-    /**
-     * Get serializer object mapped to the class
-     * 
-     * @param clazz the class
-     * @return the serializer object
+    /*
+     * (non-Javadoc)
+     * @see com.tvd12.ezyfox.core.content.impl.BaseContext#getObjectSerializer(java.lang.Class)
      */
+    @Override
     public ObjectSerializer getObjectSerializer(Class<?> clazz) {
         return objectSerializers.get(clazz);
     }
     
-    /**
-     * Get deserializer object mapped to the class
-     * 
-     * @param clazz the class
-     * @return the deserializer object
+    /*
+     * (non-Javadoc)
+     * @see com.tvd12.ezyfox.core.content.impl.BaseContext#getObjectDeserializer(java.lang.Class)
      */
+    @Override
     public ObjectDeserializer getObjectDeserializer(Class<?> clazz) {
         return objectDeserializers.get(clazz);
+    }
+    
+    /**
+     * Get room extension configuration
+     * 
+     * @param entryPoint the room extension entry point class
+     * @return the room extension configuration
+     */
+    public RoomExtensionConfiguration getRoomExtensionConfig(Class<?> entryPoint) {
+        return appExtensionConfig().getRoomExtensionConfiguration(entryPoint);
+    }
+    
+    /**
+     * @return the application extension configuration
+     */
+    private AppExtensionConfiguration appExtensionConfig() {
+        return (AppExtensionConfiguration) extensionConfig;
     }
 }

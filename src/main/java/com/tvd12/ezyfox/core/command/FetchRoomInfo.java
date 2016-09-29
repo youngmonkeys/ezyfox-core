@@ -52,6 +52,7 @@ public interface FetchRoomInfo {
     /**
      * For Game Rooms: get all Players in the Room (same as all User without the Spectators)
      * 
+     * @param <T> the user type
      * @return list of spectators
      */
     <T extends ApiUser> List<T> getSpectatorsList();
@@ -60,6 +61,7 @@ public interface FetchRoomInfo {
      * For Game Rooms: get all Players in the Room (same as all User without the Spectators)
      * 
      * @param clazz class of game user
+     * @param <T> the game user type
      * @return list of spectators
      */
     <T extends ApiGameUser> List<T> getSpectatorsList(Class<?> clazz);
@@ -67,6 +69,7 @@ public interface FetchRoomInfo {
     /**
      * For Game Rooms: get all Spectators in the Room (same as all User without the Players)
      * 
+     * @param <T> the user type
      * @return list of player without spectators
      */
     <T extends ApiUser> List<T> getPlayersList();
@@ -74,6 +77,7 @@ public interface FetchRoomInfo {
     /**
      * For Game Rooms: get all Spectators in the Room (same as all User without the Players)
      * 
+     * @param <T> the game user type
      * @param clazz class of game user
      * @return list of player without spectators
      */
@@ -82,6 +86,7 @@ public interface FetchRoomInfo {
     /**
      * Get all Users in the Room
      * 
+     * @param <T> the user type
      * @return all user in room
      */
     <T extends ApiUser> List<T> getUserList();
@@ -89,6 +94,7 @@ public interface FetchRoomInfo {
     /**
      * Get all Users in the Room
      * 
+     * @param <T> the game user type
      * @param clazz class of game user
      * @return all user in room
      */

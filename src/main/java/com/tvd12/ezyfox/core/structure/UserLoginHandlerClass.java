@@ -20,8 +20,8 @@ public class UserLoginHandlerClass extends ServerHandlerClass {
     private ResponseHandlerClass responseHandlerClass;
     
     /**
-     * @param clazz
-     * @param paramTypes
+     * @param clazz the class type parse
+     * @param paramTypes the parameter types of handle method
      */
     public UserLoginHandlerClass(Class<?> clazz, Class<?>... paramTypes) {
         super(clazz, paramTypes);
