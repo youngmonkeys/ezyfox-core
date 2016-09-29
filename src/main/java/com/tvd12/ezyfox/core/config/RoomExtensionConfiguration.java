@@ -3,6 +3,8 @@
  */
 package com.tvd12.ezyfox.core.config;
 
+import java.util.Map;
+
 import com.tvd12.ezyfox.core.structure.AgentClass;
 import com.tvd12.ezyfox.core.structure.UserAgentClass;
 
@@ -13,23 +15,13 @@ import com.tvd12.ezyfox.core.structure.UserAgentClass;
 public interface RoomExtensionConfiguration {
     
     /**
-     * @return the room class
+     * @return the map of room classes and their structure
      */
-    Class<?> getRoomClass();
+    Map<Class<?>, AgentClass> getRoomAgentMap();
     
     /**
-     * @return the structure of room class
+     * @return the map of game user classes and their structure
      */
-    AgentClass getRoomAgentClass();
-    
-    /**
-     * @return the game user class
-     */
-    Class<?> getGameUserClass();
-    
-    /**
-     * @return the game user class structure
-     */
-    UserAgentClass getGameUserAgentClass();
+    Map<Class<?>, UserAgentClass> getGameUserAgentMap();
     
 }

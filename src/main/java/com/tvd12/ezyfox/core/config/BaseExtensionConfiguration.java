@@ -10,9 +10,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.tvd12.ezyfox.core.structure.AgentClass;
 import com.tvd12.ezyfox.core.structure.MessageParamsClass;
 import com.tvd12.ezyfox.core.structure.RequestResponseClass;
 import com.tvd12.ezyfox.core.structure.ResponseParamsClass;
+import com.tvd12.ezyfox.core.structure.UserAgentClass;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -47,6 +49,26 @@ public class BaseExtensionConfiguration {
     @Setter @Getter
     protected Set<Class<?>> serverEventHandlerClasses;
     
+    // the map of room classes and their structure
+    @Getter
+    protected Map<Class<?>, AgentClass> roomAgentMap;
+
+    // the map of game users and their structure
+    @Getter
+    protected Map<Class<?>, UserAgentClass> gameUserAgentMap;
+    
+    public BaseExtensionConfiguration() {
+        initialize();
+    }
+    
+    /**
+     * Initialize all components
+     */
+    protected void initialize() {
+        this.roomAgentMap = new HashMap<>();
+        this.gameUserAgentMap = new HashMap<>();
+    }
+    
     /**
      * Set message parameter classes and parse their structure
      * 
@@ -75,6 +97,24 @@ public class BaseExtensionConfiguration {
     }
     
     /**
+     * Set room classes and parse their structure
+     * 
+     * @param classes the set of room classes
+     */
+    public void setRoomClasses(Set<Class<?>> classes) {
+        this.roomAgentMap.putAll(createRoomAgentClasses(classes));
+    }
+    
+    /**
+     * Set game user classes and parse their structure
+     * 
+     * @param classes the game user classes
+     */
+    public void setGameUserClasses(Set<Class<?>> classes) {
+        this.gameUserAgentMap.putAll(createGameUserAgentClasses(classes));
+    }
+    
+    /**
      * Check all components
      */
     public void checkAll() {
@@ -92,6 +132,8 @@ public class BaseExtensionConfiguration {
         this.messageParamsClasses = Collections.unmodifiableMap(messageParamsClasses);
         this.serverEventHandlerClasses = Collections.unmodifiableSet(serverEventHandlerClasses);
         this.requestResponseClientClasses = Collections.unmodifiableList(requestResponseClientClasses);
+        this.roomAgentMap = Collections.unmodifiableMap(roomAgentMap);
+        this.gameUserAgentMap = Collections.unmodifiableMap(gameUserAgentMap);
     }
     
     /**
@@ -138,6 +180,34 @@ public class BaseExtensionConfiguration {
     
     protected void checkExecuteMethod(RequestResponseClass clazz) {
         clazz.checkExecuteMethod(null, null);
+    }
+    
+    /**
+     * Parse room agent class and put them to map
+     * 
+     * @param agentClasses the set of room agent classes
+     * @return the map of room classes and their structure
+     */
+    protected Map<Class<?>, AgentClass> 
+                createRoomAgentClasses(Set<Class<?>> agentClasses) {
+        Map<Class<?>, AgentClass> answer = new HashMap<>();
+        for(Class<?> clazz : agentClasses) 
+            answer.put(clazz, new AgentClass(clazz));
+        return answer;
+    }
+    
+    /**
+     * Parse game user agent class and put them to map
+     * 
+     * @param agentClasses the set of game user agent classes
+     * @return the map of game user classes and their structure
+     */
+    protected Map<Class<?>, UserAgentClass> 
+                createGameUserAgentClasses(Set<Class<?>> agentClasses) {
+        Map<Class<?>, UserAgentClass> answer = new HashMap<>();
+        for(Class<?> clazz : agentClasses) 
+            answer.put(clazz, new UserAgentClass(clazz));
+        return answer;
     }
     
 }

@@ -45,8 +45,6 @@ public class AppExtensionConfigurationLoader extends ConfigurationLoader {
                 (AppExtensionConfigurationImpl)super.load(configClass, packages);
         answer.setRoomExtensionConfigurations(createRoomExtensionConfigs(configClass));
         answer.setAutoResponseEvents(findAutoResponseEvents(configClass));
-        answer.setGameUserClasses(findGameUserClasses(packages));
-        answer.setRoomClasses(findRoomClasses(packages));
         answer.setUserClass(findUserClass(packages));
         return (T)answer;
     }
