@@ -10,14 +10,13 @@ import com.tvd12.ezyfox.core.transport.Parameters;
  * @author tavandung12
  *
  */
-public class UserDeserializer implements ObjectDeserializer {
+public class UserDeserializer implements ObjectDeserializer<AppUser> {
 
     /* (non-Javadoc)
      * @see com.tvd12.ezyfox.core.serialize.ObjectDeserializer#deserialize(com.tvd12.ezyfox.core.transport.Parameters)
      */
-    @SuppressWarnings("unchecked")
     @Override
-    public AppUser deserialize(Object object, Parameters params) {
+    public AppUser deserialize(AppUser object, Parameters params) {
         AppUser user = new AppUser();
         user.setName(params.get("name", String.class));
         return user;

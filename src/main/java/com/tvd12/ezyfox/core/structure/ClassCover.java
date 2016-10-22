@@ -3,6 +3,7 @@ package com.tvd12.ezyfox.core.structure;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -32,15 +33,96 @@ public abstract class ClassCover {
     // set of default method
 	protected Set<Method> defaultMethods; 
 	
+	// set of types to ignore
+	protected Set<Class<?>> ignoredTypes;
+	
+	 // list of setter method's structure
+    protected List<MethodCover> methods;
+    
+ // list of getter methods's structure refer to {@code clazz}
+    protected List<MethodCover> references;
+	
+	// new instance
+    protected ClassCover() {
+        this.init();
+    }
+	
+	// construct with java class
+    public ClassCover(Class<?> clazz) {
+        this();
+        init(clazz);
+    }
+    
+    /**
+     * Initialize fields
+     */
+    protected void init() {
+        this.methods = new ArrayList<>();
+        this.references = new ArrayList<>();
+    }
+	
 	/**
 	 * Initialize with java class
 	 * 
 	 * @param clazz the class to parse
 	 */
 	protected void init(Class<?> clazz) {
-		this.clazz = clazz;
-		this.defaultMethods = defaultMethods();
+	    this.initComponents(clazz);
+		this.initWithFields();
+        this.initWithMethods();
 	}
+	
+	protected void initComponents(Class<?> clazz) {
+	    this.clazz = clazz;
+	    this.ignoredTypes = ignoredTypes();
+	    this.defaultMethods = defaultMethods();
+	}
+	
+	/**
+     * Parse annotated fields to get getter methods and their structure
+     */
+    protected void initWithFields() {
+        List<Field> fields = getAnnotatedFields();
+        for(Field field : fields) {
+            if(typeFilter().filter(field.getType()))
+                addMethod(initWithField(field));
+        }
+    }
+    
+    /**
+     * Parse annotated methods to get getter methods and their structure
+     */
+    protected void initWithMethods() {
+        List<Method> methods = getAnnotatedMethods();
+        for(Method method : methods) {
+            if(methodFilter().filter(method) && 
+                    typeFilter().filter(getMethodType(method)))
+                addMethod(initWithMethod(method));
+        }
+    }
+    
+    /**
+     * Parse a java field to get getter method and read it's structure
+     * 
+     * @param field field to get getter method
+     * @return a getter method's structure
+     */
+    protected abstract MethodCover initWithField(Field field);
+    
+    /**
+     * Parse java method to get it's structure
+     * 
+     * @param method java method
+     * @return a getter method's structure
+     */
+    protected abstract MethodCover initWithMethod(Method method);
+    
+    /**
+     * Add a method's structure to list
+     * 
+     * @param method the method to add
+     */
+    protected abstract void addMethod(MethodCover method);
 	
 	/**
 	 * Get annotated fields
@@ -116,6 +198,8 @@ public abstract class ClassCover {
                 return (T) method;
         return null;
     }
+    
+    protected abstract Class<?> getMethodType(Method method);
 	
     /**
      * Create a method filter to filter invalid method
@@ -129,6 +213,15 @@ public abstract class ClassCover {
                 return !containsMethod(method)
                         && !isDefaultMethod(method)
                         && validateMethod(method);
+            }
+        };
+    }
+    
+    protected TypeFilter typeFilter() {
+        return new TypeFilter() {
+            @Override
+            public boolean filter(Class<?> type) {
+                return !ignoredTypes.contains(type);
             }
         };
     }
@@ -171,6 +264,17 @@ public abstract class ClassCover {
 	    methods.add(getDefaultMethod("toString"));
 	    methods.add(getDefaultMethod("equals", Object.class));
 	    return methods;
+	}
+	
+	/**
+	 * We have some types need to ignored
+	 * 
+	 * @return the set of types need to ignored 
+	 */
+	private Set<Class<?>> ignoredTypes() {
+	    Set<Class<?>> answer = new HashSet<>();
+	    answer.add(Class.class);
+	    return answer;
 	}
 	
 	/**

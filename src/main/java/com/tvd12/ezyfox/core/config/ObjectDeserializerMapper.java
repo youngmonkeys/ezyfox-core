@@ -15,7 +15,7 @@ import com.tvd12.ezyfox.core.serialize.ObjectDeserializer;
 public class ObjectDeserializerMapper {
     
     // map of class and it's serializer
-    protected Map<Class<?>, ObjectDeserializer> deserializers;
+    protected Map<Class<?>, ObjectDeserializer<?>> deserializers;
     
     /**
      * Init map
@@ -30,7 +30,7 @@ public class ObjectDeserializerMapper {
      * @param clazz the class
      * @param serializer the serializer
      */
-    public void add(Class<?> clazz, ObjectDeserializer serializer) {
+    public void add(Class<?> clazz, ObjectDeserializer<?> serializer) {
         deserializers.put(clazz, serializer);
     }
     
@@ -56,8 +56,8 @@ public class ObjectDeserializerMapper {
      * @param clazz the class
      * @return the deserializer object
      */
-    public ObjectDeserializer get(Class<?> clazz) {
-        ObjectDeserializer answer = deserializers.get(clazz);
+    public ObjectDeserializer<?> get(Class<?> clazz) {
+        ObjectDeserializer<?> answer = deserializers.get(clazz);
         if(answer != null) return answer;
         throw new IllegalArgumentException("Has no deserializer object map to " + clazz);
     }

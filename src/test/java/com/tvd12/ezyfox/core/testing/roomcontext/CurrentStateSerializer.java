@@ -11,13 +11,13 @@ import com.tvd12.ezyfox.core.transport.impl.ParameterWrapper;
  * @author tavandung12
  *
  */
-public class CurrentStateSerializer implements ObjectSerializer {
+public class CurrentStateSerializer implements ObjectSerializer<CurrentState> {
 
     /* (non-Javadoc)
      * @see com.tvd12.ezyfox.core.serialize.ObjectSerializer#serialize(java.lang.Object)
      */
     @Override
-    public Parameters serialize(Object object) {
+    public Parameters serialize(CurrentState object) {
         return new ParameterWrapper();
     }
     

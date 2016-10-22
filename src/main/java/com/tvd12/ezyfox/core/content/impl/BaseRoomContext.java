@@ -59,7 +59,7 @@ public class BaseRoomContext extends BaseContext {
      * @see com.tvd12.ezyfox.core.content.impl.BaseContext#getObjectSerializer(java.lang.Class)
      */
     @Override
-    public ObjectSerializer getObjectSerializer(Class<?> clazz) {
+    public ObjectSerializer<?> getObjectSerializer(Class<?> clazz) {
         return appContext.getObjectSerializer(clazz);
     }
 
@@ -67,7 +67,7 @@ public class BaseRoomContext extends BaseContext {
      * @see com.tvd12.ezyfox.core.content.impl.BaseContext#getObjectDeserializer(java.lang.Class)
      */
     @Override
-    public ObjectDeserializer getObjectDeserializer(Class<?> clazz) {
+    public ObjectDeserializer<?> getObjectDeserializer(Class<?> clazz) {
         return appContext.getObjectDeserializer(clazz);
     }
 

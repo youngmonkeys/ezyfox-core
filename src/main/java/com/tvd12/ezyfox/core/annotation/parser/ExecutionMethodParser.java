@@ -1,9 +1,9 @@
 package com.tvd12.ezyfox.core.annotation.parser;
 
+import static com.tvd12.ezyfox.core.reflect.ReflectMethodUtil.getPublicMethodSet;
+
 import java.lang.reflect.Method;
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.List;
 
 import com.tvd12.ezyfox.core.annotation.ExecuteMethod;
 import com.tvd12.ezyfox.core.content.AppContext;
@@ -29,9 +29,8 @@ public final class ExecutionMethodParser {
 	 */
 	public static Method getListenerExecuteMethod(Class<?> clazz, 
 	        Class<?> userClass, Collection<Class<?>> gameUserClasses) {
-		Method[] methods = clazz.getDeclaredMethods();
 		Method executeMethod = getListenerExecuteMethod(
-		        Arrays.asList(methods), userClass, gameUserClasses);
+		        getPublicMethodSet(clazz), userClass, gameUserClasses);
 		if(executeMethod != null)
 		    return executeMethod;
 		throw new RuntimeException("Has no execution method in class " + clazz);
@@ -45,7 +44,7 @@ public final class ExecutionMethodParser {
 	 * @param gameUserClasses list of game user agent classes
 	 * @return
 	 */
-	private static Method getListenerExecuteMethod(List<Method> methods,
+	private static Method getListenerExecuteMethod(Collection<Method> methods,
 	        Class<?> userClass, Collection<Class<?>> gameUserClasses) {
 	    for(Method method : methods) {
             if(validateMethod(method)

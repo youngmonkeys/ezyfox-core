@@ -1,5 +1,6 @@
 package com.tvd12.ezyfox.core.entities;
 
+import com.google.common.base.Objects;
 import com.tvd12.ezyfox.core.command.UserInfo;
 
 import lombok.Setter;
@@ -74,5 +75,29 @@ public abstract class ApiGameUser extends ApiBaseUser {
     @Override
     public final ApiSession getSession() {
         return parent.getSession();
+    }
+    
+    /*
+     * (non-Javadoc)
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if(obj == null) 
+            return false;
+        if(obj == this)
+            return true;
+        if(obj instanceof ApiGameUser)
+            return Objects.equal(getName(), ((ApiGameUser)obj).getName());
+        return false;
+    }
+    
+    /*
+     * (non-Javadoc)
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getName());
     }
 }

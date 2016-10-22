@@ -15,7 +15,9 @@ import com.tvd12.ezyfox.core.annotation.RequestParam;
 public class RequestListenerClass extends ClassWrapper {
     
     // prevent new instance with default constructor
-    private RequestListenerClass() {}
+    protected RequestListenerClass() {
+        super();
+    }
     
     /**
      * @param clazz the class to parse

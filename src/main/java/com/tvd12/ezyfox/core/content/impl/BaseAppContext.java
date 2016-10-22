@@ -106,13 +106,13 @@ public abstract class BaseAppContext extends BaseContext {
     protected void addObjectSerializerMaps() {
         Map<Class<?>, Class<?>> map = extensionConfig.getObjectSerializerClasses();
         for(Class<?> clazz : map.keySet())
-            addObjectSerializer(clazz, (ObjectSerializer) newInstance(map.get(clazz)));
+            addObjectSerializer(clazz, (ObjectSerializer<?>) newInstance(map.get(clazz)));
     }
     
     protected void addObjectDeserializerMaps() {
         Map<Class<?>, Class<?>> map = extensionConfig.getObjectDeserializerClasses();
         for(Class<?> clazz : map.keySet())
-            addObjectDeserializer(clazz, (ObjectDeserializer) newInstance(map.get(clazz)));
+            addObjectDeserializer(clazz, (ObjectDeserializer<?>) newInstance(map.get(clazz)));
     }
     
     @SuppressWarnings("unchecked")
@@ -430,7 +430,7 @@ public abstract class BaseAppContext extends BaseContext {
      * @param clazz the class
      * @param serializer the serializer object
      */
-    public void addObjectSerializer(Class<?> clazz, ObjectSerializer serializer) {
+    public void addObjectSerializer(Class<?> clazz, ObjectSerializer<?> serializer) {
         objectSerializers.add(clazz, serializer);
     }
     
@@ -440,7 +440,7 @@ public abstract class BaseAppContext extends BaseContext {
      * @param clazz the class
      * @param deserializer the deserializer object
      */
-    public void addObjectDeserializer(Class<?> clazz, ObjectDeserializer deserializer) {
+    public void addObjectDeserializer(Class<?> clazz, ObjectDeserializer<?> deserializer) {
         objectDeserializers.add(clazz, deserializer);
     }
 
@@ -448,6 +448,7 @@ public abstract class BaseAppContext extends BaseContext {
      * (non-Javadoc)
      * @see com.tvd12.ezyfox.core.content.impl.BaseContext#getObjectSerializer(java.lang.Class)
      */
+    @SuppressWarnings({ "unchecked", "rawtypes" })
     @Override
     public ObjectSerializer getObjectSerializer(Class<?> clazz) {
         return objectSerializers.get(clazz);
@@ -457,6 +458,7 @@ public abstract class BaseAppContext extends BaseContext {
      * (non-Javadoc)
      * @see com.tvd12.ezyfox.core.content.impl.BaseContext#getObjectDeserializer(java.lang.Class)
      */
+    @SuppressWarnings({ "rawtypes", "unchecked" })
     @Override
     public ObjectDeserializer getObjectDeserializer(Class<?> clazz) {
         return objectDeserializers.get(clazz);

@@ -3,6 +3,7 @@ package com.tvd12.ezyfox.core.reflect;
 import java.lang.reflect.Type;
 import java.util.Collection;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 
 /**
@@ -16,6 +17,16 @@ public final class ReflectTypeUtil {
 
     // prevent new instance
 	private ReflectTypeUtil() {}
+	
+	/**
+	 * check whether type is map 
+	 * 
+	 * @param type type to check
+	 * @return true or false
+	 */
+	public static boolean isMap(Class<?> type) {
+	    return Map.class.isAssignableFrom(type);
+	}
 	
 	/**
      * Check whether type is primitive boolean 

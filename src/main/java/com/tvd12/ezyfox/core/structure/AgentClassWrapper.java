@@ -21,6 +21,7 @@ public class AgentClassWrapper extends ClassWrapper {
 
     // prevent new instance
     protected AgentClassWrapper() {
+        super();
     }
 
     /**

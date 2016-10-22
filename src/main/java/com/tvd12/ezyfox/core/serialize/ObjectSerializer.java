@@ -9,8 +9,8 @@ import com.tvd12.ezyfox.core.transport.Parameters;
  * @author tavandung12
  *
  */
-public interface ObjectSerializer {
+public interface ObjectSerializer<T> {
 
-    Parameters serialize(Object object);
+    Parameters serialize(T object);
     
 }

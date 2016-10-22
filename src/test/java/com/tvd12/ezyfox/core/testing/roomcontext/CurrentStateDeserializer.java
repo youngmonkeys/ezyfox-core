@@ -10,14 +10,13 @@ import com.tvd12.ezyfox.core.transport.Parameters;
  * @author tavandung12
  *
  */
-public class CurrentStateDeserializer implements ObjectDeserializer {
+public class CurrentStateDeserializer implements ObjectDeserializer<CurrentState> {
 
     /* (non-Javadoc)
      * @see com.tvd12.ezyfox.core.serialize.ObjectDeserializer#deserialize(java.lang.Object, com.tvd12.ezyfox.core.transport.Parameters)
      */
-    @SuppressWarnings("unchecked")
     @Override
-    public Object deserialize(Object object, Parameters params) {
+    public CurrentState deserialize(CurrentState object, Parameters params) {
         return object;
     }
 

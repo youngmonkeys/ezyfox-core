@@ -98,7 +98,7 @@ public class GetterMethodCover extends MethodCover {
 		try {
 			return ReflectFieldUtil.getGetterMethod(clazz, field);
 		} catch (ExtensionException e) {
-			throw new IllegalStateException(e);
+			throw new IllegalStateException("error related to key: " + getKey() + " : " + getType(), e);
 		}
 	}
 	

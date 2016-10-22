@@ -20,6 +20,7 @@ public class AgentClassUnwrapper extends ClassUnwrapper {
 
     // prevent use default constructor
     protected AgentClassUnwrapper() {
+        super();
     }
 
     /**

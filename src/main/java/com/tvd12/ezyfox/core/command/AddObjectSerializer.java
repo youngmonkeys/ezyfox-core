@@ -20,6 +20,6 @@ public interface AddObjectSerializer {
      * @param serializer the serializer object
      * @return this pointer for chaining
      */
-    AddObjectSerializer add(Class<?> clazz, ObjectSerializer serializer);
+    AddObjectSerializer add(Class<?> clazz, ObjectSerializer<?> serializer);
     
 }
