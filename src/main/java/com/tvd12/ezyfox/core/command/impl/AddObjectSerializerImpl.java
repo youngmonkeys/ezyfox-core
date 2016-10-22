@@ -24,7 +24,7 @@ public class AddObjectSerializerImpl extends FixedCommand implements AddObjectSe
      * @see com.tvd12.ezyfox.core.command.AddObjectSerializer#add(java.lang.Class, com.tvd12.ezyfox.core.serialize.ObjectSerializer)
      */
     @Override
-    public AddObjectSerializer add(Class<?> clazz, ObjectSerializer serializer) {
+    public AddObjectSerializer add(Class<?> clazz, ObjectSerializer<?> serializer) {
         context.addObjectSerializer(clazz, serializer);
         return this;
     }

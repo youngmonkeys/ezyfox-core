@@ -10,11 +10,10 @@ import com.tvd12.ezyfox.core.transport.Parameters;
  * @author tavandung12
  *
  */
-public class ExampleRoomDeserializer implements ObjectDeserializer {
+public class ExampleRoomDeserializer implements ObjectDeserializer<ExampleRoom> {
 
-    @SuppressWarnings("unchecked")
     @Override
-    public Object deserialize(Object object, Parameters params) {
+    public ExampleRoom deserialize(ExampleRoom object, Parameters params) {
         return object;
     }
 

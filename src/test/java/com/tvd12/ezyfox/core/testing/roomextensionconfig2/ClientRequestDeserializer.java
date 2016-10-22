@@ -10,15 +10,14 @@ import com.tvd12.ezyfox.core.transport.Parameters;
  * @author tavandung12
  *
  */
-public class ClientRequestDeserializer implements ObjectDeserializer {
+public class ClientRequestDeserializer implements ObjectDeserializer<ExClientRequestListener> {
 
     /* (non-Javadoc)
      * @see com.tvd12.ezyfox.core.serialize.ObjectDeserializer#deserialize(java.lang.Object, com.tvd12.ezyfox.core.transport.Parameters)
      */
-    @SuppressWarnings("unchecked")
     @Override
-    public <T> T deserialize(Object object, Parameters params) {
-        return (T) object;
+    public ExClientRequestListener deserialize(ExClientRequestListener object, Parameters params) {
+        return object;
     }
 
 }

@@ -1,8 +1,6 @@
 package com.tvd12.ezyfox.core.structure;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -24,70 +22,15 @@ import lombok.Getter;
 @Getter
 public abstract class ClassUnwrapper extends ClassCover {
     
-    // list of getter method's structure
-	protected List<GetterMethodCover> methods 
-			= new ArrayList<>();
+    protected ClassUnwrapper() {
+        super();
+    }
 	
-	// list of getter methods's structure refer to {@code clazz}
-	protected List<GetterMethodCover> references
-            = new ArrayList<>();
-	
-	// prevent new instance
-	protected ClassUnwrapper() {}
-    
 	// construct with java class
     public ClassUnwrapper(Class<?> clazz) {
-        init(clazz);
+        super(clazz);
     }
 
-    /**
-     * @see ClassCover#init(Class)
-     */
-	@Override
-	protected void init(Class<?> clazz) {
-		super.init(clazz);
-		this.initWithFields();
-		this.initWithMethods();
-	}
-	
-	/**
-	 * Parse annotated fields to get getter methods and their structure
-	 */
-	private void initWithFields() {
-		List<Field> fields = getAnnotatedFields();
-		for(Field field : fields) {
-			addMethod(initWithField(field));
-		}
-	}
-	
-	/**
-	 * Parse annotated methods to get getter methods and their structure
-	 */
-	private void initWithMethods() {
-		List<Method> methods = getAnnotatedMethods();
-		for(Method method : methods) {
-		    if(!methodFilter().filter(method))
-		        continue;
-			addMethod(initWithMethod(method));
-		}
-	}
-	
-	/**
-	 * Parse a java field to get getter method and read it's structure
-	 * 
-	 * @param field field to get getter method
-	 * @return a getter method's structure
-	 */
-	protected GetterMethodCover initWithField(Field field) {return null;};
-	
-	/**
-	 * Parse java method to get it's structure
-	 * 
-	 * @param method java method
-	 * @return a getter method's structure
-	 */
-	protected GetterMethodCover initWithMethod(Method method) {return null;}
-	
 	/**
 	 * Because this class is abstract, we need create instances in implementation class
 	 * 
@@ -121,13 +64,17 @@ public abstract class ClassUnwrapper extends ClassCover {
     /**
      * Add a method's structure to list
      * 
-     * @param method the method to add
+     * @param struct the structure of method to add
      */
-    protected void addMethod(GetterMethodCover method) {
+    @Override
+    protected void addMethod(MethodCover struct) {
+        GetterMethodCover method = (GetterMethodCover)struct;
         method.setDeclaringClazz(this);
         methods.add(method);
         Class<?> paramType = null;
-        if(method.isTwoDimensionsObjectArray()) 
+        if(method.isMap())
+            paramType = null;
+        else if(method.isTwoDimensionsObjectArray()) 
             paramType = method.getComponentType().getComponentType();
         else if(method.isObjectArray())
             paramType = method.getComponentType();
@@ -206,7 +153,7 @@ public abstract class ClassUnwrapper extends ClassCover {
      * @return a structure object
      */
 	public GetterMethodCover getMethod(int index) {
-		return methods.get(index);
+		return getMethods().get(index);
 	}
 	
 	/**
@@ -241,4 +188,23 @@ public abstract class ClassUnwrapper extends ClassCover {
         }
         return true;
     }
+    
+    /* (non-Javadoc)
+     * @see com.tvd12.ezyfox.core.structure.ClassCover#getMethodType(java.lang.reflect.Method)
+     */
+    @Override
+    protected Class<?> getMethodType(Method method) {
+        return method.getReturnType();
+    }
+    
+    @SuppressWarnings({ "rawtypes", "unchecked" })
+    public List<GetterMethodCover> getMethods() {
+        return (List)this.methods;
+    }
+    
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    public List<GetterMethodCover> getReferences() {
+        return (List)this.references;
+    }
+    
 }

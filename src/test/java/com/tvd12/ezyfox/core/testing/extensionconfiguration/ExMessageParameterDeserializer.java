@@ -10,11 +10,10 @@ import com.tvd12.ezyfox.core.transport.Parameters;
  * @author tavandung12
  *
  */
-public class ExMessageParameterDeserializer implements ObjectDeserializer {
+public class ExMessageParameterDeserializer implements ObjectDeserializer<ExMessagesParameter> {
 
-    @SuppressWarnings("unchecked")
     @Override
-    public Object deserialize(Object object, Parameters params) {
+    public ExMessagesParameter deserialize(ExMessagesParameter object, Parameters params) {
         return object;
     }
     

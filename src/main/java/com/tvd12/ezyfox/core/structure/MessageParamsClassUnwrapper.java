@@ -26,7 +26,9 @@ import com.tvd12.ezyfox.core.annotation.MessageParam;
 public class MessageParamsClassUnwrapper extends ClassUnwrapper {
 
     // prevent new instance with default constructor
-    protected MessageParamsClassUnwrapper() {}
+    protected MessageParamsClassUnwrapper() {
+        super();
+    }
     
     /**
      * Construct with annotated class

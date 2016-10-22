@@ -28,6 +28,7 @@ public class AppContextImplTest {
     
     private BaseAppContext context;
     
+    @SuppressWarnings("unchecked")
     public AppContextImplTest() {
         context = newAppContext();
         context.addAppCommand(AppCommand.class, AppCommand.class);
@@ -60,7 +61,7 @@ public class AppContextImplTest {
         Parameters params = context.getObjectSerializer(AppUser.class).serialize(user);
         assertEquals(params.get("name", String.class), "dung");
         
-        user = context.getObjectDeserializer(AppUser.class).deserialize(new Object(), params);
+        user = (AppUser) context.getObjectDeserializer(AppUser.class).deserialize(null, params);
         assertEquals(user.getName(), "dung");
     }
     

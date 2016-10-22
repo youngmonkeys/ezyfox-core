@@ -5,6 +5,7 @@ import static org.testng.Assert.assertNotNull;
 import static org.testng.Assert.assertNull;
 
 import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.List;
 
@@ -17,6 +18,7 @@ import com.tvd12.ezyfox.core.reflect.ReflectFieldUtil;
 import com.tvd12.ezyfox.core.reflect.ReflectMethodUtil;
 import com.tvd12.ezyfox.core.structure.AgentClassWrapper;
 import com.tvd12.ezyfox.core.structure.ClassWrapper;
+import com.tvd12.ezyfox.core.structure.MethodCover;
 import com.tvd12.ezyfox.core.structure.SetterMethodCover;
 import com.tvd12.test.base.BaseTest;
 import com.tvd12.test.reflect.MethodBuilder;
@@ -49,6 +51,16 @@ public class AgentClassWrapperTest extends BaseTest {
             protected <T extends Annotation> Class<T>[] getAnnotationClasses() {return null;}
             @Override
             protected ClassWrapper newClass() {return null;}
+            @Override
+            protected MethodCover initWithField(Field field) {
+                // TODO Auto-generated method stub
+                return null;
+            }
+            @Override
+            protected MethodCover initWithMethod(Method method) {
+                // TODO Auto-generated method stub
+                return null;
+            }
         };
         SetterMethodCover initWithField = (SetterMethodCover) MethodInvoker.create()
                 .object(classWrapper)
@@ -184,6 +196,24 @@ public class AgentClassWrapperTest extends BaseTest {
         protected <T extends Annotation> Class<T>[] getAnnotationClasses() {
             return null;
         }
-        
+
+        /* (non-Javadoc)
+         * @see com.tvd12.ezyfox.core.structure.ClassCover#initWithField(java.lang.reflect.Field)
+         */
+        @Override
+        protected MethodCover initWithField(Field field) {
+            // TODO Auto-generated method stub
+            return null;
+        }
+
+        /* (non-Javadoc)
+         * @see com.tvd12.ezyfox.core.structure.ClassCover#initWithMethod(java.lang.reflect.Method)
+         */
+        @Override
+        protected MethodCover initWithMethod(Method method) {
+            // TODO Auto-generated method stub
+            return null;
+        }
+
     }
 }

@@ -17,7 +17,9 @@ import com.tvd12.ezyfox.core.annotation.ConfigProperty;
 public class PropertiesClassWrapper extends ClassWrapper {
 
     // prevent new instance with default constructor
-    private PropertiesClassWrapper() {}
+    protected PropertiesClassWrapper() {
+        super();
+    }
     
     /**
      * @param clazz the class to parse

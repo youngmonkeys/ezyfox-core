@@ -20,6 +20,7 @@ public class BuddyClassWrapper extends ClassWrapper {
 
     // prevent use default constructor
     protected BuddyClassWrapper() {
+        super();
     }
 
     /**

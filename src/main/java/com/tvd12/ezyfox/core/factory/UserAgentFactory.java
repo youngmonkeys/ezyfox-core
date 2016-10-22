@@ -29,17 +29,38 @@ public final class UserAgentFactory {
     public static ApiUser newUserAgent(String name,
             AgentClass userAgentClass, 
             Collection<UserAgentClass> gameUserAgentClasses) {
-        ApiUser userAgent = (ApiUser)userAgentClass.getWrapper().newInstance();
+        ApiUser userAgent = newUserAgent(userAgentClass, name);
         for(AgentClass clazz : gameUserAgentClasses) {
-            ApiGameUser gameUser = 
-                    (ApiGameUser)clazz.getWrapper().newInstance();
-            userAgent.addChild(gameUser);
+            ApiGameUser gameUser = newGameUserAgent(clazz);
             gameUser.setParent(userAgent);
+            userAgent.addChild(gameUser);
         }
-        userAgent.setName(name);
         
         return userAgent;
         
+    }
+    
+    /**
+     * New and set name to game user agent
+     * 
+     * @param agentClass the structure of user agent class
+     * @return the user agent
+     */
+    private static ApiGameUser newGameUserAgent(AgentClass agentClass) {
+        return (ApiGameUser)agentClass.getWrapper().newInstance();
+    }
+    
+    /**
+     * New and set name to user agent
+     * 
+     * @param agentClass the structure of user agent class
+     * @param name the user name
+     * @return the user agent
+     */
+    private static ApiUser newUserAgent(AgentClass agentClass, String name) {
+        ApiUser userAgent = (ApiUser)agentClass.getWrapper().newInstance();
+        userAgent.setName(name);
+        return userAgent;
     }
     
 }

@@ -17,7 +17,9 @@ import com.tvd12.ezyfox.core.annotation.ResponseParam;
 public class ResponseHandlerClass extends ClassUnwrapper {
 
     // prevent new instance with default constructor
-    private ResponseHandlerClass() {}
+    private ResponseHandlerClass() {
+        super();
+    }
     
     /**
      * @param clazz the class to parse

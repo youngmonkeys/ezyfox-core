@@ -1,10 +1,10 @@
 package com.tvd12.ezyfox.core.entities;
 
+import java.util.Collection;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Map;
-import java.util.Set;
 
+import com.google.common.base.Objects;
 import com.tvd12.ezyfox.core.command.UserInfo;
 
 import lombok.Getter;
@@ -40,10 +40,6 @@ public abstract class ApiUser extends ApiBaseUser {
     @Setter
     private ApiBuddyProperties buddyProperties;
     
-    // set of game user agent reference
-    @Getter
-    private final Set<ApiGameUser> children
-            = new HashSet<>();
     private final Map<Class<?>, ApiGameUser> childrenMap
             = new HashMap<>();
     
@@ -53,7 +49,6 @@ public abstract class ApiUser extends ApiBaseUser {
      * @param child the game user
      */
     public final void addChild(ApiGameUser child) {
-        children.add(child);
         childrenMap.put(child.getClass(), child);
     }
     
@@ -71,6 +66,15 @@ public abstract class ApiUser extends ApiBaseUser {
         throw new IllegalStateException("Has no user agent with class " + clazz);
     }
     
+    /**
+     * get collection of children
+     * 
+     * @return the collection of children
+     */
+    public final Collection<ApiGameUser> getChildren() {
+        return childrenMap.values();
+    }
+    
     /* (non-Javadoc)
      * @see com.tvd12.ezyfox.core.entities.ApiBaseUser#getBuddyProperties()
      */
@@ -80,4 +84,27 @@ public abstract class ApiUser extends ApiBaseUser {
         return (T)buddyProperties;
     }
 	
+    /*
+     * (non-Javadoc)
+     * @see java.lang.Object#equals(java.lang.Object)
+     */
+    @Override
+    public boolean equals(Object obj) {
+        if(obj == null) 
+            return false;
+        if(obj == this)
+            return true;
+        if(obj instanceof ApiUser)
+            return Objects.equal(getName(), ((ApiUser)obj).getName());
+        return false;
+    }
+    
+    /*
+     * (non-Javadoc)
+     * @see java.lang.Object#hashCode()
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getName());
+    }
 }

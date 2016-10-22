@@ -20,6 +20,6 @@ public interface AddObjectDeserializer {
      * @param deserializer the deserializer object
      * @return this pointer for chaining
      */
-    AddObjectDeserializer add(Class<?> clazz, ObjectDeserializer deserializer);
+    AddObjectDeserializer add(Class<?> clazz, ObjectDeserializer<?> deserializer);
     
 }

@@ -1,8 +1,6 @@
 package com.tvd12.ezyfox.core.structure;
 
-import java.lang.reflect.Field;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -24,69 +22,15 @@ import lombok.Getter;
 @Getter
 public abstract class ClassWrapper extends ClassCover {
     
- // list of setter method's structure
-	protected List<SetterMethodCover> methods
-			= new ArrayList<>();
-	
-	// list of setter methods's structure refer to {@code clazz}
-	protected List<SetterMethodCover> references
-	        = new ArrayList<>();
-	
 	// prevent new instance
-	public ClassWrapper() {}
+	protected ClassWrapper() {
+	    super();
+	}
 	
 	// construct with java class
 	public ClassWrapper(Class<?> clazz) {
-        init(clazz);
+        super(clazz);
     }
-	
-	/**
-     * @see ClassCover#init(Class)
-     */
-	@Override
-	public void init(Class<?> clazz) {
-		super.init(clazz);
-		this.initWithFields();
-		this.initWithMethods();
-	}
-	
-	/**
-     * Parse annotated fields to get setter methods and their structure
-     */
-	private void initWithFields() {
-		List<Field> fields = getAnnotatedFields();
-		for(Field field : fields) {
-			addMethod(initWithField(field));
-		}
-	}
-	
-	/**
-     * Parse annotated methods to get setter methods and their structure
-     */
-	private void initWithMethods() {
-		List<Method> methods = getAnnotatedMethods();
-		for(Method method : methods) {
-		    if(!methodFilter().filter(method))
-		        continue;
-			addMethod(initWithMethod(method));
-		}
-	}
-	
-	/**
-     * Parse a java field to get setter method and read it's structure
-     * 
-     * @param field field to get setter method
-     * @return a setter method's structure
-     */
-	protected SetterMethodCover initWithField(Field field) {return null;}
-	
-	/**
-     * Parse java method to get it's structure
-     * 
-     * @param method java method
-     * @return a getter method's structure
-     */
-	protected SetterMethodCover initWithMethod(Method method) {return null;}
 	
 	/**
      * Because this class is abstract, we need create instances in implementation class
@@ -121,9 +65,11 @@ public abstract class ClassWrapper extends ClassCover {
 	/**
      * Add a method's structure to list
      * 
-     * @param method the structure of setter method
+     * @param struct the structure of setter method
      */
-	public void addMethod(SetterMethodCover method) {
+	@Override
+	public void addMethod(MethodCover struct) {
+	    SetterMethodCover method = (SetterMethodCover)struct;
 	    method.setDeclaringClazz(this);
         methods.add(method);
 	    Class<?> paramType = null;
@@ -206,7 +152,7 @@ public abstract class ClassWrapper extends ClassCover {
      * @return a structure object
      */
 	public SetterMethodCover getMethod(int index) {
-		return methods.get(index);
+		return getMethods().get(index);
 	}
     
 	/**
@@ -241,5 +187,24 @@ public abstract class ClassWrapper extends ClassCover {
         }
         return true;
 	}
+	
+	/* (non-Javadoc)
+	 * @see com.tvd12.ezyfox.core.structure.ClassCover#getMethodType(java.lang.reflect.Method)
+	 */
+	@Override
+	protected Class<?> getMethodType(Method method) {
+	    return method.getParameterTypes()[0];
+	}
+	
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+    public List<SetterMethodCover> getMethods() {
+	    return (List)this.methods;
+	}
+	
+	// list of setter methods's structure refer to {@code clazz}
+    @SuppressWarnings({ "unchecked", "rawtypes" })
+    public List<SetterMethodCover> getReferences() {
+        return (List)this.references;
+    }
 	
 }

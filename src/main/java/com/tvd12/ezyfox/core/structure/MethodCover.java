@@ -127,6 +127,9 @@ public class MethodCover {
 	// return type or parameter type is collection of Byte
 	protected boolean isByteCollection;
 	
+	// return type of parameter type is map
+	protected boolean isMap;
+	
 	/**
 	 * parse java method
 	 * 
@@ -266,6 +269,7 @@ public class MethodCover {
 		isColection = isCollection(type);
 		isArray = type.isArray();
 		isPrimitive = ReflectTypeUtil.isPrimitive(type);
+		isMap = ReflectTypeUtil.isMap(type);
 	}
 	
 	/**

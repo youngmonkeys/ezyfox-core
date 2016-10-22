@@ -14,15 +14,22 @@ public class UserAgentUtilTest extends BaseTest {
     @Test
     public void testValidCase() {
         ExUser user = new ExUser();
+        user.setName("user");
         VideoPokerUser videoPokerUser = new VideoPokerUser();
-        user.addChild(new PokerUser());
+        PokerUser pokerUser = new PokerUser();
+        pokerUser.setParent(user);
+        videoPokerUser.setParent(user);
+        user.addChild(pokerUser);
         user.addChild(videoPokerUser);
         
         ApiGameUser gameUser = UserAgentUtil.getGameUser(user, VideoPokerUser.class);
         
         assertEquals(gameUser, videoPokerUser);
         user = new ExUser();
-        user.addChild(new PokerUser());
+        user.setName("user");
+        PokerUser guser = new PokerUser();
+        guser.setParent(user);
+        user.addChild(guser);
         gameUser = UserAgentUtil.getGameUser(user, VideoPokerUser.class);
         assertNull(gameUser);
     }

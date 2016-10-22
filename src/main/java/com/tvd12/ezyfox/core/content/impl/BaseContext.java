@@ -39,7 +39,7 @@ public abstract class BaseContext implements AppContext {
      * @param clazz the class
      * @return the serializer object
      */
-    public abstract ObjectSerializer getObjectSerializer(Class<?> clazz);
+    public abstract ObjectSerializer<?> getObjectSerializer(Class<?> clazz);
     
     /**
      * Get deserializer object mapped to the class
@@ -47,7 +47,7 @@ public abstract class BaseContext implements AppContext {
      * @param clazz the class
      * @return the deserializer object
      */
-    public abstract ObjectDeserializer getObjectDeserializer(Class<?> clazz);
+    public abstract ObjectDeserializer<?> getObjectDeserializer(Class<?> clazz);
     
     /**
      * Get structure of response parameter class map to the class

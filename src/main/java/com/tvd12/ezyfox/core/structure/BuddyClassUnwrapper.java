@@ -18,10 +18,10 @@ import com.tvd12.ezyfox.core.annotation.BuddyVariableParam;
 
 public class BuddyClassUnwrapper extends ClassUnwrapper {
 
-    // prevent use default constructor
-    protected BuddyClassUnwrapper() {
+    public BuddyClassUnwrapper() {
+        super();
     }
-
+    
     /**
      * Construct with agent's class
      * 
