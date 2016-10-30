@@ -3,21 +3,13 @@
  */
 package com.tvd12.ezyfox.core.config;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.List;
+import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import com.tvd12.ezyfox.core.structure.AgentClass;
-import com.tvd12.ezyfox.core.structure.MessageParamsClass;
-import com.tvd12.ezyfox.core.structure.RequestResponseClass;
-import com.tvd12.ezyfox.core.structure.ResponseParamsClass;
-import com.tvd12.ezyfox.core.structure.UserAgentClass;
-
 import lombok.Getter;
-import lombok.Setter;
 
 /**
  * @author tavandung12
@@ -26,36 +18,31 @@ import lombok.Setter;
 public class BaseExtensionConfiguration {
 
     // the map of classes and their serializer
-    @Setter @Getter
+    @Getter
     protected Map<Class<?>, Class<?>> objectSerializerClasses;
 
     // the map of classes and their desializer
-    @Setter @Getter
+    @Getter
     protected Map<Class<?>, Class<?>> objectDeserializerClasses;
-
-    // the map of response classes and their structure
-    @Getter
-    protected Map<Class<?>, ResponseParamsClass> responseParamsClasses;
-
-    // the map of message parameter classes and their structure
-    @Getter
-    protected Map<Class<?>, MessageParamsClass> messageParamsClasses;
-
-    // the map of request classes and their structure
-    @Getter
-    protected List<RequestResponseClass> requestResponseClientClasses;
-
+    
     // list of server event handler classes
-    @Setter @Getter
+    @Getter
     protected Set<Class<?>> serverEventHandlerClasses;
     
-    // the map of room classes and their structure
     @Getter
-    protected Map<Class<?>, AgentClass> roomAgentMap;
-
-    // the map of game users and their structure
+    protected Set<Class<?>> responseParamsClasses;
+    
     @Getter
-    protected Map<Class<?>, UserAgentClass> gameUserAgentMap;
+    protected Set<Class<?>> messageParamsClasses;
+    
+    @Getter
+    protected Set<Class<?>> requestResponseClientClasses;
+    
+    @Getter
+    protected Set<Class<?>> roomAgentClasses;
+    
+    @Getter
+    protected Set<Class<?>> gameUserAgentClasses;
     
     public BaseExtensionConfiguration() {
         initialize();
@@ -65,8 +52,41 @@ public class BaseExtensionConfiguration {
      * Initialize all components
      */
     protected void initialize() {
-        this.roomAgentMap = new HashMap<>();
-        this.gameUserAgentMap = new HashMap<>();
+        this.roomAgentClasses = new HashSet<>();
+        this.gameUserAgentClasses = new HashSet<>();
+        this.responseParamsClasses = new HashSet<>();
+        this.messageParamsClasses = new HashSet<>();
+        this.objectSerializerClasses = new HashMap<>();
+        this.objectDeserializerClasses = new HashMap<>();
+        this.serverEventHandlerClasses = new HashSet<>();
+        this.requestResponseClientClasses = new HashSet<>();
+    }
+    
+    /**
+     * Add the server event handler classes to the set
+     * 
+     * @param classes the server event handler classes
+     */
+    public void setServerEventHandlerClasses(Set<Class<?>> classes) {
+        this.serverEventHandlerClasses.addAll(classes);
+    }
+    
+    /**
+     * Add all object serializer classes to the map
+     * 
+     * @param classes the map of serializer classes
+     */
+    public void setObjectSerializerClasses(Map<Class<?>, Class<?>> classes) {
+        this.objectSerializerClasses.putAll(classes);
+    }
+    
+    /**
+     * Add all object deserializer classes to the map
+     * 
+     * @param classes the map of deserializer classes
+     */
+    public void setObjectDeserializerClasses(Map<Class<?>, Class<?>> classes) {
+        this.objectDeserializerClasses.putAll(classes);
     }
     
     /**
@@ -75,7 +95,7 @@ public class BaseExtensionConfiguration {
      * @param classes the classes
      */
     public void setMessageParamsClasses(Set<Class<?>> classes) {
-        this.messageParamsClasses = createMessageParamsClasses(classes);
+        this.messageParamsClasses.addAll(classes);
     }
     
     /**
@@ -84,7 +104,7 @@ public class BaseExtensionConfiguration {
      * @param classes the classes
      */
     public void setRequestResponseClientClasses(Set<Class<?>> classes) {
-        this.requestResponseClientClasses = createRequestResponseHandlers(classes);
+        this.requestResponseClientClasses.addAll(classes);
     }
     
     /**
@@ -93,7 +113,7 @@ public class BaseExtensionConfiguration {
      * @param classes the response parameter classes
      */
     public void setResponseParamsClasses(Set<Class<?>> classes) {
-        this.responseParamsClasses = createResponseParamsClasses(classes);
+        this.responseParamsClasses.addAll(classes);
     }
     
     /**
@@ -101,8 +121,8 @@ public class BaseExtensionConfiguration {
      * 
      * @param classes the set of room classes
      */
-    public void setRoomClasses(Set<Class<?>> classes) {
-        this.roomAgentMap.putAll(createRoomAgentClasses(classes));
+    public void setRoomAgentClasses(Set<Class<?>> classes) {
+        this.roomAgentClasses.addAll(classes);
     }
     
     /**
@@ -110,16 +130,23 @@ public class BaseExtensionConfiguration {
      * 
      * @param classes the game user classes
      */
-    public void setGameUserClasses(Set<Class<?>> classes) {
-        this.gameUserAgentMap.putAll(createGameUserAgentClasses(classes));
+    public void setGameUserAgentClasses(Set<Class<?>> classes) {
+        this.gameUserAgentClasses.addAll(classes);
+    }
+    
+    public void build() {
+        this.buildComponents();
+        this.unmodifyAll();
+        this.checkAll();
     }
     
     /**
      * Check all components
      */
-    public void checkAll() {
-        unmodifyAll();
-        checkRequestResponseClasses();
+    protected void checkAll() {
+    }
+    
+    protected void buildComponents() {
     }
     
     /**
@@ -128,86 +155,12 @@ public class BaseExtensionConfiguration {
     protected void unmodifyAll() {
         this.objectSerializerClasses = Collections.unmodifiableMap(objectSerializerClasses);
         this.objectDeserializerClasses = Collections.unmodifiableMap(objectDeserializerClasses);
-        this.responseParamsClasses = Collections.unmodifiableMap(responseParamsClasses);
-        this.messageParamsClasses = Collections.unmodifiableMap(messageParamsClasses);
         this.serverEventHandlerClasses = Collections.unmodifiableSet(serverEventHandlerClasses);
-        this.requestResponseClientClasses = Collections.unmodifiableList(requestResponseClientClasses);
-        this.roomAgentMap = Collections.unmodifiableMap(roomAgentMap);
-        this.gameUserAgentMap = Collections.unmodifiableMap(gameUserAgentMap);
-    }
-    
-    /**
-     * Check all request listener classes
-     */
-    protected void checkRequestResponseClasses() {
-        for(RequestResponseClass clazz : requestResponseClientClasses)
-            checkExecuteMethod(clazz);
-    }
-    
-    protected Map<Class<?>, ResponseParamsClass> 
-                createResponseParamsClasses(Set<Class<?>> classes) {
-        Map<Class<?>, ResponseParamsClass> answer = new HashMap<>();
-        for(Class<?> clazz : classes)
-            answer.put(clazz, new ResponseParamsClass(clazz));
-        return answer;
-    }
-    
-    protected List<RequestResponseClass> 
-                createRequestResponseHandlers(Set<Class<?>> classes) {
-        List<RequestResponseClass> answer = new ArrayList<>();
-        for(Class<?> clazz : classes)
-            answer.add(newAndInitRequestResponseClass(clazz));
-        return answer;
-    }
-    
-    protected Map<Class<?>, MessageParamsClass> 
-                createMessageParamsClasses(Set<Class<?>> classes) {
-        Map<Class<?>, MessageParamsClass> answer = new HashMap<>();
-        for(Class<?> clazz : classes)
-            answer.put(clazz, new MessageParamsClass(clazz));
-        return answer;
-    }
-    
-    protected RequestResponseClass newRequestResponseClass() {
-        return new RequestResponseClass();
-    }
-    
-    private RequestResponseClass newAndInitRequestResponseClass(Class<?> clazz) {
-        RequestResponseClass answer = newRequestResponseClass();
-        answer.init(clazz);
-        return answer;
-    }
-    
-    protected void checkExecuteMethod(RequestResponseClass clazz) {
-        clazz.checkExecuteMethod(null, null);
-    }
-    
-    /**
-     * Parse room agent class and put them to map
-     * 
-     * @param agentClasses the set of room agent classes
-     * @return the map of room classes and their structure
-     */
-    protected Map<Class<?>, AgentClass> 
-                createRoomAgentClasses(Set<Class<?>> agentClasses) {
-        Map<Class<?>, AgentClass> answer = new HashMap<>();
-        for(Class<?> clazz : agentClasses) 
-            answer.put(clazz, new AgentClass(clazz));
-        return answer;
-    }
-    
-    /**
-     * Parse game user agent class and put them to map
-     * 
-     * @param agentClasses the set of game user agent classes
-     * @return the map of game user classes and their structure
-     */
-    protected Map<Class<?>, UserAgentClass> 
-                createGameUserAgentClasses(Set<Class<?>> agentClasses) {
-        Map<Class<?>, UserAgentClass> answer = new HashMap<>();
-        for(Class<?> clazz : agentClasses) 
-            answer.put(clazz, new UserAgentClass(clazz));
-        return answer;
+        this.responseParamsClasses = Collections.unmodifiableSet(responseParamsClasses);
+        this.messageParamsClasses = Collections.unmodifiableSet(messageParamsClasses);
+        this.requestResponseClientClasses = Collections.unmodifiableSet(requestResponseClientClasses);
+        this.roomAgentClasses = Collections.unmodifiableSet(roomAgentClasses);
+        this.gameUserAgentClasses = Collections.unmodifiableSet(gameUserAgentClasses);
     }
     
 }

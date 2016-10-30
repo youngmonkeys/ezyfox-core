@@ -192,7 +192,7 @@ public abstract class BaseAppContext extends BaseContext {
      * @return structure of user agent class
      */
     public UserAgentClass getUserAgentClass() {
-        return appExtensionConfig().getUserAgentClass();
+        return appExtensionConfig().getUserAgentStruct();
     }
     
     /**
@@ -201,7 +201,7 @@ public abstract class BaseAppContext extends BaseContext {
      * @return a collection of user classes structure
      */
     public Collection<UserAgentClass> getGameUserAgentClasses() {
-        return appExtensionConfig().getGameUserAgentClasses();
+        return appExtensionConfig().getGameUserAgentStructCollection();
     }
     
     /**
@@ -236,21 +236,21 @@ public abstract class BaseAppContext extends BaseContext {
      * @return user agent's class
      */
     public Class<?> getUserClass() {
-        return appExtensionConfig().getUserClass();
+        return appExtensionConfig().getUserAgentClass();
     }
     
     /**
      * @return list of room agent classes
      */
     public Set<Class<?>> getRoomClasses() {
-        return appExtensionConfig().getRoomClasses();
+        return appExtensionConfig().getRoomAgentClasses();
     }
     
     /**
      * @return list of game user agent classes
      */
     public Set<Class<?>> getGameUserClasses() {
-        return appExtensionConfig().getGameUserClasses();
+        return appExtensionConfig().getGameUserAgentClasses();
     }
     
     /*

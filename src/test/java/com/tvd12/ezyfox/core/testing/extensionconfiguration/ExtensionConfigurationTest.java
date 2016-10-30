@@ -16,15 +16,15 @@ public class ExtensionConfigurationTest {
         loader.setEntryPoint(ExampleSFSZoneExtensionTest.class);
         AppExtensionConfigurationImpl config = loader.load();
         
-        assertEquals(ExampleUser.class, config.getUserClass());
-        assertEquals(ExampleUser.class, config.getUserAgentClass().getWrapper().getClazz());
+        assertEquals(ExampleUser.class, config.getUserAgentClass());
+        assertEquals(ExampleUser.class, config.getUserAgentStruct().getWrapper().getClazz());
         assertEquals(config.getRequestResponseClientClasses().size(), 3);
         assertEquals(config.getServerEventHandlerClasses().size(), 3);
-        assertEquals(config.getGameUserClasses().size(), 2);
+        assertEquals(config.getGameUserAgentClasses().size(), 2);
         assertEquals(config.getGameUserAgentClasses().size(), 2);
         assertEquals(config.getResponseParamsClasses().size(), 1);
         assertEquals(config.getMessageParamsClasses().size(), 1);
-        assertEquals(config.getMessageParamsClasses()
+        assertEquals(config.getMessageParamsStructs()
                 .get(ExMessagesParameter.class).getWrapper().methodCount(), 1);
         assertEquals(config.getObjectDeserializerClasses().size(), 2);
         assertEquals(config.getObjectSerializerClasses().size(), 2);
@@ -41,7 +41,7 @@ public class ExtensionConfigurationTest {
     public void checkUserAgentClassTest() {
         AppExtensionConfigurationImpl config = new AppExtensionConfigurationImpl() {
             @Override
-            public Class<?> getUserClass() {
+            public Class<?> getUserAgentClass() {
                 return ClassA.class;
             }
         };

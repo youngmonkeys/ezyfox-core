@@ -4,6 +4,7 @@
 package com.tvd12.ezyfox.core.config;
 
 import java.util.Collection;
+import java.util.Map;
 import java.util.Set;
 
 import com.tvd12.ezyfox.core.structure.AgentClass;
@@ -20,22 +21,22 @@ public interface AppExtensionConfiguration {
     /**
      * @return the user class
      */
-    Class<?> getUserClass();
+    Class<?> getUserAgentClass();
     
     /**
      * @return user class structure
      */
-    UserAgentClass getUserAgentClass();
+    UserAgentClass getUserAgentStruct();
     
     /**
      * @return the set of room classes
      */
-    Set<Class<?>> getRoomClasses();
+    Set<Class<?>> getRoomAgentClasses();
 
     /**
      * @return the set of game user classes
      */
-    Set<Class<?>> getGameUserClasses();
+    Set<Class<?>> getGameUserAgentClasses();
 
     /**
      * check whether response a message to client automatically or not
@@ -60,7 +61,7 @@ public interface AppExtensionConfiguration {
     /**
      * @return the collection of game user classes structure
      */
-    Collection<UserAgentClass> getGameUserAgentClasses();
+    Collection<UserAgentClass> getGameUserAgentStructCollection();
     
     /**
      * @param clazz message parameters class
@@ -74,6 +75,16 @@ public interface AppExtensionConfiguration {
      */
     ResponseParamsClass getResponseParamsClass(Class<?> clazz);
     
+    /**
+     * @return the map of message parameters classes and their structure
+     */
+    Map<Class<?>, MessageParamsClass> getMessageParamsStructs();
+
+    /**
+     * @return the map of response classes and their structure
+     */
+    Map<Class<?>, ResponseParamsClass> getResponseParamsStructs();
+
     /**
      * @param entryPoint the entry point class of the room extension
      * @return the room extension configuration

@@ -1,7 +1,7 @@
 package com.tvd12.ezyfox.core.content.impl;
 
 import com.tvd12.ezyfox.core.annotation.parser.ContextConfigParser;
-import com.tvd12.ezyfox.core.config.ExtensionConfiguration;
+import com.tvd12.ezyfox.core.config.ComplexExtensionConfiguration;
 import com.tvd12.ezyfox.core.serialize.ObjectDeserializer;
 import com.tvd12.ezyfox.core.serialize.ObjectSerializer;
 import com.tvd12.ezyfox.core.structure.ResponseParamsClass;
@@ -23,8 +23,8 @@ public class BaseRoomContext extends BaseContext {
         this.initRequestListenerCenter();
     }
     
-    protected ExtensionConfiguration getExtensionConfig() {
-        return (ExtensionConfiguration)appContext.getRoomExtensionConfig(configClasss);
+    protected ComplexExtensionConfiguration getExtensionConfig() {
+        return (ComplexExtensionConfiguration)appContext.getRoomExtensionConfig(configClasss);
     }
     
     protected Class<?> getConfigClass(Class<?> entryPoint) {

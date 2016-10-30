@@ -31,7 +31,7 @@ public final class ReflectPackageUtil {
 	public static Set<Class<?>> findClasses(String pkg, 
 			Class<? extends Annotation> annotation) {
 		Reflections reflections = new Reflections(pkg);
-		return reflections.getTypesAnnotatedWith(annotation);
+		return reflections.getTypesAnnotatedWith(annotation, true);
 	}
 	
 	/**
