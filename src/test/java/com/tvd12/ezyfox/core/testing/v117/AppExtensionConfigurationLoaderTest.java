@@ -18,6 +18,7 @@ import com.tvd12.ezyfox.core.config.AppExtensionConfigurationImpl;
 import com.tvd12.ezyfox.core.config.ComplexExtensionConfiguration;
 import com.tvd12.ezyfox.core.config.loader.AppExtensionConfigurationLoader;
 import com.tvd12.ezyfox.core.structure.RequestResponseClass;
+import com.tvd12.ezyfox.core.testing.context.UserJoinZoneHandler;
 import com.tvd12.ezyfox.core.testing.v117.roomconfig1.V117GameUser1;
 import com.tvd12.ezyfox.core.testing.v117.roomconfig1.V117MessageParams1;
 import com.tvd12.ezyfox.core.testing.v117.roomconfig1.V117ResponseParams1;
@@ -85,6 +86,8 @@ public class AppExtensionConfigurationLoaderTest {
                 ex.getRequestResponseClientStructs(), V120ClientRequestListener2.class));
         assertEquals(ex.getObjectDeserializerClasses().get(V120MessageParams2.class), V120ObjectDeserializer2.class);
         assertEquals(ex.getObjectSerializerClasses().get(V120MessageParams2.class), V120ObjectSerializer2.class);
+        
+        assertTrue(ex.getServerEventHandlerClasses().contains(UserJoinZoneHandler.class));
     }
     
     private RequestResponseClass getRequestResponseClass(
