@@ -8,11 +8,14 @@ import java.util.Set;
 
 import org.springframework.core.annotation.AnnotationUtils;
 
+import com.tvd12.ezyfox.core.annotation.AdditionalAppPackages;
 import com.tvd12.ezyfox.core.annotation.AutoResponse;
+import com.tvd12.ezyfox.core.annotation.ParentAppConfig;
 import com.tvd12.ezyfox.core.annotation.RoomContextConfiguration;
 import com.tvd12.ezyfox.core.annotation.RoomPackages;
 import com.tvd12.ezyfox.core.annotation.UserAgent;
 import com.tvd12.ezyfox.core.annotation.parser.ContextConfigParser;
+import com.tvd12.ezyfox.core.config.AdditionalAppExtensionConfiguration;
 import com.tvd12.ezyfox.core.config.AppExtensionConfigurationImpl;
 import com.tvd12.ezyfox.core.config.ExtensionConfiguration;
 import com.tvd12.ezyfox.core.config.RoomExtensionConfiguration;
@@ -43,9 +46,10 @@ public class AppExtensionConfigurationLoader extends ConfigurationLoader {
     protected <T extends ExtensionConfiguration> T load(Class<?> configClass, String[] packages) {
         AppExtensionConfigurationImpl answer = 
                 (AppExtensionConfigurationImpl)super.load(configClass, packages);
+        answer.setAdditionalConfigurations(createAdditionExtensionConfigs());
         answer.setRoomExtensionConfigurations(createRoomExtensionConfigs(configClass));
         answer.setAutoResponseEvents(findAutoResponseEvents(configClass));
-        answer.setUserClass(findUserClass(packages));
+        answer.setUserAgentClass(findUserClass(packages));
         return (T)answer;
     }
     
@@ -64,6 +68,47 @@ public class AppExtensionConfigurationLoader extends ConfigurationLoader {
     @Override
     protected Class<?> getConfigurationClass() {
         return ContextConfigParser.getConfigurationClass(getEntryPoint());
+    }
+    
+    protected Map<Class<?>, AdditionalAppExtensionConfiguration>
+            createAdditionExtensionConfigs() {
+        Map<Class<?>, AdditionalAppExtensionConfiguration> answer = new HashMap<>();
+        for(Class<?> clazz : findAdditionConfigClasses())
+            answer.put(clazz, newAddtionExtensionConfigLoader(clazz).load());
+        return answer;
+    }
+    
+    protected Set<Class<?>> findAdditionConfigClasses() {
+        Set<Class<?>> answer = new HashSet<>();
+        Set<Class<?>> classes = findAnnotatedClasses(
+                getAdditionalPakages(), ParentAppConfig.class);
+        for(Class<?> clazz : classes) 
+            checkAndAddAdditionConfigClass(answer, clazz);
+        return answer;
+    }
+    
+    protected void checkAndAddAdditionConfigClass(
+            Set<Class<?>> answer, Class<?> clazz) {
+        if(isMyAdditionConfigClass(clazz))
+            answer.add(clazz);
+    }
+    
+    protected boolean isMyAdditionConfigClass(Class<?> clazz) {
+        return getParentConfigClassFromAdditionConfigClass(clazz)
+                .equals(getConfigurationClass().getName());
+    }
+    
+    protected String getParentConfigClassFromAdditionConfigClass(Class<?> clazz) {
+        ParentAppConfig anno = clazz.getAnnotation(ParentAppConfig.class);
+        return anno.clazz() == Class.class ? anno.value() : anno.clazz().getName();
+    }
+    
+    protected AdditionalAppExtensionConfigurationLoader
+            newAddtionExtensionConfigLoader(Class<?> configClass) {
+        AdditionalAppExtensionConfigurationLoader answer = 
+                new AdditionalAppExtensionConfigurationLoader();
+        answer.setConfigurationClass(configClass);
+        return answer;
     }
     
     /**
@@ -131,7 +176,13 @@ public class AppExtensionConfigurationLoader extends ConfigurationLoader {
     protected String[] getRoomPackages(Class<?> configClass) {
         return configClass.isAnnotationPresent(RoomPackages.class)
                 ? configClass.getAnnotation(RoomPackages.class).packages()
-                : new String[] {""};
+                : new String[] {"com"};
+    }
+    
+    protected String[] getAdditionalPakages() {
+        return getConfigurationClass().isAnnotationPresent(AdditionalAppPackages.class)
+                ? getConfigurationClass().getAnnotation(AdditionalAppPackages.class).packages()
+                : new String[] {"com"};
     }
     
     /**

@@ -6,7 +6,7 @@ package com.tvd12.ezyfox.core.content.impl;
 import java.util.List;
 import java.util.Set;
 
-import com.tvd12.ezyfox.core.config.ExtensionConfiguration;
+import com.tvd12.ezyfox.core.config.ComplexExtensionConfiguration;
 import com.tvd12.ezyfox.core.config.RequestListenerCenter;
 import com.tvd12.ezyfox.core.content.AppContext;
 import com.tvd12.ezyfox.core.serialize.ObjectDeserializer;
@@ -21,7 +21,7 @@ import com.tvd12.ezyfox.core.structure.ResponseParamsClass;
 public abstract class BaseContext implements AppContext {
     
  // extension configuration object
-    protected ExtensionConfiguration extensionConfig;
+    protected ComplexExtensionConfiguration extensionConfig;
     
     // holds all request listeners's structure
     protected RequestListenerCenter requestListenerCenter;
@@ -72,7 +72,7 @@ public abstract class BaseContext implements AppContext {
      */
     protected void initRequestListenerCenter() {
         requestListenerCenter = new RequestListenerCenter();
-        requestListenerCenter.addListeners(extensionConfig.getRequestResponseClientClasses());
+        requestListenerCenter.addListeners(extensionConfig.getRequestResponseClientStructs());
     }
     
 }

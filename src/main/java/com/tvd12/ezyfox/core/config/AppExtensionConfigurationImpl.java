@@ -2,7 +2,7 @@ package com.tvd12.ezyfox.core.config;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.HashSet;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -23,72 +23,39 @@ import lombok.Setter;
  *
  */
 public class AppExtensionConfigurationImpl
-        extends BaseExtensionConfiguration
-        implements ExtensionConfiguration, AppExtensionConfiguration {
+        extends AbstractExtensionConfiguration
+        implements ComplexExtensionConfiguration, AppExtensionConfiguration {
     
     // the user class
-    @Getter
-    private Class<?> userClass;
-    
-    // the list of room classes
-    @Getter
-    private Set<Class<?>> roomClasses;
-
-    // the list of game user classes
-    @Getter
-    private Set<Class<?>> gameUserClasses;
+    @Setter @Getter
+    protected Class<?> userAgentClass;
     
     // the structure of user class
     @Getter
-    private UserAgentClass userAgentClass;
+    protected UserAgentClass userAgentStruct;
     
     // the list of events response a message to client automatically
     @Setter
-    private Set<String> autoResponseEvents;
+    protected Set<String> autoResponseEvents;
+    
+    // the map of response classes and their structure
+    @Getter
+    protected Map<Class<?>, ResponseParamsClass> responseParamsStructs;
+
+    // the map of message parameter classes and their structure
+    @Getter
+    protected Map<Class<?>, MessageParamsClass> messageParamsStructs;
+
+    // the map of room classes and their structure
+    @Getter
+    protected Map<Class<?>, AgentClass> roomAgentStructs;
+
+    // the map of game users and their structure
+    @Getter
+    protected Map<Class<?>, UserAgentClass> gameUserAgentStructs;
     
     // the map of room configuration class and their holder
-    private Map<Class<?>, RoomExtensionConfiguration> roomExtensionConfigurations;
-    
-    /*
-     * (non-Javadoc)
-     * @see com.tvd12.ezyfox.core.config.BaseExtensionConfiguration#initialize()
-     */
-    @Override
-    protected void initialize() {
-        super.initialize();
-        this.roomClasses = new HashSet<>();
-        this.gameUserClasses = new HashSet<>();
-    }
-    
-    /**
-     * Set user class and parse it's structure
-     * 
-     * @param clazz the user class
-     */
-    public void setUserClass(Class<?> clazz) {
-        this.userClass = clazz;
-        this.userAgentClass = new UserAgentClass(clazz);
-    }
-    
-    /*
-     * (non-Javadoc)
-     * @see com.tvd12.ezyfox.core.config.BaseExtensionConfiguration#setRoomClasses(java.util.Set)
-     */
-    @Override
-    public void setRoomClasses(Set<Class<?>> classes) {
-        super.setRoomClasses(classes);
-        this.roomClasses.addAll(classes);
-    }
-    
-    /*
-     * (non-Javadoc)
-     * @see com.tvd12.ezyfox.core.config.BaseExtensionConfiguration#setGameUserClasses(java.util.Set)
-     */
-    @Override
-    public void setGameUserClasses(Set<Class<?>> classes) {
-        super.setGameUserClasses(classes);
-        this.gameUserClasses.addAll(classes);
-    }
+    protected Map<Class<?>, RoomExtensionConfiguration> roomExtensionConfigurations;
     
     /**
      * Set room extension configurations
@@ -99,7 +66,41 @@ public class AppExtensionConfigurationImpl
         roomExtensionConfigurations = map;
         for(RoomExtensionConfiguration cfg : map.values())
             importFromRoomConfiguration(cfg);
-        
+    }
+    
+    /**
+     * Set additional configuration to the application configuration
+     * 
+     * @param map the map of configuration classes and their information
+     */
+    public void setAdditionalConfigurations(Map<Class<?>, AdditionalAppExtensionConfiguration> map) {
+        for(AdditionalAppExtensionConfiguration cfg : map.values())
+            importFromAdditionalConfiguration(cfg);
+    }
+    
+    /**
+     * Set additional configuration to the application configuration
+     * 
+     * @param cfg the additional configuration
+     */
+    private void importFromAdditionalConfiguration(BaseExtensionConfiguration cfg) {
+        this.importFromBaseConfiguration(cfg);
+        this.setRequestResponseClientClasses(cfg.getRequestResponseClientClasses());
+    }
+    
+    /**
+     * Set additional configuration to the application configuration
+     * 
+     * @param cfg the additional configuration
+     */
+    private void importFromBaseConfiguration(BaseExtensionConfiguration cfg) {
+        this.setRoomAgentClasses(cfg.getRoomAgentClasses());
+        this.setGameUserAgentClasses(cfg.getGameUserAgentClasses());
+        this.setMessageParamsClasses(cfg.getMessageParamsClasses());
+        this.setObjectDeserializerClasses(cfg.getObjectDeserializerClasses());
+        this.setObjectSerializerClasses(cfg.getObjectSerializerClasses());
+        this.setResponseParamsClasses(cfg.getResponseParamsClasses());
+        this.setServerEventHandlerClasses(cfg.getServerEventHandlerClasses());
     }
     
     /**
@@ -108,28 +109,7 @@ public class AppExtensionConfigurationImpl
      * @param cfg the room configuration
      */
     private void importFromRoomConfiguration(RoomExtensionConfiguration cfg) {
-        ExtensionConfiguration base = (ExtensionConfiguration)cfg;
-        importRoomFromRoomConfiguration(cfg);
-        imporGameUserFromRoomConfiguration(cfg);
-        importFromExtensionConfiguration(base);
-    }
-    
-    private void importFromExtensionConfiguration(ExtensionConfiguration base) {
-        this.objectSerializerClasses.putAll(base.getObjectSerializerClasses());
-        this.objectDeserializerClasses.putAll(base.getObjectDeserializerClasses());
-        this.responseParamsClasses.putAll(base.getResponseParamsClasses());
-        this.messageParamsClasses.putAll(base.getMessageParamsClasses());
-        this.serverEventHandlerClasses.addAll(base.getServerEventHandlerClasses());
-    }
-    
-    private void importRoomFromRoomConfiguration(RoomExtensionConfiguration cfg) {
-        this.roomClasses.addAll(cfg.getRoomAgentMap().keySet());
-        this.roomAgentMap.putAll(cfg.getRoomAgentMap());
-    }
-    
-    private void imporGameUserFromRoomConfiguration(RoomExtensionConfiguration cfg) {
-        this.gameUserClasses.addAll(cfg.getGameUserAgentMap().keySet());
-        this.gameUserAgentMap.putAll(cfg.getGameUserAgentMap());
+        importFromBaseConfiguration((BaseExtensionConfiguration)cfg);
     }
     
     /* (non-Javadoc)
@@ -145,7 +125,7 @@ public class AppExtensionConfigurationImpl
      */
     @Override
     public AgentClass getRoomAgentClass(Class<?> roomClass) {
-        return roomAgentMap.get(roomClass);
+        return roomAgentStructs.get(roomClass);
     }
     
     /* (non-Javadoc)
@@ -153,15 +133,15 @@ public class AppExtensionConfigurationImpl
      */
     @Override
     public UserAgentClass getGameUserAgentClass(Class<?> clazz) {
-        return gameUserAgentMap.get(clazz);
+        return gameUserAgentStructs.get(clazz);
     }
     
     /* (non-Javadoc)
      * @see com.tvd12.ezyfox.core.config.AppExtensionConfiguration#getGameUserAgentClasses()
      */
     @Override
-    public Collection<UserAgentClass> getGameUserAgentClasses() {
-        return gameUserAgentMap.values();
+    public Collection<UserAgentClass> getGameUserAgentStructCollection() {
+        return getGameUserAgentStructs().values();
     }
     
     /* (non-Javadoc)
@@ -169,7 +149,7 @@ public class AppExtensionConfigurationImpl
      */
     @Override
     public MessageParamsClass getMessageParamsClass(Class<?> clazz) {
-        return messageParamsClasses.get(clazz);
+        return messageParamsStructs.get(clazz);
     }
     
     /* (non-Javadoc)
@@ -177,7 +157,7 @@ public class AppExtensionConfigurationImpl
      */
     @Override
     public ResponseParamsClass getResponseParamsClass(Class<?> clazz) {
-        return responseParamsClasses.get(clazz);
+        return responseParamsStructs.get(clazz);
     }
     
     /* (non-Javadoc)
@@ -188,6 +168,19 @@ public class AppExtensionConfigurationImpl
         return roomExtensionConfigurations.get(entryPoint);
     }
     
+    /* (non-Javadoc)
+     * @see com.tvd12.ezyfox.core.config.BaseExtensionConfiguration#buildComponents()
+     */
+    @Override
+    protected void buildComponents() {
+        super.buildComponents();
+        this.userAgentStruct = new UserAgentClass(userAgentClass);
+        this.roomAgentStructs = createRoomAgentClasses();
+        this.gameUserAgentStructs = createGameUserAgentClasses();
+        this.responseParamsStructs = createResponseParamsClasses();
+        this.messageParamsStructs = createMessageParamsClasses();
+    }
+    
     /*
      * (non-Javadoc)
      * @see com.tvd12.ezyfox.core.config.BaseExtensionConfiguration#unmodifyAll()
@@ -195,9 +188,11 @@ public class AppExtensionConfigurationImpl
     @Override
     protected void unmodifyAll() {
         super.unmodifyAll();
-        this.roomClasses = Collections.unmodifiableSet(roomClasses);
-        this.gameUserClasses = Collections.unmodifiableSet(gameUserClasses);
         this.autoResponseEvents = Collections.unmodifiableSet(autoResponseEvents);
+        this.gameUserAgentStructs = Collections.unmodifiableMap(gameUserAgentStructs);
+        this.messageParamsStructs = Collections.unmodifiableMap(messageParamsStructs);
+        this.responseParamsStructs = Collections.unmodifiableMap(responseParamsStructs);
+        this.roomAgentStructs = Collections.unmodifiableMap(roomAgentStructs);
     }
     
     /* (non-Javadoc)
@@ -205,7 +200,45 @@ public class AppExtensionConfigurationImpl
      */
     @Override
     protected void checkExecuteMethod(RequestResponseClass clazz) {
-        clazz.checkExecuteMethod(getUserClass(), getGameUserClasses());
+        clazz.checkExecuteMethod(getUserAgentClass(), getGameUserAgentClasses());
+    }
+    
+    protected Map<Class<?>, ResponseParamsClass> createResponseParamsClasses() {
+        Map<Class<?>, ResponseParamsClass> answer = new HashMap<>();
+        for(Class<?> clazz : responseParamsClasses)
+            answer.put(clazz, new ResponseParamsClass(clazz));
+        return answer;
+    }
+    
+    protected Map<Class<?>, MessageParamsClass> createMessageParamsClasses() {
+        Map<Class<?>, MessageParamsClass> answer = new HashMap<>();
+        for(Class<?> clazz : messageParamsClasses)
+            answer.put(clazz, new MessageParamsClass(clazz));
+        return answer;
+    }
+    
+    /**
+     * Parse room agent class and put them to map
+     * 
+     * @return the map of room classes and their structure
+     */
+    protected Map<Class<?>, AgentClass> createRoomAgentClasses() {
+        Map<Class<?>, AgentClass> answer = new HashMap<>();
+        for(Class<?> clazz : roomAgentClasses) 
+            answer.put(clazz, new AgentClass(clazz));
+        return answer;
+    }
+    
+    /**
+     * Parse game user agent class and put them to map
+     * 
+     * @return the map of game user classes and their structure
+     */
+    protected Map<Class<?>, UserAgentClass> createGameUserAgentClasses() {
+        Map<Class<?>, UserAgentClass> answer = new HashMap<>();
+        for(Class<?> clazz : gameUserAgentClasses) 
+            answer.put(clazz, new UserAgentClass(clazz));
+        return answer;
     }
     
 }

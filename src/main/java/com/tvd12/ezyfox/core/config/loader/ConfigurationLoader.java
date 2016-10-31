@@ -37,8 +37,8 @@ public abstract class ConfigurationLoader extends BaseConfigurationLoader {
     protected <T extends ExtensionConfiguration> T load(Class<?> configClass, String[] packages) {
         BaseExtensionConfiguration answer = 
                 newExtensionConfiguration();
-        answer.setGameUserClasses(findGameUserClasses(packages));
-        answer.setRoomClasses(findRoomClasses(packages));
+        answer.setGameUserAgentClasses(findGameUserClasses(packages));
+        answer.setRoomAgentClasses(findRoomClasses(packages));
         answer.setMessageParamsClasses(findMessageParamsClasses(packages));
         Set<Class<?>> additionalRequestListenerClasses =
                 fetchAdditionalClientRequestListeners(configClass);

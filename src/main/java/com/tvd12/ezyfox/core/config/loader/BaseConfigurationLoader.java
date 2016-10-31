@@ -43,7 +43,7 @@ public abstract class BaseConfigurationLoader {
      */
 	protected <T extends ExtensionConfiguration> T load(Class<?> configClass) {
 	    T answer = load(configClass, getPackagesScan(configClass));
-	    ((BaseExtensionConfiguration)answer).checkAll();
+	    ((BaseExtensionConfiguration)answer).build();
 	    return answer;
 	}
 	

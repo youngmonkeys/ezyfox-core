@@ -11,8 +11,8 @@ import com.tvd12.ezyfox.core.structure.RoomRequestResponseClass;
  *
  */
 public class RoomExtensionConfigurationImpl
-        extends BaseExtensionConfiguration
-        implements ExtensionConfiguration, RoomExtensionConfiguration {
+        extends AbstractExtensionConfiguration
+        implements ComplexExtensionConfiguration, RoomExtensionConfiguration {
     
     /* (non-Javadoc)
      * @see com.tvd12.ezyfox.core.config.BaseExtensionConfiguration#newRequestResponseClass()
@@ -21,4 +21,5 @@ public class RoomExtensionConfigurationImpl
     protected RequestResponseClass newRequestResponseClass() {
         return new RoomRequestResponseClass();
     }
+    
 }

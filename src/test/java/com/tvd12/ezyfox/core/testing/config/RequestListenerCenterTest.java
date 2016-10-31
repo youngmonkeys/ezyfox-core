@@ -7,7 +7,7 @@ import java.util.Set;
 
 import org.testng.annotations.Test;
 
-import com.tvd12.ezyfox.core.config.ExtensionConfiguration;
+import com.tvd12.ezyfox.core.config.ComplexExtensionConfiguration;
 import com.tvd12.ezyfox.core.config.RequestListenerCenter;
 import com.tvd12.ezyfox.core.config.loader.AppExtensionConfigurationLoader;
 import com.tvd12.ezyfox.core.structure.RequestResponseClass;
@@ -20,10 +20,10 @@ public class RequestListenerCenterTest extends BaseTest {
     public void testValidCase() {
         AppExtensionConfigurationLoader loader = new AppExtensionConfigurationLoader();
         loader.setEntryPoint(ExampleSFSZoneExtensionTest.class);
-        ExtensionConfiguration config = loader.load();
+        ComplexExtensionConfiguration config = loader.load();
         
         RequestListenerCenter center = new RequestListenerCenter();
-        center.addListeners(config.getRequestResponseClientClasses());
+        center.addListeners(config.getRequestResponseClientStructs());
         
         List<RequestResponseClass> classes = center.getListeners("abc");
         assertEquals(classes.size(), 3);

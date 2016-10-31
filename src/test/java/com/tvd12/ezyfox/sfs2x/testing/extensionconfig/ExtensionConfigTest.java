@@ -35,12 +35,12 @@ public class ExtensionConfigTest extends AbstractTestNGSpringContextTests {
 	
 	@Test
 	public void testFindValidExtensionUser() {
-		assertEquals(TestUser.class, extensionConfig.getUserClass());
+		assertEquals(TestUser.class, extensionConfig.getUserAgentClass());
 	}
 	
 	@Test
 	public void testFindValidClientActionListeners() {
-		List<RequestResponseClass> listeners = extensionConfig.getRequestResponseClientClasses();
+		List<RequestResponseClass> listeners = extensionConfig.getRequestResponseClientStructs();
 		assertEquals(3, listeners.size());
 		for(RequestResponseClass listener : listeners) {
 			String command = listener.getRequestCommand();
