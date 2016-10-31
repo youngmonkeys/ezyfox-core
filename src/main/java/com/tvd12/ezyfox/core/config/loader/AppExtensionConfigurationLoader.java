@@ -169,8 +169,10 @@ public class AppExtensionConfigurationLoader extends ConfigurationLoader {
      * @return the set of room extension entry point
      */
     protected Set<Class<?>> findRoomConfigurationClasses(Class<?> configClass) {
-        return new HashSet<>(ReflectPackageUtil.findClasses(
+        if(configClass.isAnnotationPresent(RoomPackages.class))
+            return new HashSet<>(ReflectPackageUtil.findClasses(
                 getRoomPackages(configClass), RoomContextConfiguration.class));
+        return new HashSet<>();
     }
     
     /**
@@ -180,9 +182,7 @@ public class AppExtensionConfigurationLoader extends ConfigurationLoader {
      * @return the array of packages
      */
     protected String[] getRoomPackages(Class<?> configClass) {
-        return configClass.isAnnotationPresent(RoomPackages.class)
-                ? configClass.getAnnotation(RoomPackages.class).packages()
-                : new String[] {"com"};
+        return configClass.getAnnotation(RoomPackages.class).packages();
     }
     
     protected String[] getAdditionalPakages() {
