@@ -46,7 +46,7 @@ public class AppExtensionConfigurationLoader extends ConfigurationLoader {
     protected <T extends ExtensionConfiguration> T load(Class<?> configClass, String[] packages) {
         AppExtensionConfigurationImpl answer = 
                 (AppExtensionConfigurationImpl)super.load(configClass, packages);
-        answer.setAdditionalConfigurations(createAdditionExtensionConfigs());
+        answer.setAdditionalConfigurations(createAdditionalExtensionConfigs());
         answer.setRoomExtensionConfigurations(createRoomExtensionConfigs(configClass));
         answer.setAutoResponseEvents(findAutoResponseEvents(configClass));
         answer.setUserAgentClass(findUserClass(packages));
@@ -71,11 +71,17 @@ public class AppExtensionConfigurationLoader extends ConfigurationLoader {
     }
     
     protected Map<Class<?>, AdditionalAppExtensionConfiguration>
-            createAdditionExtensionConfigs() {
+            createAdditionalExtensionConfigs() {
         Map<Class<?>, AdditionalAppExtensionConfiguration> answer = new HashMap<>();
-        for(Class<?> clazz : findAdditionConfigClasses())
-            answer.put(clazz, newAddtionExtensionConfigLoader(clazz).load());
+        if(shouldFindAdditionalExtensionConfigs()) {
+            for(Class<?> clazz : findAdditionConfigClasses())
+                answer.put(clazz, newAddtionExtensionConfigLoader(clazz).load());
+        }
         return answer;
+    }
+    
+    protected boolean shouldFindAdditionalExtensionConfigs() {
+        return getConfigurationClass().isAnnotationPresent(AdditionalAppPackages.class);
     }
     
     protected Set<Class<?>> findAdditionConfigClasses() {
@@ -180,9 +186,7 @@ public class AppExtensionConfigurationLoader extends ConfigurationLoader {
     }
     
     protected String[] getAdditionalPakages() {
-        return getConfigurationClass().isAnnotationPresent(AdditionalAppPackages.class)
-                ? getConfigurationClass().getAnnotation(AdditionalAppPackages.class).packages()
-                : new String[] {"com"};
+        return getConfigurationClass().getAnnotation(AdditionalAppPackages.class).packages();
     }
     
     /**

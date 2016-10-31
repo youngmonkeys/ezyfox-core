@@ -143,7 +143,7 @@ We must spend a lot of time to declare, init variables. Some time we also have t
 	<dependency>
 		<groupId>com.tvd12</groupId>
 		<artifactId>ezyfox-core</artifactId>
-		<version>1.2.0</version>
+		<version>1.2.1</version>
 	</dependency>
 ```
 
