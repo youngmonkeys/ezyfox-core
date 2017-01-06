@@ -29,7 +29,16 @@ public interface AppContext {
 	void set(Object key, Object value);
 	
 	/**
-	 * Support for retrieve data that's held
+     * Support to retrieve data that's held
+     * 
+     * @param <T> the returned type
+     * @param key key
+     * @return a value
+     */
+    <T> T get(Object key);
+	
+	/**
+	 * Support to retrieve data that's held
 	 * 
 	 * @param <T> the returned type
 	 * @param key key

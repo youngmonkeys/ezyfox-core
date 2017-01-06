@@ -22,10 +22,11 @@ public interface ApiProperties {
     /**
      * get the value to which the specified key is mapped
      * 
+     * @param <T> type of value
      * @param key key
      * @return a value
      */
-    public Object getProperty(Object key);
+    public <T> T getProperty(Object key);
     
     /**
      * get the value to which the specified key is mapped and cast value to specific type

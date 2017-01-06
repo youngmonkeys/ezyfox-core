@@ -32,6 +32,7 @@ public class RoomContextTest {
          assertNotNull(roomContext.command(AddCommand.class));
          roomContext.set("a", "b");
          assertEquals(roomContext.get("a", String.class), "b");
+         assertEquals(roomContext.get("a"), "b");
     }
 
     private BaseAppContext newAppContext() {
