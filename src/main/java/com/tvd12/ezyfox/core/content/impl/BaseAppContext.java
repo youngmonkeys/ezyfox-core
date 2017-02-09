@@ -188,6 +188,15 @@ public abstract class BaseAppContext extends BaseContext {
     
     /*
      * (non-Javadoc)
+     * @see com.tvd12.ezyfox.core.content.AppContext#get(java.lang.Class)
+     */
+    @Override
+    public <T> T get(Class<T> clazz) {
+    	return get((Object)clazz);
+    }
+    
+    /*
+     * (non-Javadoc)
      * @see com.tvd12.ezyfox.core.content.AppContext#get(java.lang.Object, java.lang.Class)
      */
     @SuppressWarnings("unchecked")

@@ -36,6 +36,15 @@ public interface AppContext {
      * @return a value
      */
     <T> T get(Object key);
+    
+    /**
+     * Support to retrieve instance of the class that's held
+     * 
+     * @param <T> the returned type
+     * @param clazz the class mapped to the instance
+     * @return the instance of the class
+     */
+    <T> T get(Class<T> clazz);
 	
 	/**
 	 * Support to retrieve data that's held

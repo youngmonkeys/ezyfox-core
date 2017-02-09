@@ -3,7 +3,7 @@
  */
 package com.tvd12.ezyfox.core.command;
 
-import java.util.List;
+import java.util.Collection;
 
 import com.tvd12.ezyfox.core.entities.ApiBaseUser;
 
@@ -55,7 +55,7 @@ public interface Response extends BaseCommand {
      * @param users user agent
      * @return this pointer
      */
-    public <U extends ApiBaseUser> Response recipients(List<U> users);
+    public <U extends ApiBaseUser> Response recipients(Collection<U> users);
     
     /**
      * add recipients to list

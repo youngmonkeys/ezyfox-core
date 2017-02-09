@@ -64,9 +64,10 @@ public class ConcurrentParameters implements Parameters {
     /**
      * @see Parameters#get(Object)
      */
+    @SuppressWarnings("unchecked")
     @Override
-    public Object get(Object key) {
-        return values.get(key);
+    public <T> T get(Object key) {
+        return (T) values.get(key);
     }
 
     /**
