@@ -1,5 +1,6 @@
 package com.tvd12.ezyfox.core.transport.impl;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,9 +16,10 @@ import com.tvd12.ezyfox.core.transport.Parameters;
  *
  */
 
-public class ParameterWrapper implements Parameters {
-    
-    // key-value map
+public class ParameterWrapper implements Parameters, Serializable {
+	private static final long serialVersionUID = 566241209233835941L;
+	
+	// key-value map
     protected Map<Object, Object> values
             = new HashMap<>();
     
