@@ -1,5 +1,6 @@
 package com.tvd12.ezyfox.core.transport.impl;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -15,9 +16,10 @@ import com.tvd12.ezyfox.core.transport.Parameters;
  *
  */
 
-public class ConcurrentParameters implements Parameters {
-
-    // concurrent has map
+public class ConcurrentParameters implements Parameters, Serializable {
+	private static final long serialVersionUID = -7914506380627713555L;
+	
+	// concurrent has map
     private ConcurrentHashMap<Object, Object> values 
             = new ConcurrentHashMap<>();
     
@@ -64,9 +66,10 @@ public class ConcurrentParameters implements Parameters {
     /**
      * @see Parameters#get(Object)
      */
+    @SuppressWarnings("unchecked")
     @Override
-    public Object get(Object key) {
-        return values.get(key);
+    public <T> T get(Object key) {
+        return (T) values.get(key);
     }
 
     /**

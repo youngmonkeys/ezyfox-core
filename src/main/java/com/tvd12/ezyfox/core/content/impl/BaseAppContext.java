@@ -25,7 +25,6 @@ import com.tvd12.ezyfox.core.config.ObjectSerializerMapper;
 import com.tvd12.ezyfox.core.config.RoomExtensionConfiguration;
 import com.tvd12.ezyfox.core.config.ServerEventHandlerClasses;
 import com.tvd12.ezyfox.core.config.loader.AppExtensionConfigurationLoader;
-import com.tvd12.ezyfox.core.content.AppContext;
 import com.tvd12.ezyfox.core.exception.ExtensionException;
 import com.tvd12.ezyfox.core.reflect.ReflectClassUtil;
 import com.tvd12.ezyfox.core.serialize.ObjectDeserializer;
@@ -169,16 +168,36 @@ public abstract class BaseAppContext extends BaseContext {
         return appExtensionConfig().isAutoResponseEvent(event);
     }
     
-    /**
-     * @see AppContext#set(Object, Object)
+    /*
+     * (non-Javadoc)
+     * @see com.tvd12.ezyfox.core.content.AppContext#set(java.lang.Object, java.lang.Object)
      */
     @Override
     public void set(Object key, Object value) {
         properties.put(key, value);
     }
     
-    /**
-     * @see AppContext#get(Object, Class)
+    /* (non-Javadoc)
+     * @see com.tvd12.ezyfox.core.content.AppContext#get(java.lang.Object)
+     */
+    @SuppressWarnings("unchecked")
+    @Override
+    public <T> T get(Object key) {
+        return (T)properties.get(key);
+    }
+    
+    /*
+     * (non-Javadoc)
+     * @see com.tvd12.ezyfox.core.content.AppContext#get(java.lang.Class)
+     */
+    @Override
+    public <T> T get(Class<T> clazz) {
+    	return get((Object)clazz);
+    }
+    
+    /*
+     * (non-Javadoc)
+     * @see com.tvd12.ezyfox.core.content.AppContext#get(java.lang.Object, java.lang.Class)
      */
     @SuppressWarnings("unchecked")
     @Override

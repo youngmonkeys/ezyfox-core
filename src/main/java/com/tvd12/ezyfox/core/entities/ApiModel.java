@@ -37,9 +37,10 @@ public abstract class ApiModel implements ApiProperties {
      * @param key key
      * @return a value
      */
+    @SuppressWarnings("unchecked")
     @Override
-    public Object getProperty(Object key) {
-        return properties.get(key);
+    public <T> T getProperty(Object key) {
+        return (T) properties.get(key);
     }
     
     /**

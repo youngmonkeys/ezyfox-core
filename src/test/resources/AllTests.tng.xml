@@ -96,4 +96,10 @@
     		<package name="com.tvd12.ezyfox.core.testing.v117"/>
     	</packages>
     </test>
+    
+    <test name="Transport">
+    	<packages>
+    		<package name="com.tvd12.ezyfox.core.testing.transport"/>
+    	</packages>
+    </test>
 </suite>

@@ -31,7 +31,10 @@ public class RoomContextTest {
          assertNotNull(roomContext.getObjectSerializer(CurrentState.class));
          assertNotNull(roomContext.command(AddCommand.class));
          roomContext.set("a", "b");
+         roomContext.set(getClass(), this);
          assertEquals(roomContext.get("a", String.class), "b");
+         assertEquals(roomContext.get("a"), "b");
+         assertEquals(roomContext.get(getClass()), this);
     }
 
     private BaseAppContext newAppContext() {

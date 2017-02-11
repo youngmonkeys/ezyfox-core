@@ -46,6 +46,19 @@ public class BaseRoomContext extends BaseContext {
     public void set(Object key, Object value) {
         appContext.set(key, value);
     }
+    
+    /* (non-Javadoc)
+     * @see com.tvd12.ezyfox.core.content.AppContext#get(java.lang.Object)
+     */
+    @Override
+    public <T> T get(Object key) {
+        return appContext.get(key);
+    }
+    
+    @Override
+    public <T> T get(Class<T> clazz) {
+    	return appContext.get(clazz);
+    }
 
     /* (non-Javadoc)
      * @see com.tvd12.ezyfox.core.content.AppContext#get(java.lang.Object, java.lang.Class)
