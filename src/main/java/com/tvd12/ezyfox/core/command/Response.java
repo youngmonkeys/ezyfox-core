@@ -55,7 +55,7 @@ public interface Response extends BaseCommand {
      * @param users user agent
      * @return this pointer
      */
-    public <U extends ApiBaseUser> Response recipients(Collection<U> users);
+    <U extends ApiBaseUser> Response recipients(Collection<U> users);
     
     /**
      * add recipients to list
@@ -64,6 +64,23 @@ public interface Response extends BaseCommand {
      * @return this pointer
      */
     Response recipients(String... usernames);
+    
+    /**
+     * Add user to excluded users list, excluded users will not receive the message
+     * 
+     * @param users the excluded users
+     * @return this pointer
+     */
+    Response exclude(ApiBaseUser... users);
+    
+    /**
+     * Add user to excluded users list, excluded users will not receive the message
+     * 
+     * @param <U> user type
+     * @param users the excluded users
+     * @return this pointer
+     */
+    <U extends ApiBaseUser> Response exclude(Collection<U> users);
     
     /**
      * user udp protocol or not

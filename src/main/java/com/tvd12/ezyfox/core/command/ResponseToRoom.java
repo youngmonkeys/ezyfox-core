@@ -3,6 +3,8 @@
  */
 package com.tvd12.ezyfox.core.command;
 
+import java.util.Collection;
+
 import com.tvd12.ezyfox.core.entities.ApiBaseUser;
 import com.tvd12.ezyfox.core.entities.ApiRoom;
 
@@ -51,10 +53,19 @@ public interface ResponseToRoom extends BaseCommand {
     /**
      * Add user to excluded users list, excluded users will not receive the message
      * 
-     * @param user the excluded user
+     * @param users the excluded user
      * @return this pointer
      */
-    ResponseToRoom exclude(ApiBaseUser user);
+    ResponseToRoom exclude(ApiBaseUser... users);
+    
+    /**
+     * Add user to excluded users list, excluded users will not receive the message
+     * 
+     * @param <U> user type
+     * @param users the excluded users
+     * @return this pointer
+     */
+    <U extends ApiBaseUser> ResponseToRoom exclude(Collection<U> users);
     
     /**
      * user udp protocol or not
