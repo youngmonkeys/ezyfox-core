@@ -9,6 +9,6 @@ package com.tvd12.ezyfox.core.constants;
  */
 public interface APIEvent {
 
-    static final String ZONE_JOIN   = "zoneJoin";
+    static final String ZONE_JOIN   = "zj";
     
 }

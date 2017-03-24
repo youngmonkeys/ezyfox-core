@@ -44,6 +44,17 @@ public abstract class ApiModel implements ApiProperties {
     }
     
     /**
+     * get the value to which the specified key is mapped
+     * 
+     * @param <T> type of value
+     * @param key key
+     * @return a value
+     */
+    public <T> T get(Class<T> key) {
+    	return getProperty(key);
+    }
+    
+    /**
      * get the value to which the specified key is mapped and cast value to specific type
      * @see java.util.Map#get(Object)
      * 

@@ -62,6 +62,9 @@ public class ApiUserTest extends BaseTest {
         assertTrue(b3.equals(b3));
         assertEquals(b3.hashCode(), b4.hashCode());
         
+        user2.setProperty(ApiUserTest.class, this);
+        assertEquals(user2.get(getClass()), this);
+        
     }
     
     
