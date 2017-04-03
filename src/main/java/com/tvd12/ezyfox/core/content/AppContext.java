@@ -56,4 +56,12 @@ public interface AppContext {
 	 */
 	<T> T get(Object key, Class<T> clazz);
 	
+	/**
+	 * Check contains key or not
+	 * 
+	 * @param key the ke
+	 * @return true or false
+	 */
+	boolean contains(Object key);
+	
 }

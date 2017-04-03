@@ -38,4 +38,6 @@ public interface ServerEvent {
 	
 	static final String ROOM_EXTENSION_DESTROY = "ROOM_EXTENSION_DESTROY";
 	static final String ZONE_EXTENSION_DESTROY = "ZONE_EXTENSION_DESTROY";
+	
+	static final String ROOM_USER_RECONNECT	   = "ROOM_USER_RECONNECT";
 }

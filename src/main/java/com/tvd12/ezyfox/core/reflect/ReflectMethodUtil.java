@@ -166,7 +166,6 @@ public final class ReflectMethodUtil {
         try {
             invokeMethod(method, obj, args);
         } catch (Exception e) {
-            LOGGER.error("Invoke execute method error", e);
             throw new RuntimeException("Can not invoke execute method " 
                     + method.getName()
                     + " on class " + method.getDeclaringClass(), e);

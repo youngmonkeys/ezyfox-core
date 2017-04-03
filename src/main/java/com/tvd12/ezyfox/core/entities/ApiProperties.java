@@ -45,4 +45,12 @@ public interface ApiProperties {
      */
     public void removeProperty(Object key);
     
+    /**
+     * Check contains key or not
+     * 
+     * @param key the key
+     * @return true or false
+     */
+    public boolean containsKey(Object key);
+    
 }
