@@ -14,6 +14,7 @@ public interface APIKey {
 	static final String ERROR      = "___err___";
 	static final String MESSAGE    = "msg";
 	static final String CODE       = "code";
-	static final String USER_JOOMS_JOINED		= "___usr_j_j___";
+	
+	static final String USER_JOINED_ROOMS		= "___usr_j_rs___";
 	
 }
