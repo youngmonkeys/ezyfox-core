@@ -3,8 +3,7 @@
  */
 package com.tvd12.ezyfox.core.testing.roomcontext;
 
-import static org.testng.Assert.assertEquals;
-import static org.testng.Assert.assertNotNull;
+import static org.testng.Assert.*;
 
 import org.testng.annotations.Test;
 
@@ -35,6 +34,7 @@ public class RoomContextTest {
          assertEquals(roomContext.get("a", String.class), "b");
          assertEquals(roomContext.get("a"), "b");
          assertEquals(roomContext.get(getClass()), this);
+         assertTrue(roomContext.contains("a"));
     }
 
     private BaseAppContext newAppContext() {

@@ -65,6 +65,8 @@ public class ApiUserTest extends BaseTest {
         user2.setProperty(ApiUserTest.class, this);
         assertEquals(user2.get(getClass()), this);
         
+        assertTrue(user2.containsKey(ApiUserTest.class));
+        
     }
     
     

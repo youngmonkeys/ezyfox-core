@@ -205,6 +205,15 @@ public abstract class BaseAppContext extends BaseContext {
         return (T)properties.get(key);
     }
     
+    /*
+     * (non-Javadoc)
+     * @see com.tvd12.ezyfox.core.content.AppContext#contains(java.lang.Object)
+     */
+    @Override
+    public boolean contains(Object key) {
+    	return properties.containsKey(key);
+    }
+    
     /**
      * Get structure of user agent class
      * 

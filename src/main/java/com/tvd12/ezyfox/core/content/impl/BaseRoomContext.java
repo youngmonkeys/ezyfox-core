@@ -67,6 +67,15 @@ public class BaseRoomContext extends BaseContext {
     public <T> T get(Object key, Class<T> clazz) {
         return appContext.get(key, clazz);
     }
+    
+    /*
+     * (non-Javadoc)
+     * @see com.tvd12.ezyfox.core.content.AppContext#contains(java.lang.Object)
+     */
+    @Override
+    public boolean contains(Object key) {
+    	return appContext.contains(key);
+    }
 
     /* (non-Javadoc)
      * @see com.tvd12.ezyfox.core.content.impl.BaseContext#getObjectSerializer(java.lang.Class)

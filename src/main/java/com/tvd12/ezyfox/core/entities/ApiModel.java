@@ -62,9 +62,10 @@ public abstract class ApiModel implements ApiProperties {
      * @param clazz specific type
      * @return a value
      */
-    @Override
+    @SuppressWarnings("unchecked")
+	@Override
     public <T> T getProperty(Object key, Class<T> clazz) {
-        return clazz.cast(properties.get(key));
+        return (T)properties.get(key);
     }
     
     /**
@@ -76,6 +77,15 @@ public abstract class ApiModel implements ApiProperties {
     @Override
     public void removeProperty(Object key) {
         properties.remove(key);
+    }
+    
+    /*
+     * (non-Javadoc)
+     * @see com.tvd12.ezyfox.core.entities.ApiProperties#containsKey(java.lang.Object)
+     */
+    @Override
+    public boolean containsKey(Object key) {
+    	return properties.containsKey(key);
     }
     
 }
