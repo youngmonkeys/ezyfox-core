@@ -66,6 +66,14 @@ public interface Response extends BaseCommand {
     Response recipients(String... usernames);
     
     /**
+     * add recipients to list
+     * 
+     * @param usernames recipient's names
+     * @return this pointer
+     */
+    Response recipients(Iterable<String> usernames);
+    
+    /**
      * Add user to excluded users list, excluded users will not receive the message
      * 
      * @param users the excluded users

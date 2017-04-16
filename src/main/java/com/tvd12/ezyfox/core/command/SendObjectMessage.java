@@ -3,7 +3,7 @@
  */
 package com.tvd12.ezyfox.core.command;
 
-import java.util.List;
+import java.util.Collection;
 
 import com.tvd12.ezyfox.core.entities.ApiBaseUser;
 import com.tvd12.ezyfox.core.entities.ApiRoom;
@@ -76,7 +76,7 @@ public interface SendObjectMessage extends BaseCommand {
      * @param recipients list of recipients
      * @return this pointer
      */
-    SendObjectMessage recipients(List<ApiBaseUser> recipients);
+    SendObjectMessage recipients(Collection<? extends ApiBaseUser> recipients);
     
     /**
      * add multiple recipients to the list
@@ -85,6 +85,14 @@ public interface SendObjectMessage extends BaseCommand {
      * @return this pointer
      */
     SendObjectMessage recipients(String... recipients);
+    
+    /**
+     * add multiple recipients to the list
+     * 
+     * @param recipients list of recipients
+     * @return this pointer
+     */
+    SendObjectMessage recipients(Iterable<String> recipients);
     
     /**
      * message as string to send
