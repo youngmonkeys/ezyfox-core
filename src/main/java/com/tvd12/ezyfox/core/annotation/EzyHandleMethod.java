@@ -7,7 +7,7 @@ import java.lang.annotation.Target;
  
 /** 
  * Indicates that a method in a class process handle a server event 
- * To be used in conjunction with {@code @ServerEventHandler} classes 
+ * To be used in conjunction with {@code @EzyServerEventHandler} classes 
  *  
  * @author tavandung12 
  * 
@@ -15,6 +15,6 @@ import java.lang.annotation.Target;
  
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.METHOD })
-public @interface HandleMethod { 
+public @interface EzyHandleMethod { 
  
 } 

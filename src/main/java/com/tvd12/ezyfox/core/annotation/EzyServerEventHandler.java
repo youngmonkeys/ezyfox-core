@@ -16,7 +16,7 @@ import java.lang.annotation.Target;
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.TYPE })
-public @interface ServerEventHandler {
+public @interface EzyServerEventHandler {
     
     /**
      * server event name

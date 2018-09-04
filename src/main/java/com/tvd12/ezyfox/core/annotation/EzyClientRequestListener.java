@@ -16,7 +16,7 @@ import java.lang.annotation.Target;
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.TYPE })
-public @interface ClientRequestListener {
+public @interface EzyClientRequestListener {
     
     /**
      * Command of request
