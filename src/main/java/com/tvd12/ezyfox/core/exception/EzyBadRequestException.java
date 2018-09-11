@@ -11,10 +11,10 @@ import lombok.Getter;
  * @author tavandung12
  *
  */
-public class EzyBadRequestException extends Exception {
-    private static final long serialVersionUID = 1L;
-    
-    @Getter
+public class EzyBadRequestException extends RuntimeException {
+	private static final long serialVersionUID = 2045148125148130757L;
+	
+	@Getter
     private int code;
     @Getter
     private String reason = "unknown";
@@ -23,7 +23,7 @@ public class EzyBadRequestException extends Exception {
     
     public EzyBadRequestException() {
         super();
-        sendToClient = false;
+        this.sendToClient = false;
     }
     
     public EzyBadRequestException(String msg) {
