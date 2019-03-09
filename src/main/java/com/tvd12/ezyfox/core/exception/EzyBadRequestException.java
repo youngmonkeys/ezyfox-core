@@ -42,8 +42,16 @@ public class EzyBadRequestException extends RuntimeException {
         this(msg, code, true);
     }
     
+    public EzyBadRequestException(int code, String msg) {
+    		this(msg, code);
+    }
+    
     public EzyBadRequestException(String msg, int code, Throwable e) {
         this(msg, code, true, e);
+    }
+    
+    public EzyBadRequestException(int code, String msg, Throwable e) {
+    		this(msg, code, e);
     }
     
     public EzyBadRequestException(int code, boolean sendToClient) {
@@ -58,11 +66,19 @@ public class EzyBadRequestException extends RuntimeException {
         this.sendToClient = sendToClient;
     }
     
+    public EzyBadRequestException(int code, String msg, boolean sendToClient) {
+    		this(msg, code, sendToClient);
+    }
+    
     public EzyBadRequestException(String msg, int code, boolean sendToClient) {
         super(msg);
         this.code = code;
         this.reason = msg;
         this.sendToClient = sendToClient;
+    }
+    
+    public EzyBadRequestException(int code, String msg, boolean sendToClient, Throwable e) {
+    		this(msg, code, sendToClient, e);
     }
     
     public EzyBadRequestException(String msg, int code, boolean sendToClient, Throwable e) {
