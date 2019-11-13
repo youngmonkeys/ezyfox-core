@@ -4,7 +4,7 @@
 
     <test name="All">
     	<packages>
-    		<package name="com.tvd12.ezyfox.core"/>
+    		<package name="com.tvd12.ezyfox.core.test"/>
     	</packages>
     </test>
 </suite>
