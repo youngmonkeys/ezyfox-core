@@ -4,7 +4,6 @@ public final class EzyResponseCommands {
 
 	public static final String ERROR = "err";
 	
-	private EzyResponseCommands() {
-	}
+	private EzyResponseCommands() {}
 	
 }

@@ -8,34 +8,34 @@ import java.lang.annotation.Target;
 
 /**
  * 
- * Indicates that a class handle a server event
+ * Indicates that a class listener a request from client and process that request
  * 
  * @author tavandung12
  *
  */
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.TYPE })
-public @interface EzyServerEventHandler {
+@Target({ ElementType.TYPE })
+public @interface EzyRequestListener {
     
+    /**
+     * Command of request
+     * 
+     * @return command of request
+     */
+	public String command() default "";
+	
 	/**
-	 * server event name
+	 * Command of request
 	 * 
-	 * @return the event name
+	 * @return the command
 	 */
 	public String value() default "";
 	
-    /**
-     * server event name
-     * 
-     * @return server event name
-     */
-	public String event() default "";
-	
 	/**
-	 * priority of handler class, lowest is first
+	 * priority of listener, lowest is first
 	 * 
-	 * @return priority of handler class
+	 * @return priority of listener
 	 */
 	public int priority() default 0;
 }

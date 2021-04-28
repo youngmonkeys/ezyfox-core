@@ -14,7 +14,7 @@ import java.lang.annotation.Target;
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.TYPE })
-public @interface EzyClientRequestInterceptor {
+public @interface EzyRequestInterceptor {
 	
 	int priority() default 0;
 	
