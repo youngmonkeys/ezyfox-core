@@ -13,4 +13,10 @@ public final class EzyEventHandlerAnnotations {
 		return event;
 	}
 	
+	public static int getHandlerPriority(Object handler) {
+	    EzyEventHandler anno = handler
+	        .getClass()
+	        .getAnnotation(EzyEventHandler.class);
+	    return anno != null ? anno.priority() : 0;
+	}
 }
