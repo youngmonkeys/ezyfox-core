@@ -18,7 +18,7 @@ This project supports to create a server side game application more efficiently 
 	<dependency>
 		<groupId>com.tvd12</groupId>
 		<artifactId>ezyfox-core</artifactId>
-		<version>2.1.2</version>
+		<version>2.1.3</version>
 	</dependency>
 ```
 
