@@ -7,35 +7,33 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * 
- * Indicates that a class handle a server event
- * 
- * @author tavandung12
+ * Indicates that a class handle a server event.
  *
+ * @author tavandung12
  */
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ElementType.TYPE })
+@Target({ElementType.TYPE})
 public @interface EzyEventHandler {
-    
+
     /**
-     * server event name
-     * 
+     * server event name.
+     *
      * @return the event name
      */
-    public String value() default "";
-    
+    String value() default "";
+
     /**
-     * server event name
-     * 
+     * server event name.
+     *
      * @return server event name
      */
-    public String event() default "";
-    
+    String event() default "";
+
     /**
-     * priority of handler class, lowest is first
-     * 
+     * priority of handler class, lowest is first.
+     *
      * @return priority of handler class
      */
-    public int priority() default 0;
+    int priority() default 0;
 }

@@ -7,6 +7,7 @@ import com.tvd12.test.base.BaseTest;
 
 public class EzyBadRequestExceptionTest extends BaseTest {
 
+    @SuppressWarnings("ThrowableNotThrown")
     @Test
     public void test() {
         EzyBadRequestException exception = new EzyBadRequestException(1, "hello", true, new Exception());

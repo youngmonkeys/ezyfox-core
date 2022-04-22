@@ -22,13 +22,9 @@ public class EzyRequestHandleAnnotationsTest {
     public static class TestClientRequestController {
         
         @EzyDoHandle("a")
-        public void handle1() {
-        }
+        public void handle1() {}
         
         @EzyDoHandle(command = "b")
-        public void handle2() {
-        }
-        
+        public void handle2() {}
     }
-    
 }

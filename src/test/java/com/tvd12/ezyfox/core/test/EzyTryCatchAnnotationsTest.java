@@ -16,9 +16,6 @@ public class EzyTryCatchAnnotationsTest {
     
     public static class A {
         @EzyTryCatch(IllegalArgumentException.class)
-        public void handleException(Exception e) {
-            
-        }
+        public void handleException(Exception e) {}
     }
-    
 }

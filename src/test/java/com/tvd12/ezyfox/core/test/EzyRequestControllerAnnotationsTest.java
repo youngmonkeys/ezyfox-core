@@ -8,7 +8,7 @@ import com.tvd12.ezyfox.core.util.EzyRequestControllerAnnotations;
 public class EzyRequestControllerAnnotationsTest {
 
     @Test
-    public void test() throws Exception {
+    public void test() {
         assert "a".equals(EzyRequestControllerAnnotations
                 .getGroup(TestClientRequestController1.class));
         assert "b".equals(EzyRequestControllerAnnotations
