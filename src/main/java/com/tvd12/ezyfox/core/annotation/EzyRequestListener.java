@@ -23,19 +23,19 @@ public @interface EzyRequestListener {
      * 
      * @return command of request
      */
-	public String command() default "";
-	
-	/**
-	 * Command of request
-	 * 
-	 * @return the command
-	 */
-	public String value() default "";
-	
-	/**
-	 * priority of listener, lowest is first
-	 * 
-	 * @return priority of listener
-	 */
-	public int priority() default 0;
+    public String command() default "";
+    
+    /**
+     * Command of request
+     * 
+     * @return the command
+     */
+    public String value() default "";
+    
+    /**
+     * priority of listener, lowest is first
+     * 
+     * @return priority of listener
+     */
+    public int priority() default 0;
 }

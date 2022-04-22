@@ -12,9 +12,9 @@ import lombok.Getter;
  *
  */
 public class EzyBadRequestException extends RuntimeException {
-	private static final long serialVersionUID = 2045148125148130757L;
-	
-	@Getter
+    private static final long serialVersionUID = 2045148125148130757L;
+    
+    @Getter
     private int code;
     @Getter
     private String reason = "unknown";
@@ -43,7 +43,7 @@ public class EzyBadRequestException extends RuntimeException {
     }
     
     public EzyBadRequestException(int code, String msg) {
-    		this(msg, code);
+            this(msg, code);
     }
     
     public EzyBadRequestException(String msg, int code, Throwable e) {
@@ -51,7 +51,7 @@ public class EzyBadRequestException extends RuntimeException {
     }
     
     public EzyBadRequestException(int code, String msg, Throwable e) {
-    		this(msg, code, e);
+            this(msg, code, e);
     }
     
     public EzyBadRequestException(int code, boolean sendToClient) {
@@ -67,7 +67,7 @@ public class EzyBadRequestException extends RuntimeException {
     }
     
     public EzyBadRequestException(int code, String msg, boolean sendToClient) {
-    		this(msg, code, sendToClient);
+            this(msg, code, sendToClient);
     }
     
     public EzyBadRequestException(String msg, int code, boolean sendToClient) {
@@ -78,7 +78,7 @@ public class EzyBadRequestException extends RuntimeException {
     }
     
     public EzyBadRequestException(int code, String msg, boolean sendToClient, Throwable e) {
-    		this(msg, code, sendToClient, e);
+            this(msg, code, sendToClient, e);
     }
     
     public EzyBadRequestException(String msg, int code, boolean sendToClient, Throwable e) {

@@ -16,6 +16,6 @@ import java.lang.annotation.Target;
 @Target({ ElementType.METHOD })
 public @interface EzyTryCatch {
     
-	Class<?>[] value();
-	
+    Class<?>[] value();
+    
 }

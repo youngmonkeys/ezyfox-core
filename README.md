@@ -15,11 +15,11 @@ This project supports to create a server side game application more efficiently 
 # Installation
 
 ```xml
-	<dependency>
-		<groupId>com.tvd12</groupId>
-		<artifactId>ezyfox-core</artifactId>
-		<version>2.1.3</version>
-	</dependency>
+    <dependency>
+        <groupId>com.tvd12</groupId>
+        <artifactId>ezyfox-core</artifactId>
+        <version>2.1.3</version>
+    </dependency>
 ```
 
 # API Reference
@@ -39,5 +39,5 @@ mvn test
 # License
 
 - Apache License, Version 2.0
-	
+    
 

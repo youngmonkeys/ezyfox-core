@@ -15,9 +15,9 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.TYPE })
 public @interface EzyRequestController {
-	
-	String value() default "";
-	
-	String group() default "";
-	
+    
+    String value() default "";
+    
+    String group() default "";
+    
 }

@@ -18,24 +18,24 @@ import java.lang.annotation.Target;
 @Target({ElementType.TYPE })
 public @interface EzyEventHandler {
     
-	/**
-	 * server event name
-	 * 
-	 * @return the event name
-	 */
-	public String value() default "";
-	
+    /**
+     * server event name
+     * 
+     * @return the event name
+     */
+    public String value() default "";
+    
     /**
      * server event name
      * 
      * @return server event name
      */
-	public String event() default "";
-	
-	/**
-	 * priority of handler class, lowest is first
-	 * 
-	 * @return priority of handler class
-	 */
-	public int priority() default 0;
+    public String event() default "";
+    
+    /**
+     * priority of handler class, lowest is first
+     * 
+     * @return priority of handler class
+     */
+    public int priority() default 0;
 }

@@ -15,9 +15,8 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ ElementType.METHOD })
 public @interface EzyDoHandle {
-	
-	String value() default "";
-	
-	String command() default "";
-	
+    
+    String value() default "";
+    
+    String command() default "";
 }
