@@ -11,7 +11,7 @@ import com.tvd12.test.assertion.Asserts;
 import com.tvd12.test.base.BaseTest;
 
 public class EzyEventHandlerListsTest extends BaseTest {
-    
+
     @Test
     public void test() {
         // given
@@ -19,10 +19,10 @@ public class EzyEventHandlerListsTest extends BaseTest {
         Object o = new Object();
         B b = new B();
         List<Object> handlers = Arrays.asList(b, o, a);
-        
+
         // when
         EzyEventHandlerLists.sortEventHandlersByPriority(handlers);
-        
+
         // then
         Asserts.assertEquals(handlers, Arrays.asList(a, o, b));
     }
@@ -30,10 +30,10 @@ public class EzyEventHandlerListsTest extends BaseTest {
     public java.lang.Class<?> getTestClass() {
         return EzyEventHandlerLists.class;
     }
-    
+
     @EzyEventHandler(priority = Integer.MIN_VALUE)
     public static class A {}
-    
+
     @EzyEventHandler(priority = Integer.MAX_VALUE)
     public static class B {}
 }

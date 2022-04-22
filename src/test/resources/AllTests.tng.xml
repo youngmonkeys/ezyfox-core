@@ -3,8 +3,8 @@
 <suite name="Core-AllTests">
 
     <test name="All">
-    	<packages>
-    		<package name="com.tvd12.ezyfox.core.test"/>
-    	</packages>
+        <packages>
+            <package name="com.tvd12.ezyfox.core.test"/>
+        </packages>
     </test>
 </suite>

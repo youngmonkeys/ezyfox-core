@@ -6,16 +6,10 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-/**
- * 
- * @author tavandung12
- *
- */
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
-@Target({ ElementType.TYPE })
+@Target({ElementType.TYPE})
 public @interface EzyRequestInterceptor {
-	
-	int priority() default 0;
-	
+
+    int priority() default 0;
 }
