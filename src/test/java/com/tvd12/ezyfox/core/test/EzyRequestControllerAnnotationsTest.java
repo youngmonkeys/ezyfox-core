@@ -10,17 +10,14 @@ public class EzyRequestControllerAnnotationsTest {
     @Test
     public void test() {
         assert "a".equals(EzyRequestControllerAnnotations
-                .getGroup(TestClientRequestController1.class));
+            .getGroup(TestClientRequestController1.class));
         assert "b".equals(EzyRequestControllerAnnotations
-                .getGroup(TestClientRequestController2.class));
+            .getGroup(TestClientRequestController2.class));
     }
-    
+
     @EzyRequestController("a")
-    public static class TestClientRequestController1 {
-    }
-    
+    public static class TestClientRequestController1 {}
+
     @EzyRequestController(value = " ", group = "b")
-    public static class TestClientRequestController2 {
-    }
-    
+    public static class TestClientRequestController2 {}
 }

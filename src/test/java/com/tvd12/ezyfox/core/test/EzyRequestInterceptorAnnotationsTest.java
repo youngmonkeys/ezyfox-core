@@ -12,16 +12,15 @@ public class EzyRequestInterceptorAnnotationsTest extends BaseTest {
     public Class<?> getTestClass() {
         return EzyRequestInterceptorAnnotations.class;
     }
-    
+
     @Test
     public void test() {
-        assert EzyRequestInterceptorAnnotations.getPriority(InteceptorA.class) == 0;
-        assert EzyRequestInterceptorAnnotations.getPriority(InteceptorB.class) == 1;
+        assert EzyRequestInterceptorAnnotations.getPriority(    InterceptorA.class) == 0;
+        assert EzyRequestInterceptorAnnotations.getPriority(    InterceptorB.class) == 1;
     }
-    
-    public static class InteceptorA {}
-    
+
+    public static class InterceptorA {}
+
     @EzyRequestInterceptor(priority = 1)
-    public static class InteceptorB {}
-    
+    public static class InterceptorB {}
 }

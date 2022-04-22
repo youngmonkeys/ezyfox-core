@@ -11,19 +11,19 @@ public class EzyRequestHandleAnnotationsTest {
     @Test
     public void test() throws Exception {
         assert "a".equals(EzyDoHandleAnnotations.getCommand(
-                TestClientRequestController.class.getDeclaredMethod("handle1")
+            TestClientRequestController.class.getDeclaredMethod("handle1")
                 .getAnnotation(EzyDoHandle.class)));
         assert "b".equals(EzyDoHandleAnnotations.getCommand(
-                TestClientRequestController.class.getDeclaredMethod("handle2")
+            TestClientRequestController.class.getDeclaredMethod("handle2")
                 .getAnnotation(EzyDoHandle.class)));
     }
-    
+
     @EzyRequestController
     public static class TestClientRequestController {
-        
+
         @EzyDoHandle("a")
         public void handle1() {}
-        
+
         @EzyDoHandle(command = "b")
         public void handle2() {}
     }

@@ -30,5 +30,4 @@ public class EzyBadRequestExceptionTest extends BaseTest {
         new EzyBadRequestException(1, "hello", new Exception());
         new EzyBadRequestException(1, true, new Exception());
     }
-    
 }

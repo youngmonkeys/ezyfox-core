@@ -12,25 +12,20 @@ public class EzyEventHandlerAnnotationsTest extends BaseTest {
     public Class<?> getTestClass() {
         return EzyEventHandlerAnnotations.class;
     }
-    
+
     @Test
     public void test() {
         assert EzyEventHandlerAnnotations.getEvent(
-                A.class.getAnnotation(EzyEventHandler.class)
-            ).equals("hello");
+            A.class.getAnnotation(EzyEventHandler.class)
+        ).equals("hello");
         assert EzyEventHandlerAnnotations.getEvent(
-                B.class.getAnnotation(EzyEventHandler.class)
-            ).equals("world");
+            B.class.getAnnotation(EzyEventHandler.class)
+        ).equals("world");
     }
-    
+
     @EzyEventHandler("hello")
-    public static class A {
-        
-    }
-    
+    public static class A {}
+
     @EzyEventHandler(event = "world")
-    public static class B {
-        
-    }
-    
+    public static class B {}
 }
