@@ -10,7 +10,7 @@
     </parent>
     
     <artifactId>ezyfox-core</artifactId>
-    <version>2.1.4</version>
+    <version>2.1.5</version>
 
     <name>ezyfox-core</name>
     <url>https://youngmonkeys.org/project/ezyfox-sever/</url>
